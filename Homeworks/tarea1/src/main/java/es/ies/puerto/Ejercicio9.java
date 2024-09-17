@@ -1,7 +1,18 @@
 package es.ies.puerto;
 
+/**
+ * Declara una variable int que contenga tu año de 
+ * nacimiento. Calcula y muestra tu edad actual 
+ * utilizando otra variable para el año actual.
+ * @author eduglezexp
+ */
+
 public class Ejercicio9 {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        int anioNacimiento = 2004;
+        int anioActual = 2024;
+        int edad = anioActual - anioNacimiento;
+
+        System.out.println("La edad es: " +edad);
     }
 }

@@ -4,7 +4,6 @@ package es.ies.puerto;
  * Declara dos variables de tipo double para almacenar el precio de dos productos. 
  * Calcula la suma y muestra el resultado.
  * @author eduglezexp
- * @version 1.0.0
  */
 
 public class Ejercicio2 {

@@ -3,7 +3,6 @@ package es.ies.puerto;
 /**
  * Declara una variable entera para almacenar tu edad y muestra su valor por pantalla.
  * @author eduglezexp
- * @version 1.0.0
  */
 
 public class Ejercicio1 {

@@ -4,7 +4,6 @@ package es.ies.puerto;
  * Declara una variable de tipo String que almacene tu nombre completo. 
  * Muestra por pantalla el nombre.
  * @author eduglezexp
- * @version 1.0.0
  */
 
 public class Ejercicio5 {
