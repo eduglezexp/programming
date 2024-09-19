@@ -8,10 +8,10 @@ package es.ies.puerto;
 
 public class Ejercicio7 {
     public static void main(String[] args) {
-        double dgradosCelsius = 10;
-        double celsiusToFahrenheit;
-        celsiusToFahrenheit = ((dgradosCelsius * 9 / 5) + 32);
+        double dCelsius = 10;
+        double dFahrenheit;
+        dFahrenheit = ((dCelsius * 9 / 5) + 32);
 
-        System.out.println(dgradosCelsius+ "Celsius, son: " +celsiusToFahrenheit+ "Fahrenheit");
+        System.out.println(dCelsius+ "Celsius, son: " +dFahrenheit+ "Fahrenheit");
     }
 }
