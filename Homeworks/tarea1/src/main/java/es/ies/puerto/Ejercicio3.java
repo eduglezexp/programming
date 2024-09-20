@@ -10,6 +10,6 @@ public class Ejercicio3 {
 
     public static void main(String[] args) {
         char primeraLetra = 'e';
-        System.out.println(primeraLetra);
+        System.out.println("La primera letra del nombre es: " +primeraLetra);
     }
 }

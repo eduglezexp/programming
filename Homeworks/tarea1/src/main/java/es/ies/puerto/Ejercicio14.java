@@ -1,16 +1,31 @@
 package es.ies.puerto;
 
+/**
+ * Declara dos variables de tipo boolean: una que indique si una persona tiene licencia 
+ * de conducir y otra si posee un vehículo. Muestra ambas variables.
+ * @author eduglezexp
+ */
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ejercicio14 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        
-        System.out.println("¿Tiene licencia?");
-        boolean licencia = scanner.nextBoolean();
+        boolean licencia = true;
+        boolean vehiculo = true;
 
-        System.out.println("¿Tiene vehiculo?");
-        boolean vehiculo = scanner.nextBoolean();
+        try {
+            System.out.println("¿Tiene licencia? (true or false)");
+            licencia = scanner.nextBoolean();
+    
+            System.out.println("¿Tiene vehiculo? (true or false)");
+            vehiculo = scanner.nextBoolean();
+        } catch(InputMismatchException e) {
+            System.out.println("Error: Debes ingresar true o false.");
+        } finally {
+            scanner.close();
+        }
 
         if (vehiculo) {
             System.out.println("Tiene vehiculo");
@@ -23,7 +38,5 @@ public class Ejercicio14 {
         } else {
             System.out.println("No tiene licencia");
         }
-
-        scanner.close();
     }
 }
