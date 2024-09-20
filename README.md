@@ -1,5 +1,5 @@
-# programming
+# Programming
 
-<img src="img/frontpage.jpg"/>
+<img src="img/front-page.jpg"/>
 
 This is my programming repository
