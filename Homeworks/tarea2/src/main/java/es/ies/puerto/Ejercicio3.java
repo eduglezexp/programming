@@ -10,8 +10,8 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Ejercicio3 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);   
+    static Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {   
 
         try {
             System.out.println("Introduce grados Celsius para" + 

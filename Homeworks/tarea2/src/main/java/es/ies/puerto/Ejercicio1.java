@@ -11,8 +11,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ejercicio1 {
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         int anioActual = LocalDate.now().getYear();
 
         try {

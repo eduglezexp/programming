@@ -9,8 +9,8 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
  
 public class Ejercicio6 {
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
         try {
             System.out.println("Introduce un numero entero: ");

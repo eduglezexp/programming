@@ -11,8 +11,8 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Ejercicio8 {
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
         try {
             System.out.println("Introduce una distancia en millas para pasarla a kilometros: ");
