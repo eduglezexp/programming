@@ -1,5 +1,6 @@
 package es.ies.puerto;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -14,13 +15,20 @@ public class Ejercicio2 {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
 
-        System.out.println("Introduce la experiencia ganada: ");
-        int puntoExperiencia = scanner.nextInt();
+        try {
+            System.out.println("Introduce los puntos de experiencia ganados: ");
+            int puntoExperiencia = scanner.nextInt();
 
-        if (puntoExperiencia > 50) {
-            System.out.println("Subes a nivel 6");
-        } else {
-            System.out.println("sigues en nivel 5");
+            if (puntoExperiencia > 50) {
+                System.out.println("Subes a nivel 6");
+            } else {
+                System.out.println("sigues en el nivel 5");
+            }
+        } catch(InputMismatchException exception) {
+            System.out.println("Introduce un numero entero valido para" + 
+            "los puntos de experiencia");
+        } finally {
+            scanner.close();
         }
     }
 }
