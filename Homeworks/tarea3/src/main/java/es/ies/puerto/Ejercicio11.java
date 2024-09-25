@@ -1,5 +1,6 @@
 package es.ies.puerto;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -15,18 +16,20 @@ import java.util.Scanner;
 public class Ejercicio11 {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        System.out.println("Introduce la velocidad a la que va la Millennium Falcon: ");
-        int velocidad = scanner.nextInt();
+        try {
+            System.out.println("Introduce la velocidad a la que va la Millennium Falcon: ");
+            int velocidad = scanner.nextInt();
 
-        if (velocidad <= 500) {
-            System.out.println("La nave esta velocidad normal");
-        } else if (velocidad > 500 && velocidad <= 1000)  {
-            System.out.println("La nave esta a máxima velocidad");
-        } else if (velocidad > 1000) {
-            System.out.println("Se activan los motores hiperespaciales");
-        } else {
-            System.out.println("Introduce un numero entero valido para la velocidad" +
-            " de la nave");
+            if (velocidad > 1000) {
+                System.out.println("Se activan los motores hiperespaciales.");
+            } else if (velocidad > 500) {
+                System.out.println("La nave está a máxima velocidad.");
+            } else {
+                System.out.println("La nave está en velocidad normal.");
+            }
+        } catch(InputMismatchException exception) {
+            System.out.println("Introduce un numero entero valido para la velocidad de " +
+            "la nave");
         }
     }
 }

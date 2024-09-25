@@ -9,24 +9,30 @@ package es.ies.puerto;
  * @author eduglezexp
  */
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ejercicio8 {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        
-        System.out.println("Ingrese un numero para saber a que dimension ira Rick: ");
-        int numero = scanner.nextInt();
+        try {
+            System.out.println("Ingrese un numero para saber a que dimension ira Rick: ");
+            int numero = scanner.nextInt();
             
-        if (numero % 3 == 0 && numero % 5 == 0) {
-            System.out.println("Entrando a la dimension C");
-        } else if (numero % 3 == 0) {
-            System.out.println("Entrando en la dimension A");
-        } else if (numero % 5 == 0) {
-            System.out.println("Entrando en la dimension B");
-        } else {
-            System.out.println("Ingrese un numero entero valido");
+            if (numero % 3 == 0 && numero % 5 == 0) {
+                System.out.println("Entrando a la dimension C");
+            } else if (numero % 3 == 0) {
+                System.out.println("Entrando en la dimension A");
+            } else if (numero % 5 == 0) {
+                System.out.println("Entrando en la dimension B");
+            } else {
+                System.out.println("Introduce un numero entero valido, pista: " +
+                "que sea divisible entre 3, 5 o ambos");
+            }
+        } catch(InputMismatchException exception) {
+            System.out.println("Introduce un numero entero valido");
+        } finally {
+            scanner.close();
         }
-        scanner.close();
     }
 }

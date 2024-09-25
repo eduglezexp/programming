@@ -23,7 +23,7 @@ public class Ejercicio15 {
                 System.out.println("¡Link ha usado la bomba y ha destruido la puerta!");
                 break;
             case "arco":
-                System.out.println("¡Link puede ahora atacar a los enemigos desde lejos!");
+                System.out.println("¡Link puede atacar ahora a los enemigos desde lejos!");
                 break;
             default:
                 System.out.println("Ese objeto no es valido, introduce uno de los " +
