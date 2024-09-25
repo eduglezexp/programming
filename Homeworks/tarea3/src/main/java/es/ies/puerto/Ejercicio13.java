@@ -1,5 +1,6 @@
 package es.ies.puerto;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -14,9 +15,22 @@ import java.util.Scanner;
 public class Ejercicio13 {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        System.out.println("Introduce el nivel de energia de Iron Man: ");
-        int nivelEnergia = scanner.nextInt();
+        try {
+            System.out.println("Introduce el nivel de energia de Iron Man: ");
+            int nivelEnergia = scanner.nextInt();
 
-        
+            if (nivelEnergia > 70) {
+                System.out.println("Iron Man puede volar");
+            } else if (nivelEnergia > 30) {
+                System.out.println("Iron Man puede caminar");
+            } else {
+                System.out.println("Iron Man está en modo crítico");
+            }
+        } catch(InputMismatchException exception) {
+            System.out.println("Introduce un numero entero valido para el nivel de " +
+            "energia de Iron Man");
+        } finally {
+            scanner.close();
+        }
     }
 }

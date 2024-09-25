@@ -20,7 +20,7 @@ public class Ejercicio11 {
 
         if (velocidad <= 500) {
             System.out.println("La nave esta velocidad normal");
-        } else if (velocidad > 500 || velocidad <= 1000)  {
+        } else if (velocidad > 500 && velocidad <= 1000)  {
             System.out.println("La nave esta a máxima velocidad");
         } else if (velocidad > 1000) {
             System.out.println("Se activan los motores hiperespaciales");
