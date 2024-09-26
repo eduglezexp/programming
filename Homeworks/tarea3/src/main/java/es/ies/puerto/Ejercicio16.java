@@ -1,6 +1,5 @@
 package es.ies.puerto;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -16,10 +15,27 @@ public class Ejercicio16 {
         System.out.println("¿Que tipo de armas tienes? (fuego, cuerpo a cuerpo, ninguna)");
         String arma = scanner.nextLine();
         arma = arma.toLowerCase();
-        
-        if (arma.equals("fuego")) {
-            System.out.println("¿Cuanta municion tienes?");
-            int municion = scanner.nextInt();        
+
+        switch (arma) {
+            case "fuego":
+                System.out.println("¿Cuanta municion tienes?");
+                int municion = scanner.nextInt();
+                if (municion <= 0) {
+                    System.out.println("¡No tienes municion, debes huir!");
+                } else {
+                    System.out.println("Puedes disparar a los zombies");
+                }
+                break;
+            case "cuerpo a cuerpo":
+                System.out.println("Puedes defenderte");
+                break;
+            case "ninguna":
+                System.out.println("No tienes armas, debes huir");
+                break;
+            default:
+                System.out.println("Ese arma no esta disponible o no existe. " +
+                "Elige entre las siguientes armas (fuego, cuerpo a cuerpo, ninguna)");
+                break;
         }
     }
 }
