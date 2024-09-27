@@ -9,7 +9,7 @@ package es.ies.puerto;
 
 public class Ejercicio4 {
     public static void main(String[] args) {
-        String frase = "hola vida";
+        String frase = "hola vida 2";
         char[] caracteres = frase.toCharArray();
         for (int i = 0; i < caracteres.length; i++) {
             if (Character.isLetter(caracteres[i])) {
