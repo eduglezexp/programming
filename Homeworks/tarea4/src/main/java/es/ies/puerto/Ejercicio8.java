@@ -1,5 +1,7 @@
 package es.ies.puerto;
 
+import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -11,12 +13,21 @@ import java.util.Scanner;
 
 public class Ejercicio8 {
     static Scanner scanner = new Scanner(System.in);
+    static Random random = new Random();
     public static void main(String[] args) {
-        System.out.println("Introduce un numero: ");
-        int numero = scanner.nextInt();
         int[] saludDragones = {45, 23, 42, 67, 102};
-        for (int i = 0; i < saludDragones.length; i++) {
+        try {
+        //do {
+            System.out.println("Introduce un daño: ");
+            int danio = scanner.nextInt();
+            int i = random.nextInt(saludDragones.length - 1);
+            saludDragones[i] = saludDragones[i] - danio;
             
+        //} while ();
+        } catch(InputMismatchException exception) {
+            System.out.println("Introduce un numero entero valido");
+        } finally {
+            scanner.close();
         }
     }
 }
