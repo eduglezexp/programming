@@ -9,7 +9,6 @@ package es.ies.puerto;
 public class Ejercicio1 {
     public static void main(String[] args) {
         int[] midiclorianos = {15000, 12000, 20000, 18000, 22000, 17000, 14000, 25000, 16000, 13000};
-        
         int suma = 0;
         int max = midiclorianos[0];
         int min = midiclorianos[0];

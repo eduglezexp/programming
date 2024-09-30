@@ -15,7 +15,7 @@ public class Ejercicio3 {
         for (String pokemon : pokemons) {
             if (pokemon.contains("a") || pokemon.contains("A")) {
                 System.out.println("Pikachu lo elige");
-            } else if (pokemon.contains("i")) {
+            } else if (pokemon.contains("i") || pokemon.contains("I")) {
                 System.out.println("¡Es muy fuerte!");
             } else {
                 System.out.println(pokemon);
