@@ -17,13 +17,25 @@ public class Ejercicio8 {
     public static void main(String[] args) {
         int[] saludDragones = {45, 23, 42, 67, 102};
         try {
-        //do {
-            System.out.println("Introduce un daño: ");
-            int danio = scanner.nextInt();
-            int i = random.nextInt(saludDragones.length - 1);
-            saludDragones[i] = saludDragones[i] - danio;
-            
-        //} while ();
+            boolean todosMuertos = false;
+            do {
+                System.out.println("Vida de los dragones:");
+                for (int i = 0; i < saludDragones.length; i++) {
+                    System.out.println("Dragon" +(i + 1)+ ": " +saludDragones[i]+ " vida") ;
+                }
+                System.out.println("Introduce un daño: ");
+                int danio = scanner.nextInt();
+                int i = random.nextInt(saludDragones.length);
+                saludDragones[i] -= danio;
+                todosMuertos = true;
+                for (int salud : saludDragones) {
+                    if (salud > 0) {
+                        todosMuertos = false;
+                        break;
+                    }
+                }
+            } while (!todosMuertos);
+            System.out.println("¡Todos los dragones han muertos!");
         } catch(InputMismatchException exception) {
             System.out.println("Introduce un numero entero valido");
         } finally {

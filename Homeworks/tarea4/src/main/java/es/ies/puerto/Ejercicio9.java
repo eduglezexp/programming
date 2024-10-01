@@ -9,6 +9,21 @@ package es.ies.puerto;
 
 public class Ejercicio9 {
     public static void main(String[] args) {
-        String[] saiyajins = {"Goku", "Vegeta"};
+        String[] saiyajins = {"Goku", "Vegeta", "Nappa", "Raditz"};
+        for (String saiyajin : saiyajins) {
+            System.out.print(saiyajin+ " ");
+        }
+        System.out.println();
+        for (int i = 0; i < saiyajins.length; i++) {
+            saiyajins[i] = null;
+            for (String saiyajin : saiyajins) {
+                if (saiyajin != null) {
+                    System.out.print(saiyajin + " ");
+                } else {
+                    System.out.print("null ");
+                }
+            }
+            System.out.println();
+        }
     }
 }
