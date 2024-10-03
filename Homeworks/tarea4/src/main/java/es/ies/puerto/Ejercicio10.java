@@ -12,7 +12,7 @@ import java.util.Random;
 public class Ejercicio10 {
     static Random random = new Random();
     public static void main(String[] args) {
-        int[] vidaPokemons1 = {100, 57, 68, 232, 140, 32};
+        int[] vidaPokemons1 = {100, 257, 68, 232, 140, 32};
         int[] vidaPokemons2 = {300, 123, 78, 6, 252, 43};
         boolean equipoMuerto1 = false;
         boolean equipoMuerto2 = false;
@@ -53,7 +53,7 @@ public class Ejercicio10 {
 
                 }
             }
-            equipoMuerto2 = false;
+            equipoMuerto2 = true;
             for (int vidaPokemon2 : vidaPokemons2) {
                 if (vidaPokemon2 > 0) {
                     equipoMuerto2 = false;
