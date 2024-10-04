@@ -11,6 +11,22 @@ public class Ejercicio7 {
     public static void main(String[] args) {
         String[] criaturas = {"Goblin", "Dragón", "Orco", "Troll"};
         String criaturaAEliminar = "Dragón"; 
+        int tamanio = criaturas.length -1;
+        String[] nuevasCriaturas = new String[tamanio];
+        int indiceCriatura = 0;
+        for (int i = 0; i < criaturas.length; i++) {
+            if (!criaturaAEliminar.equals(criaturas[i])) {
+                String temporal = criaturas[i];
+                nuevasCriaturas[indiceCriatura] = temporal;
+                indiceCriatura++;
+            }
+        }
+        System.out.println(criaturaAEliminar + " ha sido eliminado del registro.");
+        for (String nuevaCriatura : nuevasCriaturas) {
+            System.out.print(nuevaCriatura+ " ");
+        }
+
+        /** Otra forma de hacerlo
         int nuevoTamanio = 0;
         for (String criatura : criaturas) {
             if (!criatura.equals(criaturaAEliminar)) {
@@ -28,5 +44,6 @@ public class Ejercicio7 {
         for (String nuevaCriatura : nuevasCriaturas) {
             System.out.print(nuevaCriatura+ " ");
         }
+        */
     }
 }
