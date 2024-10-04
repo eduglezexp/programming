@@ -12,7 +12,8 @@ public class Ejercicio4 {
         String[] inventario = {"Espada", "Escudo", "Poción", "Gema", "Mapa"}; 
         String[] invertido = new String[inventario.length];
         for (int i = 0; i < inventario.length; i++) {
-            invertido[inventario.length-1-i] = inventario[i];  
+            invertido[inventario.length -1 -i] = inventario[i];  
+            System.out.println(inventario[i]);
         }
     }
 }
