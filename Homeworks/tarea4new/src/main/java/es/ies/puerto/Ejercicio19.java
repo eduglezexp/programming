@@ -10,14 +10,16 @@ public class Ejercicio19 {
     public static void main(String[] args) {
         String[] pociones = {"Poción de Curación", "Poción de Veneno", "Curación Mayor", "Poción de Invisibilidad"}; 
         int contadorCurativas = 0;
+        int contadorOtrasPociones = 0;
         for (String pocion : pociones) {
             if (pocion.contains("Curación")) {
                 contadorCurativas++;
+            } else {
+                contadorOtrasPociones++;
             }
         }
-        int tamanioOtrasPociones = pociones.length - contadorCurativas;
-        String[] pocionesCurativas = new String[pociones.length]; 
-        String[] otrasPociones = new String[tamanioOtrasPociones];
+        String[] pocionesCurativas = new String[contadorCurativas]; 
+        String[] otrasPociones = new String[contadorOtrasPociones];
         int indiceCurativas = 0;
         int indiceOtras = 0;
         for (String pocion : pociones) {
