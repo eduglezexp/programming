@@ -4,7 +4,8 @@ package es.ies.puerto;
  * Dos equipos de superhéroes han decidido fusionarse para enfrentar una amenaza mayor. 
  * Escribe un programa que combine ambos equipos en un solo array, sin que se repita 
  * ningún nombre.
- * @author
+ * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio13 {

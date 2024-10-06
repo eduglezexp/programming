@@ -4,6 +4,7 @@ package es.ies.puerto;
  * Un grupo de guerreros ha sido evaluado por su nivel de poder de ataque. 
  * Escribe un programa que determine quién es el héroe más fuerte y el más débil.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio3 {

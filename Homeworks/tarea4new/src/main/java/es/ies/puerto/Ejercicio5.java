@@ -5,6 +5,7 @@ package es.ies.puerto;
  * (números pares) y los Sith (números impares). Escribe un programa que cuente 
  * cuántos Jedi y cuántos Sith hay en un array de fuerzas.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio5 {

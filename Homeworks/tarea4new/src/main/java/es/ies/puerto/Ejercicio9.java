@@ -5,6 +5,7 @@ package es.ies.puerto;
  * puntos de fuerza de los guerreros de dos ejércitos y muestre un nuevo array con las 
  * fuerzas combinadas de ambos.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio9 {

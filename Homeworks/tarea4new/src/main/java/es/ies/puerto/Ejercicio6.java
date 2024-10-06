@@ -5,6 +5,7 @@ package es.ies.puerto;
  * por el equipo rebelde. Escribe un programa que busque un valor específico en el 
  * array y verifique si el cristal Kyber está presente.
  * @author euglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio6 {

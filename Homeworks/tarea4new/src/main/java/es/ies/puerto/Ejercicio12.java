@@ -6,6 +6,7 @@ package es.ies.puerto;
  * cuyo nombre contiene la palabra "Fuego", mientras que los de defensa contienen 
  * "Escudo". Escribe un programa que cuente los hechizos de ataque y de defensa.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio12 {

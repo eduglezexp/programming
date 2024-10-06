@@ -5,6 +5,7 @@ package es.ies.puerto;
  * de vida. Escribe un programa que calcule la suma total de puntos de vida de 
  * todos los aventureros en un array.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio2 {

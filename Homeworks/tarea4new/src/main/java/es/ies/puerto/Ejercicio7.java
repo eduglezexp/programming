@@ -5,6 +5,7 @@ package es.ies.puerto;
  * registro de criaturas vivas. Escribe un programa que elimine a esta criatura 
  * específica del array.
  * @author euglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio7 {

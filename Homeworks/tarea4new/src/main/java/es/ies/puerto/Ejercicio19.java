@@ -4,6 +4,7 @@ package es.ies.puerto;
  * curativas contienen la palabra "Curación". Escribe un programa que separe las pociones 
  * curativas de las otras.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio19 {

@@ -4,6 +4,7 @@ package es.ies.puerto;
  * Thanos ha recolectado gemas del infinito, pero quiere saber cuántas tiene de cada tipo. 
  * Escribe un programa que cuente cuántas gemas de "Poder", "Tiempo" y "Espacio" ha recolectado.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio20 {

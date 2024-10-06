@@ -4,6 +4,7 @@ package es.ies.puerto;
  * Dos equipos de héroes han recolectado botines durante una misión conjunta. 
  * Escribe un programa que combine ambos inventarios de botines en uno solo.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio8 {

@@ -5,6 +5,7 @@ package es.ies.puerto;
  * los encontró. Escribe un programa que invierta el orden de los objetos en su 
  * inventario para mostrar el último objeto primero.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio4 {

@@ -4,6 +4,7 @@ package es.ies.puerto;
  * Crea un array que represente los midiclorianos de 10 Jedi. Calcula la media de 
  * midiclorianos en el array. ¿Quién tiene más y quién tiene menos?
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio1 {

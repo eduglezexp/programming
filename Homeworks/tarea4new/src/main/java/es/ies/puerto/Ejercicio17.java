@@ -5,6 +5,7 @@ package es.ies.puerto;
  * Escribe un programa que multiplique la experiencia de cada personaje por 1.5 
  * para simular su mejora tras una batalla.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio17 {

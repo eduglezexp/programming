@@ -5,6 +5,7 @@ package es.ies.puerto;
  * Escribe un programa que ordene los tiempos de menor a mayor para mostrar quién ha 
  * sido el más rápido.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio18 {

@@ -5,6 +5,7 @@ package es.ies.puerto;
  * y tu misión es eliminar una criatura específica del registro. Escribe un programa 
  * que elimine la criatura que ya ha sido contenida.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio16 {

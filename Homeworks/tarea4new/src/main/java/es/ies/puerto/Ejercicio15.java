@@ -5,6 +5,7 @@ package es.ies.puerto;
  * buscando específicamente el "Anillo Único". Escribe un programa que determine si el 
  * Anillo Único está en el inventario.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio15 {

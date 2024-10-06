@@ -5,6 +5,7 @@ package es.ies.puerto;
  * Escribe un programa que ordene las puntuaciones de los gladiadores de menor a mayor para 
  * ver quién es el mejor combatiente.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio10 {

@@ -5,6 +5,7 @@ package es.ies.puerto;
  * Cada casa recibe una medalla (Oro, Plata o Bronce) según su puntuación. Escribe 
  * un programa que cuente cuántas medallas de cada tipo ha ganado una casa.
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio14 {

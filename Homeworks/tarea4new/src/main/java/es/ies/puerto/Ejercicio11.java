@@ -5,6 +5,7 @@ package es.ies.puerto;
  * Escribe un programa que multiplique cada valor de ataque en el array por 
  * un valor escalar (el poder de la poción).
  * @author eduglezexp
+ * @version 1.0.0
  */
 
 public class Ejercicio11 {
