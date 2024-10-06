@@ -13,33 +13,33 @@ public class Ejercicio13 {
         String[] equipo2 = {"Capitán América", "Thor", "Hawkeye"};
         int tamanioCompleto = equipo1.length + equipo2.length;
         String[] equipoCompleto = new String[tamanioCompleto];
-        int index = 0;
+        int indice = 0;
         for (int i = 0; i < equipo1.length; i++) {
             boolean duplicado = false;
-            for (int j = 0; j < index; j++) {
+            for (int j = 0; j < indice; j++) {
                 if (equipoCompleto[j].equals(equipo1[i])) {
                     duplicado = true;
                     break;
                 }
             }
             if (!duplicado) {
-                equipoCompleto[index++] = equipo1[i];
-            }
+                equipoCompleto[indice++] = equipo1[i];
+            } 
         }
         for (int i = 0; i < equipo2.length; i++) {
             boolean duplicado = false;
-            for (int j = 0; j < index; j++) {
+            for (int j = 0; j < indice; j++) {
                 if (equipoCompleto[j].equals(equipo2[i])) {
                     duplicado = true;
                     break;
                 }
             }
             if (!duplicado) {
-                equipoCompleto[index++] = equipo2[i];
+                equipoCompleto[indice++] = equipo2[i];
             }
         }
-        for (String equipo : equipoCompleto) {
-            System.out.print(equipo+ " ");
+        for (int i = 0; i < indice; i++) {
+            System.out.print(equipoCompleto[i] + " ");
         }
     }
 }
