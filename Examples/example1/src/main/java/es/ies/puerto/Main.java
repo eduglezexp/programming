@@ -11,6 +11,5 @@ public class Main {
         System.out.println(edad);
         System.out.println("Mi suma es " +suma);
         System.out.println("Mi resta es " +resta);
-        System.out.println();
     }
 }
