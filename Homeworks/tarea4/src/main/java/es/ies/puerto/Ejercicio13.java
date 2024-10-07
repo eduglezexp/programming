@@ -9,5 +9,5 @@ package es.ies.puerto;
  */
 
 public class Ejercicio13 {
-
+    String[] planetas = {};
 }

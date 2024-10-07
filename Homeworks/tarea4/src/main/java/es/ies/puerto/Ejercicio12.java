@@ -12,13 +12,13 @@ import java.util.Scanner;
 public class Ejercicio12 {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
+        String[] objetos = {"batarangs", "ganchos", "bombas de humo"};
         String opcion = "";
         do {
             System.out.println("Elige una opcion para el inventario: (agregar o eliminar)");
             opcion = scanner.nextLine();
             opcion = opcion.toLowerCase();
         } while (!opcion.equals("agregar") && !opcion.equals("eliminar"));
-        String[] objetos = {"batarangs", "ganchos", "bombas de humo"};
         switch (opcion) {
             case "agregar":
                 System.out.println();
@@ -30,6 +30,8 @@ public class Ejercicio12 {
                 System.out.println("¿Que objeto desea añadir al inventario?: ");
                 String objetoAniadir = scanner.nextLine();
                 objetos[objetos.length -1] += objetoAniadir;
+                int contador = 0;
+                String[] nuevosObjetos = new String[objetos.length + 1];
                 System.out.println();
                 System.out.println("***Inventario***");
                 for (int i = 0; i < objetos.length; i++) {
