@@ -21,19 +21,32 @@ public class Ejercicio12 {
         String[] objetos = {"batarangs", "ganchos", "bombas de humo"};
         switch (opcion) {
             case "agregar":
-                for (int i = 0; i < objetos.length; i++) {
-                    
-                }
-            case "eliminar":
                 System.out.println();
                 System.out.println("***Inventario***");
                 for (int i = 0; i < objetos.length; i++) {
                     System.out.println(" - " +objetos[i]);
                 }
                 System.out.println();
+                System.out.println("¿Que objeto desea añadir al inventario?: ");
+                String objetoAniadir = scanner.nextLine();
+                objetos[objetos.length -1] += objetoAniadir;
+                System.out.println();
+                System.out.println("***Inventario***");
+                for (int i = 0; i < objetos.length; i++) {
+                    System.out.println(" - " +objetos[i]);
+                }
+                break;
+            case "eliminar":
+                System.out.println();
+                System.out.println("***Inventario***");
+                for (int i = 0; i < objetos.length; i++) {  
+                    System.out.println(" - " +objetos[i]);
+                }
+                System.out.println();
                 System.out.println("¿Que objeto desea eliminar del inventario?: ");
                 String objetoEliminar = scanner.nextLine();
                 objetoEliminar = objetoEliminar.toLowerCase();
+                break;
         }
         scanner.close();
     } 
