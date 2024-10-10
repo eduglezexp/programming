@@ -13,6 +13,9 @@ package es.ies.puerto;
 
 public class Ejercicio30 {
     public static void main(String[] args) {
-        
+        double distancia = 4.5e16;
+        double velocidad = 2.0e8;
+        double tiempo = distancia / velocidad;
+        System.out.println(tiempo);
     }
 }
