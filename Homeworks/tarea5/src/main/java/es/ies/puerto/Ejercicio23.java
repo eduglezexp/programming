@@ -6,9 +6,8 @@ package es.ies.puerto;
  * @version 1.0.0
  */
 
-import java.util.Scanner;
-
 public class Ejercicio23 {
-public static void main(String[] args) {
-            }
+    public static void main(String[] args) {
+        
+    }
 }
