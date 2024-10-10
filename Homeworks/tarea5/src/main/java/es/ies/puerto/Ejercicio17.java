@@ -12,6 +12,7 @@ public class Ejercicio17 {
         int danioBase = 200;
         double numeroRandom = 1.5 + (Math.random() * (2.0 - 1.5));
         double danioCritico = danioBase * numeroRandom;
+        danioCritico = Math.round(danioCritico);
         System.out.println(danioCritico);
     }
 }

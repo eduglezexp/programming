@@ -10,5 +10,10 @@ package es.ies.puerto;
 public class Ejercicio22 {
     public static void main(String[] args) {
         String hechizo = "Expecto Patronum";
+        boolean contiene = false;
+        if (hechizo.startsWith("Expecto") && hechizo.endsWith("Patronum")) {
+            contiene = true;
+        }
+        System.out.println(contiene);
     }
 }
