@@ -23,7 +23,7 @@ public class Coche {
     public Coche(String marca, String modelo, int anio) {
         this.marca = marca;
         this.modelo = modelo;
-        this.anio = anio;
+        setAnio(anio);
     }
 
     public String getMarca() {
@@ -47,8 +47,9 @@ public class Coche {
     }
 
     public void setAnio(int anio) {
-        if (anio >= 1886) {
-            this.anio = anio;
+        if (anio <= 1886) {
+            this.anio = 1886;
         }
+        this.anio = anio;
     }    
 }

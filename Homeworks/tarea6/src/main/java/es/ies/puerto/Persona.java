@@ -12,17 +12,50 @@ package es.ies.puerto;
  */
 
 public class Persona {
+    private String dni;
     private String nombre;
     private int edad;
 
+    /**
+     * Constructor por defecto
+     */
     public Persona() {
 
     }
 
+    /**
+     * Constructor con la propiedad del dni
+     * @param dni de la persona
+     */
+    public Persona(String dni) {
+        this.dni = dni;
+    }
+
+    /**
+     * Constructor de las propiedades nombre y edad
+     * @param nombre por defecto de la persona
+     * @param edad de la persona
+     */
     public Persona(String nombre, int edad) {
         this.nombre = nombre;
         this.edad = edad;
     }
+
+    /**
+     * Constructor de todas las propiedades
+     * @param dni de la persona
+     * @param nombre por defecto de la persona
+     * @param edad de la persona
+     */
+    public Persona(String dni, String nombre, int edad) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    /**
+     * Getters and Setters
+     */
 
     public int getEdad() {
         return edad;
@@ -32,7 +65,24 @@ public class Persona {
         this.edad = edad;
     }
 
-    public void mostrarInformacion() {
-        System.out.println("Nombre: " + nombre + ", Edad: " + edad);
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona [dni=" + dni + ", nombre=" + nombre + ", edad=" + edad + "]";
     }
 }
