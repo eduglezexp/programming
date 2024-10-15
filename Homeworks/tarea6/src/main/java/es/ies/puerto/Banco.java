@@ -35,23 +35,17 @@ public class Banco {
         if (dinero > 0) {
             saldo += dinero; 
             return true;  
-        } else {
-            System.out.println("Error: La cantidad a depositar debe ser mayor que 0");
-            return false;
-        }
+        } 
+        System.out.println("Error: La cantidad a depositar debe ser mayor que 0");
+        return false;
     }
 
     public String retirarDinero(float dinero) {
-        if (dinero > 0) {
+        if (dinero > 0 && saldo > dinero) {
             saldo -= dinero;
-        } else {
-            return "Introduzca una cantidad de dinero valida";
+            return "Dinero: " +dinero+ " retirado correctamente";
         } 
-        if (saldo < 0) {
-            return "Saldo insuficiente";
-        } else {
-            return "El dinero retirado es " +dinero;
-        }
+        return "Introduzca una cantidad de dinero valida o Saldo insuficiente";
     }
     
     public static void main(String[] args) {
