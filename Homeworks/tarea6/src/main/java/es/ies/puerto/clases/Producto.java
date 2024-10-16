@@ -1,20 +1,12 @@
-package es.ies.puerto;
+package es.ies.puerto.clases;
 
 /**
  * Ejercicio 15
  * Crea una clase Producto con los atributos nombre, precio y stock. 
  * El precio no puede ser negativo y el stock debe ser al menos 0.
- * Instancia y uso de la clase
- * Crea un objeto de la clase Producto con nombre "Laptop", precio 1000, 
- * y stock 50. Asegúrate de que el precio no sea negativo y que el stock 
- * no sea menor a 0.
  * Ejercicio 16
  * Añade a la clase Producto un método para vender productos, que disminuya 
  * el stock y retorne el total de la venta.
- * Instancia y uso de la clase
- * Crea un objeto de la clase Producto con nombre "Cámara", precio 300, 
- * y stock 20. Realiza una venta de 5 unidades y muestra el stock restante 
- * y el total de la venta.
  * @author eduglezexp
  * @version 1.0.0
  */
@@ -66,13 +58,12 @@ public class Producto {
         return "Producto [nombre=" + nombre + ", precio=" + precio + ", stock=" + stock + "]";
     }
 
-    public void ventaProductos() {
-        
-    }
-
-    public static void main(String[] args) {
-        Producto producto1 = new Producto("Laptop", 1000, 50);
-        System.out.println(producto1);
-
+    public String ventaProductos(Producto producto, int cantidad) {
+        if (producto.stock < cantidad) {
+            return "Stock insuficente";
+        }
+        producto.stock -= cantidad;
+        float total = producto.precio *= cantidad;
+        return "El total de la venta es: " +total;
     }
 }

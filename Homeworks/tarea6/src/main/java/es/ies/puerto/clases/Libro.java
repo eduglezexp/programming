@@ -1,13 +1,10 @@
-package es.ies.puerto;
+package es.ies.puerto.clases;
 
 /**
  * Ejercicio 12
  * Crea una clase Libro con los atributos titulo, autor y paginas. 
  * Usa getters y setters para cada atributo, y asegura que el número 
  * de páginas sea un entero positivo.
- * Instancia y uso de la clase
- * Crea un objeto de la clase Libro con título "El Quijote", autor "Cervantes", 
- * y 500 páginas. Asegúrate de que el número de páginas sea positivo.
  * @author eduglezexp
  * @version 1.0.0
  */
@@ -53,10 +50,5 @@ public class Libro {
     @Override
     public String toString() {
         return "Libro [titular=" + titular + ", autor=" + autor + ", paginas=" + paginas + "]";
-    }
-
-    public static void main(String[] args) {
-        Libro libro = new Libro("El Quijote", "Cervantes", 500);
-        System.out.println(libro);
     }
 }
