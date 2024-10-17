@@ -16,15 +16,27 @@ public class Producto {
     private float precio;
     private int stock;
     
+    /**
+     * Constructor por defecto
+     */
     public Producto() {
     }
 
+    /**
+     * Constructor con todas las propiedades
+     * @param nombre del producto
+     * @param precio del producto
+     * @param stock del producto
+     */
     public Producto(String nombre, float precio, int stock) {
         this.nombre = nombre;
         setPrecio(precio);
         setStock(stock);
     }
 
+    /**
+     * Getters and Setters
+     */
     public String getNombre() {
         return nombre;
     }

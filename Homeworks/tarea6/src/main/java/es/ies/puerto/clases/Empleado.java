@@ -16,20 +16,37 @@ public class Empleado {
     private String puesto;
     private float salario;
     
+    /**
+     * Constructor por defecto
+     */
     public Empleado() {
     }
 
+    /**
+     * Constructor con las propiedades nombre y salario
+     * @param nombre del empleado
+     * @param salario del empleado
+     */
     public Empleado(String nombre, float salario) {
         this.nombre = nombre;
         setSalario(salario);
     }
 
+    /**
+     * Constructor con todas las propiedades
+     * @param nombre del empleado
+     * @param puesto del empleado
+     * @param salario del empleado
+     */
     public Empleado(String nombre, String puesto, float salario) {
         this.nombre = nombre;
         setPuesto(puesto);
         setSalario(salario);
     }
 
+    /**
+     * Getters and Setters
+     */
     public String getNombre() {
         return nombre;
     }

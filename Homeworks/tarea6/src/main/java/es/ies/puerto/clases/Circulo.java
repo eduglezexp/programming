@@ -14,13 +14,23 @@ package es.ies.puerto.clases;
 public class Circulo {
     private int radio;
 
+    /**
+     * Constructor por defecto
+     */
     public Circulo() {
     }
 
+    /**
+     * Constructor con todas las propiedades
+     * @param radio del circulo
+     */
     public Circulo(int radio) {
         setRadio(radio);
     }
 
+    /**
+     * Getters and Setters
+     */
     public int getRadio() {
         return radio;
     }
@@ -33,15 +43,13 @@ public class Circulo {
 
     public float calcularArea() {
         double area = Math.PI * Math.pow(radio, 2);
-        float areaFloat = (float) area;
-        return areaFloat;
+        return (float) area;
     }
 
     public float calcularPerimetro() {
         double diametro = 2 * radio * Math.PI;
         double perimetro = diametro * Math.PI;
-        float perimetroFloat = (float) perimetro;
-        return perimetroFloat;
+        return (float) perimetro;
     }
 
     @Override

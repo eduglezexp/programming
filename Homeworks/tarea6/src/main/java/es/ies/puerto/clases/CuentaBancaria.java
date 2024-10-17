@@ -15,14 +15,25 @@ public class CuentaBancaria {
     private String titular;
     private float saldo;
     
+    /**
+     * Constructor por defecto
+     */
     public CuentaBancaria() {
     }
 
+    /**
+     * Constructor con todas las propiedades
+     * @param titular de la cuenta bancaria
+     * @param saldo del titular
+     */
     public CuentaBancaria(String titular, float saldo) {
         this.titular = titular;
         this.saldo = saldo;
     }
 
+    /**
+     * Getters and Setters
+     */
     public String getTitular() {
         return titular;
     }

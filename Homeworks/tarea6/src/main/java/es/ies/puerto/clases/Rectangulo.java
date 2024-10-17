@@ -21,15 +21,26 @@ public class Rectangulo {
     private float base;
     private float altura;
 
+    /**
+     * Constructor por defecto
+     */
     public Rectangulo() {
 
     }
 
+    /**
+     * Constructor con todas las propiedades
+     * @param base del rectangulo
+     * @param altura del rectangulo
+     */
     public Rectangulo(float base, float altura) {
         this.base = base;
         this.altura = altura;
     }
 
+    /**
+     * Getters and Setters
+     */
     public float getBase() {
         return base;
     }

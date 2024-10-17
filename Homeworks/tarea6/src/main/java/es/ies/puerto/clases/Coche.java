@@ -16,16 +16,28 @@ public class Coche {
     private String modelo;
     private int anio;
 
+    /**
+     * Constructor por defecto
+     */
     public Coche() {
 
     }
 
+    /**
+     * Constructor con todas las propiedades
+     * @param marca del coche
+     * @param modelo del coche
+     * @param anio del coche
+     */
     public Coche(String marca, String modelo, int anio) {
         this.marca = marca;
         this.modelo = modelo;
         setAnio(anio);
     }
 
+    /**
+     * Getters and Setters
+     */
     public String getMarca() {
         return marca;
     }

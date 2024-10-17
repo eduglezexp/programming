@@ -15,14 +15,25 @@ public class Alumno {
     private String nombre;
     private float nota;
     
+    /**
+     * Constructor por defecto
+     */
     public Alumno() {
     }
 
+    /**
+     * Constructor con todas las propiedades
+     * @param nombre del alumno
+     * @param nota del alumno
+     */
     public Alumno(String nombre, float nota) {
         this.nombre = nombre;
         setNota(nota);
     }
 
+    /**
+     * Getters and Setters
+     */
     public String getNombre() {
         return nombre;
     }

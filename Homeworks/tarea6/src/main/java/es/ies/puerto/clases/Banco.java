@@ -12,14 +12,24 @@ package es.ies.puerto.clases;
 public class Banco {
     private float saldo;
 
+    /**
+     * Constructor por defecto
+     */
     public Banco() {
 
     }
 
+    /**
+     * Constructor con todas las propiedades
+     * @param saldo del cliente
+     */
     public Banco(float saldo) {
         this.saldo = saldo;
     }
 
+    /**
+     * Getters and Setters
+     */
     public float getSaldo() {
         return saldo;
     }

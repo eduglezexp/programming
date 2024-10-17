@@ -16,15 +16,27 @@ public class Vehiculo {
     private String modelo;
     private int combustible;
     
+    /**
+     * Constructor por defecto
+     */
     public Vehiculo() {
     }
 
+    /**
+     * Constructor con todas las propiedades
+     * @param marca del vehiculo
+     * @param modelo del vehiculo
+     * @param combustible del vehiculo
+     */
     public Vehiculo(String marca, String modelo, int combustible) {
         this.marca = marca;
         this.modelo = modelo;
         setCombustible(combustible);
     }
-
+    
+    /**
+     * Getters and Setters
+     */
     public String getMarca() {
         return marca;
     }

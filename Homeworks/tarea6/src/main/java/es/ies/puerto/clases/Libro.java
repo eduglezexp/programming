@@ -14,15 +14,27 @@ public class Libro {
     private String autor;
     private int paginas;
     
+    /**
+     * Constructor por defecto
+     */
     public Libro() {
     }
 
+    /**
+     * Constructor con todas las propiedades
+     * @param titular del libro
+     * @param autor del libro
+     * @param paginas del libro
+     */
     public Libro(String titular, String autor, int paginas) {
         this.titular = titular;
         this.autor = autor;
         this.paginas = paginas;
     }
 
+    /**
+     * Getters and Setters
+     */
     public String getTitular() {
         return titular;
     }
