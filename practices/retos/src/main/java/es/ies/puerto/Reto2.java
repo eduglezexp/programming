@@ -16,15 +16,21 @@ public class Reto2 {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         System.out.println("Introduce los ingresos anuales: ");
-        float ingresosAnuales = scanner.nextFloat();
-        float impuestos = 0;
+        int ingresosAnuales = scanner.nextInt();
+        System.out.println(calcularImpuestos(ingresosAnuales));
+        scanner.close();
+    }
+
+    public static String calcularImpuestos(int ingresosAnuales) {
+        int impuestos = 0;
         if (ingresosAnuales < 30000) {
-            System.out.println("no hay impuesto");
+            return "No hay impuesto";
         } else if (ingresosAnuales < 100000) {
-            impuestos = (float) (ingresosAnuales * 0.10);
-            System.out.println("Impuestos del 10%, total: " + impuestos);
+            impuestos = (int) (ingresosAnuales * 0.10f);
+            return "Impuestos del 10%, total: " + impuestos;
         } else {
-            
+            impuestos = (int) (ingresosAnuales * 0.20f);
+            return "Impuestos del 20%, total: " + impuestos;
         }
     }
 }

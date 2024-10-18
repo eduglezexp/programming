@@ -29,5 +29,6 @@ public class Reto1 {
             }
             contador++;
         } while (contador != 3);
+        scanner.close();
     }
 }
