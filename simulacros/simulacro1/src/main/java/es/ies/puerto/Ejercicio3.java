@@ -15,8 +15,8 @@ public class Ejercicio3 {
     }
 
     public static void imprimirFizzBuzz() {
-        String mensaje = "";
         for (int i = 1; i <= 100; i++) {
+            String mensaje = "";
             if (i % 3 == 0) {
                 mensaje = "Fizz";
             } 
@@ -25,6 +25,8 @@ public class Ejercicio3 {
             } 
             if (mensaje.isEmpty()) {
                 System.out.println(i);
+            } else {
+                System.out.println(mensaje);
             }
         }
     }

@@ -1,5 +1,12 @@
 package es.ies.puerto;
 
+/**
+ * Crea una clase llamada Círculo que represente un círculo. Debe de poseer como atributo 
+ * su radio, del cual vamos a obtener el perímetro de este.
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
 public class Circulo {
     private float radio;
 
@@ -28,11 +35,18 @@ public class Circulo {
         this.radio = radio;
     }
 
-    public void calcularArea() {
-
+    @Override
+    public String toString() {
+        return "Circulo [radio=" + radio + "]";
     }
 
-    public void calcularPerimetro() {
-        
+    public float calcularArea() {
+        double area = Math.PI * Math.pow(radio, 2);
+        return (float) area;
+    }
+
+    public float calcularPerimetro() {
+        double perimetro = 2 * Math.PI * radio;
+        return (float) perimetro;
     }
 }
