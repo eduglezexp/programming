@@ -12,6 +12,7 @@ public class Coche {
     private String marca;
     private String modelo;
     private int anio;
+    private int velocidad;
 
     /**
      * Constructor por defecto 
@@ -21,13 +22,69 @@ public class Coche {
 
     /**
      * Constructor con todas las propiedades
-     * @param marca
-     * @param modelo
-     * @param anio
+     * @param marca del coche
+     * @param modelo del coche
+     * @param anio del coche
+     * @param velocidad del coche
      */
-    public Coche(String marca, String modelo, int anio) {
+    public Coche(String marca, String modelo, int anio, int velocidad) {
         this.marca = marca;
         this.modelo = modelo;
         this.anio = anio;
-    }   
+        setVelocidad(velocidad);
+    }
+
+    /**
+     * Getters and Setters
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public int getAnio() {
+        return anio;
+    }
+
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+
+    public int getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(int velocidad) {
+        if (velocidad >= 0) {
+            this.velocidad = velocidad;
+        }
+    }
+    
+    public void acelerar(int incremento) {
+        if (incremento > 0) {
+            setVelocidad(this.velocidad + incremento);
+        }
+    }
+
+    public void frenar(int decremento) {
+        if (decremento > 0) {
+            setVelocidad(this.velocidad - decremento);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Coche [marca=" + marca + ", modelo=" + modelo + ", anio=" + anio + ", velocidad=" + velocidad + "]";
+    }
 }
