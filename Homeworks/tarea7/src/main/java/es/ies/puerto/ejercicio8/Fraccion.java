@@ -47,44 +47,55 @@ public class Fraccion {
     public void setDenominador(float denominador) {
         if (denominador == 0) {
             this.denominador = 1;
+        } else {
+            this.denominador = denominador;
         }
-        this.denominador = denominador;
-    }
-    
-    /**
-     * Funcion para calcular la suma de dos fracciones
-     * @param otraFraccion 
-     * @return nueva fraccion con el resultado
-     */
-    public float sumar(Fraccion otraFraccion) {
-        return 0;
     }
 
     /**
-     * Funcion para calcular la resta de dos fracciones
-     * @param otraFraccion 
+     * Suma de dos fracciones
+     * @param otraFraccion
      * @return nueva fraccion con el resultado
      */
-    public float restar(Fraccion otraFraccion) {
-        return 0;
+    public Fraccion sumar(Fraccion otraFraccion) {
+        float nuevoNumerador = (this.numerador * otraFraccion.denominador) +
+                               (otraFraccion.numerador * this.denominador);
+        float nuevoDenominador = this.denominador * otraFraccion.denominador;
+        return new Fraccion(nuevoNumerador, nuevoDenominador);
     }
 
     /**
-     * Funcion para calcular la division de dos fracciones
-     * @param otraFraccion 
+     * Resta de dos fracciones
+     * @param otraFraccion
      * @return nueva fraccion con el resultado
      */
-    public float dividir(Fraccion otraFraccion) {
-        return 0;
+    public Fraccion restar(Fraccion otraFraccion) {
+        float nuevoNumerador = (this.numerador * otraFraccion.denominador) -
+                               (otraFraccion.numerador * this.denominador);
+        float nuevoDenominador = this.denominador * otraFraccion.denominador;
+        return new Fraccion(nuevoNumerador, nuevoDenominador);
     }
 
     /**
-     * Funcion para calcular la multiplicacion de dos fracciones
-     * @param otraFraccion 
+     * Multiplicación de dos fracciones
+     * @param otraFraccion
      * @return nueva fraccion con el resultado
      */
-    public float multiplicar(Fraccion otraFraccion) {
-        return 0;
+    public Fraccion multiplicar(Fraccion otraFraccion) {
+        float nuevoNumerador = this.numerador * otraFraccion.numerador;
+        float nuevoDenominador = this.denominador * otraFraccion.denominador;
+        return new Fraccion(nuevoNumerador, nuevoDenominador);
+    }
+
+    /**
+     * División de dos fracciones
+     * @param otraFraccion
+     * @return nueva fraccion con el resultado
+     */
+    public Fraccion dividir(Fraccion otraFraccion) {
+        float nuevoNumerador = this.numerador * otraFraccion.denominador;
+        float nuevoDenominador = this.denominador * otraFraccion.numerador;
+        return new Fraccion(nuevoNumerador, nuevoDenominador);
     }
 
     @Override

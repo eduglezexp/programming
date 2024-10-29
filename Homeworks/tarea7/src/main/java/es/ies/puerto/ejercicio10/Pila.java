@@ -1,7 +1,5 @@
 package es.ies.puerto.ejercicio10;
 
-import java.util.Arrays;
-
 /**
  * 10. Clase Pila con Métodos para Apilar y Desapilar
  * Crea una clase Pila (simulando una estructura de datos LIFO) con métodos apilar() 
@@ -12,49 +10,62 @@ import java.util.Arrays;
  */
 
 public class Pila {
-    int[] datos;
+    private int capacidad;       
+    private int[] items;        
+    private int tope;       
 
     /**
      * Constructor por defecto
      */
     public Pila() {
+
     }
 
     /**
      * Constructor con todas las propiedades
-     * @param datos de la pila
+     * @param capacidad
      */
-    public Pila(int[] datos) {
-        this.datos = datos;
+    public Pila(int capacidad) {
+        this.capacidad = capacidad;
+        this.items = new int[capacidad];
+        this.tope = -1; 
     }
-
+    
     /**
-     * Getters and Setters
+     * Metodo para apilar un elemento
+     * @param valor 
      */
-    public int[] getDatos() {
-        return datos;
+    public void apilar(int valor) {
+        if (tope < capacidad - 1) {
+            items[++tope] = valor;
+        } else {
+            System.out.println("La pila está llena. No se puede apilar " + valor);
+        }
     }
-
-    public void setDatos(int[] datos) {
-        this.datos = datos;
-    }
-
+    
     /**
-     * Metodo para apilar los datos
+     * funcion para deapilar un elemento
+     * @return 
      */
-    public void apilar() {
-
+    public int desapilar() {
+        if (tope >= 0) { 
+            return items[tope--];
+        } else {
+            System.out.println("La pila está vacía. No se puede desapilar.");
+            return -1;
+        }
     }
-
-    /**
-     * Metodo para desapilar los datos
-     */
-    public void desapilar() {
-
-    }
-
+    
     @Override
     public String toString() {
-        return "Pila [datos=" + Arrays.toString(datos) + "]";
+        if (tope == -1) {
+            return "La pila está vacía";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Contenido de la pila: ");
+        for (int i = tope; i >= 0; i--) {
+            sb.append(items[i]).append(" ");
+        }
+        return sb.toString();
     }
 }
