@@ -34,7 +34,7 @@ public class Fecha {
 
     /**
      * Metodo para validar si la fecha es correcta
-     * @return la fecha si es valida
+     * @return el dia si es valido
      */
     public boolean esFechaValida() {
         if (mes < 1 || mes > 12 || anio < 1) {
