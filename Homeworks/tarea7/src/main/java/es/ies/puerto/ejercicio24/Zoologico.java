@@ -103,7 +103,7 @@ public class Zoologico {
      * Metodo para ordenar la lista despues de eliminar a un animal
      */
     public void ordenarLista() {
-        for (int i = 0; i < animales.length; i++) {
+        for (int i = 0; i < animales.length-1; i++) {
             if (animales[i] == null) {
                 animales[i] = animales[i+1];
                 animales[i+1] = null;
