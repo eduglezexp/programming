@@ -60,7 +60,7 @@ public class Zoologico {
     }
 
     /**
-     * Funcion para incluir un animal a la lista
+     * Metodo para incluir un animal a la lista
      * @param animal nuevo
      * @return true/false
      */
@@ -76,6 +76,11 @@ public class Zoologico {
         return true;
     }
 
+    /**
+     * Metodo para eliminar un animal
+     * @param animalEliminar
+     * @return true/false
+     */
     public boolean deleteAnimal(Animal animalEliminar) {
         if (animalEliminar == null) {
             return false;
@@ -111,7 +116,7 @@ public class Zoologico {
 
     @Override
     public String toString() {
-        String mensaje = "Nombre: " +nombre+ "\n";
+        String mensaje = "Nombre: " +nombre;
         for (Animal animal : animales) {
             if (animal != null) {
                 mensaje += animal.toString();
