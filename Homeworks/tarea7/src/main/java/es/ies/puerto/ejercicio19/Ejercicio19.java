@@ -10,5 +10,9 @@ package es.ies.puerto.ejercicio19;
  */
 
 public class Ejercicio19 {
-
+    public static void main(String[] args) {
+        Conversor conversor = new Conversor(5, 7);
+        System.out.println("Pies: " +conversor.metrosAPies());
+        System.out.println("Millas: " +conversor.kilometrosAMillas());
+    }
 }

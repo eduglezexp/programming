@@ -13,8 +13,14 @@ public class Ejercicio24 {
     static Zoologico zoologico;
     public static void main(String[] args) {
         Animal animal1 = new Animal("Julian", "León");
+        Animal animal2 = new Animal("Pablo", "Loro");
         zoologico = new Zoologico("Loro Parque");
         zoologico.addAnimal(animal1);
+        zoologico.addAnimal(animal2);
         System.out.println(zoologico);    
+        zoologico.deleteAnimal(animal1);
+        System.out.println(zoologico);
+        zoologico.addAnimal(animal1);
+        System.out.println(zoologico);
     }
 }

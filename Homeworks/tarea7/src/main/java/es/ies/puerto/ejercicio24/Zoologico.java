@@ -1,7 +1,5 @@
 package es.ies.puerto.ejercicio24;
 
-import java.util.Arrays;
-
 /**
  * 24. Clase Zoológico con Animales
  * Crea una clase Zoologico que almacene una lista (array) (array) de animales 
@@ -35,20 +33,16 @@ public class Zoologico {
     }
 
     /**
-     * Constructor con todas las propiedades
-     * @param nombre
-     * @param animales
-     */
-    public Zoologico(String nombre, Animal[] animales) {
-        this.nombre = nombre;
-        this.animales = animales;
-        numeroAnimales = 0;
-        animales = new Animal[5];
-    }
-
-    /**
      * Getters and Setters
      */
+    public int getNumeroAnimales() {
+        return numeroAnimales;
+    }
+
+    public void setNumeroAnimales(int numeroAnimales) {
+        this.numeroAnimales = numeroAnimales;
+    } 
+
     public String getNombre() {
         return nombre;
     }
@@ -93,6 +87,7 @@ public class Zoologico {
             if (animalEliminar.equals(animales[i])) {
                 animales[i] = null;
                 numeroAnimales--;
+                ordenarLista();
                 return true;
             }
         }
@@ -103,11 +98,14 @@ public class Zoologico {
      * Metodo para ordenar la lista despues de eliminar a un animal
      */
     public void ordenarLista() {
-        for (int i = 0; i < animales.length-1; i++) {
-            if (animales[i] == null) {
-                animales[i] = animales[i+1];
-                animales[i+1] = null;
+        int index = 0;
+        for (int i = 0; i < animales.length; i++) {
+            if (animales[i] != null) {
+                animales[index++] = animales[i];
             }
+        }
+        while (index < animales.length) {
+            animales[index++] = null;
         }
     }
 
@@ -120,13 +118,5 @@ public class Zoologico {
             }
         }
         return mensaje;
-    }
-
-    public int getNumeroAnimales() {
-        return numeroAnimales;
-    }
-
-    public void setNumeroAnimales(int numeroAnimales) {
-        this.numeroAnimales = numeroAnimales;
-    }   
+    }  
 }

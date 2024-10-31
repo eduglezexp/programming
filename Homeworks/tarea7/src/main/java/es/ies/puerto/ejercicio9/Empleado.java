@@ -83,7 +83,7 @@ public class Empleado {
      */
     @Override
     public String toString() {
-        return "Empleado{" +
+        return "\nEmpleado{" +
                 "Nombre='" + nombre + '\'' +
                 ", Puesto='" + puesto + '\'' +
                 ", Salario=" + salario +
