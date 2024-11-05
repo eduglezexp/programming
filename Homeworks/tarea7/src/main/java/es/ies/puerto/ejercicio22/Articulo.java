@@ -104,7 +104,6 @@ import java.util.Objects;
 
     @Override
     public String toString() {
-        return "Artículo: " + nombre + ", Precio: $" + precio + ", Stock: " + stock + " unidades\n";
+        return "\nArtículo: " + nombre + ", Precio: $" + precio + ", Stock: " + stock + " unidades";
     }
 }
-

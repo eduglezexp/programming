@@ -9,16 +9,17 @@ package es.ies.puerto.ejercicio10;
  * @version 1.0.0
  */
 
-public class Pila {
-    private int capacidad;       
-    private int[] items;        
-    private int tope;       
+public class Pila {     
+    private int capacidad; 
+    private Integer[] elementos;
+    private int tope;             
 
     /**
      * Constructor por defecto
      */
     public Pila() {
-
+        this.elementos = new Integer[capacidad];
+        this.tope = 0;
     }
 
     /**
@@ -27,45 +28,53 @@ public class Pila {
      */
     public Pila(int capacidad) {
         this.capacidad = capacidad;
-        this.items = new int[capacidad];
-        this.tope = -1; 
+        this.elementos = new Integer[capacidad];
+        this.tope = 0;
     }
     
     /**
      * Metodo para apilar un elemento
      * @param valor 
      */
-    public void apilar(int valor) {
-        if (tope < capacidad - 1) {
-            items[++tope] = valor;
-        } else {
-            System.out.println("La pila está llena. No se puede apilar " + valor);
+    public boolean apilar(Integer numero) {
+        if (numero == null) {
+            return false;
         }
+        if (tope >= elementos.length) {
+            return false;
+        }
+        for (int i = elementos.length-1; i > 0; i--) {
+            elementos[i] = elementos[i-1];
+        }
+        elementos[0] = numero;
+        tope++;
+        return true;
     }
     
     /**
      * funcion para deapilar un elemento
      * @return 
      */
-    public int desapilar() {
-        if (tope >= 0) { 
-            return items[tope--];
-        } else {
-            System.out.println("La pila está vacía. No se puede desapilar.");
-            return -1;
+    public boolean desapilar() {
+        if (tope < 1) { 
+            return false;
+        } 
+        for (int i = 0; i < elementos.length-1; i++) {
+            elementos[i] = elementos[i+1];
         }
+        elementos[tope] = null;
+        tope--;
+        return true;
     }
     
     @Override
     public String toString() {
-        if (tope == -1) {
-            return "La pila está vacía";
+        String mensaje= "";
+        for (int i = 0; i < elementos.length; i++) {
+            if (elementos[i] != null) {
+                mensaje += "Posicion " +i+ " Valor: " +elementos[i]+ "\n";   
+            }
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Contenido de la pila: ");
-        for (int i = tope; i >= 0; i--) {
-            sb.append(items[i]).append(" ");
-        }
-        return sb.toString();
+        return mensaje;
     }
 }
