@@ -1,7 +1,5 @@
 package es.ies.puerto.ejercicio25;
 
-import java.util.Arrays;
-
 import es.ies.puerto.ejercicio11.Vehiculo;
 
 public class Concesionario {
@@ -71,6 +69,11 @@ public class Concesionario {
         return true;
     }
 
+    /**
+     * Metodo para eliminar un vehiculo de la lista
+     * @param vehiculo
+     * @return true/false
+     */
     public boolean deleteVehiculo(Vehiculo vehiculo) {
         if (vehiculo == null) {
             return false;
@@ -90,7 +93,7 @@ public class Concesionario {
     }
 
     /**
-     * Metodo para ordenar la lista despues de eliminar a un animal
+     * Metodo para ordenar la lista despues de eliminar un vehiculo
      */
     public void ordenarLista() {
         int index = 0;

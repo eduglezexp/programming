@@ -1,17 +1,17 @@
-package es.ies.puerto.ejercicio26;
+package es.ies.puerto.ejercicio29;
 
 import es.ies.puerto.ejercicio17.Libro;
 
 /**
- * 26. Clase Biblioteca con Libros
- * Crea una clase Biblioteca que almacene una lista (array) (array) de libros 
- * (clase Libro). Implementa métodos para agregar libros, eliminar libros y listar 
- * todos los libros. Usa toString() para describir la biblioteca.
- * @author eduglezexp
+ * 29. Clase Estantería con Libros
+ * Crea una clase Estanteria con una lista (array) (array) de libros. 
+ * Implementa métodos para agregar libros y ordenarlos por título. 
+ * Usa toString() para mostrar los detalles de la estantería.
+ * @author edglezexp 
  * @version 1.0.0
  */
 
-public class Biblioteca {
+public class Estanteria {
     private int numeroLibros;
     private String nombre;
     private Libro[] libros;
@@ -19,7 +19,7 @@ public class Biblioteca {
     /**
      * Constructor por defecto
      */
-    public Biblioteca() {
+    public Estanteria() {
         numeroLibros = 0;
         libros = new Libro[5];
     }
@@ -28,7 +28,7 @@ public class Biblioteca {
      * Constructor con la propiedad nombre
      * @param nombre
      */
-    public Biblioteca(String nombre) {
+    public Estanteria(String nombre) {
         this.nombre = nombre;
         numeroLibros = 0;
         libros = new Libro[5];
@@ -79,40 +79,17 @@ public class Biblioteca {
     }
 
     /**
-     * Metodo para eliminar un libro de la lista
-     * @param libro
-     * @return true/false
+     * Metodo para ordenar los libros por titulo
      */
-    public boolean deleteLibro(Libro libro) {
-        if (libro == null) {
-            return false;
-        }
-        if (numeroLibros == 0)  {
-            return false;
-        }
-        for (int i = 0; i < libros.length; i++) {
-            if (libro.equals(libros[i])) {
-                libros[i] = null;
-                numeroLibros--;
-                ordenarLista();
-                return true;
+    public void ordenarLibrosPorTitulo() {
+        for (int i = 0; i < numeroLibros - 1; i++) {
+            for (int j = 0; j < numeroLibros - i - 1; j++) {
+                if (libros[j].getTitulo().compareToIgnoreCase(libros[j + 1].getTitulo()) > 0) {
+                    Libro temporal = libros[j];
+                    libros[j] = libros[j + 1];
+                    libros[j + 1] = temporal;
+                }
             }
-        }
-        return false;
-    }
-
-    /**
-     * Metodo para ordenar la lista despues de eliminar un libro
-     */
-    public void ordenarLista() {
-        int index = 0;
-        for (int i = 0; i < libros.length; i++) {
-            if (libros[i] != null) {
-                libros[index++] = libros[i];
-            }
-        }
-        while (index < libros.length) {
-            libros[index++] = null;
         }
     }
 
