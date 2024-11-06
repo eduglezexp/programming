@@ -89,7 +89,7 @@ package es.ies.puerto.ejercicio46;
 
     @Override
     public String toString() {
-        String mensaje = "Aeropuerto: " + nombre;
+        String mensaje = "Nombre: " + nombre;
         for (int i = 0; i < numeroReservas; i++) {
             mensaje += reservas[i];
         }

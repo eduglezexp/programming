@@ -74,7 +74,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad + "]";
+        return "\nProducto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad + "]";
     }
 
 
@@ -93,5 +93,4 @@ public class Producto {
     public int hashCode() {
         return Objects.hash(id, nombre, precio, cantidad);
     }
-    
 }
