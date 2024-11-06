@@ -63,6 +63,6 @@ public class Estudiante {
 
     @Override
     public String toString() {
-        return "Estudiante [nombre=" + nombre + ", matricula=" + matricula + ", calificacion=" + calificacion + "]";
+        return "\nEstudiante [nombre=" + nombre + ", matricula=" + matricula + ", calificacion=" + calificacion + "]";
     }
 }
