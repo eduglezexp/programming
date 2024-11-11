@@ -80,10 +80,10 @@ public class Mago {
 
     /**
      * Metodo para calcular el danio del hechizo
-     * @return
+     * @return el danio
      */
     public int calcularDanio() {
-        return nivel * 10;
+        return this.nivel * 10;
     }
 
     /**
@@ -91,7 +91,7 @@ public class Mago {
      * @param cantidad
      */
     public void recargar(int cantidad) {
-
+        this.mana += cantidad;
     }
 
     @Override
