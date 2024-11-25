@@ -29,10 +29,20 @@ public class Concesionario {
      * @return true/false
      */
     public boolean agregar(Vehiculo vehiculo) {
-        if (vehiculo == null) {
+        if (obtener(vehiculo) != null) {
             return false;
         }
         return vehiculos.add(vehiculo);
+    }
+
+    /**
+     * Metodo para eliminar un vehiculo
+     * @param vehiculo
+     * @return true/false
+     */
+    public boolean eliminar() {
+        vehiculos.remove(vehiculos.size()-1);
+        return true;
     }
 
     /**
@@ -47,8 +57,51 @@ public class Concesionario {
         return vehiculos.remove(vehiculo);
     }
 
+    /**
+     * Metodo para actualizar un vehiculo
+     * @param vehiculo
+     * @return true/false
+     */
+    public boolean actualizar(Vehiculo vehiculoActualizar) {
+        if (vehiculoActualizar == null) {
+            return false;
+        }
+        int posicion = vehiculos.indexOf(vehiculoActualizar);
+        if (posicion < 0) {
+            return false;
+        }
+        vehiculos.set(posicion, vehiculoActualizar);
+        return true;
+    }
+
+    /**
+     * Metodo para obtener un vehiculo por su matricula
+     * @param matricula
+     * @return vehiculo
+     */
+    public Vehiculo obtener(String matricula) {
+        if (matricula == null) {
+            return null;
+        }
+        Vehiculo vehiculoBuscar = new Vehiculo(matricula);
+        return obtener(vehiculoBuscar);
+    }
+    
+    /**
+     * Metodo para obtener un vehiculo
+     * @param vehiculo
+     * @return vehiculo
+     */
+    public Vehiculo obtener(Vehiculo vehiculo) {
+        if (vehiculo == null) {
+            return null;
+        }
+        int posicion = vehiculos.indexOf(vehiculo);
+        return vehiculos.get(posicion);
+    }
+
     @Override
     public String toString() {
-        return "{nombre=" + nombre + ", vehiculos=" + vehiculos +"}";
+        return "{nombre:" + nombre + ", vehiculos:" + vehiculos +"}";
     }
 }

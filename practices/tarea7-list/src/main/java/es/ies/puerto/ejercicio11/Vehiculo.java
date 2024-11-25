@@ -1,5 +1,7 @@
 package es.ies.puerto.ejercicio11;
 
+import java.util.Objects;
+
 /**
  * 11. Clase Vehículo
  * Define una clase base Vehiculo con atributos marca y modelo. 
@@ -11,6 +13,7 @@ package es.ies.puerto.ejercicio11;
 public class Vehiculo {
     private String marca;
     private String modelo;
+    private String matricula;
 
     /**
      * Constructor por defecto
@@ -19,13 +22,32 @@ public class Vehiculo {
     }
 
     /**
-     * Constructor con todas las propiedades
+     * Constructor con la propiedad matricula
+     * @param matricula
+     */
+    public Vehiculo(String matricula) {
+        this.matricula = matricula;
+    }
+
+    /**
+     * Constructor con las propiedades marca y modelo 
      * @param marca
      * @param modelo
      */
     public Vehiculo(String marca, String modelo) {
         this.marca = marca;
         this.modelo = modelo;
+    }
+
+    /**
+     * Constructor con todas las propiedades
+     * @param marca
+     * @param modelo
+     */
+    public Vehiculo(String marca, String modelo, String matricula) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.matricula = matricula;
     }
 
     /**
@@ -47,8 +69,36 @@ public class Vehiculo {
         this.modelo = modelo;
     }
 
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Vehiculo)) {
+            return false;
+        }
+        Vehiculo vehiculo = (Vehiculo) o;
+        return Objects.equals(matricula, vehiculo.matricula);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matricula);
+    }
+    
     @Override
     public String toString() {
-        return "\nVehiculo [marca=" + marca + ", modelo=" + modelo + "]";
+        return "\n{" +
+            " marca='" + getMarca() + "'" +
+            ", modelo='" + getModelo() + "'" +
+            ", matricula='" + getMatricula() + "'" +
+            "}";
     }
 }
