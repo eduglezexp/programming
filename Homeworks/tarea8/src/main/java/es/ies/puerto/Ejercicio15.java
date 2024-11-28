@@ -1,6 +1,7 @@
 package es.ies.puerto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author eduglezexp
@@ -15,7 +16,19 @@ public class Ejercicio15 {
         nombres.add("Eduardo");
         nombres.add("Alberto");
         nombres.add("Antonio");
-        ArrayList nombres2 = (ArrayList) nombres.clone();
+        List<String> nombres2 = clonar(nombres);
         System.out.println(nombres2);
+    }
+
+    /**
+     * Funcion que clona una lista a otra
+     * @param list
+     * @return lista clonada o vacia
+     */
+    public static List<String> clonar(ArrayList<String> list) {
+        if (list == null || list.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return (ArrayList) list.clone();
     }
 }
