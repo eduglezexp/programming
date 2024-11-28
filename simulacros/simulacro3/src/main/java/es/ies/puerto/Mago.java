@@ -112,6 +112,6 @@ public class Mago {
     
     @Override
     public String toString() {
-        return "Mago [nombre=" + nombre + ", nivel=" + nivel + ", mana=" + mana + "]";
+        return "\nMago [nombre=" + nombre + ", nivel=" + nivel + ", mana=" + mana + "]";
     }
 }

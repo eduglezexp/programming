@@ -23,6 +23,9 @@ package es.ies.puerto;
 
 public class Ejercicio3 {
     public static void main(String[] args) {
-        
+        CuentaBancaria cuentaBancaria = new CuentaBancaria("001", "Pedro", 2500d);
+        System.out.println(cuentaBancaria.depositar(300));
+        System.out.println(cuentaBancaria.retirar(150));
+        System.out.println(cuentaBancaria.consultarSaldo());
     }
 }

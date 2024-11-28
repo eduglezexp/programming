@@ -66,9 +66,46 @@ public class Consejo {
         int indice = 0;
         for (int i = 0; i < magos.length; i++) {
             if (magos[i] != null) {
-                magos[i] = magos[indice];
-                indice++;
+                magos[indice++] = magos[i];
             }
         }
+        while (indice < magos.length) {
+            magos[indice++] = null;
+        }
+    }
+
+    public Mago mayorCantidadHechizos() {
+        if (totalMagos == 0) {
+            return null;
+        }
+        Mago mayorMana = magos[0];
+        for (int i = 0; i < magos.length; i++) {
+            if (magos[i] != null && magos[i].getMana() > mayorMana.getMana()) {
+                mayorMana = magos[i];
+            }
+        }
+        return mayorMana;
+    }
+
+    public Mago mayorPoderMagico() {
+        if (totalMagos == 0) {
+            return null;
+        }
+        Mago mayorPoder = magos[0];
+        for (int i = 0; i < magos.length; i++) {
+            if (magos[i] != null && magos[i].getNivel() > mayorPoder.getNivel()) {
+                mayorPoder = magos[i];
+            }
+        }
+        return mayorPoder;
+    }
+
+    @Override
+    public String toString() {
+        String mensaje = "";
+        for (int i = 0; i < totalMagos; i++) {
+            mensaje += magos[i];
+        }
+        return mensaje;
     }
 }

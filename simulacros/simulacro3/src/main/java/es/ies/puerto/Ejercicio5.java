@@ -23,6 +23,19 @@ package es.ies.puerto;
 
 public class Ejercicio5 {
     public static void main(String[] args) {
-        
+        Consejo consejo = new Consejo();
+        Mago mago1 = new Mago("Mago1", 49, 300);
+        Mago mago2 = new Mago("Mago2", 34, 120);
+        Mago mago3 = new Mago("Mago3", 34, 120);
+        consejo.agregarMago(mago1);
+        consejo.agregarMago(mago2);
+        consejo.agregarMago(mago3);
+        System.out.println(consejo);
+        consejo.deleteMago(mago2);
+        System.out.println(consejo);
+        consejo.agregarMago(mago2);
+        System.out.println(consejo);
+        System.out.println(consejo.mayorCantidadHechizos());
+        System.out.println(consejo.mayorPoderMagico());
     }
 }

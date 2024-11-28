@@ -16,5 +16,7 @@ public class Ejercicio20 {
         nombres.add("Alberto");
         nombres.add("Antonio");
         System.out.println(nombres);
+        nombres.remove(1);
+        System.out.println(nombres);
     }
 }
