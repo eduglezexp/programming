@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * @author eduglezexp
  * @version 1.0.0
+ * posible examen
  */
 
 public class Ejercicio6 {
@@ -26,7 +27,7 @@ public class Ejercicio6 {
      * @param lista1 
      * @param lista2 
      * @return Lista con el producto de los elementos de lista1 y lista2 en las mismas 
-     * posiciones, si ambas están llenas.
+     * posiciones, si ambas estan llenas
      */
     public static List<Integer> validarYRellenarListas(List<Integer> lista1, List<Integer> lista2) {
         if (lista1.isEmpty()) {

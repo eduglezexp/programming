@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Ejercicio5 {
     public static void main(String[] args) {
-        List<Integer> numeros = llenarLista();
+        List<Integer> numeros = llenarLista(20);
         System.out.println("Tamaño inicial de la lista: " + numeros.size());
         System.out.println("Lista inicial: " + numeros);
         eliminarMultiplosDeTres(numeros);
@@ -20,12 +20,12 @@ public class Ejercicio5 {
     }
 
     /**
-     * Metodo para llenar una lista con numeros del 1 al 20
-     * @return Lista con los numeros del 1 al 20
+     * Metodo para llenar una lista con numeros dada una cantidad
+     * @return Lista con los numeros 
      */
-    public static List<Integer> llenarLista() {
+    public static List<Integer> llenarLista(int cantidad) {
         List<Integer> lista = new ArrayList<>();
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= cantidad; i++) {
             lista.add(i);
         }
         return lista;
