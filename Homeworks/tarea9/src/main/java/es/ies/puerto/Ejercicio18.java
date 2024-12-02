@@ -1,8 +1,11 @@
 package es.ies.puerto;
 
-import java.util.Scanner;
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
 
 public class Ejercicio18 {
-public static void main(String[] args) {
-            }
+    public static void main(String[] args) {
+    }
 }
