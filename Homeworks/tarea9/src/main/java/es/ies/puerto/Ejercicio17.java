@@ -25,8 +25,8 @@ public class Ejercicio17 {
      * @param cantidad
      * @return una lista de numeros
      */
-    public static ArrayList<Integer> inicializarLista(int cantidad) {
-        ArrayList<Integer> numeros = new ArrayList<>();
+    public static List<Integer> inicializarLista(int cantidad) {
+        List<Integer> numeros = new ArrayList<>();
         for (int i = 1; i <= cantidad; i++) {
             numeros.add(i);
         }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Ejercicio13 {
     public static void main(String[] args) {
-        ArrayList<Integer> numeros = inicializarLista(20);
+        List<Integer> numeros = inicializarLista(20);
         List<Integer> impares = new ArrayList<>();
         List<Integer> pares = new ArrayList<>();
         dividirEnParesEImpares(numeros, impares, pares);
@@ -25,8 +25,8 @@ public class Ejercicio13 {
      * @param cantidad
      * @return una lista de numeros
      */
-    public static ArrayList<Integer> inicializarLista(int cantidad) {
-        ArrayList<Integer> numeros = new ArrayList<>();
+    public static List<Integer> inicializarLista(int cantidad) {
+        List<Integer> numeros = new ArrayList<>();
         for (int i = 1; i <= cantidad; i++) {
             numeros.add(i);
         }

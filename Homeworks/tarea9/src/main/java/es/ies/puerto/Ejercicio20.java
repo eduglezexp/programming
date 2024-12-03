@@ -1,6 +1,7 @@
 package es.ies.puerto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,27 +11,13 @@ import java.util.List;
 
 public class Ejercicio20 {
     public static void main(String[] args) {
-        List<String> listaNombres = inicializarLista();
-        System.out.println("Lista original: " + listaNombres);
+        List<String> nombres = new ArrayList<>(Arrays.asList("Ana", "Juan", 
+        "Pedro", "Lucía", "Carlos", "María"));
+        System.out.println("Lista original: " +nombres);
         char letraEspecifica = 'A'; 
         String nuevoNombre = "Generico"; 
-        actualizarNombres(listaNombres, letraEspecifica, nuevoNombre);
-        System.out.println("Lista después de la actualización: " + listaNombres);
-    }
-
-    /**
-     * Inicializa la lista con algunos nombres
-     * @return La lista de nombres
-     */
-    public static List<String> inicializarLista() {
-        List<String> lista = new ArrayList<>();
-        lista.add("Ana");
-        lista.add("Juan");
-        lista.add("Pedro");
-        lista.add("Lucía");
-        lista.add("Alejandro");
-        lista.add("Carlos");
-        return lista;
+        actualizarNombres(nombres, letraEspecifica, nuevoNombre);
+        System.out.println("Lista despues de la actualizacion: " +nombres);
     }
 
     /**
@@ -39,12 +26,13 @@ public class Ejercicio20 {
      * @param letraEspecifica 
      * @param nuevoNombre 
      */
-    public static void actualizarNombres(List<String> lista, char letraEspecifica, String nuevoNombre) {
+    public static List<String> actualizarNombres(List<String> lista, char letraEspecifica, String nuevoNombre) {
         for (int i = 0; i < lista.size(); i++) {
             String nombre = lista.get(i);
             if (nombre.charAt(0) == letraEspecifica) {
                 lista.set(i, nuevoNombre);
             }
         }
+        return lista;
     }
 }
