@@ -1,7 +1,6 @@
 package es.ies.puerto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,9 +26,9 @@ public class Ejercicio10 {
      * @return lista de nombres validada
      */
     public static List<String> validarNombres(List<String> nombres) {
-        for (String nombre : nombres) {
-            if (nombre.length() > 5) {
-                nombre = "GENÉRICO";
+        for (int i = 0; i < nombres.size(); i++) {
+            if (nombres.get(i).length() > 5) {
+                nombres.set(i, "GENÉRICO");
             }
         }
         return nombres;

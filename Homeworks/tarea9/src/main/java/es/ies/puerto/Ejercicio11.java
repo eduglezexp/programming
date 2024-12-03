@@ -10,8 +10,13 @@ import java.util.List;
 
 public class Ejercicio11 {
     public static void main(String[] args) {
-        System.out.println(llenarLista(30));
-
+        List<Integer> numeros = llenarLista(30);
+        System.out.println(numeros);
+        List<List<Integer>> sublistas = dividirEnSublistas(numeros, 5);
+        System.out.println("Sublistas:");
+        for (List<Integer> sublista : sublistas) {
+            System.out.println(sublista);
+        }
     }
 
     /**
@@ -22,8 +27,22 @@ public class Ejercicio11 {
         List<Integer> lista = new ArrayList<>();
         for (int i = 1; i <= cantidad; i++) {
             lista.add(i);
-            lista.subList(i, i);
         }
         return lista;
+    }
+
+    /**
+     * Divide una lista en sublistas de longitud fija
+     * @param lista 
+     * @param tamanio 
+     * @return Una lista de sublistas
+     */
+    public static List<List<Integer>> dividirEnSublistas(List<Integer> lista, int tamanio) {
+        List<List<Integer>> sublistas = new ArrayList<>();
+        for (int i = 0; i < lista.size(); i += tamanio) {
+            sublistas.add(lista.subList(i, Math.min(i + tamanio, lista.size())));
+
+        }
+        return sublistas;
     }
 }
