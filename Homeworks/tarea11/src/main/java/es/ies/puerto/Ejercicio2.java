@@ -8,16 +8,29 @@ import java.util.Vector;
  */
 
 public class Ejercicio2 {
-    static Vector<Integer> vector;
     public static void main(String[] args) {
-        vector = new Vector<>();
-        vector.add(1);
-        vector.add(2);
-        vector.add(3);
-        vector.add(4);
-        vector.add(5);
-        System.out.println(vector.get(2));
-        vector.set(2, 10);
-        System.out.println(vector);
+        Vector<Integer> numeros = new Vector<>();
+        numeros.add(1);
+        numeros.add(2);
+        numeros.add(3);
+        numeros.add(4);
+        numeros.add(5);
+        System.out.println(numeros.get(2));
+        int posicion = 3;
+        int nuevoElemento = 10;
+        System.out.println(modificarElementoVector(numeros, posicion, nuevoElemento));
+    }
+
+    /**
+     * Metodo para modificar un elemento del vector, dada su posicion y un elemento nuevo
+     * @param vector
+     * @param posicion
+     * @param nuevoElemento
+     * @return vector modificado
+     */
+    public static Vector<Integer> modificarElementoVector(Vector<Integer> vector, int posicion, int nuevoElemento) {
+        int indice = posicion-1;
+        vector.set(indice, nuevoElemento);
+        return vector;
     }
 }

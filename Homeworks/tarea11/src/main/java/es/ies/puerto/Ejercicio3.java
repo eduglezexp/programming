@@ -16,6 +16,12 @@ public class Ejercicio3 {
         System.out.println(eliminarPorCondicion(vector, valor));
     }
 
+    /**
+     * Metodo para eliminar en un vector dado un valor
+     * @param vector
+     * @param valor
+     * @return vector
+     */
     public static Vector<String> eliminarPorCondicion(Vector<String> vector, String valor) {
         vector.removeIf(color -> color.startsWith(valor));
         return vector;

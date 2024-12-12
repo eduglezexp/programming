@@ -15,6 +15,11 @@ public class Ejercicio5 {
         System.out.println(ordenarVector(vector));
     }
 
+    /**
+     * Metodo para ordenar un vector
+     * @param vector
+     * @return vector ordenado
+     */
     public static Vector<Integer> ordenarVector(Vector<Integer> vector) {
         Collections.sort(vector);
         return vector;

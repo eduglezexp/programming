@@ -8,13 +8,23 @@ import java.util.Vector;
  */
 
 public class Ejercicio1 {
-    static Vector<String> vector;
     public static void main(String[] args) {
-        vector.add("Manzana");
-        vector.add("Banana");
-        vector.add("Cereza");
-        vector.add("Mango");
-        vector.add("Uva");
-        System.out.println(vector);       
+        Vector<String> frutas = crearVectorFrutas();
+        System.out.println(frutas);
+    }
+
+    /**
+     * Metodo para crear un vector con frutas
+     * @return vector con frutas
+     */
+    public static Vector<String> crearVectorFrutas() {
+        Vector<String> frutas = new Vector<>();
+        frutas = new Vector<>();
+        frutas.add("Manzana");
+        frutas.add("Banana");
+        frutas.add("Cereza");
+        frutas.add("Mango");
+        frutas.add("Uva");
+        return frutas;
     }
 }

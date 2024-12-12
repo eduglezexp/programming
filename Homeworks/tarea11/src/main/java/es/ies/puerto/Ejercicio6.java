@@ -16,6 +16,12 @@ public class Ejercicio6 {
         System.out.println(verificarPresenciaElemento(vector, pais));
     }
 
+    /**
+     * Metodo para verificar si existe un pais en el vector
+     * @param vector
+     * @param pais
+     * @return true/false
+     */
     public static boolean verificarPresenciaElemento(Vector<String> vector, String pais) {
         return vector.contains(pais);
     }

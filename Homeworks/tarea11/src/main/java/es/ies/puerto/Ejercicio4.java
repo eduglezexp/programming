@@ -13,7 +13,12 @@ public class Ejercicio4 {
         Vector<Integer> vector = new Vector<>(Arrays.asList(1, 2, 3, 4, 5));
         System.out.println(copiarElementosPares(vector));
     }
- 
+    
+    /**
+     * Metodo para copiar en un vector los elementos que sean pares
+     * @param vector
+     * @return vector con los elementos pares
+     */
     public static Vector<Integer> copiarElementosPares(Vector<Integer> vector) {
         Vector<Integer> vectorCopiado = new Vector<>();
         for (Integer numero : vector) {
