@@ -9,20 +9,26 @@ import java.util.Vector;
 
 public class Ejercicio10 {
     public static void main(String[] args) {
-        calcularPromedio();
+        Vector<Float> calificaciones = new Vector<>();
+        calificaciones.add(80.0f);
+        calificaciones.add(90.0f);
+        calificaciones.add(70.0f);
+        calcularPromedio(calificaciones);
+        System.out.println("Calificaciones: " + calificaciones);
+        float promedio = calcularPromedio(calificaciones);
+        System.out.println("Promedio: " + promedio);
     }
 
-    public static void calcularPromedio() {
-        Vector<Double> calificaciones = new Vector<>();
-        calificaciones.add(80.0);
-        calificaciones.add(90.0);
-        calificaciones.add(70.0);
-        double suma = 0;
+    /**
+     * Metodo para calcular el promedio dado un vector
+     * @param calificaciones
+     * @return promedio del vector
+     */
+    public static float calcularPromedio(Vector<Float> calificaciones) {
+        float suma = 0;
         for (int i = 0; i < calificaciones.size(); i++) {
             suma += calificaciones.get(i);
         }
-        double promedio = suma / calificaciones.size();
-        System.out.println("Calificaciones: " + calificaciones);
-        System.out.println("Promedio: " + promedio);
+        return suma / calificaciones.size();
     }
 }
