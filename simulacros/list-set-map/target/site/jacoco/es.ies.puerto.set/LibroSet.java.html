@@ -8,29 +8,67 @@ import es.ies.puerto.Libro;
 public class LibroSet {
     Set&lt;Libro&gt; libros;
 
-<span class="fc" id="L11">    public LibroSet() {</span>
+    /**
+     * Constructor por defecto
+     */
+<span class="fc" id="L14">    public LibroSet() {</span>
+<span class="fc" id="L15">        this.libros = new HashSet&lt;&gt;();</span>
+<span class="fc" id="L16">    }</span>
 
-<span class="fc" id="L13">    }</span>
-
+    /**
+     * Funcion para agregar a un libro a la lista
+     * @param libro
+     * @return true/false
+     */
     public boolean agregar(Libro libro) {
-<span class="fc" id="L16">        return false;</span>
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (!libros.contains(libro)) {</span>
+<span class="fc" id="L25">            return libros.add(libro);</span>
+        } 
+<span class="nc" id="L27">        return false;</span>
     }
 
+    /**
+     * Funcion para listar los libros
+     * @return hashSet con la lista de libros
+     */
     public Set&lt;Libro&gt; listar() {
-<span class="fc" id="L20">        return new HashSet();</span>
+<span class="fc" id="L35">        return new HashSet(libros);</span>
     }
 
+    /**
+     * Funcion para buscar un libro
+     * @param isbn
+     * @return libro buscado
+     */
     public Libro buscar(String isbn) {
-<span class="fc" id="L24">        return null;     </span>
+<span class="fc" id="L44">        return libros.stream().filter(p -&gt; p.getIsbn().equals(isbn)).findFirst().orElse(null);       </span>
     }
 
-    public boolean actualizar(String isbn, Libro libro) {
-<span class="fc" id="L28">        return false;</span>
+    /**
+     * Funcion para actualizar un libro
+     * @param isbn
+     * @param nuevoLibro
+     * @return true/false
+     */
+    public boolean actualizar(String isbn, Libro nuevoLibro) {
+<span class="fc" id="L54">        Libro libroBuscar = new Libro(isbn);</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        for (Libro libro : libros) {</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if (libro.equals(libroBuscar)) {</span>
+<span class="fc" id="L57">                libro = nuevoLibro;</span>
+<span class="fc" id="L58">                return true; </span>
+            }
+<span class="nc" id="L60">        }</span>
+<span class="fc" id="L61">        return false;</span>
     }
 
+    /**
+     * Funcion para eliminar un libro
+     * @param isbn
+     * @return true/false
+     */
     public boolean eliminar(String isbn) {
-<span class="fc" id="L32">        return false;</span>
+<span class="fc" id="L70">        Libro libroBuscar = new Libro(isbn);</span>
+<span class="fc" id="L71">        return libros.remove(libroBuscar);</span>
     }
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

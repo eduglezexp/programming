@@ -9,28 +9,65 @@ import es.ies.puerto.Articulo;
 public class ArticuloMap {
     Map&lt;String, Articulo&gt; articulos;
 
-<span class="fc" id="L12">    public ArticuloMap() {</span>
+    /**
+     * Constructor por defecto
+     */
+<span class="fc" id="L15">    public ArticuloMap() {</span>
+<span class="fc" id="L16">        this.articulos = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L17">    }</span>
 
-<span class="fc" id="L14">    }</span>
-
+    /**
+     * Funcion para agregar un articulo a la lista
+     * @param articulo
+     * @return true/false
+     */
     public boolean agregar(Articulo articulo) {
-<span class="fc" id="L17">        return false;</span>
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if (!articulos.containsKey(articulo.getCodigo())) { </span>
+<span class="fc" id="L26">            articulos.put(articulo.getCodigo(), articulo);</span>
+<span class="fc" id="L27">            return true;</span>
+        }
+<span class="nc" id="L29">        return false;</span>
     }
 
+    /**
+     * Funcion para listar los articulos
+     * @return hashMap con la lista de articulos
+     */
     public Map&lt;String, Articulo&gt; listar() {
-<span class="fc" id="L21">        return new HashMap();</span>
+<span class="fc" id="L37">        return new HashMap&lt;&gt;(articulos);</span>
     }
 
+    /**
+     * Funcion para buscar un articulo
+     * @param codigo
+     * @return articulo buscado
+     */
     public Articulo buscar(String codigo) {
-<span class="fc" id="L25">        return null;     </span>
+<span class="fc" id="L46">        return articulos.get(codigo);</span>
     }
 
+    /**
+     * Funcion para actualizar un articulo
+     * @param codigo
+     * @param nuevoArticulo
+     * @return true/false
+     */
     public boolean actualizar(String codigo, Articulo nuevoArticulo) {
-<span class="fc" id="L29">        return false;</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (articulos.containsKey(codigo)) { </span>
+<span class="fc" id="L57">            articulos.put(codigo, nuevoArticulo);</span>
+<span class="fc" id="L58">            return true;</span>
+        }
+<span class="fc" id="L60">        return false;</span>
     }
 
+    /**
+     * Funcion para eliminar un articulo
+     * @param codigo
+     * @return true/false
+     */
     public boolean eliminar(String codigo) {
-<span class="fc" id="L33">        return false;</span>
+<span class="fc" id="L69">        Articulo articuloEliminar = new Articulo(codigo);</span>
+<span class="fc" id="L70">        return articulos.remove(codigo, articuloEliminar);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
