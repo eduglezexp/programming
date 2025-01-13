@@ -54,14 +54,12 @@ public class AnimalSet {
      * @return true/false
      */
     public boolean actualizar(String identificador, Animal nuevoAnimal) {
-<span class="fc" id="L57">        Animal animalBuscar = new Animal(identificador);</span>
-<span class="fc bfc" id="L58" title="All 2 branches covered.">        for (Animal animal : animales) {</span>
-<span class="pc bpc" id="L59" title="1 of 2 branches missed.">            if (animal.equals(animalBuscar)) {</span>
-<span class="fc" id="L60">                animal = nuevoAnimal;</span>
-<span class="fc" id="L61">                return true; </span>
-            }
-<span class="nc" id="L63">        }</span>
-<span class="fc" id="L64">        return false;</span>
+<span class="fc" id="L57">        Animal animalexiste = buscar(identificador);</span>
+<span class="pc bpc" id="L58" title="1 of 4 branches missed.">        if (animalexiste == null || identificador.isEmpty()) {</span>
+<span class="fc" id="L59">            return false;</span>
+        }
+<span class="fc" id="L61">        eliminar(identificador);</span>
+<span class="fc" id="L62">        return agregar(nuevoAnimal);</span>
     }
 
     /**
@@ -70,8 +68,8 @@ public class AnimalSet {
      * @return true/false
      */
     public boolean eliminar(String identificador) {
-<span class="fc" id="L73">        Animal animalEliminar = new Animal(identificador);</span>
-<span class="fc" id="L74">        return animales.remove(animalEliminar); </span>
+<span class="fc" id="L71">        Animal animalEliminar = new Animal(identificador);</span>
+<span class="fc" id="L72">        return animales.remove(animalEliminar); </span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

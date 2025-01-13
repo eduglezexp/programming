@@ -54,14 +54,12 @@ public class AnimalSet {
      * @return true/false
      */
     public boolean actualizar(String identificador, Animal nuevoAnimal) {
-        Animal animalBuscar = new Animal(identificador);
-        for (Animal animal : animales) {
-            if (animal.equals(animalBuscar)) {
-                animal = nuevoAnimal;
-                return true; 
-            }
+        Animal animalexiste = buscar(identificador);
+        if (animalexiste == null || identificador.isEmpty()) {
+            return false;
         }
-        return false;
+        eliminar(identificador);
+        return agregar(nuevoAnimal);
     }
 
     /**
