@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Ejercicio5.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">logica-fechas</a> &gt; <a href="index.source.html" class="el_package">es.ies.puerto</a> &gt; <span class="el_source">Ejercicio5.java</span></div><h1>Ejercicio5.java</h1><pre class="source lang-java linenums">package es.ies.puerto;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
+/**
+ * Clase del ejercicio 5
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
+<span class="nc" id="L14">public class Ejercicio5 {</span>
+
+    /**
+     * Funcion que dado un numero n, calcula cual sera el dia de la semana que ocurrira 
+     * despues de sumar n dias a la fecha actua
+     * @param fecha a sumar dias
+     * @param dias dias a sumarle a la fecha
+     * @return nueva fecha con los dias sumados
+     */
+    public static String obtenerDiaDeLaSemanaEnElFuturo(LocalDate fecha, int dias) {
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (fecha == null) {</span>
+<span class="fc" id="L25">            return null;</span>
+        }
+<span class="fc" id="L27">        LocalDate nuevaFecha = fecha.plusDays(dias);</span>
+<span class="fc" id="L28">        return nuevaFecha.getDayOfWeek().toString();</span>
+    }
+
+    public static void main(String[] args) {
+<span class="nc" id="L32">        System.out.println(obtenerDiaDeLaSemanaEnElFuturo(LocalDate.now(), 100));</span>
+<span class="nc" id="L33">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

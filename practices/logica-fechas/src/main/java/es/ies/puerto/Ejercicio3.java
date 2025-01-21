@@ -9,6 +9,7 @@ import java.time.Month;
  * @author eduglezexp
  * @version 1.0.0
  */
+
 public class Ejercicio3 {
 
     /**
@@ -18,8 +19,14 @@ public class Ejercicio3 {
      * @return la fecha del ultimo viernes
      */
     public static LocalDate obtenerUltimoViernes(int anio, Month mes) {
-        LocalDate localDate = LocalDate.of(anio, mes, 0);
-        boolean viernes = localDate.getDayOfWeek().equals(DayOfWeek.FRIDAY);
-        return localDate;
+        if (anio < 1 || mes == null) {
+            return null;
+        }
+        LocalDate ultimoDiaDelMes = LocalDate.of(anio, mes, 
+        mes.length(LocalDate.of(anio, mes, 1).isLeapYear()));
+        while (ultimoDiaDelMes.getDayOfWeek() != DayOfWeek.FRIDAY) {
+            ultimoDiaDelMes = ultimoDiaDelMes.minusDays(1);
+        }
+        return ultimoDiaDelMes;
     }
 }

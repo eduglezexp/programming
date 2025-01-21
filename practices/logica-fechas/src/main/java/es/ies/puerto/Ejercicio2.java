@@ -22,7 +22,7 @@ public class Ejercicio2 {
         if (anio < 1 || mes == null) {
             return -1;
         }
-        LocalDate localDate = LocalDate.of(anio, mes, 0);
+        LocalDate localDate = LocalDate.of(anio, mes, 1);
         return localDate.lengthOfMonth();
     }
 }

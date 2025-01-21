@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Ejercicio10.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">logica-fechas</a> &gt; <a href="index.source.html" class="el_package">es.ies.puerto</a> &gt; <span class="el_source">Ejercicio10.java</span></div><h1>Ejercicio10.java</h1><pre class="source lang-java linenums">package es.ies.puerto;
+
+import java.time.LocalDate;
+
+/**
+ * Clase del ejercicio 10
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
+<span class="nc" id="L11">public class Ejercicio10 {</span>
+    
+    public static long calcularDiferenciaEnDias(LocalDate fecha1, LocalDate fecha2) {
+<span class="fc bfc" id="L14" title="All 4 branches covered.">        if (fecha1 == null || fecha2 == null) {</span>
+<span class="fc" id="L15">            return -1; </span>
+        }
+<span class="fc" id="L17">        long diferencia = 0;</span>
+<span class="fc bfc" id="L18" title="All 2 branches covered.">        LocalDate inicio = fecha1.isBefore(fecha2) ? fecha1 : fecha2;</span>
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        LocalDate fin = fecha1.isBefore(fecha2) ? fecha2 : fecha1;</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        while (!inicio.isEqual(fin)) {</span>
+<span class="fc" id="L21">            inicio = inicio.plusDays(1);</span>
+<span class="fc" id="L22">            diferencia++;</span>
+        }
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (fecha1.isAfter(fecha2)) {</span>
+<span class="fc" id="L25">            diferencia = -diferencia;</span>
+        }
+<span class="fc" id="L27">        return diferencia;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
