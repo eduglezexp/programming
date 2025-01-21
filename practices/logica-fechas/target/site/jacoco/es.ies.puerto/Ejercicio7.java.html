@@ -3,7 +3,7 @@
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.temporal.TemporalAdjusters;
+
 
 /**
  * Clase del ejercicio 7
@@ -23,11 +23,13 @@ import java.time.temporal.TemporalAdjusters;
 <span class="fc bfc" id="L23" title="All 2 branches covered.">        if (anio &lt; 1) {</span>
 <span class="fc" id="L24">            return null;</span>
         }
-<span class="fc" id="L26">        LocalDate primerDiaDeMayo = LocalDate.of(anio, 5, 1);</span>
-<span class="fc" id="L27">        int diasHastaElPrimerDomingo = (7 - primerDiaDeMayo.getDayOfWeek().getValue()) % 7;</span>
-<span class="fc" id="L28">        LocalDate primerDomingo = primerDiaDeMayo.plusDays(diasHastaElPrimerDomingo);</span>
-<span class="fc" id="L29">        LocalDate segundoDomingo = primerDomingo.plusDays(7);</span>
-<span class="fc" id="L30">        return segundoDomingo;</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        for (int i = 1; i &lt; 8; i++) {</span>
+<span class="fc" id="L27">            LocalDate mesDeMayo = LocalDate.of(anio, 5, i);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">            if (mesDeMayo.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {</span>
+<span class="fc" id="L29">                return mesDeMayo.plusDays(7);</span>
+            }
+        }
+<span class="nc" id="L32">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

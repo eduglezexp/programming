@@ -9,22 +9,28 @@ import java.time.LocalDate;
  */
 
 <span class="nc" id="L11">public class Ejercicio10 {</span>
-    
+
+    /**
+     * Funcion que calcula la fecha de San Valetin del proximo anio, dado un anio actual
+     * @param fecha1 a calcular
+     * @param fecha2 a calcular
+     * @return la diferencia
+     */
     public static long calcularDiferenciaEnDias(LocalDate fecha1, LocalDate fecha2) {
-<span class="fc bfc" id="L14" title="All 4 branches covered.">        if (fecha1 == null || fecha2 == null) {</span>
-<span class="fc" id="L15">            return -1; </span>
+<span class="fc bfc" id="L20" title="All 4 branches covered.">        if (fecha1 == null || fecha2 == null) {</span>
+<span class="fc" id="L21">            return -1; </span>
         }
-<span class="fc" id="L17">        long diferencia = 0;</span>
-<span class="fc bfc" id="L18" title="All 2 branches covered.">        LocalDate inicio = fecha1.isBefore(fecha2) ? fecha1 : fecha2;</span>
-<span class="fc bfc" id="L19" title="All 2 branches covered.">        LocalDate fin = fecha1.isBefore(fecha2) ? fecha2 : fecha1;</span>
-<span class="fc bfc" id="L20" title="All 2 branches covered.">        while (!inicio.isEqual(fin)) {</span>
-<span class="fc" id="L21">            inicio = inicio.plusDays(1);</span>
-<span class="fc" id="L22">            diferencia++;</span>
+<span class="fc" id="L23">        long diferencia = 0;</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        LocalDate inicio = fecha1.isBefore(fecha2) ? fecha1 : fecha2;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        LocalDate fin = fecha1.isBefore(fecha2) ? fecha2 : fecha1;</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        while (!inicio.isEqual(fin)) {</span>
+<span class="fc" id="L27">            inicio = inicio.plusDays(1);</span>
+<span class="fc" id="L28">            diferencia++;</span>
         }
-<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (fecha1.isAfter(fecha2)) {</span>
-<span class="fc" id="L25">            diferencia = -diferencia;</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if (fecha1.isAfter(fecha2)) {</span>
+<span class="fc" id="L31">            diferencia = -diferencia;</span>
         }
-<span class="fc" id="L27">        return diferencia;</span>
+<span class="fc" id="L33">        return diferencia;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

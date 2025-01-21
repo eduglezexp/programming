@@ -9,7 +9,13 @@ import java.time.LocalDate;
  */
 
 public class Ejercicio10 {
-    
+
+    /**
+     * Funcion que calcula la fecha de San Valetin del proximo anio, dado un anio actual
+     * @param fecha1 a calcular
+     * @param fecha2 a calcular
+     * @return la diferencia
+     */
     public static long calcularDiferenciaEnDias(LocalDate fecha1, LocalDate fecha2) {
         if (fecha1 == null || fecha2 == null) {
             return -1; 

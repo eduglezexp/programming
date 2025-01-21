@@ -3,6 +3,7 @@ package es.ies.puerto;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Year;
 
 /**
  * Clase del ejercicio 3
@@ -23,7 +24,7 @@ public class Ejercicio3 {
             return null;
         }
         LocalDate ultimoDiaDelMes = LocalDate.of(anio, mes, 
-        mes.length(LocalDate.of(anio, mes, 1).isLeapYear()));
+        mes.length(Year.isLeap(anio)));
         while (ultimoDiaDelMes.getDayOfWeek() != DayOfWeek.FRIDAY) {
             ultimoDiaDelMes = ultimoDiaDelMes.minusDays(1);
         }

@@ -3,7 +3,7 @@ package es.ies.puerto;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.temporal.TemporalAdjusters;
+
 
 /**
  * Clase del ejercicio 7
@@ -23,10 +23,12 @@ public class Ejercicio7 {
         if (anio < 1) {
             return null;
         }
-        LocalDate primerDiaDeMayo = LocalDate.of(anio, 5, 1);
-        int diasHastaElPrimerDomingo = (7 - primerDiaDeMayo.getDayOfWeek().getValue()) % 7;
-        LocalDate primerDomingo = primerDiaDeMayo.plusDays(diasHastaElPrimerDomingo);
-        LocalDate segundoDomingo = primerDomingo.plusDays(7);
-        return segundoDomingo;
+        for (int i = 1; i < 8; i++) {
+            LocalDate mesDeMayo = LocalDate.of(anio, 5, i);
+            if (mesDeMayo.getDayOfWeek().equals(DayOfWeek.SUNDAY)) {
+                return mesDeMayo.plusDays(7);
+            }
+        }
+        return null;
     }
 }

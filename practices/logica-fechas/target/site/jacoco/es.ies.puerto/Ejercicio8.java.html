@@ -9,18 +9,18 @@ import java.time.LocalDate;
  */
 
 <span class="nc" id="L11">public class Ejercicio8 {</span>
+
+    /**
+     * Funcion que calcula cuantos dias han pasado desde 
+     * el inicio de anio hasta una fecha dada
+     * @param fecha para calcular
+     * @return dias transcurridos 
+     */
     public static long diasDesdeInicioDelanio(LocalDate fecha) {
-<span class="fc bfc" id="L13" title="All 2 branches covered.">        if (fecha == null) {</span>
-<span class="fc" id="L14">            return -1; </span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (fecha == null) {</span>
+<span class="fc" id="L21">            return -1; </span>
         }
-<span class="fc" id="L16">        LocalDate inicioAnio = LocalDate.of(fecha.getYear(), 1, 1);</span>
-<span class="fc" id="L17">        int diasTranscurridos = 0;</span>
-<span class="fc" id="L18">        LocalDate fechaActual = inicioAnio;</span>
-<span class="fc bfc" id="L19" title="All 2 branches covered.">        while (!fechaActual.isEqual(fecha)) {</span>
-<span class="fc" id="L20">            diasTranscurridos++;</span>
-<span class="fc" id="L21">            fechaActual = fechaActual.plusDays(1);</span>
-        }
-<span class="fc" id="L23">        return diasTranscurridos + 1;</span>
+<span class="fc" id="L23">        return fecha.getDayOfYear();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

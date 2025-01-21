@@ -1,7 +1,6 @@
 package es.ies.puerto;
 
 import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
 import java.time.DayOfWeek;
 
 /**
@@ -11,6 +10,14 @@ import java.time.DayOfWeek;
  */
 
 public class Ejercicio9 {
+
+    /**
+     * Funcion para obtener un programa que determine si la fecha 
+     * corresponde al ultimo día del anio
+     * @param anio de la fecha
+     * @param mes de la fecha 
+     * @return fecha del primer lunes del mes 
+     */
     public static LocalDate obtenerPrimerLunesDelMes(int anio, int mes) {
         if (anio <= 0 || mes < 1 || mes > 12) {
             return null; 

@@ -3,6 +3,7 @@
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Year;
 
 /**
  * Clase del ejercicio 3
@@ -10,7 +11,7 @@ import java.time.Month;
  * @version 1.0.0
  */
 
-<span class="nc" id="L13">public class Ejercicio3 {</span>
+<span class="nc" id="L14">public class Ejercicio3 {</span>
 
     /**
      * Funcion para obtener el ultimo viernes de un mes
@@ -19,15 +20,15 @@ import java.time.Month;
      * @return la fecha del ultimo viernes
      */
     public static LocalDate obtenerUltimoViernes(int anio, Month mes) {
-<span class="fc bfc" id="L22" title="All 4 branches covered.">        if (anio &lt; 1 || mes == null) {</span>
-<span class="fc" id="L23">            return null;</span>
+<span class="fc bfc" id="L23" title="All 4 branches covered.">        if (anio &lt; 1 || mes == null) {</span>
+<span class="fc" id="L24">            return null;</span>
         }
-<span class="fc" id="L25">        LocalDate ultimoDiaDelMes = LocalDate.of(anio, mes, </span>
-<span class="fc" id="L26">        mes.length(LocalDate.of(anio, mes, 1).isLeapYear()));</span>
-<span class="fc bfc" id="L27" title="All 2 branches covered.">        while (ultimoDiaDelMes.getDayOfWeek() != DayOfWeek.FRIDAY) {</span>
-<span class="fc" id="L28">            ultimoDiaDelMes = ultimoDiaDelMes.minusDays(1);</span>
+<span class="fc" id="L26">        LocalDate ultimoDiaDelMes = LocalDate.of(anio, mes, </span>
+<span class="fc" id="L27">        mes.length(Year.isLeap(anio)));</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        while (ultimoDiaDelMes.getDayOfWeek() != DayOfWeek.FRIDAY) {</span>
+<span class="fc" id="L29">            ultimoDiaDelMes = ultimoDiaDelMes.minusDays(1);</span>
         }
-<span class="fc" id="L30">        return ultimoDiaDelMes;</span>
+<span class="fc" id="L31">        return ultimoDiaDelMes;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

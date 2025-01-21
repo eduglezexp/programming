@@ -27,8 +27,4 @@ public class Ejercicio5 {
         LocalDate nuevaFecha = fecha.plusDays(dias);
         return nuevaFecha.getDayOfWeek().toString();
     }
-
-    public static void main(String[] args) {
-        System.out.println(obtenerDiaDeLaSemanaEnElFuturo(LocalDate.now(), 100));
-    }
 }
