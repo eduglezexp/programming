@@ -4,13 +4,28 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Period;
 
-<span class="nc" id="L7">public class Ejercicio1 {</span>
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
+<span class="nc" id="L12">public class Ejercicio1 {</span>
     
+    /**
+     * Funcion que calcula la diferencia exacta en anios, meses, dias, horas, minutos 
+     * y segundos entre dos fechas dadas
+     * @param fechaInicio a calcular 
+     * @param fechaFin a calcular
+     * @return la diferencia entre dos fechas dadas 
+     */
     public static LocalDateTime calcularDiferenciaFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
-<span class="pc bpc" id="L10" title="2 of 4 branches missed.">        if (fechaInicio == null || fechaFin == null) {</span>
-<span class="nc" id="L11">            return null;</span>
+<span class="pc bpc" id="L22" title="2 of 4 branches missed.">        if (fechaInicio == null || fechaFin == null) {</span>
+<span class="nc" id="L23">            return null;</span>
         }
-<span class="fc" id="L13">        return null;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (fechaInicio.isAfter(fechaFin)) {</span>
+<span class="fc" id="L26">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L28">        return fechaInicio.from(fechaFin);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

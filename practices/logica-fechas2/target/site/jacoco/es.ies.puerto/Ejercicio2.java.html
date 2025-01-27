@@ -5,30 +5,40 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-<span class="nc" id="L8">public class Ejercicio2 {</span>
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
 
+<span class="nc" id="L13">public class Ejercicio2 {</span>
+
+    /**
+     * Funcion para encontrar el ultimo viernes de cada mes, dado un anio
+     * @param anio a calcular 
+     * @return una lista de las fechas
+     */ 
     public static List&lt;LocalDate&gt; obtenerUltimosViernes(int anio) {
-<span class="fc" id="L11">        List&lt;LocalDate&gt; ultimosViernes = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L12" title="All 2 branches covered.">        if (anio &lt;=0) {</span>
-<span class="fc" id="L13">            return ultimosViernes;</span>
+<span class="fc" id="L21">        List&lt;LocalDate&gt; ultimosViernes = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (anio &lt;=0) {</span>
+<span class="fc" id="L23">            return ultimosViernes;</span>
         }
         // Iteramos sobre cada mes del año
-<span class="fc bfc" id="L16" title="All 2 branches covered.">        for (Month mes : Month.values()) {</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (Month mes : Month.values()) {</span>
             // Obtener el último día del mes
-<span class="fc" id="L18">            LocalDate ultimoDiaDelMes = LocalDate.of(anio, mes, mes.length(LocalDate.of(anio, mes, 1).isLeapYear()));</span>
+<span class="fc" id="L28">            LocalDate ultimoDiaDelMes = LocalDate.of(anio, mes, mes.length(LocalDate.of(anio, mes, 1).isLeapYear()));</span>
 
             // Obtener el último viernes
-<span class="fc" id="L21">            LocalDate ultimoViernes = ultimoDiaDelMes;</span>
+<span class="fc" id="L31">            LocalDate ultimoViernes = ultimoDiaDelMes;</span>
 
             // Retroceder hasta el viernes más cercano
-<span class="fc bfc" id="L24" title="All 2 branches covered.">            while (ultimoViernes.getDayOfWeek().getValue() != 5) { // 5 representa el viernes</span>
-<span class="fc" id="L25">                ultimoViernes = ultimoViernes.minusDays(1);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            while (ultimoViernes.getDayOfWeek().getValue() != 5) { // 5 representa el viernes</span>
+<span class="fc" id="L35">                ultimoViernes = ultimoViernes.minusDays(1);</span>
             }
 
             // Añadir el último viernes a la lista
-<span class="fc" id="L29">            ultimosViernes.add(ultimoViernes);</span>
+<span class="fc" id="L39">            ultimosViernes.add(ultimoViernes);</span>
         }
-<span class="fc" id="L31">        return ultimosViernes;</span>
+<span class="fc" id="L41">        return ultimosViernes;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

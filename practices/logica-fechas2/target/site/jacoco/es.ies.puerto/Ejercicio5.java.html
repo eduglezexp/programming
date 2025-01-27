@@ -6,10 +6,29 @@ import java.time.temporal.TemporalAdjusters;
 import java.time.DayOfWeek;
 import java.time.Duration;
 
-<span class="nc" id="L9">public class Ejercicio5 {</span>
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
+<span class="nc" id="L14">public class Ejercicio5 {</span>
     
+    /**
+     * Funcion para calcular cuantos milisegundos ha vivido una persona
+     * @param fechaNacimiento de la persona 
+     * @return los milisegundos vividos en anios bisiestos
+     */
     public static long calcularEdadEnMilisegundos(LocalDateTime fechaNacimiento) {
-<span class="fc" id="L12">        return -1;</span>
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if (fechaNacimiento == null) {</span>
+<span class="nc" id="L23">            throw new IllegalArgumentException(&quot;La fecha de nacimiento no puede ser nula&quot;);</span>
+        }
+<span class="fc" id="L25">        LocalDateTime ahora = LocalDateTime.now();</span>
+
+        // Calcular la diferencia en milisegundos entre la fecha de nacimiento y la fecha actual
+<span class="fc" id="L28">        Duration duracion = Duration.between(fechaNacimiento, ahora);</span>
+
+        // Devolver la diferencia en milisegundos
+<span class="fc" id="L31">        return duracion.toMillis();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

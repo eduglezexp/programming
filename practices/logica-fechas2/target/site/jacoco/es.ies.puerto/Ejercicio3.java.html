@@ -25,13 +25,14 @@ import java.util.Map;
      */
     public static Map&lt;String, ZonedDateTime&gt; convertirZonasHorarias(
         LocalDateTime fechaHora, ZoneId zonaOrigen, List&lt;ZoneId&gt; zonasDestino) {
-<span class="fc" id="L28">        zonaOrigen = ZoneId.of(&quot;America/New_York&quot;);</span>
-<span class="fc" id="L29">        zonasDestino = List.of(</span>
-<span class="fc" id="L30">                ZoneId.of(&quot;Asia/Tokyo&quot;),</span>
-<span class="fc" id="L31">                ZoneId.of(&quot;Europe/London&quot;),</span>
-<span class="fc" id="L32">                ZoneId.of(&quot;Australia/Sydney&quot;)</span>
-        );
-<span class="fc" id="L34">        return null;</span>
+<span class="fc" id="L28">            ZonedDateTime fechaHoraZonaOrigen = fechaHora.atZone(zonaOrigen);</span>
+<span class="fc" id="L29">            Map&lt;String, ZonedDateTime&gt; resultado = new HashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">            for (ZoneId zonaDestino : zonasDestino) {</span>
+<span class="fc" id="L31">                ZonedDateTime fechaHoraZonaDestino = fechaHoraZonaOrigen.withZoneSameInstant(zonaDestino);</span>
+<span class="fc" id="L32">                resultado.put(zonaDestino.getId(), fechaHoraZonaDestino);</span>
+<span class="fc" id="L33">            }</span>
+    
+<span class="fc" id="L35">            return resultado;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

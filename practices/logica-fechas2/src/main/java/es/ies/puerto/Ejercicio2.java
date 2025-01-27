@@ -5,8 +5,18 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
 public class Ejercicio2 {
 
+    /**
+     * Funcion para encontrar el ultimo viernes de cada mes, dado un anio
+     * @param anio a calcular 
+     * @return una lista de las fechas
+     */ 
     public static List<LocalDate> obtenerUltimosViernes(int anio) {
         List<LocalDate> ultimosViernes = new ArrayList<>();
         if (anio <=0) {

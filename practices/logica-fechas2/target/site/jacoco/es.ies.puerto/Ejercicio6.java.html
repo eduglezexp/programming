@@ -5,10 +5,41 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 
-<span class="nc" id="L8">public class Ejercicio6 {</span>
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
+<span class="nc" id="L13">public class Ejercicio6 {</span>
     
+    /**
+     * Funcion que dada una lista de eclipses solares historicos y futuros 
+     * con sus fechas y horarios en UTC, encuentra el proximo eclipse solar,
+     * dada una fecha
+     * @param eclipses a buscar
+     * @param fechaReferencia a partir de esta fecha se buscara el proximo 
+     * eclipse que ocurrira cerca
+     * @return la fecha exacta a la que ocurrira el eclipse
+     */
     public static LocalDateTime obtenerProximoEclipse(List&lt;LocalDateTime&gt; eclipses, LocalDateTime fechaReferencia) {
-<span class="fc" id="L11">     return null;   </span>
+<span class="pc bpc" id="L25" title="2 of 4 branches missed.">        if (eclipses == null || fechaReferencia == null) {</span>
+<span class="nc" id="L26">            throw new IllegalArgumentException(&quot;La lista de eclipses y la fecha de referencia no pueden ser nulas&quot;);</span>
+        }
+<span class="fc" id="L28">        LocalDateTime proximoEclipse = null;</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        for (LocalDateTime eclipse : eclipses) {</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">            if (eclipse == null) {</span>
+<span class="nc" id="L31">                continue; </span>
+            }
+<span class="fc bfc" id="L33" title="All 2 branches covered.">            if (eclipse.isAfter(fechaReferencia)) {</span>
+<span class="pc bpc" id="L34" title="1 of 4 branches missed.">                if (proximoEclipse == null || eclipse.isBefore(proximoEclipse)) {</span>
+<span class="fc" id="L35">                    proximoEclipse = eclipse;</span>
+                }
+            }
+<span class="fc" id="L38">        }</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if (proximoEclipse == null) {</span>
+<span class="fc" id="L40">            throw new IllegalArgumentException(&quot;No hay eclipses futuros después de la fecha de referencia.&quot;);</span>
+        }
+<span class="fc" id="L42">        return proximoEclipse;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

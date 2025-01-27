@@ -25,13 +25,13 @@ public class Ejercicio3 {
      */
     public static Map<String, ZonedDateTime> convertirZonasHorarias(
         LocalDateTime fechaHora, ZoneId zonaOrigen, List<ZoneId> zonasDestino) {
-        zonaOrigen = ZoneId.of("America/New_York");
-        zonasDestino = List.of(
-                ZoneId.of("Asia/Tokyo"),
-                ZoneId.of("Europe/London"),
-                ZoneId.of("Australia/Sydney")
-        );
-        return null;
+            ZonedDateTime fechaHoraZonaOrigen = fechaHora.atZone(zonaOrigen);
+            Map<String, ZonedDateTime> resultado = new HashMap<>();
+            for (ZoneId zonaDestino : zonasDestino) {
+                ZonedDateTime fechaHoraZonaDestino = fechaHoraZonaOrigen.withZoneSameInstant(zonaDestino);
+                resultado.put(zonaDestino.getId(), fechaHoraZonaDestino);
+            }
     
+            return resultado;
     }
 }
