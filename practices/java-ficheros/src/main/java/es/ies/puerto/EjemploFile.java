@@ -1,15 +1,15 @@
 package es.ies.puerto;
 
+import es.ies.puerto.model.FileOperaciones;
 import es.ies.puerto.model.Persona;
-import es.ies.puerto.model.fichero.OperacionesFichero;
 
 
 
 public class EjemploFile {
     
     public static void main(String[] args) {
-        OperacionesFichero operaciones = new OperacionesFichero();
-        Persona persona = new Persona("00000000H", "dios", 10000);
+        FileOperaciones operaciones = new FileOperaciones();
+        Persona persona = new Persona("00000000H", "dios");
         //System.out.println(persona);
         boolean insertar = operaciones.create(persona);
         if (insertar) {
@@ -17,7 +17,7 @@ public class EjemploFile {
         } else {
             System.out.println("No se ha insertado el elemento");
         }
-        Persona personaUpdate = new Persona("00000000H", "Dios 2", 10000);
+        Persona personaUpdate = new Persona("00000000H", "Dios 2");
         operaciones.update(personaUpdate);
     }    
 }

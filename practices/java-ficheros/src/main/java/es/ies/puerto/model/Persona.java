@@ -4,7 +4,6 @@ import java.util.Objects;
 public class Persona {
     String identificador;
     String nombre;
-    long sueldo;
 
     public Persona(){}
 
@@ -12,10 +11,9 @@ public class Persona {
         this.identificador = identificador;
     }
 
-    public Persona(String identificador, String nombre, long sueldo){
+    public Persona(String identificador, String nombre){
         this.identificador = identificador;
         this.nombre = nombre;
-        this.sueldo = sueldo;
     }
 
 
@@ -27,13 +25,10 @@ public class Persona {
         return this.nombre;
     }
 
-    public long getSueldo() {
-        return this.sueldo;
-    }
 
     @Override
     public String toString() {
-        return getIdentificador() +"," + getNombre() + "," + getSueldo();
+        return getIdentificador() + "," + getNombre();
     }
 
     @Override

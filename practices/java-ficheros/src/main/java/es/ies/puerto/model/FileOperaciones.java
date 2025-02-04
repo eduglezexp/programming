@@ -1,4 +1,4 @@
-package es.ies.puerto.model.fichero;
+package es.ies.puerto.model;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,21 +6,26 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
-import es.ies.puerto.model.OperacionesInterface;
-import es.ies.puerto.model.Persona;
+import es.ies.puerto.Operaciones;
 
-public class OperacionesFichero implements OperacionesInterface{
+public class FileOperaciones implements Operaciones{
     
-    File fichero;
-    String path = "/home/dam/1DAM/Programacion/programming/practices/java-ficheros/src/main/resources/archivo.txt";
+    private File file;
+    private String fichero = "empleados.txt";
 
-    public OperacionesFichero() {
-        fichero = new File(path);
-        if (!fichero.exists() || !fichero.isFile()) {
-            throw new IllegalArgumentException("El recurso no es de tipo fichero" +path);
+    public FileOperaciones() {
+        try {
+            URL resource = getClass().getClassLoader().getResource(fichero);
+            if (resource == null) {
+                
+            }
+            file = new File(resource.toURI());
+        } catch (Exception e) {
+            
         }
     }
 
@@ -29,11 +34,11 @@ public class OperacionesFichero implements OperacionesInterface{
         if (persona == null || persona.getIdentificador() == null) {
             return false;
         }
-        Set<Persona> personas = read(fichero);
+        Set<Persona> personas = read(file);
         if (personas.contains(persona)) {
             return false;
         }
-        return create(persona.toString(), fichero);
+        return create(persona.toString(), file);
     }
 
     private boolean create(String data,File file) {
@@ -46,14 +51,14 @@ public class OperacionesFichero implements OperacionesInterface{
         }
     }
 
-    private Set<Persona> read(File file) {
+    public Set<Persona> read(File file) {
         Set<Persona> personas = new HashSet<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] arrayline = line.split(",");
-                Persona persona = new Persona(arrayline[0], arrayline[1], Long.valueOf(arrayline[2]));
-                personas.add(persona);
+                Empleado empleado = new Empleado(arrayline[0], arrayline[1], arrayline[2], Double.parseDouble(arrayline[3]));
+                personas.add(empleado);
             }
         } catch (IOException e) {
             return new HashSet<>();
@@ -66,7 +71,7 @@ public class OperacionesFichero implements OperacionesInterface{
         if (persona == null || persona.getIdentificador() == null) {
             return false;
         }
-        Set<Persona> personas = read(fichero);
+        Set<Persona> personas = read(file);
         if (personas.contains(persona)) {
             return false;
         }
@@ -74,7 +79,7 @@ public class OperacionesFichero implements OperacionesInterface{
             if (personaBuscar.equals(persona)) {
                 personas.remove(personaBuscar);
                 personas.add(persona);
-                return updateFile(personas, fichero);
+                return updateFile(personas, file);
             }
         }
         return false;
@@ -99,39 +104,41 @@ public class OperacionesFichero implements OperacionesInterface{
         if (persona == null || persona.getIdentificador() == null) {
             return false;
         }
-        Set<Persona> personas = read(fichero);
+        Set<Persona> personas = read(file);
         if (personas.contains(persona)) {
             return false;
         }
         for (Persona personaBuscar : personas) {
             if (personaBuscar.equals(persona)) {
                 personas.remove(personaBuscar);
-                return updateFile(personas, fichero);
+                return updateFile(personas, file);
             }
         }
         return false;
     }
 
     @Override
-    public Persona search(Persona persona) {
+    public Persona read(Persona persona) {
         if (persona == null || persona.getIdentificador() == null) {
             return persona;
         }
-        Set<Persona> personas = new HashSet<>();
-        for (Persona personaBuscar : personas) {
-            if (personaBuscar.equals(persona)) {
-                return personaBuscar;
+        Set<Persona> personas = read(file);
+        if (personas.contains(persona)) {
+            for (Persona personaBuscar : personas) {
+                if (personaBuscar.equals(persona)) {
+                    return personaBuscar;
+                }
             }
         }
         return persona;
     }
 
     @Override
-    public Persona search(String identificador) {
+    public Persona read(String identificador) {
         if (identificador == null || identificador.isEmpty()) {
             return null;
         }
-        Persona persona = new Persona(identificador);
-        return search(persona);
+        Persona persona = new Empleado(identificador);
+        return read(persona);
     }
 }
