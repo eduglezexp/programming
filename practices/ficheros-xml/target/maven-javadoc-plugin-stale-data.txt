@@ -1,0 +1,50 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'/home/super/Descargas/ejemplo-mvc/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/super/Descargas/ejemplo-mvc/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'ejemplo-mvc 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'ejemplo-mvc 1.0-SNAPSHOT API'
+es.ies.puerto.config
+es.ies.puerto.model
+es.ies.puerto.model.file
+es.ies.puerto.controller
+es.ies.puerto.view
+es.ies.puerto
+/home/super/Descargas/ejemplo-mvc/src/main/java = 1737387040429
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/script.js = 1737390012822
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/index-all.html = 1737390012818
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/allpackages-index.html = 1737390012810
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/tag-search-index.js = 1737390012814
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/element-list = 1737390012770
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/member-search-index.js = 1737390012814
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/package-search-index.js = 1737390012814
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/search.js = 1737390012822
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/overview-tree.html = 1737390012802
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/allclasses-index.html = 1737390012810
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/overview-summary.html = 1737390012818
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/module-search-index.js = 1737390012814
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/help-doc.html = 1737390012822
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/jquery-ui.overrides.css = 1737390012830
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/type-search-index.js = 1737390012814
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/index.html = 1737390012806
+/home/super/Descargas/ejemplo-mvc/target/reports/apidocs/stylesheet.css = 1737390012822
