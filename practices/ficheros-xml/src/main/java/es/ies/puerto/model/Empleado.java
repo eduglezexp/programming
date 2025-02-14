@@ -1,5 +1,7 @@
 package es.ies.puerto.model;
 
+import java.util.Objects;
+
 public class Empleado {
     String id;
     String nombre;
@@ -52,5 +54,21 @@ public class Empleado {
     @Override
     public String toString() {
         return id + "," + nombre + "," + fechaNacimiento + "," + puesto ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Empleado)) {
+            return false;
+        }
+        Empleado empleado = (Empleado) o;
+        return Objects.equals(id, empleado.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

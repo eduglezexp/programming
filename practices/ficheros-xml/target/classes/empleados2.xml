@@ -2,9 +2,9 @@
 <empleados>
     <empleado>
         <id>1</id>
-        <nombre>Juan Pérez</nombre>
-        <fechaNacimiento>1993/05/12</fechaNacimiento>
-        <puesto>Desarrollador</puesto>
+        <nombre>Pepe</nombre>
+        <fechaNacimiento>0/0/0000</fechaNacimiento>
+        <puesto>dios</puesto>
     </empleado>
     <empleado>
         <id>2</id>
