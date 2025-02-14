@@ -6,7 +6,9 @@ import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -39,8 +41,8 @@ public class XmlToJava {
                 empleados.add(empleado);
             }
         }
-        //System.out.println(empleados);
-        escribirXml() ;
+        Empleado empleado = new Empleado("1", "Pepe", "0/0/0000", "dios");
+        modificar(empleado, empleados);
     }
 
     public static void escribirXml() throws Exception {
@@ -69,6 +71,62 @@ public class XmlToJava {
         Element puesto = doc.createElement("puesto");
         puesto.appendChild(doc.createTextNode("Desarrollador"));
         empleado.appendChild(puesto);
+        
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        DOMSource source = new DOMSource(doc);
+        StreamResult result = new StreamResult(new File("src/main/resources/empleados2.xml"));
+        transformer.transform(source, result);
+    }
+
+    public static boolean modificar(Empleado empleado, List<Empleado> empleados) throws Exception{
+        if (empleado == null) {
+            return false;
+        }
+        int posicion = empleados.indexOf(empleado);
+        if (posicion < 0) {
+            return false;
+        }
+        empleados.set(posicion, empleado);
+        volcarFicheroXml(empleados);
+        return true;
+    }
+
+    public static boolean eliminar(Empleado empleado, List<Empleado> empleados) throws ParserConfigurationException, TransformerException {
+        if (empleado == null) {
+            return false;
+        }
+        boolean eliminado = empleados.remove(empleado);
+        if (eliminado) {
+            volcarFicheroXml(empleados);
+        }
+        return eliminado;
+    }
+
+    public static void volcarFicheroXml(List<Empleado> empleados) throws ParserConfigurationException, TransformerException  {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.newDocument();
+        
+        Element root = doc.createElement("empleados");
+        doc.appendChild(root);
+        
+        for (Empleado empleado : empleados) {
+            Element empleadoXml = doc.createElement("empleado");
+            root.appendChild(empleadoXml);
+            Element id = doc.createElement("id");
+            id.appendChild(doc.createTextNode(empleado.getId()));
+            empleadoXml.appendChild(id);
+            Element nombre = doc.createElement("nombre");
+            nombre.appendChild(doc.createTextNode(empleado.getNombre()));
+            empleadoXml.appendChild(nombre);
+            Element fechaNacimiento = doc.createElement("fechaNacimiento");
+            fechaNacimiento.appendChild(doc.createTextNode(empleado.getFechaNacimiento()));
+            empleadoXml.appendChild(fechaNacimiento);
+            Element puesto = doc.createElement("puesto");
+            puesto.appendChild(doc.createTextNode(empleado.getPuesto()));
+            empleadoXml.appendChild(puesto);
+        }
         
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
