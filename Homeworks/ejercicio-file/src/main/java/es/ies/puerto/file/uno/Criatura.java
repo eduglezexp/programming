@@ -75,7 +75,13 @@ public class Criatura {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Criatura [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", categoria=" + categoria
+                + "]";
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -91,5 +97,4 @@ public class Criatura {
     public int hashCode() {
         return Objects.hash(id);
     }
-    
 }
