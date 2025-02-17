@@ -31,22 +31,21 @@ void obtenerCriaturasTest() {
 
     @Test
 void obtenerCriaturaTest() {
-        String idBuscar = "ID_ACTUALIZAR";
+        String idBuscar = "DG001";
         Criatura critaturaBuscar = new Criatura(idBuscar);
         critaturaBuscar = persistencia.obtener(critaturaBuscar);
-        Assertions.assertEquals(critaturaBuscar.getId(),"ID_BUSCAR",
+        Assertions.assertEquals(critaturaBuscar.getId(),idBuscar,
                 MESSAGE_ERROR);
         Assertions.assertNotNull(critaturaBuscar.getNombre(),
                 MESSAGE_ERROR);
-        Assertions.assertTrue (critaturaBuscar.getCategoria().equals("VALOR_COMPARAR"),
+        Assertions.assertTrue (critaturaBuscar.getCategoria().equals("Dragones"),
                 MESSAGE_ERROR);
-        Assertions.assertNotNull(critaturaBuscar.getDescripcion().equals("VALOR_COMPARAR"),
+        Assertions.assertNotNull(critaturaBuscar.getDescripcion().equals("Un imponente dragón que escupe fuego."),
                 MESSAGE_ERROR);
     }
 
     @Test
 void addDeleteCriaturaTest() {
-
         int numCriaturasInicial = criaturas.size();
         Criatura criaturaInsertar = new Criatura();
 
@@ -67,7 +66,7 @@ void addDeleteCriaturaTest() {
 
     @Test
 void actualizarCriatura() {
-        String idActualizar = "ID_ACTUALIZAR";
+        String idActualizar = "UN002";
         Criatura CriaturaBuscar = new Criatura(idActualizar);
         Criatura CriaturaActualizar = persistencia.obtener(CriaturaBuscar);
         Criatura CriaturaBackup = persistencia.obtener(CriaturaBuscar);
@@ -82,7 +81,4 @@ void actualizarCriatura() {
         persistencia.updateCriatura(CriaturaBackup);
 
     }
-
-
-
 }

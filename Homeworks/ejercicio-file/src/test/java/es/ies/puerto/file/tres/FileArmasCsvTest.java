@@ -10,9 +10,7 @@ import static utilidades.UtilClassTest.MESSAGE_ERROR;
 
 class FileArmasCsvTest {
 
-
     FileArmasCsv persistencia;
-
     List<Arma> armas;
 
     @BeforeEach
@@ -31,25 +29,23 @@ class FileArmasCsvTest {
 
     @Test
     void obtenerArmaTest() {
-        String idBuscar = "ID_ACTUALIZAR";
+        String idBuscar = "EX001";
         Arma ArmaBuscar = new Arma(idBuscar);
         ArmaBuscar = persistencia.obtenerArma(ArmaBuscar);
-        Assertions.assertEquals(ArmaBuscar.getId(),"ID_BUSCAR",
+        Assertions.assertEquals(ArmaBuscar.getId(),idBuscar,
                 MESSAGE_ERROR);
         Assertions.assertNotNull(ArmaBuscar.getNombre(),
                 MESSAGE_ERROR);
-        Assertions.assertTrue (ArmaBuscar.getOrigen().equals("VALOR_COMPARAR"),
+        Assertions.assertTrue (ArmaBuscar.getOrigen().equals("Camelot"),
                 MESSAGE_ERROR);
-        Assertions.assertNotNull(ArmaBuscar.getOrigen().equals("VALOR_COMPARAR"),
+        Assertions.assertNotNull(ArmaBuscar.getOrigen().equals("Camelot"),
                 MESSAGE_ERROR);
     }
 
     @Test
     void addDeleteArmaTest() {
-
         int numArmasInicial = armas.size();
         Arma ArmaInsertar = new Arma();
-
         persistencia.addArma(ArmaInsertar);
         armas = persistencia.obtenerArmas();
         int numArmasInsertar = armas.size();
@@ -67,7 +63,7 @@ class FileArmasCsvTest {
 
     @Test
     void actualizarArma() {
-        String idActualizar = "ID_ACTUALIZAR";
+        String idActualizar = "MJ002";
         Arma ArmaBuscar = new Arma(idActualizar);
         Arma ArmaActualizar = persistencia.obtenerArma(ArmaBuscar);
         Arma ArmaBackup = persistencia.obtenerArma(ArmaBuscar);
@@ -79,8 +75,5 @@ class FileArmasCsvTest {
         Assertions.assertEquals(ArmaBuscar.toString(), ArmaActualizar.toString(),
                 MESSAGE_ERROR);
         persistencia.updateArma(ArmaBackup);
-
     }
-
-
 }

@@ -4,9 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import es.ies.puerto.file.dos.FilePokedexXml;
-import es.ies.puerto.file.dos.Pokemon;
-
 import java.util.List;
 
 import static utilidades.UtilClassTest.MESSAGE_ERROR;
@@ -34,16 +31,16 @@ class FilePokedexXmlTest {
 
     @Test
     void obtenerPokemonTest() {
-        String idBuscar = "ID_ACTUALIZAR";
+        String idBuscar = "001";
         Pokemon PokemonBuscar = new Pokemon(idBuscar);
         PokemonBuscar = persistencia.obtenerPokemon(PokemonBuscar);
-        Assertions.assertEquals(PokemonBuscar.getId(),"ID_BUSCAR",
+        Assertions.assertEquals(PokemonBuscar.getId(),idBuscar,
                 MESSAGE_ERROR);
         Assertions.assertNotNull(PokemonBuscar.getNombre(),
                 MESSAGE_ERROR);
-        Assertions.assertTrue (PokemonBuscar.getNombre().equals("VALOR_COMPARAR"),
+        Assertions.assertTrue (PokemonBuscar.getNombre().equals("Bulbasaur"),
                 MESSAGE_ERROR);
-        Assertions.assertNotNull(PokemonBuscar.getDescripcion().equals("VALOR_COMPARAR"),
+        Assertions.assertNotNull(PokemonBuscar.getDescripcion().equals("Un pequeño Pokémon con una semilla en su espalda que crece a medida que el Pokémon se desarrolla."),
                 MESSAGE_ERROR);
     }
 
@@ -70,7 +67,7 @@ class FilePokedexXmlTest {
 
     @Test
     void actualizarPokemon() {
-        String idActualizar = "ID_ACTUALIZAR";
+        String idActualizar = "003";
         Pokemon PokemonBuscar = new Pokemon(idActualizar);
         Pokemon PokemonActualizar = persistencia.obtenerPokemon(PokemonBuscar);
         Pokemon PokemonBackup = persistencia.obtenerPokemon(PokemonBuscar);
@@ -84,6 +81,4 @@ class FilePokedexXmlTest {
         persistencia.updatePokemon(PokemonBackup);
 
     }
-
-
 }

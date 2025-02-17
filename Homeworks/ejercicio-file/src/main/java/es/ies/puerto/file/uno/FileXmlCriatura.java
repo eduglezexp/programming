@@ -3,16 +3,12 @@ package es.ies.puerto.file.uno;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -22,28 +18,34 @@ import org.w3c.dom.NodeList;
  * @author eduglezexp
  * @version 1.0.0
  */
-
 public class FileXmlCriatura {
-    static List<Criatura> criaturas;
-    String path = "src/main/resources/uno.xml";
+    private static List<Criatura> criaturas;
+    private static final String PATH = "src/main/resources/uno.xml";
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto 
      */
-    public FileXmlCriatura() throws Exception{
+    public FileXmlCriatura() {
         criaturas = new ArrayList<>();
-        File archivo = new File(path);
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(archivo);
-        prepararLista(doc);
+        File archivo = new File(PATH);
+        if (!archivo.exists()) {
+            System.err.println("Archivo XML no encontrado: " + PATH);
+        }
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(archivo);
+            prepararLista(doc);
+        } catch (Exception e) {
+            System.err.println("Error al leer el archivo XML: " + e.getMessage());
+        }
     }
 
     /**
-     * Metodo para hacer que la lista tenga la informacion del fichero
-     * @param doc para obtener el elemento por tag
+     * Metodo para llenar la lista de criaturas con la información del archivo XML
+     * @param doc Documento XML a procesar
      */
-    private void prepararLista(Document doc){
+    private void prepararLista(Document doc) {
         NodeList lista = doc.getElementsByTagName("criatura");
         for (int i = 0; i < lista.getLength(); i++) {
             Node nodo = lista.item(i);
@@ -53,52 +55,66 @@ public class FileXmlCriatura {
                 String nombre = elemento.getElementsByTagName("nombre").item(0).getTextContent();
                 String descripcion = elemento.getElementsByTagName("descripcion").item(0).getTextContent();
                 String categoria = elemento.getElementsByTagName("categoria").item(0).getTextContent();
-                Criatura criatura = new Criatura(id, nombre, descripcion, categoria);
-                criaturas.add(criatura);
+                criaturas.add(new Criatura(id, nombre, descripcion, categoria));
             }
         }
     }
 
-    public static void volcarCriaturaXml() throws Exception  {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.newDocument();
-        
-        Element root = doc.createElement("empleados");
-        doc.appendChild(root);
-        
-        for (Criatura criatura : criaturas) {
+    /**
+     * Metodo para escribir la lista de criaturas en el archivo XML
+     */
+    public static void volcarCriaturaXml() {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.newDocument();
 
-            Element criaturaXml = doc.createElement("criatura");
-            root.appendChild(criaturaXml);
+            Element root = doc.createElement("criaturas"); 
+            doc.appendChild(root);
 
-            Element id = doc.createElement("id");
-            id.appendChild(doc.createTextNode(criatura.getId()));
-            criaturaXml.appendChild(id);
-            
-            Element nombre = doc.createElement("nombre");
-            nombre.appendChild(doc.createTextNode(criatura.getNombre()));
-            criaturaXml.appendChild(nombre);
-            
-            Element descripcion = doc.createElement("descripcion");
-            descripcion.appendChild(doc.createTextNode(criatura.getDescripcion()));
-            criaturaXml.appendChild(descripcion);
-            
-            Element categoria = doc.createElement("categoria");
-            categoria.appendChild(doc.createTextNode(criatura.getCategoria()));
-            criaturaXml.appendChild(categoria);
+            for (Criatura criatura : criaturas) {
+                Element criaturaXml = doc.createElement("criatura");
+                root.appendChild(criaturaXml);
+
+                Element id = doc.createElement("id");
+                id.appendChild(doc.createTextNode(criatura.getId()));
+                criaturaXml.appendChild(id);
+
+                Element nombre = doc.createElement("nombre");
+                nombre.appendChild(doc.createTextNode(criatura.getNombre()));
+                criaturaXml.appendChild(nombre);
+
+                Element descripcion = doc.createElement("descripcion");
+                descripcion.appendChild(doc.createTextNode(criatura.getDescripcion()));
+                criaturaXml.appendChild(descripcion);
+
+                Element categoria = doc.createElement("categoria");
+                categoria.appendChild(doc.createTextNode(criatura.getCategoria()));
+                criaturaXml.appendChild(categoria);
+            }
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(PATH));
+            transformer.transform(source, result);
+        } catch (Exception e) {
+            System.err.println("Error al escribir en el archivo XML: " + e.getMessage());
         }
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = transformerFactory.newTransformer();
-        DOMSource source = new DOMSource(doc);
-        StreamResult result = new StreamResult(new File("src/main/resources/uno.xml"));
-        transformer.transform(source, result);
     }
 
+    /**
+     * Metodo que obtiene la lista de todas las criaturas
+     * @return Lista de criaturas almacenadas
+     */
     public List<Criatura> obtenerCriaturas() {
-        return criaturas;
+        return new ArrayList<>(criaturas); 
     }
 
+    /**
+     * Metodo que obtiene una criatura especifica por su ID
+     * @param criatura Criatura a buscar
+     * @return criatura si se encuentra
+     */
     public Criatura obtener(Criatura criatura) {
         if (criatura == null || !criaturas.contains(criatura)) {
             return null;
@@ -107,6 +123,10 @@ public class FileXmlCriatura {
         return criaturas.get(posicion);
     }
 
+    /**
+     * Metodo para agrega una nueva criatura a la lista y la guarda en el XML
+     * @param criatura Criatura a agregar
+     */
     public void addCriatura(Criatura criatura) {
         if (criatura == null || criaturas.contains(criatura)) {
             return;
@@ -115,10 +135,30 @@ public class FileXmlCriatura {
         volcarCriaturaXml();
     }
 
+    /**
+     * Metodo para elimina una criatura de la lista y actualiza el XML
+     * @param criatura Criatura a eliminar.
+     */
     public void deleteCriatura(Criatura criatura) {
-
+        if (criatura == null || !criaturas.contains(criatura)) {
+            return;
+        }
+        criaturas.remove(criatura);
+        volcarCriaturaXml();
     }
-    public void updateCriatura(Criatura criatura) {
 
+    /**
+     * Metodo que actualiza una criatura existente en la lista y en el XML
+     * @param criatura Criatura con los nuevos datos
+     */
+    public void updateCriatura(Criatura criatura) {
+        if (criatura == null) {
+            return;
+        }
+        int index = criaturas.indexOf(criatura);
+        if (index >= 0) {
+            criaturas.set(index, criatura);
+            volcarCriaturaXml();
+        }
     }
 }
