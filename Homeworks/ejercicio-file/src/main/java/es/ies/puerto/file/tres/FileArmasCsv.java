@@ -1,7 +1,13 @@
 package es.ies.puerto.file.tres;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase para gestionar el archivo CSV de armas.
@@ -107,7 +113,7 @@ public class FileArmasCsv {
      * @param arma a actualizar
      */
     public void updateArma(Arma arma) {
-        if (arma == null || armas.contains(arma)) {
+        if (arma == null || !armas.contains(arma)) {
             return;
         }
         int index = armas.indexOf(arma);

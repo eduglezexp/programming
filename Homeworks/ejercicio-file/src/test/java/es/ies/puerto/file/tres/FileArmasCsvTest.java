@@ -1,10 +1,10 @@
 package es.ies.puerto.file.tres;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static utilidades.UtilClassTest.MESSAGE_ERROR;
 
@@ -45,15 +45,15 @@ class FileArmasCsvTest {
     @Test
     void addDeleteArmaTest() {
         int numArmasInicial = armas.size();
-        Arma ArmaInsertar = new Arma();
-        persistencia.addArma(ArmaInsertar);
+        Arma armaInsertar = new Arma();
+        persistencia.addArma(armaInsertar);
         armas = persistencia.obtenerArmas();
         int numArmasInsertar = armas.size();
-        Assertions.assertTrue(armas.contains(ArmaInsertar),
+        Assertions.assertTrue(armas.contains(armaInsertar),
                 MESSAGE_ERROR);
         Assertions.assertEquals(numArmasInicial +1 ,
                 numArmasInsertar, MESSAGE_ERROR);
-        persistencia.deleteArma(ArmaInsertar);
+        persistencia.deleteArma(armaInsertar);
         armas = persistencia.obtenerArmas();
         int numArmasBorrado = armas.size();
         Assertions.assertEquals(numArmasInicial ,
@@ -64,16 +64,16 @@ class FileArmasCsvTest {
     @Test
     void actualizarArma() {
         String idActualizar = "MJ002";
-        Arma ArmaBuscar = new Arma(idActualizar);
-        Arma ArmaActualizar = persistencia.obtenerArma(ArmaBuscar);
-        Arma ArmaBackup = persistencia.obtenerArma(ArmaBuscar);
-        ArmaActualizar.setNombre("nombreActualizar");
-        ArmaActualizar.setDescripcion("descripcionActualizar");
-        persistencia.updateArma(ArmaActualizar);
+        Arma armaBuscar = new Arma(idActualizar);
+        Arma armaActualizar = persistencia.obtenerArma(armaBuscar);
+        Arma armaBackup = persistencia.obtenerArma(armaBuscar);
+        armaActualizar.setNombre("nombreActualizar");
+        armaActualizar.setDescripcion("descripcionActualizar");
+        persistencia.updateArma(armaActualizar);
 
-        ArmaBuscar = persistencia.obtenerArma(ArmaBuscar);
-        Assertions.assertEquals(ArmaBuscar.toString(), ArmaActualizar.toString(),
+        armaBuscar = persistencia.obtenerArma(armaBuscar);
+        Assertions.assertEquals(armaBuscar.toString(), armaActualizar.toString(),
                 MESSAGE_ERROR);
-        persistencia.updateArma(ArmaBackup);
+        persistencia.updateArma(armaBackup);
     }
 }
