@@ -53,7 +53,7 @@ public class FileArmasCsv {
      * Metodo para escribir la lista de armas en el archivo CSV
      */
     private void guardarArmas() {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH, true))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH, false))) {
             for (Arma arma : armas) {
                 bw.write(arma.toString());
                 bw.newLine();
