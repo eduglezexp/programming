@@ -1,6 +1,9 @@
 package es.file.json.uno;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -23,6 +26,7 @@ public class CaballeroService {
      * Constructor por defecto
      */
     public CaballeroService() {
+        caballeros = new ArrayList<>();
         objectMapper = new ObjectMapper();
         file = new File(path);
         loadAll();
@@ -62,7 +66,23 @@ public class CaballeroService {
      * @return Lista de caballero dentro del rango de fechas
      */
     public List<Caballero> findByDateRange(String startDate, String endDate) {
-        return null;
+        List<Caballero> caballerosFiltrados = new ArrayList<>();
+        if (startDate == null || startDate.isEmpty()) {
+            return caballerosFiltrados;
+        }
+        if (endDate == null || endDate.isEmpty()) {
+            return caballerosFiltrados;
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate start = LocalDate.parse(startDate, formatter);
+        LocalDate end = LocalDate.parse(endDate, formatter);
+        for (Caballero caballero : caballeros) {
+            LocalDate fechaCaballero = LocalDate.parse(caballero.getFechaIngreso(), formatter);
+            if (!fechaCaballero.isBefore(start) && !fechaCaballero.isAfter(end)) {
+                caballerosFiltrados.add(caballero);
+            }
+        }
+        return caballerosFiltrados;
     }
 
     /**

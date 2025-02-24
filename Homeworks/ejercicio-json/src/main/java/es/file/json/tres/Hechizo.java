@@ -1,9 +1,10 @@
 package es.file.json.tres;
 
-import com.fasterxml.jackson.annotation.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author eduglezexp
@@ -78,11 +79,6 @@ public class Hechizo {
 
     public String getFechaCreacion() {
         return this.fechaCreacion;
-    }
-
-    public LocalDate getFechaAsLocalDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDate.parse(fechaCreacion, formatter);
     }
 
     @Override

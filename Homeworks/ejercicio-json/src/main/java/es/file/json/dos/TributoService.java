@@ -64,14 +64,19 @@ public class TributoService {
      * @return Lista de tributos dentro del rango de fechas
      */
     public List<Tributo> findByDateRange(String startDate, String endDate) {
+        List<Tributo> tributosFiltrados = new ArrayList<>();
+        if (startDate == null || startDate.isEmpty()) {
+            return tributosFiltrados;
+        }
+        if (endDate == null || endDate.isEmpty()) {
+            return tributosFiltrados;
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate start = LocalDate.parse(startDate, formatter);
         LocalDate end = LocalDate.parse(endDate, formatter);
-        List<Tributo> tributosFiltrados = new ArrayList<>();
         for (Tributo tributo : tributos) {
-            LocalDate fechaTributo = tributo.getFechaAsLocalDate();
-            if ((fechaTributo.isEqual(start) || fechaTributo.isAfter(start)) &&
-                (fechaTributo.isEqual(end)   || fechaTributo.isBefore(end))) {
+            LocalDate fechaTributo = LocalDate.parse(tributo.getFechaSeleccion(), formatter);
+            if (!fechaTributo.isBefore(start) && !fechaTributo.isAfter(end)) {
                 tributosFiltrados.add(tributo);
             }
         }

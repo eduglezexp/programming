@@ -1,9 +1,10 @@
 package es.file.json.uno;
 
-import com.fasterxml.jackson.annotation.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author eduglezexp
@@ -74,11 +75,6 @@ public class Caballero {
 
     public String getFechaIngreso() {
         return this.fechaIngreso;
-    }
-
-    public LocalDate getFechaAsLocalDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDate.parse(fechaIngreso, formatter);
     }
 
     @Override

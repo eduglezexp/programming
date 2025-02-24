@@ -2,6 +2,9 @@ package es.file.json.tres;
 
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -24,6 +27,7 @@ public class HechizoService   {
      * Constructor por defecto
      */
     public HechizoService() {
+        hechizos = new ArrayList<>();
         objectMapper = new ObjectMapper();
         file = new File(path);
         loadAll();
@@ -63,7 +67,23 @@ public class HechizoService   {
      * @return Lista de hechizos dentro del rango de fechas
      */
     public List<Hechizo> findByDateRange(String startDate, String endDate) {
-        return null;
+        List<Hechizo> hechizosFiltrados = new ArrayList<>();
+        if (startDate == null || startDate.isEmpty()) {
+            return hechizosFiltrados;
+        }
+        if (endDate == null || endDate.isEmpty()) {
+            return hechizosFiltrados;
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate start = LocalDate.parse(startDate, formatter);
+        LocalDate end = LocalDate.parse(endDate, formatter);
+        for (Hechizo hechizo : hechizos) {
+            LocalDate fechaHechizo = LocalDate.parse(hechizo.getFechaCreacion(), formatter);
+            if (!fechaHechizo.isBefore(start) && !fechaHechizo.isAfter(end)) {
+                hechizosFiltrados.add(hechizo);
+            }
+        }
+        return hechizosFiltrados;
     }
 
     /**

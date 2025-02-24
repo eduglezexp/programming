@@ -1,9 +1,9 @@
 package es.file.json.dos;
 
-import com.fasterxml.jackson.annotation.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author eduglezexp
@@ -77,11 +77,6 @@ public class Tributo {
 
     public String getFechaSeleccion() {
         return this.fechaSeleccion;
-    }
-
-    public LocalDate getFechaAsLocalDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDate.parse(fechaSeleccion, formatter);
     }
 
     @Override
