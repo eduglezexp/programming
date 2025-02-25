@@ -79,6 +79,26 @@ public class Tributo {
         return this.fechaSeleccion;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDistrito(int distrito) {
+        this.distrito = distrito;
+    }
+
+    public void setVoluntario(boolean voluntario) {
+        this.voluntario = voluntario;
+    }
+
+    public void setFechaSeleccion(String fechaSeleccion) {
+        this.fechaSeleccion = fechaSeleccion;
+    }
+
     @Override
     public String toString() {
         return "Tributo [id=" + id + ", nombre=" + nombre + ", distrito=" + distrito + ", voluntario=" + voluntario

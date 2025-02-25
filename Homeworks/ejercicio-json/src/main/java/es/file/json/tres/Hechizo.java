@@ -81,6 +81,26 @@ public class Hechizo {
         return this.fechaCreacion;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setEsOscuro(boolean esOscuro) {
+        this.esOscuro = esOscuro;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
     @Override
     public String toString() {
         return "Hechizo [id=" + id + ", nombre=" + nombre + ", tipo=" + tipo + ", esOscuro=" + esOscuro

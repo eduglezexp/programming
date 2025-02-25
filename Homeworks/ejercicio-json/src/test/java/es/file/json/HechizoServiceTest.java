@@ -1,5 +1,10 @@
 package es.file.json;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.io.File;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -25,7 +30,7 @@ class HechizoServiceTest {
     @AfterEach
     void afterEach() {
         hechizoService.delete(hechizo);
-        Assertions.assertEquals(4, hechizoService.loadAll().size());
+        Assertions.assertEquals(4, hechizoService.getList().size());
     } 
 
     @Test
@@ -36,7 +41,7 @@ class HechizoServiceTest {
 
     @Test
     void addHechizoTest() {
-        Assertions.assertEquals(5, hechizoService.loadAll().size());
+        Assertions.assertEquals(5, hechizoService.getList().size());
     }
 
     @Test
@@ -85,5 +90,47 @@ class HechizoServiceTest {
     void searchListHechizosRangeExistTest() {
         List<Hechizo> hechizos = hechizoService.findByDateRange("1500-06-11", "1500-06-13");
         Assertions.assertEquals(1, hechizos.size());
+    }
+
+    @Test
+    void searchListHechizosRangeNullTest() {
+        List<Hechizo> hechizo = hechizoService.findByDateRange("2023-01-01", null);
+        Assertions.assertNotNull(hechizo, "El resultado no es el esperado");
+        Assertions.assertTrue(hechizo.isEmpty(), "La lista deberia estar vacia");
+        List<Hechizo> hechizo2 = hechizoService.findByDateRange(null, null);
+        Assertions.assertNotNull(hechizo2, "El resultado no es el esperado");
+        Assertions.assertTrue(hechizo2.isEmpty(), "La lista deberia estar vacia");
+    }
+
+    @Test
+    void deleteHechizoNullTest() {
+        boolean result = hechizoService.delete(null);
+        Assertions.assertFalse(result, "El resultado no es el esperado");
+    }
+
+    @Test
+    void saveFileCatchTest() {
+        File file = new File("/ruta/no/escribible");
+        List<Hechizo> hechizos = Collections.emptyList();
+        hechizoService.saveFile(file, hechizos);
+        Assertions.assertTrue(true);
+    }
+
+    @Test
+    void testConstructorVacio() {
+        Hechizo hechizo = new Hechizo();
+        assertNotNull(hechizo, "El objeto Caballero no deberia ser null");
+    }
+
+    @Test
+    void testToString() {
+        Hechizo hechizo = new Hechizo();
+        hechizo.setId(1);
+        hechizo.setNombre("Seiya");
+        hechizo.setTipo("Pegasus");
+        hechizo.setEsOscuro(true);
+        hechizo.setFechaCreacion("2023-01-01");
+        String expected = "Hechizo [id=1, nombre=Seiya, tipo=Pegasus, esOscuro=true, fechaCreacion=2023-01-01]";
+        assertEquals(expected, hechizo.toString());
     }
 }

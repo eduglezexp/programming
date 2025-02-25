@@ -77,6 +77,26 @@ public class Caballero {
         return this.fechaIngreso;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setConstelacion(String constelacion) {
+        this.constelacion = constelacion;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public void setFechaIngreso(String fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+
     @Override
     public String toString() {
         return "Caballero [id=" + id + ", nombre=" + nombre + ", constelacion=" + constelacion + ", nivel=" + nivel

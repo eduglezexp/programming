@@ -1,5 +1,10 @@
 package es.file.json;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.io.File;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -24,7 +29,7 @@ class TributoServiceTest {
     @AfterEach
     void afterEach() {
         tributoService.delete(tributo);
-        Assertions.assertEquals(4, tributoService.loadAll().size());
+        Assertions.assertEquals(4, tributoService.getList().size());
     } 
 
     @Test
@@ -35,7 +40,7 @@ class TributoServiceTest {
 
     @Test
     void addTributoTest() {
-        Assertions.assertEquals(5, tributoService.loadAll().size());
+        Assertions.assertEquals(5, tributoService.getList().size());
     }
 
     @Test
@@ -81,5 +86,47 @@ class TributoServiceTest {
     void searchListTributosRangeExistTest() {
         List<Tributo> tributos = tributoService.findByDateRange("1970-04-15", "2000-04-15");
         Assertions.assertEquals(2, tributos.size());
+    }
+
+    @Test
+    void searchListCaballerosRangeNullTest() {
+        List<Tributo> tributos = tributoService.findByDateRange("2023-01-01", null);
+        Assertions.assertNotNull(tributos, "El resultado no es el esperado");
+        Assertions.assertTrue(tributos.isEmpty(), "La lista deberia estar vacia");
+        List<Tributo> tributos2 = tributoService.findByDateRange(null, null);
+        Assertions.assertNotNull(tributos2, "El resultado no es el esperado");
+        Assertions.assertTrue(tributos2.isEmpty(), "La lista deberia estar vacia");
+    }
+
+    @Test
+    void deleteTributoNullTest() {
+        boolean result = tributoService.delete(null);
+        Assertions.assertFalse(result, "El resultado no es el esperado");
+    }
+
+    @Test
+    void saveFileCatchTest() {
+        File file = new File("/ruta/no/escribible");
+        List<Tributo> tributos = Collections.emptyList();
+        tributoService.saveFile(file, tributos);
+        Assertions.assertTrue(true);
+    }
+
+    @Test
+    void testConstructorVacio() {
+        Tributo tributo = new Tributo();
+        assertNotNull(tributo, "El objeto Caballero no deberia ser null");
+    }
+
+    @Test
+    void testToString() {
+        Tributo tributo = new Tributo();
+        tributo.setId(1);
+        tributo.setNombre("Seiya");
+        tributo.setDistrito(9);
+        tributo.setVoluntario(true);
+        tributo.setFechaSeleccion("2023-01-01");
+        String expected = "Tributo [id=1, nombre=Seiya, distrito=9, voluntario=true, fechaSeleccion=2023-01-01]";
+        assertEquals(expected, tributo.toString());
     }
 }

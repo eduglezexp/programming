@@ -9,8 +9,6 @@ import java.util.List;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import es.file.json.tres.Hechizo;
-
 /**
  * @author eduglezexp
  * @version 1.0.0
