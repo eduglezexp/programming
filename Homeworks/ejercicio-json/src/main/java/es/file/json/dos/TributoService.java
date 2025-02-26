@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TributoService {
     ObjectMapper objectMapper;
-    String path = "src/main/resources/tributos.json";
+    String path = "src/main/resources/json/tributos.json";
     File file;
     List<Tributo> tributos;
 

@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class HechizoService   {
     ObjectMapper objectMapper;
-    String path = "src/main/resources/hechizos.json";
+    String path = "src/main/resources/json/hechizos.json";
     File file;
     List<Hechizo> hechizos;
 

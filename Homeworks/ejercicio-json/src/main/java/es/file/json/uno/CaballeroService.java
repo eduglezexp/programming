@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CaballeroService {
     ObjectMapper objectMapper;
-    String path = "src/main/resources/caballeros.json";
+    String path = "src/main/resources/json/caballeros.json";
     File file;
     List<Caballero> caballeros;
 
