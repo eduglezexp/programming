@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -166,38 +167,108 @@ public class Fecha {
             return -1l;
         }
         return Period.between(fecha1, fecha2).getYears(); 
-        }
-
+    }
+    
+    /**
+     * Metodo que compara dos fechas
+     * @param fecha1 a comparar
+     * @param fecha2 a comparar
+     * @return el numero de dias entre ambas fechas
+     */
     public int compararFechas(LocalDate fecha1, LocalDate fecha2) {
-        return 1000;
+        if (fecha1 == null || fecha2 == null) {
+            return -1;
+        }
+        return fecha1.compareTo(fecha2);
     }
 
+    /**
+     * Metodo que dice si dada una fecha, ese anio es bisiesto o no
+     * @param fecha a comprobar
+     * @return true/false
+     */
     public boolean esBisiesto(LocalDate fecha) {
+        if (fecha == null) {
+            return false;
+        }
         return fecha.isLeapYear();
     }
 
+    /**
+     * Metodo para obtener el dia de la semana
+     * @param fecha a obtener el dia de la semana
+     * @return el dia de la semana
+     */
     public String obtenerDiaSemana(LocalDate fecha) {
-        return null;
+        if (fecha == null) {
+            return null;
+        }
+        return String.valueOf(fecha.getDayOfWeek());
     }
 
+    /**
+     * Metodo para obtener el dia de la anio
+     * @param fecha a obtener el dia de la anio
+     * @return el dia de la sanio
+     */
     public int obtenerDiaDelAnio(LocalDate fecha) {
-        return -1;
+        if (fecha == null) {
+            return -1;
+        }
+        return fecha.getDayOfYear();
     }
 
+    /**
+     * Metodo para obtener el primer dia del mes
+     * @param fecha a obtener el primer dia del mes
+     * @return primer dia del mes
+     */
     public LocalDate obtenerPrimerDiaMes(LocalDate fecha) {
-        return null;
+        if (fecha == null) {
+            return null;
+        }
+        return fecha.withDayOfMonth(1);
     }
 
+    /**
+     * Metodo para obtener el ultimo dia del mes
+     * @param fecha a obtener el ultimo dia del mes
+     * @return ultimo dia del mes
+     */
     public LocalDate obtenerUltimoDiaMes(LocalDate fecha) {
-        return null;
+        if (fecha == null) {
+            return null;
+        }
+        return fecha.withDayOfMonth(fecha.lengthOfMonth());
     }
 
+    /**
+     * Metodo para convertir una fecha a la zona horaria dada
+     * @param fechaHora a comvertir a otra zona 
+     * @param zona horaria a convertir
+     * @return fecha convertida a la nueva fecha horaria
+     */
     public ZonedDateTime convertirZonaHoraria(LocalDateTime fechaHora, String zona) {
-        return null;
+        if (fechaHora == null) {
+            return null;
+        }
+        if (zona == null || zona.isEmpty()) {
+            return null;
+        }
+        ZoneId zoneId = ZoneId.of(zona);
+        return fechaHora.atZone(zoneId);
     }
 
-
+    /**
+     * Metodo para calcular la diferencia en horas y minutos
+     * @param inicio de la duracion 
+     * @param fin de la duracion 
+     * @return la diferencia en horas y minutos
+     */
     public Duration calcularDiferenciaHorasMinutos(LocalDateTime inicio, LocalDateTime fin) {
-        return null;
+        if (inicio == null || fin == null) {
+            return null;
+        }
+        return Duration.between(inicio, fin);
     }
 }
