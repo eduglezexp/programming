@@ -19,7 +19,7 @@ import org.w3c.dom.NodeList;
  * @version 1.0.0
  */
 public class FileXmlCriatura {
-    private static List<Criatura> criaturas;
+    public static List<Criatura> criaturas;
     private static final String PATH = "src/main/resources/uno.xml";
 
     /**

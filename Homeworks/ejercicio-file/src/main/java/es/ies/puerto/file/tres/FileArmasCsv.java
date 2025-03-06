@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class FileArmasCsv {
     private static final String PATH = "src/main/resources/tres.csv";
-    private List<Arma> armas;
+    public List<Arma> armas;
 
     /**
      * Constructor por defecto
