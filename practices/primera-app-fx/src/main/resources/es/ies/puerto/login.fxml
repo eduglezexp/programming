@@ -17,4 +17,5 @@
    <PasswordField fx:id="textFieldPassword" />
     <Button alignment="TOP_CENTER" onAction="#onLoginButtonClick" prefHeight="26.0" prefWidth="163.0" text="Aceptar" textAlignment="CENTER" />
    <Text fx:id="textFieldMensaje" strokeType="OUTSIDE" strokeWidth="0.0" text="Soy el texto inical" />
+   <Button fx:id="openRegistrarButton" mnemonicParsing="false" onAction="#openRegistrarClick" text="Open Registrar" />
 </VBox>

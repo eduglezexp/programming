@@ -1,10 +1,16 @@
 package es.ies.puerto.controller;
 
+import java.io.IOException;
+
+import es.ies.puerto.PrincipalApplication;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class LoginController {
     
@@ -21,6 +27,10 @@ public class LoginController {
     private Text textFieldMensaje;
 
     @FXML
+    protected Button openRegistrarButton;
+
+
+    @FXML
     protected void onLoginButtonClick() {
 
         if (textFieldUsuario== null || textFieldUsuario.getText().isEmpty() || 
@@ -35,5 +45,15 @@ public class LoginController {
         } 
 
         textFieldMensaje.setText("Usuario validado correctamente");
+    }
+
+    @FXML
+    protected void openRegistrarClick() throws IOException {
+        Stage stage = (Stage) openRegistrarButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("registro.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 620, 440);
+        stage.setTitle("Pantalla Registro");
+        stage.setScene(scene);
+        stage.show();
     }
 }
