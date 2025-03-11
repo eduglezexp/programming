@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="300.0" spacing="20.0" style="-fx-background-color: light-blue;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.LoginController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+   <Button fx:id="openRegistrarButton" alignment="CENTER" contentDisplay="TOP" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#openRegistrarClick" prefHeight="25.0" prefWidth="115.0" text="Registrar" textAlignment="CENTER" translateX="80.0" translateY="-5.0" />
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
+   <TextField fx:id="textFieldUsuario" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Usuario" />
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+   <PasswordField fx:id="textFieldPassword" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Password" />
+    <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" onAction="#onLoginButtonClick" prefHeight="32.0" prefWidth="110.0" text="Aceptar" textAlignment="CENTER" />
+   <Button fx:id="buttonRecuperarContrasenia" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openRecuperarContraseniaClick" prefHeight="32.0" prefWidth="140.0" text="Recuperar Contraseña" />
+   <Text fx:id="textFieldMensaje" strokeType="OUTSIDE" strokeWidth="0.0" />
+</VBox>
