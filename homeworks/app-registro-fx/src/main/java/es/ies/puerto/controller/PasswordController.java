@@ -18,6 +18,10 @@ public class PasswordController extends ControllerAbstract{
 
     @FXML
     protected void onPasswordButtonClick() {
+        if (textFieldEmail == null ||  textFieldEmail.getText().isEmpty()) {
+            textMensaje.setText("¡El email no puede ser nulo o vacio!");
+            return;
+        }
         mostrarPantalla(buttonAceptar, "login.fxml", "Pantalla Principal");
     }
 }

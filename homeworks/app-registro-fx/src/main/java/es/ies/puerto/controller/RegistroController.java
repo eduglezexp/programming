@@ -1,5 +1,7 @@
 package es.ies.puerto.controller;
 
+import es.ies.puerto.model.entities.Usuario;
+import es.ies.puerto.model.services.UsuarioServiceJson;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -7,7 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 public class RegistroController extends ControllerAbstract{
+
+    UsuarioServiceJson usuarioServiceJson;
     
+    public RegistroController() {
+        usuarioServiceJson = new UsuarioServiceJson();
+    }
+
     @FXML 
     private TextField textFiledUsuario;
 
@@ -24,7 +32,7 @@ public class RegistroController extends ControllerAbstract{
     private TextField textFieldEmail;
 
     @FXML 
-    private TextField textFieldRepit;
+    private TextField textFieldEmailRepit;
 
     @FXML 
     private Text textMensaje;
@@ -39,12 +47,18 @@ public class RegistroController extends ControllerAbstract{
             textMensaje.setText("¡El password no puede ser nulo o vacio!");
             return;
         }
-
-        if (textFieldPassword.getText().equals(textFieldPasswordRepit.getText())) {
-            textMensaje.setText("¡El password es correcto");
+        if (textFieldEmail == null ||  textFieldEmail.getText().isEmpty() 
+            || textFieldEmailRepit == null || textFieldEmailRepit.getText().isEmpty()) {
+            textMensaje.setText("¡El email no puede ser nulo o vacio!");
+            return;
         }
-
-        textMensaje.setText("Valores no validos");
-        mostrarPantalla(buttonRegistrar, "profile.fxml", "Pantalla Profile");
+        boolean equalPassword = textFieldPassword.getText().equals(textFieldPasswordRepit.getText());
+        boolean equalEmail = textFieldEmail.getText().equals(textFieldEmailRepit.getText());
+        if (equalPassword && equalEmail) {
+            Usuario usuario = new Usuario(textFiledUsuario, textFieldPassword, textFieldNombre, textFieldEmail);
+            usuarioServiceJson.add(usuario);
+            mostrarPantalla(buttonRegistrar, "profile.fxml", "Pantalla Profile");
+        }
+        textMensaje.setText("¡Los valores del password o correo no coinciden!");
     }
 }

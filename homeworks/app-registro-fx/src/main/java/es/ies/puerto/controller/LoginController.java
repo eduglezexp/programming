@@ -30,10 +30,9 @@ public class LoginController extends ControllerAbstract{
     protected void onLoginButtonClick() {
         if (textFieldUsuario== null || textFieldUsuario.getText().isEmpty() || 
             textFieldPassword == null || textFieldPassword.getText().isEmpty() ) {
-                textFieldMensaje.setText("Credenciales null o vacias");
-                return;
+            textFieldMensaje.setText("Credenciales null o vacias");
+            return;
         }
-
         if (!textFieldUsuario.getText().equals(usuario) || !textFieldPassword.getText().equals(password)) {
             textFieldMensaje.setText("Credenciales invalidas");
             return;
@@ -49,6 +48,6 @@ public class LoginController extends ControllerAbstract{
 
     @FXML
     protected void openRecuperarContraseniaClick() {
-        mostrarPantalla(openRegistrarButton, "password.fxml", "Pantalla Recuperar Contraseña");
+        mostrarPantalla(buttonRecuperarContrasenia, "password.fxml", "Pantalla Recuperar Contraseña");
     }
 }
