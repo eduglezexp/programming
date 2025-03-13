@@ -19,6 +19,7 @@
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <controlsfx.version>11.2.0</controlsfx.version>
         <jackson.version>2.15.0</jackson.version>
+        <jbcrypt.version>0.4</jbcrypt.version>
     </properties>
 
     <dependencies>
@@ -59,6 +60,13 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- BCrypt para seguridad de contrsenias -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>${jbcrypt.version}</version>
         </dependency>
     </dependencies>
 

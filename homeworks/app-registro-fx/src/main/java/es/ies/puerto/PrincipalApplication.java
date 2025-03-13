@@ -7,11 +7,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
 public class PrincipalApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        String css = this.getClass().getResource("css/login.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("Pantalla Princial");
         stage.setResizable(false);
         stage.setScene(scene);

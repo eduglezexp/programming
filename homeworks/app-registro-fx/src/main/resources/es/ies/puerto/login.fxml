@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="300.0" spacing="20.0" style="-fx-background-color: light-blue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.LoginController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="300.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.LoginController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -16,7 +16,7 @@
    <TextField fx:id="textFieldUsuario" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Usuario" />
    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
    <PasswordField fx:id="textFieldPassword" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Password" />
-    <Button alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" onAction="#onLoginButtonClick" prefHeight="32.0" prefWidth="110.0" text="Aceptar" textAlignment="CENTER" />
+    <Button fx:id="openAceptarButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" onAction="#onLoginButtonClick" prefHeight="32.0" prefWidth="110.0" text="Aceptar" textAlignment="CENTER" />
    <Button fx:id="buttonRecuperarContrasenia" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openRecuperarContraseniaClick" prefHeight="34.0" prefWidth="167.0" text="Recuperar Contraseña" />
    <Text fx:id="textFieldMensaje" strokeType="OUTSIDE" strokeWidth="0.0" />
 </VBox>

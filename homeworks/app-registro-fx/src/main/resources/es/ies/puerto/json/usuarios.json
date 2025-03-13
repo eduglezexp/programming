@@ -1,0 +1,56 @@
+[
+    {
+        "usuario": "fefw",
+        "password": "1234",
+        "nombre": "e12e12e312",
+        "email": "e12e21e"
+    },
+    {
+        "usuario": "HelloWorld",
+        "password": "$2a$10$g8EzSwJY8HHOK4aCYtgGCu.KWv59gzBwvvHE5SP5979qNl/5KEM0a",
+        "nombre": "World",
+        "email": "1234@gmail"
+    },
+    {
+        "usuario": "gefef",
+        "password": "1234",
+        "nombre": "fgerfww",
+        "email": "123"
+    },
+    {
+        "usuario": "Pablo",
+        "password": "123",
+        "nombre": "hola",
+        "email": "123"
+    },
+    {
+        "usuario": "fef",
+        "password": "$2a$10$ci0M/NFcKVflju/rfFkgk.7vPBS1E8qpOvT9aPrmgWKFkkrvb62NC",
+        "nombre": "fef",
+        "email": "fefewf@fewfewf.com"
+    },
+    {
+        "usuario": "Paco",
+        "password": "$2a$10$FZqnmhevSM8IWKrp7fsfleQaxRMii9MsK4fDNr/5.tO6.rD/qClAG",
+        "nombre": "fewf",
+        "email": "1234"
+    },
+    {
+        "usuario": "Bayderex",
+        "password": "bayderex123",
+        "nombre": "Manolo",
+        "email": "manolobuenaonda123"
+    },
+    {
+        "usuario": "Pedro",
+        "password": "$2a$10$HLbY6C4E0Icinwh/MRPsT.NsqtT/JRxLWo7UYkYzNY1IdpuunHWKq",
+        "nombre": "fwfwefw",
+        "email": "123"
+    },
+    {
+        "usuario": "fgfgerge",
+        "password": "1234",
+        "nombre": "fewfwe",
+        "email": "123"
+    }
+]

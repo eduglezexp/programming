@@ -2,85 +2,109 @@ package es.ies.puerto.model.entities;
 
 import java.util.Objects;
 
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Usuario {
 
-    private TextField textFiledUsuario;
+    private String usuario;
+    private String password;
+    private String nombre;
+    private String email;
 
-    private PasswordField textFieldPassword;
-
-    private TextField textFieldNombre;
- 
-    private TextField textFieldEmail;
-
+    /**
+     * Constructor por defecto
+     */
     public Usuario() {
     }
 
-    public Usuario(TextField textFiledUsuario) {
-        this.textFiledUsuario = textFiledUsuario;
+    /**
+     * Constructor con la propiedad usuario
+     * @param usuario identificador de la clase Usuario
+     */
+    public Usuario(@JsonProperty("usuario") String usuario) {
+        this.usuario = usuario;
     }
 
-    public Usuario(TextField textFiledUsuario, PasswordField textFieldPassword,
-        TextField textFieldNombre, TextField textFieldEmail) {
-        this.textFiledUsuario = textFiledUsuario;
-        this.textFieldPassword = textFieldPassword;
-        this.textFieldNombre = textFieldNombre;
-        this.textFieldEmail = textFieldEmail;
+    /**
+     * Constructor con todas las propiedades
+     * @param usuario nick del usuario
+     * @param password del usuario
+     * @param nombre del usuario
+     * @param email del usuario
+     */
+    @JsonCreator
+    public Usuario(@JsonProperty("usuario") String usuario, 
+                   @JsonProperty("password") String password, 
+                   @JsonProperty("nombre") String nombre, 
+                   @JsonProperty("email") String email) {
+        this.usuario = usuario;
+        this.password = password;
+        this.nombre = nombre;
+        this.email = email;
     }
 
-    public TextField getTextFiledUsuario() {
-        return textFiledUsuario;
+    /**
+     * Getters and Setters
+     */
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setTextFiledUsuario(TextField textFiledUsuario) {
-        this.textFiledUsuario = textFiledUsuario;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public PasswordField getTextFieldPassword() {
-        return textFieldPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setTextFieldPassword(PasswordField textFieldPassword) {
-        this.textFieldPassword = textFieldPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public TextField getTextFieldNombre() {
-        return textFieldNombre;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTextFieldNombre(TextField textFieldNombre) {
-        this.textFieldNombre = textFieldNombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public TextField getTextFieldEmail() {
-        return textFieldEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTextFieldEmail(TextField textFieldEmail) {
-        this.textFieldEmail = textFieldEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
-        return textFiledUsuario + "," + textFieldPassword
-                + "," + textFieldNombre + "," + textFieldEmail;
+        return "Usuario{" +
+                "usuario='" + usuario + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Usuario)) {
-            return false;
-        }
-        Usuario usuario = (Usuario) o;
-        return Objects.equals(textFiledUsuario, usuario.textFiledUsuario);
+        if (this == o) return true;
+        if (!(o instanceof Usuario)) return false;
+        Usuario usuario1 = (Usuario) o;
+        return Objects.equals(usuario, usuario1.usuario);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(textFiledUsuario);
+        return Objects.hash(usuario);
     }
 }

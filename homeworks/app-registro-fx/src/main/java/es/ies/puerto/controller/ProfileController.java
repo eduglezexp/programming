@@ -1,27 +1,50 @@
 package es.ies.puerto.controller;
 
+import es.ies.puerto.model.entities.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class ProfileController extends ControllerAbstract{
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
 
-    @FXML 
+public class ProfileController extends ControllerAbstract {
+
+    @FXML
     private TextField textFieldUsuario;
 
-    @FXML 
+    @FXML
     private PasswordField textFieldPassword;
 
-    @FXML 
+    @FXML
     private TextField textFieldNombre;
 
-    @FXML 
+    @FXML
     private TextField textFieldEmail;
 
-    @FXML 
+    @FXML
     private Button buttonVolverAtras;
 
+    /**
+     * Carga los datos del usuario en los campos de la interfaz grafica
+     * @param usuario El objeto Usuario con los datos que se mostraran en pantalla
+     */
+    public void cargarDatosUsuario(Usuario usuario) {
+        if (usuario != null) {
+            textFieldUsuario.setText(usuario.getUsuario());
+            textFieldPassword.setText("******");
+            textFieldNombre.setText(usuario.getNombre());
+            textFieldEmail.setText(usuario.getEmail());
+        }
+    }
+
+    /**
+     * Maneja el evento de clic en el boton de volver atras
+     * Redirige a la pantalla de inicio de sesion (login)
+     */
     @FXML
     protected void onVolverAtrasClick() {
         mostrarPantalla(buttonVolverAtras, "login.fxml", "Pantalla Principal");

@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="415.0" prefWidth="300.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.ProfileController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="415.0" prefWidth="300.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.ProfileController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
-      <TextField fx:id="textFieldUsuario" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="textFieldUsuario" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
       <Text layoutX="140.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-      <PasswordField fx:id="textFieldPassword" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
+      <PasswordField fx:id="textFieldPassword" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
       <Text layoutX="135.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" />
-      <TextField fx:id="textFieldNombre" layoutX="60.0" layoutY="66.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="textFieldNombre" editable="false" layoutX="60.0" layoutY="66.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
       <Text layoutX="138.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-      <TextField fx:id="textFieldEmail" layoutX="60.0" layoutY="230.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="textFieldEmail" editable="false" layoutX="60.0" layoutY="230.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
       <Button fx:id="buttonVolverAtras" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onVolverAtrasClick" prefHeight="32.0" prefWidth="110.0" text="Volver Atrás" />
    </children>
 </VBox>
