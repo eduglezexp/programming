@@ -31,7 +31,7 @@ public class LoginController extends ControllerAbstract{
     private PasswordField textFieldPassword;
 
     @FXML
-    private Text textFieldMensaje;
+    private Text textMensaje;
 
     @FXML
     private Button openRegistrarButton;
@@ -51,17 +51,17 @@ public class LoginController extends ControllerAbstract{
     protected void onLoginButtonClick() {
         if (textFieldUsuario == null || textFieldUsuario.getText().isEmpty() || 
             textFieldPassword == null || textFieldPassword.getText().isEmpty() ) {
-            textFieldMensaje.setText("Credenciales null o vacias");
+            textMensaje.setText("Credenciales nulas o vacias");
             return;
         }
         Usuario usuario = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldUsuario.getText(), Usuario::getUsuario);
         if (usuario == null) {
-            textFieldMensaje.setText("Usuario no encontrado");
+            textMensaje.setText("Usuario no encontrado");
             return;
         }
         boolean passwordCorrecta = usuario.getPassword().equals(textFieldPassword.getText());
         if (!passwordCorrecta) {
-            textFieldMensaje.setText("Contraseña incorrecta");
+            textMensaje.setText("Contraseña incorrecta");
             return;
         }
         mostrarPantalla(openAceptarButton, "profile.fxml", "Pantalla Profile", usuario);

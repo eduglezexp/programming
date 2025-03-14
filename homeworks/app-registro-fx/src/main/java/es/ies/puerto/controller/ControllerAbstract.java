@@ -5,6 +5,7 @@ import es.ies.puerto.model.entities.Usuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -28,6 +29,9 @@ public abstract class ControllerAbstract {
             Stage stage = (Stage) button.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(fxml));
             Scene scene = new Scene(fxmlLoader.load());
+            scene.getStylesheets().add(getClass().getResource("/es/ies/puerto/css/style.css").toExternalForm());
+            Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
+            stage.getIcons().add(icon);
             stage.setTitle(titulo);
             stage.setResizable(false);
             stage.setScene(scene);
@@ -51,9 +55,12 @@ public abstract class ControllerAbstract {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(fxml));
             Scene scene = new Scene(fxmlLoader.load());
+            scene.getStylesheets().add(getClass().getResource("/es/ies/puerto/css/style.css").toExternalForm());
             ProfileController profileController = fxmlLoader.getController();
             profileController.cargarDatosUsuario(usuario);
             Stage stage = (Stage) button.getScene().getWindow();
+            Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
+            stage.getIcons().add(icon);
             stage.setTitle(titulo);
             stage.setResizable(false);
             stage.setScene(scene);

@@ -3,6 +3,7 @@ package es.ies.puerto;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,8 +18,10 @@ public class PrincipalApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        String css = this.getClass().getResource("css/login.css").toExternalForm();
+        String css = this.getClass().getResource("css/style.css").toExternalForm();
         scene.getStylesheets().add(css);
+        Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
+        stage.getIcons().add(icon);
         stage.setTitle("Pantalla Princial");
         stage.setResizable(false);
         stage.setScene(scene);

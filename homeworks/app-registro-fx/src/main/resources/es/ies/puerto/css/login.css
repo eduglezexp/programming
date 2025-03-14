@@ -1,9 +1,0 @@
-.root {
-    -fx-background-color: #2d80c4; /* Color de fondo para elementos con la clase .fxmlLoader */
-}
-
-#textFieldMensaje {
-    -fx-text-fill: red; /* Color del texto para el elemento con ID textFieldMensaje */
-    -fx-font-size: 14px; /* Tamaño de la fuente */
-    -fx-font-weight: bold; /* Negrita */
-}
