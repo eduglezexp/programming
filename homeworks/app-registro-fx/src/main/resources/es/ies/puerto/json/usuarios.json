@@ -1,11 +1,5 @@
 [
     {
-        "usuario": "fefw",
-        "password": "1234",
-        "nombre": "e12e12e312",
-        "email": "e12e21e"
-    },
-    {
         "usuario": "HelloWorld",
         "password": "$2a$10$g8EzSwJY8HHOK4aCYtgGCu.KWv59gzBwvvHE5SP5979qNl/5KEM0a",
         "nombre": "World",
@@ -18,16 +12,10 @@
         "email": "dewd@gmail.com"
     },
     {
-        "usuario": "gefef",
-        "password": "1234",
-        "nombre": "fgerfww",
-        "email": "123"
-    },
-    {
-        "usuario": "Pablo",
-        "password": "123",
-        "nombre": "hola",
-        "email": "123"
+        "usuario": "thtyht",
+        "password": "$2a$10$KDnWmkEtlT6nTUiS3JSGIuXZ71Se2ilhf7ypqv4pDm3Vo2gu47fMC",
+        "nombre": "hrthyh",
+        "email": "123@gmail.com"
     },
     {
         "usuario": "fef",
@@ -42,21 +30,9 @@
         "email": "1234"
     },
     {
-        "usuario": "Bayderex",
-        "password": "bayderex123",
-        "nombre": "Manolo",
-        "email": "manolobuenaonda123"
-    },
-    {
         "usuario": "Pedro",
         "password": "$2a$10$HLbY6C4E0Icinwh/MRPsT.NsqtT/JRxLWo7UYkYzNY1IdpuunHWKq",
         "nombre": "fwfwefw",
-        "email": "123"
-    },
-    {
-        "usuario": "fgfgerge",
-        "password": "1234",
-        "nombre": "fewfwe",
         "email": "123"
     }
 ]

@@ -51,7 +51,7 @@ public class LoginController extends ControllerAbstract{
     protected void onLoginButtonClick() {
         if (textFieldUsuario == null || textFieldUsuario.getText().isEmpty() || 
             textFieldPassword == null || textFieldPassword.getText().isEmpty() ) {
-            textMensaje.setText("Credenciales nulas o vacias");
+            textMensaje.setText("¡Credenciales nulos o vacios!");
             return;
         }
         Usuario usuario = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldUsuario.getText(), Usuario::getUsuario);
