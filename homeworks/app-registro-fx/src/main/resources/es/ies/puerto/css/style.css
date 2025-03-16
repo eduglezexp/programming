@@ -42,9 +42,11 @@ Text {
 }
 
 #textMensaje {
+    -fx-wrapping-width: 250px;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-fill: red;
+    -fx-text-alignment: center;
 }
 
 #openAceptarButton {

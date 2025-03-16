@@ -15,7 +15,7 @@
       <TextField fx:id="textFieldNombre" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Nombre" />
       <TextField fx:id="textFieldEmail" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Email" />
       <TextField fx:id="textFieldEmailRepit" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Repetir Email" />
-      <Text fx:id="textMensaje" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="textMensaje" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="250"/>
       <Button fx:id="buttonRegistrar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onRegistrarButtonClick" prefHeight="32.0" prefWidth="110.0" text="Aceptar" />
    </children>
 </VBox>
