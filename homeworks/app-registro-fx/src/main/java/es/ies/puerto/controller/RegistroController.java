@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.Usuario;
 import es.ies.puerto.model.services.UsuarioServiceJson;
 import javafx.fxml.FXML;
@@ -17,7 +18,7 @@ import javafx.scene.text.Text;
  * @version 1.0.0
  */
 
-public class RegistroController extends ControllerAbstract{
+public class RegistroController extends AbstractController{
 
     UsuarioServiceJson usuarioServiceJson;
     

@@ -10,8 +10,8 @@
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="¡Registrate Ahora!" />
       <TextField fx:id="textFieldUsuario" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Usuario" />
-      <PasswordField fx:id="textFieldPassword" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir password" />
-      <PasswordField fx:id="textFieldPasswordRepit" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Repetir password" />
+      <PasswordField fx:id="textFieldPassword" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir contraseña" />
+      <PasswordField fx:id="textFieldPasswordRepit" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Repetir contraseña" />
       <TextField fx:id="textFieldNombre" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Nombre" />
       <TextField fx:id="textFieldEmail" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Email" />
       <TextField fx:id="textFieldEmailRepit" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Repetir Email" />

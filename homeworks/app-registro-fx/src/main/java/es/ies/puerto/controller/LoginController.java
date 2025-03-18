@@ -1,9 +1,14 @@
 package es.ies.puerto.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.Usuario;
 import es.ies.puerto.model.services.UsuarioServiceJson;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -13,7 +18,7 @@ import javafx.scene.text.Text;
  * @version 1.0.0
  */
 
-public class LoginController extends ControllerAbstract{
+public class LoginController extends AbstractController{
 
     UsuarioServiceJson usuarioServiceJson;
     
@@ -25,6 +30,9 @@ public class LoginController extends ControllerAbstract{
     }
 
     @FXML
+    private ComboBox comboIdioma;
+
+    @FXML
     private TextField textFieldUsuario;
     
     @FXML
@@ -34,6 +42,12 @@ public class LoginController extends ControllerAbstract{
     private Text textMensaje;
 
     @FXML
+    private Text textUsuario;
+
+    @FXML
+    private Text textContrasenia;
+
+    @FXML
     private Button openRegistrarButton;
 
     @FXML
@@ -41,6 +55,25 @@ public class LoginController extends ControllerAbstract{
 
     @FXML
     private Button buttonRecuperarContrasenia;
+
+    @FXML
+    public void initialize() {
+        List<String> idiomas = new ArrayList<>();
+        idiomas.add("es");
+        idiomas.add("en");
+        idiomas.add("fr");
+        comboIdioma.getItems().addAll(idiomas);
+    }
+
+    /**
+     * Metodo para cambiar el idioma
+     */
+    @FXML
+    protected void cambiarIdioma() {
+        setPropertiesIdioma(loadIdioma("idioma", comboIdioma.getValue().toString()));
+        textUsuario.setText(getPropertiesIdioma().getProperty("textUsuario"));
+        textContrasenia.setText(getPropertiesIdioma().getProperty("textContrasenia"));
+    }
 
     /**
      * Maneja el evento de clic en el boton de inicio de sesion

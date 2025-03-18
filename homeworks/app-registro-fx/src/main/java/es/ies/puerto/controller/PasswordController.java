@@ -1,5 +1,6 @@
 package es.ies.puerto.controller;
 
+import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.Usuario;
 import es.ies.puerto.model.services.UsuarioServiceJson;
 import javafx.fxml.FXML;
@@ -12,7 +13,7 @@ import javafx.scene.text.Text;
  * @version 1.0.0
  */
 
-public class PasswordController extends ControllerAbstract{
+public class PasswordController extends AbstractController{
 
     UsuarioServiceJson usuarioServiceJson;
     

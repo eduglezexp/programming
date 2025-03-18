@@ -1,5 +1,6 @@
 package es.ies.puerto.controller;
 
+import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +12,7 @@ import javafx.scene.control.TextField;
  * @version 1.0.0
  */
 
-public class ProfileController extends ControllerAbstract {
+public class ProfileController extends AbstractController {
 
     @FXML
     private TextField textFieldUsuario;

@@ -1,6 +1,13 @@
-package es.ies.puerto.controller;
+package es.ies.puerto.controller.abstractas;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.Properties;
 
 import es.ies.puerto.PrincipalApplication;
+import es.ies.puerto.controller.ProfileController;
+import es.ies.puerto.controller.RegistroController;
 import es.ies.puerto.model.entities.Usuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +20,47 @@ import javafx.stage.Stage;
  * @version 1.0.0
  */
 
-public abstract class ControllerAbstract {
+public abstract class AbstractController {
+
+    private Properties propertiesIdioma;
+
+    /**
+     * Getters and Setters
+     */
+    public Properties getPropertiesIdioma() {
+        return propertiesIdioma;
+    }
+
+    public void setPropertiesIdioma(Properties propertiesIdioma) {
+        this.propertiesIdioma = propertiesIdioma;
+    }
+
+    /**
+     * Metodo para cargar un idioma
+     * @param nombreFichero a leer
+     * @param idioma a cambiar
+     * @return properties
+     */
+    public Properties loadIdioma(String nombreFichero, String idioma) {
+        Properties properties = new Properties();
+        if (nombreFichero == null || idioma == null) {
+            return properties;
+        }
+        String path = "src/main/resources/" + nombreFichero + "-" + idioma + ".properties";
+        File file = new File(path);
+        if (!file.exists() || !file.isFile()) {
+            System.out.println("Path: " +file.getAbsolutePath());
+            return properties;
+        }
+        try {
+            FileInputStream input = new FileInputStream(path);
+            InputStreamReader isr = new InputStreamReader(input, "UTF-8");
+            properties.load(isr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return properties;
+    }
 
     /**
      * Metodo para mostrar una nueva pantalla en la aplicacion
@@ -29,6 +76,8 @@ public abstract class ControllerAbstract {
             Stage stage = (Stage) button.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(fxml));
             Scene scene = new Scene(fxmlLoader.load());
+            RegistroController registroController = fxmlLoader.getController();
+            registroController.setPropertiesIdioma(getPropertiesIdioma());
             scene.getStylesheets().add(getClass().getResource("/es/ies/puerto/css/style.css").toExternalForm());
             Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
             stage.getIcons().add(icon);
