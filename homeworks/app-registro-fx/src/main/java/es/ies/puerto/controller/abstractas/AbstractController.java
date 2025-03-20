@@ -77,7 +77,8 @@ public abstract class AbstractController {
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(fxml));
             Scene scene = new Scene(fxmlLoader.load());
             RegistroController registroController = fxmlLoader.getController();
-            registroController.setPropertiesIdioma(getPropertiesIdioma());
+            //registroController.setPropertiesIdioma(getPropertiesIdioma());
+            //registroController.postConstructor();
             scene.getStylesheets().add(getClass().getResource("/es/ies/puerto/css/style.css").toExternalForm());
             Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
             stage.getIcons().add(icon);

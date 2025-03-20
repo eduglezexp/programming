@@ -3,6 +3,7 @@ package es.ies.puerto.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.Usuario;
 import es.ies.puerto.model.services.UsuarioServiceJson;
@@ -70,9 +71,12 @@ public class LoginController extends AbstractController{
      */
     @FXML
     protected void cambiarIdioma() {
-        setPropertiesIdioma(loadIdioma("idioma", comboIdioma.getValue().toString()));
-        textUsuario.setText(getPropertiesIdioma().getProperty("textUsuario"));
-        textContrasenia.setText(getPropertiesIdioma().getProperty("textContrasenia"));
+        String path = "src/main/resources/idioma-" + comboIdioma.getValue().toString() + ".properties";
+        //setPropertiesIdioma(loadIdioma("idioma", comboIdioma.getValue().toString()));
+        //textUsuario.setText(getPropertiesIdioma().getProperty("textUsuario"));
+        ConfigManager.ConfigProperties.setPath(path);
+        textUsuario.setText(ConfigManager.ConfigProperties.getProperty("textUsuario"));
+        textContrasenia.setText(ConfigManager.ConfigProperties.getProperty("textContrasenia"));
     }
 
     /**

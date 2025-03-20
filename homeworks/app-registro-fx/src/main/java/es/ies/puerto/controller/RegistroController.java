@@ -53,6 +53,16 @@ public class RegistroController extends AbstractController{
     @FXML 
     private Button buttonRegistrar;
 
+    @FXML
+    public void initialize() {
+        
+    }
+
+    public  void  postConstructor() {
+        textFieldUsuario.setPromptText(getPropertiesIdioma().getProperty("textUsuario"));
+        textFieldPassword.setPromptText(getPropertiesIdioma().getProperty("textContrasenia"));
+    }
+
     /**
      * Maneja el evento de clic en el boton de registro
      * Valida los datos ingresados por el usuario y crea un nuevo usuario si son correctos
