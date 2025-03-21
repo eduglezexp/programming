@@ -63,9 +63,6 @@ public abstract class AbstractController {
     @FXML
     private Button buttonVolverAtras;
 
-    @FXML
-    private Text textMensaje;
-
     /**
      * Método para cambiar el idioma
      */
@@ -125,10 +122,6 @@ public abstract class AbstractController {
 
         if (buttonVolverAtras != null) {
             buttonVolverAtras.setText(ConfigManager.ConfigProperties.getProperty("buttonVolverAtras"));
-        }
-
-        if (textMensaje != null) {
-            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("textMensaje"));
         }
     }
 
