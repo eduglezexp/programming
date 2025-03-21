@@ -25,13 +25,21 @@ public class PasswordController extends AbstractController{
     }
 
     @FXML 
+    private Text textEmail;
+
+    @FXML 
     private TextField textFieldEmail;
 
     @FXML 
-    private Button buttonAceptar;
+    private Button openAceptarButton;
 
     @FXML 
     private Text textMensaje;
+
+    @FXML
+    public void initialize() {
+        cambiarIdioma();
+    }
 
     /**
      * Metodo que maneja el evento de clic en el boton de recuperacon de contrasenia

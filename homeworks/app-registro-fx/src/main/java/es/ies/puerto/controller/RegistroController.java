@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.Usuario;
 import es.ies.puerto.model.services.UsuarioServiceJson;
@@ -29,6 +30,9 @@ public class RegistroController extends AbstractController{
         usuarioServiceJson = new UsuarioServiceJson();
     }
 
+    @FXML
+    public Text textRegistroTitulo;
+
     @FXML 
     private TextField textFieldUsuario;
 
@@ -51,17 +55,23 @@ public class RegistroController extends AbstractController{
     private Text textMensaje;
 
     @FXML 
-    private Button buttonRegistrar;
+    private Button openRegistrarButton;
 
     @FXML
     public void initialize() {
-        
+        cambiarIdioma();
     }
 
-    public  void  postConstructor() {
-        textFieldUsuario.setPromptText(getPropertiesIdioma().getProperty("textUsuario"));
-        textFieldPassword.setPromptText(getPropertiesIdioma().getProperty("textContrasenia"));
+    @Override
+    @FXML
+    protected void cambiarIdioma() {
+        super.cambiarIdioma();
+        textFieldPasswordRepit.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldPasswordRepit"));
+        textFieldEmail.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldEmail"));
+        textFieldNombre.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldNombre"));
+        textFieldEmailRepit.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldEmailRepit"));
     }
+
 
     /**
      * Maneja el evento de clic en el boton de registro
@@ -109,7 +119,8 @@ public class RegistroController extends AbstractController{
                 textMensaje.setText("¡El usuario ya existe!");
                 return;
             }
-            mostrarPantalla(buttonRegistrar, "profile.fxml", "Pantalla Profile", usuario);
+            String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profile.title");
+            mostrarPantalla(openRegistrarButton, "profile.fxml", tituloPantalla, usuario);
             return;
         }
         textMensaje.setText("¡Los valores del password o correo no coinciden!");

@@ -1,5 +1,6 @@
 package es.ies.puerto.controller;
 
+import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.Usuario;
 import javafx.fxml.FXML;
@@ -29,6 +30,11 @@ public class ProfileController extends AbstractController {
     @FXML
     private Button buttonVolverAtras;
 
+    @FXML
+    public void initialize() {
+        cambiarIdioma();
+    }
+
     /**
      * Carga los datos del usuario en los campos de la interfaz grafica
      * @param usuario El objeto Usuario con los datos que se mostraran en pantalla
@@ -48,6 +54,7 @@ public class ProfileController extends AbstractController {
      */
     @FXML
     protected void onVolverAtrasClick() {
-        mostrarPantalla(buttonVolverAtras, "login.fxml", "Pantalla Principal");
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("login.title");
+        mostrarPantalla(buttonVolverAtras, "login.fxml", tituloPantalla);
     }
 }

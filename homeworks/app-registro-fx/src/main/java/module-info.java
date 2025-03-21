@@ -9,10 +9,12 @@ module es.ies.puerto {
     requires jbcrypt;
 
     opens es.ies.puerto to javafx.fxml;
-    exports es.ies.puerto;
-    exports es.ies.puerto.controller;
     opens es.ies.puerto.controller to javafx.fxml;
+    opens es.ies.puerto.controller.abstractas to javafx.fxml; 
 
     opens es.ies.puerto.model.entities to com.fasterxml.jackson.databind, 
     org.junit.platform.commons, org.mockito;
+
+    exports es.ies.puerto;
+    exports es.ies.puerto.controller;
 }

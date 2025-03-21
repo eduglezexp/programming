@@ -12,6 +12,24 @@
         "email": "dewd@gmail.com"
     },
     {
+        "usuario": "Pa",
+        "password": "$2a$10$NRlkWR3HR7WflDsxfe6jl.iUNaRWaYCOyiYPDJl0aO6K2sGCw1CM6",
+        "nombre": "pa",
+        "email": "123@gmail.com"
+    },
+    {
+        "usuario": "pe",
+        "password": "$2a$10$hfLL3Cf.Al7pgp6.GIhQn.mb5vXf9zJal274W2iszMbU/Xigny70C",
+        "nombre": "pe",
+        "email": "123@gmail.com"
+    },
+    {
+        "usuario": "313",
+        "password": "$2a$10$KQ.RrbM4ei86Z/EjOsB0t.bR18PYmIQCaadmjSSXNgTTfRu2Nnz0O",
+        "nombre": "3123",
+        "email": "erwr@gmail.com"
+    },
+    {
         "usuario": "thtyht",
         "password": "$2a$10$KDnWmkEtlT6nTUiS3JSGIuXZ71Se2ilhf7ypqv4pDm3Vo2gu47fMC",
         "nombre": "hrthyh",
@@ -24,15 +42,9 @@
         "email": "fefewf@fewfewf.com"
     },
     {
-        "usuario": "Paco",
-        "password": "$2a$10$FZqnmhevSM8IWKrp7fsfleQaxRMii9MsK4fDNr/5.tO6.rD/qClAG",
-        "nombre": "fewf",
-        "email": "1234"
-    },
-    {
-        "usuario": "Pedro",
-        "password": "$2a$10$HLbY6C4E0Icinwh/MRPsT.NsqtT/JRxLWo7UYkYzNY1IdpuunHWKq",
-        "nombre": "fwfwefw",
-        "email": "123"
+        "usuario": "pi",
+        "password": "$2a$10$8tLrBa/U4l.HpNnoW6rlmOibISTzUyUy9crqeCbH82l0s.K20/nWu",
+        "nombre": "pi",
+        "email": "123@gmail.com"
     }
 ]

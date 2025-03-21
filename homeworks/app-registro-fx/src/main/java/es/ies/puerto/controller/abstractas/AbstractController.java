@@ -1,18 +1,17 @@
 package es.ies.puerto.controller.abstractas;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.Properties;
-
 import es.ies.puerto.PrincipalApplication;
+import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.ProfileController;
-import es.ies.puerto.controller.RegistroController;
 import es.ies.puerto.model.entities.Usuario;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -22,44 +21,115 @@ import javafx.stage.Stage;
 
 public abstract class AbstractController {
 
-    private Properties propertiesIdioma;
+    @FXML
+    public Text textUsuario;
+
+    @FXML
+    public Text textContrasenia;
+
+    @FXML 
+    private Text textEmail;
+
+    @FXML
+    private TextField textFieldUsuario;
+    
+    @FXML
+    private PasswordField textFieldPassword;
+
+    @FXML
+    private Button openAceptarButton;
+
+    @FXML
+    private Button openRegistrarButton;
+
+    @FXML
+    private Button buttonRecuperarContrasenia;
+
+    @FXML
+    private Text textRegistroTitulo;
+
+    @FXML
+    private TextField textFieldNombre;
+
+    @FXML
+    private TextField textFieldEmail;
+
+    @FXML
+    private TextField textFieldEmailRepit;
+
+    @FXML
+    private PasswordField textFieldPasswordRepit;
+
+    @FXML
+    private Button buttonVolverAtras;
+
+    @FXML
+    private Text textMensaje;
 
     /**
-     * Getters and Setters
+     * Método para cambiar el idioma
      */
-    public Properties getPropertiesIdioma() {
-        return propertiesIdioma;
-    }
+    @FXML
+    protected void cambiarIdioma() {
+        if (textUsuario != null) {
+            textUsuario.setText(ConfigManager.ConfigProperties.getProperty("textUsuario"));
+        }
 
-    public void setPropertiesIdioma(Properties propertiesIdioma) {
-        this.propertiesIdioma = propertiesIdioma;
-    }
+        if (textContrasenia != null) {
+            textContrasenia.setText(ConfigManager.ConfigProperties.getProperty("textContrasenia"));
+        }
 
-    /**
-     * Metodo para cargar un idioma
-     * @param nombreFichero a leer
-     * @param idioma a cambiar
-     * @return properties
-     */
-    public Properties loadIdioma(String nombreFichero, String idioma) {
-        Properties properties = new Properties();
-        if (nombreFichero == null || idioma == null) {
-            return properties;
+        if (textEmail != null) {
+            textEmail.setText(ConfigManager.ConfigProperties.getProperty("textEmail"));
         }
-        String path = "src/main/resources/" + nombreFichero + "-" + idioma + ".properties";
-        File file = new File(path);
-        if (!file.exists() || !file.isFile()) {
-            System.out.println("Path: " +file.getAbsolutePath());
-            return properties;
+
+        if (textFieldUsuario != null) {
+            textFieldUsuario.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldUsuario"));
         }
-        try {
-            FileInputStream input = new FileInputStream(path);
-            InputStreamReader isr = new InputStreamReader(input, "UTF-8");
-            properties.load(isr);
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        if (textFieldPassword != null) {
+            textFieldPassword.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldPassword"));
         }
-        return properties;
+
+        if (openAceptarButton != null) {
+            openAceptarButton.setText(ConfigManager.ConfigProperties.getProperty("openAceptarButton"));
+        }
+
+        if (openRegistrarButton != null) {
+            openRegistrarButton.setText(ConfigManager.ConfigProperties.getProperty("openRegistrarButton"));
+        }
+
+        if (buttonRecuperarContrasenia != null) {
+            buttonRecuperarContrasenia.setText(ConfigManager.ConfigProperties.getProperty("buttonRecuperarContrasenia"));
+        }
+
+        if (textRegistroTitulo != null) {
+            textRegistroTitulo.setText(ConfigManager.ConfigProperties.getProperty("textRegistroTitulo"));
+        }
+
+        if (textFieldNombre != null) {
+            textFieldNombre.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldNombre"));
+        }
+
+        if (textFieldEmail != null) {
+            textFieldEmail.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldEmail"));
+        }
+
+        if (textFieldEmailRepit != null) {
+            textFieldEmailRepit.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldEmailRepit"));
+        }
+
+        if (textFieldPasswordRepit != null) {
+            textFieldPasswordRepit.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldPasswordRepit"));
+        }
+
+        if (buttonVolverAtras != null) {
+            buttonVolverAtras.setText(ConfigManager.ConfigProperties.getProperty("buttonVolverAtras"));
+        }
+
+        if (textMensaje != null) {
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("textMensaje"));
+        }
     }
 
     /**
@@ -76,9 +146,6 @@ public abstract class AbstractController {
             Stage stage = (Stage) button.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(fxml));
             Scene scene = new Scene(fxmlLoader.load());
-            RegistroController registroController = fxmlLoader.getController();
-            //registroController.setPropertiesIdioma(getPropertiesIdioma());
-            //registroController.postConstructor();
             scene.getStylesheets().add(getClass().getResource("/es/ies/puerto/css/style.css").toExternalForm());
             Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
             stage.getIcons().add(icon);

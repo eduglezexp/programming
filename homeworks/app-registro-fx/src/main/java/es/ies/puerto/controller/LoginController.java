@@ -1,7 +1,6 @@
 package es.ies.puerto.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.mindrot.jbcrypt.BCrypt;
 
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
@@ -20,6 +19,9 @@ import javafx.scene.text.Text;
  */
 
 public class LoginController extends AbstractController{
+    
+    private final String pathFichero="src/main/resources/";
+    private final String ficheroStr= "idioma-";
 
     UsuarioServiceJson usuarioServiceJson;
     
@@ -59,24 +61,26 @@ public class LoginController extends AbstractController{
 
     @FXML
     public void initialize() {
-        List<String> idiomas = new ArrayList<>();
-        idiomas.add("es");
-        idiomas.add("en");
-        idiomas.add("fr");
-        comboIdioma.getItems().addAll(idiomas);
+        comboIdioma.getItems().add("es");
+        comboIdioma.getItems().add("en");
+        comboIdioma.getItems().add("fr");
+        String idioma = ConfigManager.ConfigProperties.getIdiomaActual();
+        comboIdioma.setValue(idioma);
+        cargarIdioma(idioma);
+        cambiarIdioma();
     }
 
-    /**
-     * Metodo para cambiar el idioma
-     */
     @FXML
-    protected void cambiarIdioma() {
-        String path = "src/main/resources/idioma-" + comboIdioma.getValue().toString() + ".properties";
-        //setPropertiesIdioma(loadIdioma("idioma", comboIdioma.getValue().toString()));
-        //textUsuario.setText(getPropertiesIdioma().getProperty("textUsuario"));
+    protected void seleccionarIdiomaClick() {
+        String idioma = comboIdioma.getValue().toString();
+        ConfigManager.ConfigProperties.setIdiomaActual(idioma);
+        cargarIdioma(idioma);
+        cambiarIdioma();
+    }
+
+    private void cargarIdioma(String idioma) {
+        String path = pathFichero+ficheroStr+idioma+".properties";
         ConfigManager.ConfigProperties.setPath(path);
-        textUsuario.setText(ConfigManager.ConfigProperties.getProperty("textUsuario"));
-        textContrasenia.setText(ConfigManager.ConfigProperties.getProperty("textContrasenia"));
     }
 
     /**
@@ -96,12 +100,13 @@ public class LoginController extends AbstractController{
             textMensaje.setText("Usuario no encontrado");
             return;
         }
-        boolean passwordCorrecta = usuario.getPassword().equals(textFieldPassword.getText());
+        boolean passwordCorrecta = BCrypt.checkpw(textFieldPassword.getText(), usuario.getPassword());
         if (!passwordCorrecta) {
             textMensaje.setText("Contraseña incorrecta");
             return;
         }
-        mostrarPantalla(openAceptarButton, "profile.fxml", "Pantalla Profile", usuario);
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profile.title");
+        mostrarPantalla(openAceptarButton, "profile.fxml", tituloPantalla, usuario);
     }
 
     /**
@@ -110,7 +115,8 @@ public class LoginController extends AbstractController{
      */
     @FXML
     protected void openRegistrarClick() {
-        mostrarPantalla(openRegistrarButton, "registro.fxml", "Pantalla Registro");
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("registro.title");
+        mostrarPantalla(openRegistrarButton, "registro.fxml", tituloPantalla);
     }
 
     /**
@@ -119,6 +125,7 @@ public class LoginController extends AbstractController{
      */
     @FXML
     protected void openRecuperarContraseniaClick() {
-        mostrarPantalla(buttonRecuperarContrasenia, "password.fxml", "Pantalla Recuperar Contraseña");
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("password.title");
+        mostrarPantalla(buttonRecuperarContrasenia, "password.fxml", tituloPantalla);
     }
 }
