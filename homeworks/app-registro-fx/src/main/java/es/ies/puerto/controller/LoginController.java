@@ -60,6 +60,9 @@ public class LoginController extends AbstractController{
     @FXML
     private Button buttonRecuperarContrasenia;
 
+    /**
+     * Metodo de inicializacion de la interfaz
+     */
     @FXML
     public void initialize() {
         comboIdioma.getItems().add("es");
@@ -71,6 +74,13 @@ public class LoginController extends AbstractController{
         cambiarIdioma();
     }
 
+    /**
+     * Maneja el evento de seleccion de idioma en el ComboBox
+     * Actualiza el idioma en la configuracion global
+     * Recarga las propiedades del nuevo idioma
+     * Actualiza todos los textos de la interfaz
+     * Refresca el titulo de la ventana
+     */
     @FXML
     protected void seleccionarIdiomaClick() {
         String idioma = comboIdioma.getValue().toString();
@@ -80,11 +90,18 @@ public class LoginController extends AbstractController{
         actualizarTituloVentana();
     }
 
+    /**
+     * Carga el archivo de propiedades del idioma especificado
+     * @param idioma Codigo del idioma a cargar (ej: "es", "en", "fr")
+     */
     private void cargarIdioma(String idioma) {
         String path = pathFichero+ficheroStr+idioma+".properties";
         ConfigManager.ConfigProperties.setPath(path);
     }
 
+    /**
+     * Actualiza dinamicamente el titulo de la ventana principal
+     */
     public void actualizarTituloVentana() {
         Stage stage = (Stage) textUsuario.getScene().getWindow(); 
         String titulo = ConfigManager.ConfigProperties.getProperty("loginTitle");

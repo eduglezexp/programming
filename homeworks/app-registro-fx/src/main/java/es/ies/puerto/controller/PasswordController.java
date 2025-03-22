@@ -37,6 +37,9 @@ public class PasswordController extends AbstractController{
     @FXML 
     private Text textMensaje;
 
+    /**
+     * Metodo de inicializacion de la interfaz
+     */
     @FXML
     public void initialize() {
         cambiarIdioma();

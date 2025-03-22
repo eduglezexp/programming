@@ -57,6 +57,9 @@ public class RegistroController extends AbstractController{
     @FXML 
     private Button openRegistrarButton;
 
+    /**
+     * Metodo de inicializacion de la interfaz
+     */
     @FXML
     public void initialize() {
         cambiarIdioma();

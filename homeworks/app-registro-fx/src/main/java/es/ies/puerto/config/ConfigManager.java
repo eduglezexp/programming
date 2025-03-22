@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
 public class ConfigManager {
 
     public static class ConfigProperties {

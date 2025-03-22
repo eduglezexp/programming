@@ -30,6 +30,9 @@ public class ProfileController extends AbstractController {
     @FXML
     private Button buttonVolverAtras;
 
+    /**
+     * Metodo de inicializacion de la interfaz
+     */
     @FXML
     public void initialize() {
         cambiarIdioma();
