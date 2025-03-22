@@ -54,7 +54,7 @@ public class ProfileController extends AbstractController {
      */
     @FXML
     protected void onVolverAtrasClick() {
-        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("login.title");
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("loginTitle");
         mostrarPantalla(buttonVolverAtras, "login.fxml", tituloPantalla);
     }
 }

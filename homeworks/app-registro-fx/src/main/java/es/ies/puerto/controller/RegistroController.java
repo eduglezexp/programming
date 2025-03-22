@@ -62,17 +62,6 @@ public class RegistroController extends AbstractController{
         cambiarIdioma();
     }
 
-    @Override
-    @FXML
-    protected void cambiarIdioma() {
-        super.cambiarIdioma();
-        textFieldPasswordRepit.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldPasswordRepit"));
-        textFieldEmail.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldEmail"));
-        textFieldNombre.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldNombre"));
-        textFieldEmailRepit.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldEmailRepit"));
-    }
-
-
     /**
      * Maneja el evento de clic en el boton de registro
      * Valida los datos ingresados por el usuario y crea un nuevo usuario si son correctos
@@ -81,31 +70,31 @@ public class RegistroController extends AbstractController{
     @FXML
     protected void onRegistrarButtonClick() {
         if (textFieldUsuario == null || textFieldUsuario.getText().isEmpty()) {
-            textMensaje.setText("¡El usuario no puede ser nulo o vacio!");
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioVacio"));
             return;
         }
         if (textFieldPassword == null ||  textFieldPassword.getText().isEmpty() 
             || textFieldPasswordRepit == null || textFieldPasswordRepit.getText().isEmpty()) {
-            textMensaje.setText("¡El password no puede ser nulo o vacio!");
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorPasswordVacio"));
             return;
         }
         if (textFieldNombre == null || textFieldNombre.getText().isEmpty()) {
-            textMensaje.setText("¡El nombre no puede ser nulo o vacio!");
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorNombreVacio"));
             return;
         }
         if (textFieldEmail == null ||  textFieldEmail.getText().isEmpty() 
             || textFieldEmailRepit == null || textFieldEmailRepit.getText().isEmpty()) {
-            textMensaje.setText("¡El email no puede ser nulo o vacio!");
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEmailVacio"));
             return;
         }
         if (textFieldPassword.getText().length() < 6) {
-            textMensaje.setText("¡La contraseña debe tener al menos 6 caracteres!");
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorPasswordLongitud"));
             return;
         }
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         Pattern emailPattern = Pattern.compile(emailRegex);
         if (!emailPattern.matcher(textFieldEmail.getText()).matches()) {
-            textMensaje.setText("¡El formato del correo no es válido!");
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEmailFormato"));
             return;
         }
         boolean equalPassword = textFieldPassword.getText().equals(textFieldPasswordRepit.getText());
@@ -116,13 +105,13 @@ public class RegistroController extends AbstractController{
             textFieldNombre.getText(), textFieldEmail.getText());
             boolean insertar = usuarioServiceJson.add(usuario);
             if (insertar == false) {
-                textMensaje.setText("¡El usuario ya existe!");
+                textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioExiste"));
                 return;
             }
-            String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profile.title");
+            String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
             mostrarPantalla(openRegistrarButton, "profile.fxml", tituloPantalla, usuario);
             return;
         }
-        textMensaje.setText("¡Los valores del password o correo no coinciden!");
+        textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEmailOPasswordNoCoincide"));
     }
 }

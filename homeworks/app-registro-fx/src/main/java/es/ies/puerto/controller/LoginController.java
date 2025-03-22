@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * @author eduglezexp
@@ -76,11 +77,18 @@ public class LoginController extends AbstractController{
         ConfigManager.ConfigProperties.setIdiomaActual(idioma);
         cargarIdioma(idioma);
         cambiarIdioma();
+        actualizarTituloVentana();
     }
 
     private void cargarIdioma(String idioma) {
         String path = pathFichero+ficheroStr+idioma+".properties";
         ConfigManager.ConfigProperties.setPath(path);
+    }
+
+    public void actualizarTituloVentana() {
+        Stage stage = (Stage) textUsuario.getScene().getWindow(); 
+        String titulo = ConfigManager.ConfigProperties.getProperty("loginTitle");
+        stage.setTitle(titulo);
     }
 
     /**
@@ -92,20 +100,20 @@ public class LoginController extends AbstractController{
     protected void onLoginButtonClick() {
         if (textFieldUsuario == null || textFieldUsuario.getText().isEmpty() || 
             textFieldPassword == null || textFieldPassword.getText().isEmpty() ) {
-            textMensaje.setText("¡Credenciales nulos o vacios!");
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorCredencialesVacios"));
             return;
         }
         Usuario usuario = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldUsuario.getText(), Usuario::getUsuario);
         if (usuario == null) {
-            textMensaje.setText("Usuario no encontrado");
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioNoEncontrado"));
             return;
         }
         boolean passwordCorrecta = BCrypt.checkpw(textFieldPassword.getText(), usuario.getPassword());
         if (!passwordCorrecta) {
-            textMensaje.setText("Contraseña incorrecta");
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorContraseniaIncorrecta"));
             return;
         }
-        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profile.title");
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
         mostrarPantalla(openAceptarButton, "profile.fxml", tituloPantalla, usuario);
     }
 
@@ -115,7 +123,7 @@ public class LoginController extends AbstractController{
      */
     @FXML
     protected void openRegistrarClick() {
-        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("registro.title");
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("registroTitle");
         mostrarPantalla(openRegistrarButton, "registro.fxml", tituloPantalla);
     }
 
@@ -125,7 +133,7 @@ public class LoginController extends AbstractController{
      */
     @FXML
     protected void openRecuperarContraseniaClick() {
-        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("password.title");
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("passwordTitle");
         mostrarPantalla(buttonRecuperarContrasenia, "password.fxml", tituloPantalla);
     }
 }

@@ -1,5 +1,6 @@
 package es.ies.puerto.controller;
 
+import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.Usuario;
 import es.ies.puerto.model.services.UsuarioServiceJson;
@@ -49,14 +50,14 @@ public class PasswordController extends AbstractController{
     @FXML
     protected void onPasswordButtonClick() {
         if (textFieldEmail == null ||  textFieldEmail.getText().isEmpty()) {
-            textMensaje.setText("¡El email no puede ser nulo o vacio!");
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEmailVacioNulo"));
             return;
         }
         Usuario email = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldEmail.getText(), Usuario::getEmail);
         if (email == null) {
-            textMensaje.setText("¡No ha sido posible enviar el email!");
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEnviarEmail"));
             return;
         }
-        textMensaje.setText("El email se ha enviado correctamente");
+        textMensaje.setText(ConfigManager.ConfigProperties.getProperty("emailEnvioCorrecto"));
     }
 }
