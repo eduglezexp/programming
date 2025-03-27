@@ -9,32 +9,38 @@ import java.util.ArrayList;
 
 import es.ies.puerto.model.abstractas.Conexion;
 
-public class UsuarioDto extends Conexion{
+public class UsuarioServiceModel extends Conexion{
 
-    public UsuarioDto() {
+    public UsuarioServiceModel() {
 
     }
 
-    public UsuarioDto(String unaRutaArchivoBD) throws SQLException, FileNotFoundException {
+    public UsuarioServiceModel(String unaRutaArchivoBD) throws SQLException, FileNotFoundException {
         super(unaRutaArchivoBD);
     }
 
-    public UsuarioModel obtenerUsuarioPorEmail(String email) throws SQLException{
+    public UsuarioEntity obtenerUsuarioPorEmail(String email) {
         String sql = "SELECT * FROM usuario " + "WHERE email='"+email+"'";
-        ArrayList<UsuarioModel> usuarios = obtenerUsuario(sql);
-        if (usuarios.isEmpty()) {
-            return null;
+        try {
+            ArrayList<UsuarioEntity> usuarios;
+            usuarios = obtenerUsuario(sql);
+            if (usuarios.isEmpty()) {
+                return null;
+            }
+            return  usuarios.get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return  usuarios.get(0);
+        return null;
     }
 
-    public ArrayList<UsuarioModel> obtenerUsuarios() throws SQLException{
+    public ArrayList<UsuarioEntity> obtenerUsuarios() throws SQLException{
         String sql = "SELECT * FROM usuario";
         return obtenerUsuario(sql);
     }
 
-    public ArrayList<UsuarioModel> obtenerUsuario(String sql) throws SQLException{
-        ArrayList<UsuarioModel> usuarios = new ArrayList<UsuarioModel>();
+    public ArrayList<UsuarioEntity> obtenerUsuario(String sql) throws SQLException{
+        ArrayList<UsuarioEntity> usuarios = new ArrayList<UsuarioEntity>();
         try {
             PreparedStatement sentencia = getConnection().prepareStatement(sql);
             ResultSet resultado = sentencia.executeQuery();
@@ -42,7 +48,7 @@ public class UsuarioDto extends Conexion{
                 String nombreStr = resultado.getString("nombre");
                 String contraseniaStr = resultado.getString("contrasenia");
                 String emailStr = resultado.getString("email");
-                UsuarioModel usuarioModel = new UsuarioModel(emailStr, nombreStr, contraseniaStr);
+                UsuarioEntity usuarioModel = new UsuarioEntity(emailStr, nombreStr, contraseniaStr);
                 usuarios.add(usuarioModel);
             }
         } catch (Exception e) {

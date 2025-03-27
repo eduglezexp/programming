@@ -59,9 +59,9 @@ public abstract class Conexion {
      * Funcion que cierra la conexion a la bbdd
      */
     protected void cerrar() throws SQLException{
-        if (connection == null) {
-            return;
-        }  
-        connection.close(); 
+        if (connection != null || !connection.isClosed()) {
+            connection.close(); 
+            connection = null;
+        }
     }
 }

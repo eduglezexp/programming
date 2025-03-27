@@ -10,5 +10,6 @@ module es.ies.puerto {
     exports es.ies.puerto;
     exports es.ies.puerto.controller;
     exports es.ies.puerto.abstractas;
+    exports es.ies.puerto.model;
     opens es.ies.puerto.controller to javafx.fxml;
 }
