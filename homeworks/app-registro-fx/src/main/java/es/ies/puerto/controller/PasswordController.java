@@ -2,7 +2,7 @@ package es.ies.puerto.controller;
 
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
-import es.ies.puerto.model.entities.Usuario;
+import es.ies.puerto.model.entities.UsuarioEntityJson;
 import es.ies.puerto.model.services.UsuarioServiceJson;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -56,7 +56,7 @@ public class PasswordController extends AbstractController{
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEmailVacioNulo"));
             return;
         }
-        Usuario email = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldEmail.getText(), Usuario::getEmail);
+        UsuarioEntityJson email = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldEmail.getText(), UsuarioEntityJson::getEmail);
         if (email == null) {
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEnviarEmail"));
             return;

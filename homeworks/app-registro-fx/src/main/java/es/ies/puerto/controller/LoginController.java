@@ -1,10 +1,8 @@
 package es.ies.puerto.controller;
 
-import org.mindrot.jbcrypt.BCrypt;
-
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
-import es.ies.puerto.model.entities.Usuario;
+import es.ies.puerto.model.entities.UsuarioEntitySqlite;
 import es.ies.puerto.model.services.UsuarioServiceJson;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -120,7 +118,21 @@ public class LoginController extends AbstractController{
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorCredencialesVacios"));
             return;
         }
-        Usuario usuario = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldUsuario.getText(), Usuario::getUsuario);
+
+        UsuarioEntitySqlite usuarioEntitySqlite = getUsuarioServiceSqlite().obtenerUsuarioPorEmail(textFieldUsuario.getText());
+        if (usuarioEntitySqlite == null) {
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioNoEncontrado"));
+            return;
+        }
+        
+        if (!textFieldUsuario.getText().equals(usuarioEntitySqlite.getEmail()) 
+        || !textFieldPassword.getText().equals(usuarioEntitySqlite.getPassword())) {
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorContraseniaIncorrecta"));
+            return;
+        } 
+        
+        /** Json
+        UsuarioEntityJson usuario = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldUsuario.getText(), UsuarioEntityJson::getUsuario);
         if (usuario == null) {
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioNoEncontrado"));
             return;
@@ -130,8 +142,9 @@ public class LoginController extends AbstractController{
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorContraseniaIncorrecta"));
             return;
         }
+        */
         String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
-        mostrarPantalla(openAceptarButton, "profile.fxml", tituloPantalla, usuario);
+        mostrarPantalla(openAceptarButton, "profile.fxml", tituloPantalla, usuarioEntitySqlite);
     }
 
     /**

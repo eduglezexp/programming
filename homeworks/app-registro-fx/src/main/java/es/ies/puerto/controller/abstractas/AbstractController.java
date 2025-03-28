@@ -3,7 +3,8 @@ package es.ies.puerto.controller.abstractas;
 import es.ies.puerto.PrincipalApplication;
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.ProfileController;
-import es.ies.puerto.model.entities.Usuario;
+import es.ies.puerto.model.entities.UsuarioEntitySqlite;
+import es.ies.puerto.model.services.UsuarioServiceSqlite;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +21,25 @@ import javafx.stage.Stage;
  */
 
 public abstract class AbstractController {
+
+    static final String PATH_DB = "src/main/resources/usuarios.db";
+
+    private UsuarioServiceSqlite usuarioServiceSqlite;
+
+    /**
+     * Constructor por defecto
+     */
+    public AbstractController() {
+        try {
+            usuarioServiceSqlite = new UsuarioServiceSqlite(PATH_DB);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public UsuarioServiceSqlite getUsuarioServiceSqlite() {
+        return usuarioServiceSqlite;
+    }
 
     @FXML
     public Text textUsuario;
@@ -157,8 +177,9 @@ public abstract class AbstractController {
      * @param fxml La ruta al archivo FXML que define la interfaz de la nueva pantalla
      * @param titulo El titulo que se asignara a la ventana
      * @param usuario contiene los datos que se cargaran en la nueva pantalla
+     * Nota: Si se va a usar Json, cambiar el UsuarioEntitySqlite por UsuarioEntityJson
      */
-    public void mostrarPantalla(Button button, String fxml, String titulo, Usuario usuario) {
+    public void mostrarPantalla(Button button, String fxml, String titulo, UsuarioEntitySqlite usuario) {
         if (button == null || fxml == null || fxml.isEmpty() || titulo == null || titulo.isEmpty()) {
             return;
         }

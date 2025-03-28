@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Usuario {
+public class UsuarioEntityJson {
 
     private String usuario;
     private String password;
@@ -22,14 +22,14 @@ public class Usuario {
     /**
      * Constructor por defecto
      */
-    public Usuario() {
+    public UsuarioEntityJson() {
     }
 
     /**
      * Constructor con la propiedad usuario
      * @param usuario identificador de la clase Usuario
      */
-    public Usuario(@JsonProperty("usuario") String usuario) {
+    public UsuarioEntityJson(@JsonProperty("usuario") String usuario) {
         this.usuario = usuario;
     }
 
@@ -41,7 +41,7 @@ public class Usuario {
      * @param email del usuario
      */
     @JsonCreator
-    public Usuario(@JsonProperty("usuario") String usuario, 
+    public UsuarioEntityJson(@JsonProperty("usuario") String usuario, 
                    @JsonProperty("password") String password, 
                    @JsonProperty("nombre") String nombre, 
                    @JsonProperty("email") String email) {
@@ -98,8 +98,8 @@ public class Usuario {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Usuario)) return false;
-        Usuario usuario1 = (Usuario) o;
+        if (!(o instanceof UsuarioEntityJson)) return false;
+        UsuarioEntityJson usuario1 = (UsuarioEntityJson) o;
         return Objects.equals(usuario, usuario1.usuario);
     }
 

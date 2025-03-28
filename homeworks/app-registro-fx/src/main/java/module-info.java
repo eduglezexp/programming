@@ -7,6 +7,7 @@ module es.ies.puerto {
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.annotation;
     requires jbcrypt;
+    requires java.sql;
 
     opens es.ies.puerto to javafx.fxml;
     opens es.ies.puerto.controller to javafx.fxml;

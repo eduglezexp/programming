@@ -2,7 +2,7 @@ package es.ies.puerto.controller;
 
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
-import es.ies.puerto.model.entities.Usuario;
+import es.ies.puerto.model.entities.UsuarioEntitySqlite;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -39,10 +39,11 @@ public class ProfileController extends AbstractController {
     }
 
     /**
-     * Carga los datos del usuario en los campos de la interfaz grafica
+     * Carga los datos del usuario en los campos de la interfaz grafica para Json
      * @param usuario El objeto Usuario con los datos que se mostraran en pantalla
+     * Nota: Si se va a usar Json, cambiar el UsuarioEntitySqlite por UsuarioEntityJson
      */
-    public void cargarDatosUsuario(Usuario usuario) {
+    public void cargarDatosUsuario(UsuarioEntitySqlite usuario) {
         if (usuario != null) {
             textFieldUsuario.setText(usuario.getUsuario());
             textFieldPassword.setText("******");

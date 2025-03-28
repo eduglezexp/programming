@@ -8,7 +8,7 @@ import java.util.function.Function;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import es.ies.puerto.model.entities.Usuario;
+import es.ies.puerto.model.entities.UsuarioEntityJson;
 
 /**
  * @author eduglezexp
@@ -19,7 +19,7 @@ public class UsuarioServiceJson {
     ObjectMapper objectMapper;
     String path = "src/main/resources/es/ies/puerto/json/usuarios.json";
     File file;
-    Set<Usuario> usuarios;
+    Set<UsuarioEntityJson> usuarios;
 
     /**
      * Constructor por defecto
@@ -35,14 +35,14 @@ public class UsuarioServiceJson {
      * Metodo que carga todos los usuarios disponibles
      * @return Lista de todos los usuarios cargados
      */
-    public Set<Usuario> loadAll() {
+    public Set<UsuarioEntityJson> loadAll() {
         if (!file.exists()) {
             saveFile(file, usuarios); 
             return usuarios;
         }
         try {
             if (file.length() > 0) {
-                usuarios = objectMapper.readValue(file, new TypeReference<Set<Usuario>>() {});
+                usuarios = objectMapper.readValue(file, new TypeReference<Set<UsuarioEntityJson>>() {});
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,7 +55,7 @@ public class UsuarioServiceJson {
      * @param file del usuario
      * @param usuarios lista de usuarios
      */
-    public void saveFile(File file, Set<Usuario> usuarios) {
+    public void saveFile(File file, Set<UsuarioEntityJson> usuarios) {
         try {
             objectMapper.writeValue(file, usuarios);
         } catch (Exception e) {
@@ -68,7 +68,7 @@ public class UsuarioServiceJson {
      * @param obj caballero a agregar
      * @return true si la operacion fue exitosa, false en caso contrario
      */
-    public boolean add(Usuario obj) {
+    public boolean add(UsuarioEntityJson obj) {
         if (obj == null) {
             return false;
         }
@@ -85,11 +85,11 @@ public class UsuarioServiceJson {
      * @param criterio de lo que se le va a buscar al usuario
      * @return usuario
      */
-    public Usuario buscarUsuarioPorCriterio(String valor, Function<Usuario, String> criterio) {
+    public UsuarioEntityJson buscarUsuarioPorCriterio(String valor, Function<UsuarioEntityJson, String> criterio) {
         if (valor == null || valor.isEmpty()) {
             return null;
         }
-        for (Usuario usuario : usuarios) {
+        for (UsuarioEntityJson usuario : usuarios) {
             if (criterio.apply(usuario).equals(valor)) {
                 return usuario;
             }
