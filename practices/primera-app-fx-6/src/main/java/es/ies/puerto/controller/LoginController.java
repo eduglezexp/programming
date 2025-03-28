@@ -1,8 +1,8 @@
 package es.ies.puerto.controller;
 
 import es.ies.puerto.PrincipalApplication;
-import es.ies.puerto.abstractas.AbstractController;
 import es.ies.puerto.config.ConfigManager;
+import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.UsuarioEntity;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,7 +62,7 @@ public class LoginController extends AbstractController{
     @FXML
     protected void onLoginButtonClick() {
 
-        if (textFieldUsuario== null || textFieldUsuario.getText().isEmpty() || 
+        if (textFieldUsuario == null || textFieldUsuario.getText().isEmpty() || 
             textFieldPassword == null || textFieldPassword.getText().isEmpty() ) {
             textFieldMensaje.setText("Credenciales null o vacias");
             return;

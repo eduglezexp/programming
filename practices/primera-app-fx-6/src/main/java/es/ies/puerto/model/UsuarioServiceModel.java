@@ -1,7 +1,5 @@
 package es.ies.puerto.model;
 
-import java.io.FileNotFoundException;
-import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,23 +13,22 @@ public class UsuarioServiceModel extends Conexion{
 
     }
 
-    public UsuarioServiceModel(String unaRutaArchivoBD) throws SQLException, FileNotFoundException {
+    public UsuarioServiceModel(String unaRutaArchivoBD) throws SQLException {
         super(unaRutaArchivoBD);
     }
 
     public UsuarioEntity obtenerUsuarioPorEmail(String email) {
         String sql = "SELECT * FROM usuario " + "WHERE email='"+email+"'";
         try {
-            ArrayList<UsuarioEntity> usuarios;
-            usuarios = obtenerUsuario(sql);
+            ArrayList<UsuarioEntity> usuarios = obtenerUsuario(sql);
             if (usuarios.isEmpty()) {
                 return null;
             }
-            return  usuarios.get(0);
+            return usuarios.get(0);
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public ArrayList<UsuarioEntity> obtenerUsuarios() throws SQLException{

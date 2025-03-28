@@ -1,4 +1,4 @@
-package es.ies.puerto.abstractas;
+package es.ies.puerto.controller.abstractas;
 
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.model.UsuarioServiceModel;
@@ -15,7 +15,7 @@ public class AbstractController {
         try {
             usuarioServiceModel = new UsuarioServiceModel(PATH_DB);
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
     }
 

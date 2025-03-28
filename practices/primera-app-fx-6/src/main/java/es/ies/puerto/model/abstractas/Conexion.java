@@ -19,9 +19,9 @@ public abstract class Conexion {
      * @throws SQLException error controlado de la bbdd
      * @throws FileNotFoundException error controlado de la ruta
      */
-    public Conexion(String unaRutaArchivoBD) throws SQLException, FileNotFoundException {
+    public Conexion(String unaRutaArchivoBD) throws SQLException {
         if (unaRutaArchivoBD == null || unaRutaArchivoBD.isEmpty()) {
-            throw new FileNotFoundException("El fichero es nulo o vacio");
+            throw new SQLException("El fichero es nulo o vacio");
         }
         File file = new File(unaRutaArchivoBD);
         if (!file.exists()) {

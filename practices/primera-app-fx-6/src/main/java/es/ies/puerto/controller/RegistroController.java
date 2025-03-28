@@ -1,7 +1,6 @@
 package es.ies.puerto.controller;
 
-import es.ies.puerto.abstractas.AbstractController;
-import es.ies.puerto.config.ConfigManager;
+import es.ies.puerto.controller.abstractas.AbstractController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -36,7 +35,7 @@ public class RegistroController extends AbstractController {
     protected void onClickRegistar() {
 
         if (textFieldPassword == null || textFieldPassword.getText().isEmpty()
-                || textFieldPasswordRepit == null || textFieldPasswordRepit.getText().isEmpty()) {
+            || textFieldPasswordRepit == null || textFieldPasswordRepit.getText().isEmpty()) {
             textMensaje.setText("¡El password no puede ser nulo o vacio!");
             return;
         }
