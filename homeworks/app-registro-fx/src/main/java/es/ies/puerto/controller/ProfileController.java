@@ -45,9 +45,9 @@ public class ProfileController extends AbstractController {
      */
     public void cargarDatosUsuario(UsuarioEntitySqlite usuario) {
         if (usuario != null) {
-            textFieldUsuario.setText(usuario.getUsuario());
+            textFieldUsuario.setText(usuario.getUser());
             textFieldPassword.setText("******");
-            textFieldNombre.setText(usuario.getNombre());
+            textFieldNombre.setText(usuario.getName());
             textFieldEmail.setText(usuario.getEmail());
         }
     }

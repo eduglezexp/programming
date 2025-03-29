@@ -23,8 +23,8 @@ public class UsuarioServiceSqlite extends Conexion{
         super(unaRutaArchivoBD);
     }
 
-    public UsuarioEntitySqlite obtenerUsuarioPorEmail(String email) {
-        String sql = "SELECT * FROM usuarios " + "WHERE email='"+email+"'";
+    public UsuarioEntitySqlite obtenerUsuarioPorEmailOUser(String input) {
+        String sql = "SELECT * FROM usuarios " + "WHERE email='"+input+"' OR user='"+input+"'";
         try {
             ArrayList<UsuarioEntitySqlite> usuarios = obtenerUsuario(sql);
             if (usuarios.isEmpty()) {
@@ -49,10 +49,10 @@ public class UsuarioServiceSqlite extends Conexion{
             ResultSet resultado = sentencia.executeQuery();
             while(resultado.next()){
                 String usuarioStr = resultado.getString("user");
-                String contraseniaStr = resultado.getString("password");
-                //String nombreStr = resultado.getString("nombre");
                 String emailStr = resultado.getString("email");
-                UsuarioEntitySqlite usuarioEntityModel = new UsuarioEntitySqlite(usuarioStr, emailStr, contraseniaStr);
+                String nombreStr = resultado.getString("name");
+                String contraseniaStr = resultado.getString("password");
+                UsuarioEntitySqlite usuarioEntityModel = new UsuarioEntitySqlite(usuarioStr, emailStr, nombreStr, contraseniaStr);
                 usuarios.add(usuarioEntityModel);
             }
         } catch (Exception e) {
@@ -65,8 +65,22 @@ public class UsuarioServiceSqlite extends Conexion{
 
     /**
      * Metodo para insertar un usuario
+     * @throws SQLException error controlado
      */
-    public void insertarUsuario() {
-
+    public boolean insertarUsuario(UsuarioEntitySqlite usuario) throws SQLException {
+        String sql = "INSERT INTO usuarios (user, email, name, password) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
+            sentencia.setString(1, usuario.getUser());
+            sentencia.setString(2, usuario.getEmail());
+            sentencia.setString(3, usuario.getName());
+            sentencia.setString(4, usuario.getPassword());
+            sentencia.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrar();
+        }
+        return false;
     }
 }

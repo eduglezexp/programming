@@ -20,8 +20,8 @@
          <Image url="@img/icon.png" />
       </image>
    </ImageView>
-   <Text fx:id="textUsuario" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
-   <TextField fx:id="textFieldUsuario" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Usuario" />
+   <Text fx:id="textUsuarioEmail" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" />
+   <TextField fx:id="textFieldUsuarioEmail" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Usuario" />
    <Text fx:id="textContrasenia" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" />
    <PasswordField fx:id="textFieldPassword" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Introducir Password" />
     <Button fx:id="openAceptarButton" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" onAction="#onLoginButtonClick" prefHeight="32.0" prefWidth="110.0" text="Aceptar" textAlignment="CENTER" />

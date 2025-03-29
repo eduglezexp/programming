@@ -9,8 +9,8 @@ import java.util.Objects;
 
 public class UsuarioEntitySqlite {
 
-    private String usuario;
-    private String nombre;
+    private String user;
+    private String name;
     private String email;
     private String password;
 
@@ -22,50 +22,35 @@ public class UsuarioEntitySqlite {
 
     /**
      * Constructor con la propiedad usuario
-     * @param usuario identificador de la clase Usuario
      * @param email identificador de la clase Usuario
      */
-    public UsuarioEntitySqlite(String nombre, String email) {
-        this.nombre = nombre;
+    public UsuarioEntitySqlite(String email) {
         this.email = email;
     }
 
     /**
      * Constructor con todas las propiedades
      * @param usuario nick del usuario
-     * @param password del usuario
-     * @param nombre del usuario
      * @param email del usuario
-     */
-    public UsuarioEntitySqlite(String usuario, String password, String email) {
-        this.usuario = usuario;
-        this.email = email;
-        this.password = password;
-    }
-
-    /**
-     * Constructor con todas las propiedades
-     * @param usuario nick del usuario
-     * @param password del usuario
      * @param nombre del usuario
-     * @param email del usuario
+     * @param password del usuario
      */
-    public UsuarioEntitySqlite(String usuario, String password, String nombre, String email) {
-        this.usuario = usuario;
-        this.password = password;
-        this.nombre = nombre;
+    public UsuarioEntitySqlite(String usuario, String email, String nombre, String password) {
+        this.user = usuario;
         this.email = email;
+        this.name = nombre;
+        this.password = password;
     }
 
     /**
      * Getters and Setters
      */
-    public String getUsuario() {
-        return usuario;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUser(String usuario) {
+        this.user = usuario;
     }
 
     public String getPassword() {
@@ -76,12 +61,12 @@ public class UsuarioEntitySqlite {
         this.password = password;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String nombre) {
+        this.name = nombre;
     }
 
     public String getEmail() {
@@ -94,10 +79,9 @@ public class UsuarioEntitySqlite {
 
     @Override
     public String toString() {
-        return "UsuarioEntity [usuario=" + usuario + ", password=" + password + ", nombre=" + nombre + ", email="
-                + email + "]";
+        return "UsuarioEntitySqlite [user=" + user + ", name=" + name + ", email=" + email + ", password=" + password
+                + "]";
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -106,12 +90,13 @@ public class UsuarioEntitySqlite {
         if (!(o instanceof UsuarioEntitySqlite)) {
             return false;
         }
-        UsuarioEntitySqlite usuarioEntity = (UsuarioEntitySqlite) o;
-        return Objects.equals(usuario, usuarioEntity.usuario) && Objects.equals(email, usuarioEntity.email);
+        UsuarioEntitySqlite usuarioEntitySqlite = (UsuarioEntitySqlite) o;
+        return Objects.equals(email, usuarioEntitySqlite.email);
     }
+    
 
     @Override
     public int hashCode() {
-        return Objects.hash(usuario, email);
+        return Objects.hash(email);
     }    
 }

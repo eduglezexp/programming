@@ -1,5 +1,7 @@
 package es.ies.puerto.controller;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.UsuarioEntitySqlite;
@@ -35,7 +37,7 @@ public class LoginController extends AbstractController{
     private ComboBox comboIdioma;
 
     @FXML
-    private TextField textFieldUsuario;
+    private TextField textFieldUsuarioEmail;
     
     @FXML
     private PasswordField textFieldPassword;
@@ -44,7 +46,7 @@ public class LoginController extends AbstractController{
     private Text textMensaje;
 
     @FXML
-    private Text textUsuario;
+    private Text textUsuarioEmail;
 
     @FXML
     private Text textContrasenia;
@@ -101,7 +103,7 @@ public class LoginController extends AbstractController{
      * Actualiza dinamicamente el titulo de la ventana principal
      */
     public void actualizarTituloVentana() {
-        Stage stage = (Stage) textUsuario.getScene().getWindow(); 
+        Stage stage = (Stage) textUsuarioEmail.getScene().getWindow(); 
         String titulo = ConfigManager.ConfigProperties.getProperty("loginTitle");
         stage.setTitle(titulo);
     }
@@ -113,24 +115,21 @@ public class LoginController extends AbstractController{
      */
     @FXML
     protected void onLoginButtonClick() {
-        if (textFieldUsuario == null || textFieldUsuario.getText().isEmpty() || 
+        if (textFieldUsuarioEmail == null || textFieldUsuarioEmail.getText().isEmpty() || 
             textFieldPassword == null || textFieldPassword.getText().isEmpty() ) {
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorCredencialesVacios"));
             return;
         }
-
-        UsuarioEntitySqlite usuarioEntitySqlite = getUsuarioServiceSqlite().obtenerUsuarioPorEmail(textFieldUsuario.getText());
-        if (usuarioEntitySqlite == null) {
+        UsuarioEntitySqlite usuario = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textFieldUsuarioEmail.getText());
+        if (usuario == null) { 
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioNoEncontrado"));
             return;
         }
-        
-        if (!textFieldUsuario.getText().equals(usuarioEntitySqlite.getEmail()) 
-        || !textFieldPassword.getText().equals(usuarioEntitySqlite.getPassword())) {
+        boolean passwordCorrecta = BCrypt.checkpw(textFieldPassword.getText(), usuario.getPassword());
+        if (!passwordCorrecta) {
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorContraseniaIncorrecta"));
             return;
-        } 
-        
+        }
         /** Json
         UsuarioEntityJson usuario = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldUsuario.getText(), UsuarioEntityJson::getUsuario);
         if (usuario == null) {
@@ -144,7 +143,7 @@ public class LoginController extends AbstractController{
         }
         */
         String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
-        mostrarPantalla(openAceptarButton, "profile.fxml", tituloPantalla, usuarioEntitySqlite);
+        mostrarPantalla(openAceptarButton, "profile.fxml", tituloPantalla, usuario);
     }
 
     /**

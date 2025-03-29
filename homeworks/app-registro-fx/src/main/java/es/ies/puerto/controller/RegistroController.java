@@ -1,15 +1,14 @@
 package es.ies.puerto.controller;
 
+import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
-import es.ies.puerto.model.entities.UsuarioEntityJson;
 import es.ies.puerto.model.entities.UsuarioEntitySqlite;
 import es.ies.puerto.model.services.UsuarioServiceJson;
-import es.ies.puerto.model.services.UsuarioServiceSqlite;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -106,24 +105,28 @@ public class RegistroController extends AbstractController{
         boolean equalEmail = textFieldEmail.getText().equals(textFieldEmailRepit.getText());
         if (equalPassword && equalEmail) {
             String hashedPassword = BCrypt.hashpw(textFieldPassword.getText(), BCrypt.gensalt());
-
-            UsuarioEntitySqlite usuarioEntitySqlite = new UsuarioEntitySqlite(textFieldUsuario.getText(), hashedPassword, 
-            textFieldNombre.getText(), textFieldEmail.getText());
-            boolean insertar;
-
+            UsuarioEntitySqlite usuario = new UsuarioEntitySqlite(textFieldUsuario.getText(), textFieldEmail.getText(), 
+            textFieldNombre.getText(), hashedPassword);
+            try {
+                boolean insertar = getUsuarioServiceSqlite().insertarUsuario(usuario);
+                if (!insertar) {
+                    textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioExiste"));
+                    return;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             /** Json
             UsuarioEntityJson usuario = new UsuarioEntityJson(textFieldUsuario.getText(), hashedPassword, 
             textFieldNombre.getText(), textFieldEmail.getText());
             boolean insertar = usuarioServiceJson.add(usuario);
-            */
-            /** 
-            if (insertar == false) {
+            if (!insertar) {
                 textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioExiste"));
                 return;
             }
             */
             String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
-            mostrarPantalla(openRegistrarButton, "profile.fxml", tituloPantalla, usuarioEntitySqlite);
+            mostrarPantalla(openRegistrarButton, "profile.fxml", tituloPantalla, usuario);
             return;
         }
         textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEmailOPasswordNoCoincide"));

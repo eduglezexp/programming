@@ -45,6 +45,9 @@ public abstract class AbstractController {
     public Text textUsuario;
 
     @FXML
+    public Text textUsuarioEmail;
+
+    @FXML
     public Text textContrasenia;
 
     @FXML 
@@ -52,6 +55,9 @@ public abstract class AbstractController {
 
     @FXML
     private TextField textFieldUsuario;
+
+    @FXML
+    private TextField textFieldUsuarioEmail;
     
     @FXML
     private PasswordField textFieldPassword;
@@ -92,6 +98,10 @@ public abstract class AbstractController {
             textUsuario.setText(ConfigManager.ConfigProperties.getProperty("textUsuario"));
         }
 
+        if (textUsuarioEmail != null) {
+            textUsuarioEmail.setText(ConfigManager.ConfigProperties.getProperty("textUsuarioEmail"));
+        }
+
         if (textContrasenia != null) {
             textContrasenia.setText(ConfigManager.ConfigProperties.getProperty("textContrasenia"));
         }
@@ -102,6 +112,10 @@ public abstract class AbstractController {
 
         if (textFieldUsuario != null) {
             textFieldUsuario.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldUsuario"));
+        }
+
+        if (textFieldUsuarioEmail != null) {
+            textFieldUsuarioEmail.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldUsuarioEmail"));
         }
 
         if (textFieldPassword != null) {
