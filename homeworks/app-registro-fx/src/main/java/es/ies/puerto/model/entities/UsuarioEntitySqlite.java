@@ -4,11 +4,11 @@ import java.util.Objects;
 
 /**
  * @author eduglezexp
- * @version 1.0.0
+ * @version 1.1.0
  */
-
 public class UsuarioEntitySqlite {
 
+    private int id;  
     private String user;
     private String name;
     private String email;
@@ -21,7 +21,7 @@ public class UsuarioEntitySqlite {
     }
 
     /**
-     * Constructor con la propiedad usuario
+     * Constructor con la propiedad email
      * @param email identificador de la clase Usuario
      */
     public UsuarioEntitySqlite(String email) {
@@ -29,7 +29,7 @@ public class UsuarioEntitySqlite {
     }
 
     /**
-     * Constructor con todas las propiedades
+     * Constructor con casi todas las propiedades menos el id
      * @param usuario nick del usuario
      * @param email del usuario
      * @param nombre del usuario
@@ -43,8 +43,32 @@ public class UsuarioEntitySqlite {
     }
 
     /**
+     * Constructor con todas las propiedades
+     * @param id identificador del usuario
+     * @param usuario nick del usuario
+     * @param email del usuario
+     * @param nombre del usuario
+     * @param password del usuario
+     */
+    public UsuarioEntitySqlite(int id, String usuario, String email, String nombre, String password) {
+        this.id = id;
+        this.user = usuario;
+        this.email = email;
+        this.name = nombre;
+        this.password = password;
+    }
+    
+    /**
      * Getters and Setters
      */
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getUser() {
         return user;
     }
@@ -79,8 +103,7 @@ public class UsuarioEntitySqlite {
 
     @Override
     public String toString() {
-        return "UsuarioEntitySqlite [user=" + user + ", name=" + name + ", email=" + email + ", password=" + password
-                + "]";
+        return "UsuarioEntitySqlite [id=" + id + ", user=" + user + ", name=" + name + ", email=" + email + ", password=" + password + "]";
     }
 
     @Override
@@ -90,13 +113,12 @@ public class UsuarioEntitySqlite {
         if (!(o instanceof UsuarioEntitySqlite)) {
             return false;
         }
-        UsuarioEntitySqlite usuarioEntitySqlite = (UsuarioEntitySqlite) o;
-        return Objects.equals(email, usuarioEntitySqlite.email);
+        UsuarioEntitySqlite other = (UsuarioEntitySqlite) o;
+        return Objects.equals(email, other.email);
     }
-    
 
     @Override
     public int hashCode() {
         return Objects.hash(email);
-    }    
+    }
 }

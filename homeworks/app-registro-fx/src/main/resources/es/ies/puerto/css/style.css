@@ -52,6 +52,10 @@ ComboBox {
     -fx-background-color: #ffcc00;
 }
 
+#colId {
+    -fx-alignment: CENTER;
+}
+
 #textMensaje {
     -fx-wrapping-width: 250px;
     -fx-font-size: 14px;
@@ -61,16 +65,42 @@ ComboBox {
 }
 
 #openAceptarButton {
-    -fx-pref-width: 120px;
+    -fx-pref-width: 140px;
     -fx-pref-height: 40px; 
 }
 
 #openRegistrarButton {
-    -fx-pref-width: 160px;
+    -fx-pref-width: 140px;
+    -fx-pref-height: 40px;
+}
+
+#openListarUsuariosButton {
+    -fx-pref-width: 180px;
     -fx-pref-height: 40px;
 }
 
 #buttonRecuperarContrasenia {
     -fx-pref-width: 200px;
     -fx-pref-height: 40px;
+}
+
+ListView {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #f0a500;
+    -fx-border-width: 2px;
+    -fx-padding: 5px;
+    -fx-background-radius: 10px;
+}
+
+.list-cell {
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-padding: 15px;
+    -fx-border-color: #f0a500;
+    -fx-border-width: 1px;
+    -fx-margin: 10px;
+}
+
+.list-cell:hover {
+    -fx-background-color: #f0a500;
 }

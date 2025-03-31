@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="325.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ies.puerto.controller.UsuariosController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <children>
+        <Text fx:id="textListaUsuario" text="Lista de Usuarios" />
+        <ListView fx:id="listViewUsuarios" prefHeight="500.0" prefWidth="301.0"/>
+        <Button fx:id="buttonVolverAtras" mnemonicParsing="false" onAction="#onVolverAtrasClick" prefHeight="32.0" prefWidth="110.0" text="Volver Atrás" />
+    </children>
+</VBox>

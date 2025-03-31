@@ -6,11 +6,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
 
 public abstract class Conexion {
     private String rutaArchivoBD;
     private Connection connection;
 
+    /**
+     * Constructor por defecto
+     */
     public Conexion() {
     }
 
@@ -31,6 +38,9 @@ public abstract class Conexion {
         rutaArchivoBD = unaRutaArchivoBD;
     }
 
+    /**
+     * Getters and Setters
+     */
     public String getRutaArchivoBD() {
         return rutaArchivoBD;
     }

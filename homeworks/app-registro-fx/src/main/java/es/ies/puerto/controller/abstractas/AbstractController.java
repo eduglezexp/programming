@@ -25,7 +25,7 @@ public abstract class AbstractController {
     static final String PATH_DB = "src/main/resources/usuarios.db";
 
     private UsuarioServiceSqlite usuarioServiceSqlite;
-
+    
     /**
      * Constructor por defecto
      */
@@ -37,6 +37,9 @@ public abstract class AbstractController {
         }
     }
 
+    /**
+     * Getters and Setters
+     */
     public UsuarioServiceSqlite getUsuarioServiceSqlite() {
         return usuarioServiceSqlite;
     }
@@ -69,6 +72,9 @@ public abstract class AbstractController {
     private Button openRegistrarButton;
 
     @FXML
+    private Button openListarUsuariosButton;
+
+    @FXML
     private Button buttonRecuperarContrasenia;
 
     @FXML
@@ -88,6 +94,9 @@ public abstract class AbstractController {
 
     @FXML
     private Button buttonVolverAtras;
+
+    @FXML
+    private Text textListaUsuario;
 
     /**
      * Método para cambiar el idioma
@@ -130,6 +139,10 @@ public abstract class AbstractController {
             openRegistrarButton.setText(ConfigManager.ConfigProperties.getProperty("openRegistrarButton"));
         }
 
+        if (openListarUsuariosButton != null) {
+            openListarUsuariosButton.setText(ConfigManager.ConfigProperties.getProperty("openListarUsuariosButton"));
+        }
+
         if (buttonRecuperarContrasenia != null) {
             buttonRecuperarContrasenia.setText(ConfigManager.ConfigProperties.getProperty("buttonRecuperarContrasenia"));
         }
@@ -156,6 +169,10 @@ public abstract class AbstractController {
 
         if (buttonVolverAtras != null) {
             buttonVolverAtras.setText(ConfigManager.ConfigProperties.getProperty("buttonVolverAtras"));
+        }
+
+        if (textListaUsuario != null) {
+            textListaUsuario.setText(ConfigManager.ConfigProperties.getProperty("textListaUsuario"));
         }
     }
 

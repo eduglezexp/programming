@@ -52,10 +52,13 @@ public class LoginController extends AbstractController{
     private Text textContrasenia;
 
     @FXML
+    private Button openAceptarButton;
+
+    @FXML
     private Button openRegistrarButton;
 
     @FXML
-    private Button openAceptarButton;
+    private Button openListarUsuariosButton;
 
     @FXML
     private Button buttonRecuperarContrasenia;
@@ -125,7 +128,8 @@ public class LoginController extends AbstractController{
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioNoEncontrado"));
             return;
         }
-        boolean passwordCorrecta = BCrypt.checkpw(textFieldPassword.getText(), usuario.getPassword());
+        //boolean passwordCorrecta = BCrypt.checkpw(textFieldPassword.getText(), usuario.getPassword());
+        boolean passwordCorrecta = textFieldPassword.getText().equals(usuario.getPassword());
         if (!passwordCorrecta) {
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorContraseniaIncorrecta"));
             return;
@@ -154,6 +158,16 @@ public class LoginController extends AbstractController{
     protected void openRegistrarClick() {
         String tituloPantalla = ConfigManager.ConfigProperties.getProperty("registroTitle");
         mostrarPantalla(openRegistrarButton, "registro.fxml", tituloPantalla);
+    }
+
+    /**
+     * Maneja el evento de clic en el boton de listar usuarios
+     * Redirige a la pantalla de de lista de usuarios
+     */
+    @FXML
+    protected void openListarUsuariosClick() {
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("usuarioTitle");
+        mostrarPantalla(openRegistrarButton, "usuarios.fxml", tituloPantalla);
     }
 
     /**

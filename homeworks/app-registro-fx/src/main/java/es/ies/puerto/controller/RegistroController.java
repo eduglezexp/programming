@@ -104,9 +104,9 @@ public class RegistroController extends AbstractController{
         boolean equalPassword = textFieldPassword.getText().equals(textFieldPasswordRepit.getText());
         boolean equalEmail = textFieldEmail.getText().equals(textFieldEmailRepit.getText());
         if (equalPassword && equalEmail) {
-            String hashedPassword = BCrypt.hashpw(textFieldPassword.getText(), BCrypt.gensalt());
+            //String hashedPassword = BCrypt.hashpw(textFieldPassword.getText(), BCrypt.gensalt());
             UsuarioEntitySqlite usuario = new UsuarioEntitySqlite(textFieldUsuario.getText(), textFieldEmail.getText(), 
-            textFieldNombre.getText(), hashedPassword);
+            textFieldNombre.getText(), textFieldPassword.getText());
             try {
                 boolean insertar = getUsuarioServiceSqlite().insertarUsuario(usuario);
                 if (!insertar) {
