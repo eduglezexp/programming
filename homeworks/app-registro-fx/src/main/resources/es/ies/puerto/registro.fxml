@@ -17,5 +17,6 @@
       <TextField fx:id="textFieldEmailRepit" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Repetir Correo Electrónico" />
       <Text fx:id="textMensaje" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="250"/>
       <Button fx:id="openRegistrarButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onRegistrarButtonClick" prefHeight="32.0" prefWidth="110.0" text="Aceptar" />
+      <Button fx:id="buttonVolverAtras" mnemonicParsing="false" onAction="#onVolverAtrasClick" prefHeight="32.0" prefWidth="110.0" text="Volver Atrás" />
    </children>
 </VBox>

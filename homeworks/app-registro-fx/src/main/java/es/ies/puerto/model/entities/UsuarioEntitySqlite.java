@@ -20,11 +20,8 @@ public class UsuarioEntitySqlite {
     public UsuarioEntitySqlite() {
     }
 
-    /**
-     * Constructor con la propiedad email
-     * @param email identificador de la clase Usuario
-     */
-    public UsuarioEntitySqlite(String email) {
+    public UsuarioEntitySqlite(String user, String email) {
+        this.user = user;
         this.email = email;
     }
 
@@ -113,12 +110,12 @@ public class UsuarioEntitySqlite {
         if (!(o instanceof UsuarioEntitySqlite)) {
             return false;
         }
-        UsuarioEntitySqlite other = (UsuarioEntitySqlite) o;
-        return Objects.equals(email, other.email);
+        UsuarioEntitySqlite usuarioEntitySqlite = (UsuarioEntitySqlite) o;
+        return Objects.equals(user, usuarioEntitySqlite.user) && Objects.equals(email, usuarioEntitySqlite.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email);
-    }
+        return Objects.hash(user, email);
+    }    
 }

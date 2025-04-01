@@ -98,6 +98,9 @@ public abstract class AbstractController {
     @FXML
     private Text textListaUsuario;
 
+    @FXML
+    private Button buscarUsuariosButton;
+
     /**
      * Método para cambiar el idioma
      */
@@ -173,6 +176,10 @@ public abstract class AbstractController {
 
         if (textListaUsuario != null) {
             textListaUsuario.setText(ConfigManager.ConfigProperties.getProperty("textListaUsuario"));
+        }
+
+        if (buscarUsuariosButton != null) {
+            buscarUsuariosButton.setText(ConfigManager.ConfigProperties.getProperty("buscarUsuariosButton"));
         }
     }
 

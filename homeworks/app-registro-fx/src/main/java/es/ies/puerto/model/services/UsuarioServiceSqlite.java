@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import es.ies.puerto.model.abstractas.Conexion;
 import es.ies.puerto.model.entities.UsuarioEntitySqlite;
@@ -35,19 +36,22 @@ public class UsuarioServiceSqlite extends Conexion{
      * Metodo que obtiene un usuario por su email o nombre de usuario
      * @param input email o nombre de usuario
      * @return usuario encontrado o null si no existe
+     * @throws SQLException error controlado
      */
-    public UsuarioEntitySqlite obtenerUsuarioPorEmailOUser(String input) {
-        String sql = "SELECT * FROM usuarios " + "WHERE email='"+input+"' OR user='"+input+"'";
-        try {
-            ArrayList<UsuarioEntitySqlite> usuarios = obtenerUsuario(sql);
-            if (usuarios.isEmpty()) {
-                return null;
-            }
-            return usuarios.get(0);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public List<UsuarioEntitySqlite> obtenerUsuarioPorEmailOUser(String input) throws SQLException {
+        String sql = "SELECT * FROM usuarios " + "WHERE email=? OR user=?";
+        return obtenerUsuario(sql, input, input);
+    }
+
+    /**
+     * Metodo que obtiene un usuario dado su email, user, name o id
+     * @param input email o nombre de usuario
+     * @return usuario encontrado o null si no existe
+     * @throws SQLException error controlado
+     */
+    public List<UsuarioEntitySqlite> obtenerUsuarioPorInput(String input) throws SQLException {
+        String sql = "SELECT * FROM usuarios " + "WHERE email=? OR user=? OR name=? OR id=?";
+        return obtenerUsuario(sql, input, input, input, input);
     }
     
     /**
@@ -55,7 +59,7 @@ public class UsuarioServiceSqlite extends Conexion{
      * @return lista de usuarios
      * @throws SQLException error controlado
      */
-    public ArrayList<UsuarioEntitySqlite> obtenerUsuarios() throws SQLException{
+    public List<UsuarioEntitySqlite> obtenerUsuarios() throws SQLException{
         String sql = "SELECT * FROM usuarios";
         return obtenerUsuario(sql);
     }
@@ -66,10 +70,13 @@ public class UsuarioServiceSqlite extends Conexion{
      * @return lista de usuarios obtenidos
      * @throws SQLException error controlado
      */
-    public ArrayList<UsuarioEntitySqlite> obtenerUsuario(String sql) throws SQLException{
-        ArrayList<UsuarioEntitySqlite> usuarios = new ArrayList<UsuarioEntitySqlite>();
+    private List<UsuarioEntitySqlite> obtenerUsuario(String sql, String... parametros) throws SQLException{
+        List<UsuarioEntitySqlite> usuarios = new ArrayList<UsuarioEntitySqlite>();
         try {
             PreparedStatement sentencia = getConnection().prepareStatement(sql);
+            for (int i = 0; i < parametros.length; i++) {
+                sentencia.setString(i + 1, parametros[i]);
+            }
             ResultSet resultado = sentencia.executeQuery();
             while(resultado.next()){
                 int usuarioId = resultado.getInt("id");

@@ -104,3 +104,21 @@ ListView {
 .list-cell:hover {
     -fx-background-color: #f0a500;
 }
+
+#textFieldBuscarUsuario {
+    -fx-pref-height: 30px;
+    -fx-padding: 0;
+    -fx-margin: 0;
+    -fx-background-radius: 2;
+    -fx-border-color: #f0a500;
+    -fx-border-radius: 2;
+}
+
+#buscarUsuariosButton {
+    -fx-pref-height: 30px;
+    -fx-padding: 0;
+    -fx-margin: 0;
+    -fx-background-radius: 2;
+    -fx-border-color: #f0a500;
+    -fx-border-radius: 2;
+}

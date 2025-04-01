@@ -1,5 +1,8 @@
 package es.ies.puerto.controller;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import es.ies.puerto.config.ConfigManager;
@@ -123,17 +126,24 @@ public class LoginController extends AbstractController{
             textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorCredencialesVacios"));
             return;
         }
-        UsuarioEntitySqlite usuario = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textFieldUsuarioEmail.getText());
-        if (usuario == null) { 
-            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioNoEncontrado"));
-            return;
+        List<UsuarioEntitySqlite> usuarios;
+        try {
+            usuarios = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textFieldUsuarioEmail.getText());
+            if (usuarios == null) { 
+                textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioNoEncontrado"));
+                return;
+            }
+            boolean passwordCorrecta = textFieldPassword.getText().equals(usuarios.get(0).getPassword());
+            if (!passwordCorrecta) {
+                textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorContraseniaIncorrecta"));
+                return;
+            }
+            String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
+            mostrarPantalla(openAceptarButton, "profile.fxml", tituloPantalla, usuarios.get(0));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         //boolean passwordCorrecta = BCrypt.checkpw(textFieldPassword.getText(), usuario.getPassword());
-        boolean passwordCorrecta = textFieldPassword.getText().equals(usuario.getPassword());
-        if (!passwordCorrecta) {
-            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorContraseniaIncorrecta"));
-            return;
-        }
         /** Json
         UsuarioEntityJson usuario = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldUsuario.getText(), UsuarioEntityJson::getUsuario);
         if (usuario == null) {
@@ -146,8 +156,6 @@ public class LoginController extends AbstractController{
             return;
         }
         */
-        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
-        mostrarPantalla(openAceptarButton, "profile.fxml", tituloPantalla, usuario);
     }
 
     /**

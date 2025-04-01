@@ -58,6 +58,9 @@ public class RegistroController extends AbstractController{
     @FXML 
     private Button openRegistrarButton;
 
+    @FXML
+    private Button buttonVolverAtras;
+
     /**
      * Metodo de inicializacion de la interfaz
      */
@@ -130,5 +133,15 @@ public class RegistroController extends AbstractController{
             return;
         }
         textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEmailOPasswordNoCoincide"));
+    }
+
+    /**
+     * Maneja el evento de clic en el boton de volver atras
+     * Redirige a la pantalla de inicio de sesion (login)
+     */
+    @FXML
+    protected void onVolverAtrasClick() {
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("loginTitle");
+        mostrarPantalla(buttonVolverAtras, "login.fxml", tituloPantalla);
     }
 }

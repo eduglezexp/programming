@@ -2,6 +2,7 @@ package es.ies.puerto.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
@@ -13,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 /**
  * @author eduglezexp
@@ -22,10 +25,22 @@ import javafx.scene.control.ListView;
 public class UsuariosController extends AbstractController{
 
     @FXML
-    private Button buttonVolverAtras;
+    private Text textListaUsuario;
+
+    @FXML
+    private TextField textFieldBuscarUsuario;
+
+    @FXML
+    private Button buscarUsuariosButton;
+
+    @FXML
+    private Text textMensaje;
 
     @FXML
     private ListView<UsuarioEntitySqlite> listViewUsuarios; 
+
+    @FXML
+    private Button buttonVolverAtras;
 
     /**
      * Metodo de inicializacion de la interfaz
@@ -73,9 +88,34 @@ public class UsuariosController extends AbstractController{
     private void cargarUsuarios() {
         try {
             UsuarioServiceSqlite service = getUsuarioServiceSqlite();
-            ArrayList<UsuarioEntitySqlite> listaUsuarios = service.obtenerUsuarios();
+            List<UsuarioEntitySqlite> listaUsuarios = service.obtenerUsuarios();
             ObservableList<UsuarioEntitySqlite> usuarios = FXCollections.observableArrayList(listaUsuarios);
             listViewUsuarios.setItems(usuarios);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Metodo para filtrar los usuarios de la lista
+     */
+    @FXML
+    protected void onBuscarUsuarios() {
+        if (textFieldBuscarUsuario == null || textFieldBuscarUsuario.getText().trim().isEmpty()) {
+            cargarUsuarios();
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorCredencialesVacios"));
+            return;
+        }
+        List<UsuarioEntitySqlite> usuariosFiltrados;
+        try {
+            usuariosFiltrados = getUsuarioServiceSqlite().obtenerUsuarioPorInput(textFieldBuscarUsuario.getText());
+            if (usuariosFiltrados == null || usuariosFiltrados.isEmpty()) {
+                textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioNoEncontrado"));
+                cargarUsuarios();
+                return;
+            }
+            listViewUsuarios.setItems(FXCollections.observableArrayList(usuariosFiltrados));
+            textMensaje.setText(null);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,8 @@
 package es.ies.puerto.controller;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.UsuarioEntityJson;
@@ -33,10 +36,13 @@ public class PasswordController extends AbstractController{
     private TextField textFieldEmail;
 
     @FXML 
-    private Button openAceptarButton;
+    private Text textMensaje;
 
     @FXML 
-    private Text textMensaje;
+    private Button openAceptarButton;
+
+    @FXML
+    private Button buttonVolverAtras;
 
     /**
      * Metodo de inicializacion de la interfaz
@@ -58,11 +64,26 @@ public class PasswordController extends AbstractController{
             return;
         }
         //UsuarioEntityJson email = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldEmail.getText(), UsuarioEntityJson::getEmail);
-        UsuarioEntitySqlite email = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textFieldEmail.getText());
-        if (email == null) {
-            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEnviarEmail"));
-            return;
+        List<UsuarioEntitySqlite> email;
+        try {
+            email = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textFieldEmail.getText());
+            if (email == null) {
+                textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEnviarEmail"));
+                return;
+            }
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("emailEnvioCorrecto"));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        textMensaje.setText(ConfigManager.ConfigProperties.getProperty("emailEnvioCorrecto"));
+    }
+    
+    /**
+     * Maneja el evento de clic en el boton de volver atras
+     * Redirige a la pantalla de inicio de sesion (login)
+     */
+    @FXML
+    protected void onVolverAtrasClick() {
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("loginTitle");
+        mostrarPantalla(buttonVolverAtras, "login.fxml", tituloPantalla);
     }
 }
