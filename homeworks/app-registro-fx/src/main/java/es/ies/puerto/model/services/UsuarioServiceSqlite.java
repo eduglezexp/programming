@@ -1,7 +1,5 @@
 package es.ies.puerto.model.services;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -86,8 +84,8 @@ public class UsuarioServiceSqlite extends Conexion{
                 String emailStr = resultado.getString("email");
                 String nombreStr = resultado.getString("name");
                 String contraseniaStr = resultado.getString("password");
-                int ideNivel = resultado.getInt("id_nivel");
-                UsuarioEntitySqlite usuarioEntityModel = new UsuarioEntitySqlite(usuarioId, usuarioStr, emailStr, nombreStr, contraseniaStr, ideNivel);
+                int idNivel = resultado.getInt("id_nivel");
+                UsuarioEntitySqlite usuarioEntityModel = new UsuarioEntitySqlite(usuarioId, usuarioStr, emailStr, nombreStr, contraseniaStr, idNivel);
                 usuarios.add(usuarioEntityModel);
             }
         } catch (Exception e) {

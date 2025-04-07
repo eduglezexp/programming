@@ -68,8 +68,8 @@ public class JuegoController extends AbstractController{
      */
     public void cargarDatosUsuario(UsuarioEntitySqlite usuario) {
         if (usuario != null) {
-            textUsuarioMostrar.setText("Usuario: " + usuario.getUser());
-            textNivel.setText(String.valueOf("Nivel: " + usuario.getIdNivel()));
+            textUsuarioMostrar.setText(usuario.getUser());
+            textNivel.setText(String.valueOf(usuario.getIdNivel()));
         }
     }
 
@@ -90,7 +90,15 @@ public class JuegoController extends AbstractController{
 
     @FXML
     protected void onVolverAtrasClick() {
-        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
-        mostrarPantalla(buttonVolverAtras, "profile.fxml", tituloPantalla);
+        try {
+            List<UsuarioEntitySqlite> usuarios = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textUsuarioMostrar.getText());
+            if (!usuarios.isEmpty()) {
+                UsuarioEntitySqlite usuario = usuarios.get(0);
+                String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
+                mostrarPantalla(buttonVolverAtras, "profile.fxml", tituloPantalla, usuario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
