@@ -1,12 +1,14 @@
 package es.ies.puerto.controller.abstractas;
 
+import java.lang.reflect.Method;
+
 import es.ies.puerto.PrincipalApplication;
 import es.ies.puerto.config.ConfigManager;
-import es.ies.puerto.controller.ProfileController;
 import es.ies.puerto.model.entities.UsuarioEntitySqlite;
 import es.ies.puerto.model.services.UsuarioServiceSqlite;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -23,7 +25,6 @@ import javafx.stage.Stage;
 public abstract class AbstractController {
 
     static final String PATH_DB = "src/main/resources/usuarios.db";
-
     private UsuarioServiceSqlite usuarioServiceSqlite;
     
     /**
@@ -217,17 +218,18 @@ public abstract class AbstractController {
      * @param usuario contiene los datos que se cargaran en la nueva pantalla
      * Nota: Si se va a usar Json, cambiar el UsuarioEntitySqlite por UsuarioEntityJson
      */
-    public void mostrarPantalla(Button button, String fxml, String titulo, UsuarioEntitySqlite usuario) {
-        if (button == null || fxml == null || fxml.isEmpty() || titulo == null || titulo.isEmpty()) {
+    public void mostrarPantalla(Node node, String fxml, String titulo, UsuarioEntitySqlite usuario) {
+        if (node == null || fxml == null || fxml.isEmpty() || titulo == null || titulo.isEmpty() || usuario == null) {
             return;
         }
         try {
+            Stage stage = (Stage) node.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(PrincipalApplication.class.getResource(fxml));
             Scene scene = new Scene(fxmlLoader.load());
             scene.getStylesheets().add(getClass().getResource("/es/ies/puerto/css/style.css").toExternalForm());
-            ProfileController profileController = fxmlLoader.getController();
-            profileController.cargarDatosUsuario(usuario);
-            Stage stage = (Stage) button.getScene().getWindow();
+            Object controller = fxmlLoader.getController();
+            Method method = controller.getClass().getMethod("cargarDatosUsuario", UsuarioEntitySqlite.class);
+            method.invoke(controller, usuario); 
             Image icon = new Image(getClass().getResource("/es/ies/puerto/img/icon.png").toExternalForm());
             stage.getIcons().add(icon);
             stage.setTitle(titulo);

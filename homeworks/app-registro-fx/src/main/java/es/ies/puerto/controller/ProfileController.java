@@ -1,11 +1,13 @@
 package es.ies.puerto.controller;
 
+import java.sql.SQLException;
+import java.util.List;
+
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.UsuarioEntitySqlite;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 /**
@@ -19,13 +21,19 @@ public class ProfileController extends AbstractController {
     private TextField textFieldUsuario;
 
     @FXML
-    private PasswordField textFieldPassword;
-
-    @FXML
     private TextField textFieldNombre;
 
     @FXML
     private TextField textFieldEmail;
+
+    @FXML
+    private TextField textFieldNivel;
+
+    @FXML
+    private Button openEditarButton;
+
+    @FXML
+    private Button openJugarButton;
 
     @FXML
     private Button buttonVolverAtras;
@@ -46,19 +54,47 @@ public class ProfileController extends AbstractController {
     public void cargarDatosUsuario(UsuarioEntitySqlite usuario) {
         if (usuario != null) {
             textFieldUsuario.setText(usuario.getUser());
-            textFieldPassword.setText("******");
             textFieldNombre.setText(usuario.getName());
             textFieldEmail.setText(usuario.getEmail());
+            textFieldNivel.setText(String.valueOf(usuario.getIdNivel()));
+        }
+    }
+
+    @FXML
+    protected void openEditarClick() {
+        try {
+            List<UsuarioEntitySqlite> usuarios = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textFieldUsuario.getText());
+            if (!usuarios.isEmpty()) {
+                UsuarioEntitySqlite usuario = usuarios.get(0);
+                String tituloPantalla = ConfigManager.ConfigProperties.getProperty("registroTitle");
+                mostrarPantalla(openEditarButton, "registro.fxml", tituloPantalla, usuario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void openJugarClick() {
+        try {
+            List<UsuarioEntitySqlite> usuarios = getUsuarioServiceSqlite().obtenerUsuarioPorEmailOUser(textFieldUsuario.getText());
+            if (!usuarios.isEmpty()) {
+                UsuarioEntitySqlite usuario = usuarios.get(0);
+                String tituloPantalla = ConfigManager.ConfigProperties.getProperty("juegoTitle");
+                mostrarPantalla(buttonVolverAtras, "juego.fxml", tituloPantalla, usuario);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     /**
      * Maneja el evento de clic en el boton de volver atras
-     * Redirige a la pantalla de inicio de sesion (login)
+     * Redirige a la pantalla de la lista de usuarios
      */
     @FXML
     protected void onVolverAtrasClick() {
-        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("loginTitle");
-        mostrarPantalla(buttonVolverAtras, "login.fxml", tituloPantalla);
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("usuarioTitle");
+        mostrarPantalla(buttonVolverAtras, "usuarios.fxml", tituloPantalla);
     }
 }

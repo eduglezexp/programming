@@ -64,6 +64,11 @@ ComboBox {
     -fx-text-alignment: center;
 }
 
+#puntosButton {
+    -fx-pref-width: 80px;
+    -fx-pref-height: 25px; 
+}
+
 #openAceptarButton {
     -fx-pref-width: 140px;
     -fx-pref-height: 40px; 
@@ -121,4 +126,10 @@ ListView {
     -fx-background-radius: 2;
     -fx-border-color: #f0a500;
     -fx-border-radius: 2;
+}
+
+#textFieldLetra {
+    -fx-pref-width: 140px;
+    -fx-pref-height: 40px; 
+    -fx-border-color: #f0a500;
 }

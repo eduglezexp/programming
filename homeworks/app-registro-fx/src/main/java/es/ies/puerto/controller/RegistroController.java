@@ -31,6 +31,8 @@ public class RegistroController extends AbstractController{
         usuarioServiceJson = new UsuarioServiceJson();
     }
 
+    private UsuarioEntitySqlite usuarioEditado;
+
     @FXML
     public Text textRegistroTitulo;
 
@@ -67,6 +69,20 @@ public class RegistroController extends AbstractController{
     @FXML
     public void initialize() {
         cambiarIdioma();
+    }
+
+    /**
+     * Carga los datos del usuario en los campos de la interfaz grafica para Json
+     * @param usuario El objeto Usuario con los datos que se mostraran en pantalla
+     * Nota: Si se va a usar Json, cambiar el UsuarioEntitySqlite por UsuarioEntityJson
+     */
+    public void cargarDatosUsuario(UsuarioEntitySqlite usuario) {
+        if (usuario != null) {
+            this.usuarioEditado = usuario;
+            textFieldUsuario.setText(usuario.getUser());
+            textFieldNombre.setText(usuario.getName());
+            textFieldEmail.setText(usuario.getEmail());
+        }
     }
 
     /**
@@ -108,29 +124,40 @@ public class RegistroController extends AbstractController{
         boolean equalEmail = textFieldEmail.getText().equals(textFieldEmailRepit.getText());
         if (equalPassword && equalEmail) {
             //String hashedPassword = BCrypt.hashpw(textFieldPassword.getText(), BCrypt.gensalt());
-            UsuarioEntitySqlite usuario = new UsuarioEntitySqlite(textFieldUsuario.getText(), textFieldEmail.getText(), 
-            textFieldNombre.getText(), textFieldPassword.getText());
             try {
-                boolean insertar = getUsuarioServiceSqlite().insertarUsuario(usuario);
-                if (!insertar) {
-                    textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioExiste"));
-                    return;
+                if (usuarioEditado == null) { 
+                    UsuarioEntitySqlite nuevoUsuario = new UsuarioEntitySqlite(
+                        textFieldUsuario.getText(),
+                        textFieldEmail.getText(),
+                        textFieldNombre.getText(),
+                        textFieldPassword.getText(),
+                        1
+                    );
+                    boolean insertado = getUsuarioServiceSqlite().insertarUsuario(nuevoUsuario);
+                    if (!insertado) {
+                        textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioExiste"));
+                        return;
+                    }
+                    String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
+                    mostrarPantalla(openRegistrarButton, "profile.fxml", tituloPantalla, nuevoUsuario);
+                } else {
+                    usuarioEditado.setUser(textFieldUsuario.getText());
+                    usuarioEditado.setEmail(textFieldEmail.getText());
+                    usuarioEditado.setName(textFieldNombre.getText());
+                    if (!textFieldPassword.getText().equals("")) {
+                        usuarioEditado.setPassword(textFieldPassword.getText());
+                    }
+                    boolean actualizado = getUsuarioServiceSqlite().actualizarUsuario(usuarioEditado);
+                    if (!actualizado) {
+                        textMensaje.setText("Error al actualizar el usuario");
+                        return;
+                    }
+                    String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
+                    mostrarPantalla(openRegistrarButton, "profile.fxml", tituloPantalla, usuarioEditado);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            /** Json
-            UsuarioEntityJson usuario = new UsuarioEntityJson(textFieldUsuario.getText(), hashedPassword, 
-            textFieldNombre.getText(), textFieldEmail.getText());
-            boolean insertar = usuarioServiceJson.add(usuario);
-            if (!insertar) {
-                textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioExiste"));
-                return;
-            }
-            */
-            String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
-            mostrarPantalla(openRegistrarButton, "profile.fxml", tituloPantalla, usuario);
-            return;
         }
         textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorEmailOPasswordNoCoincide"));
     }

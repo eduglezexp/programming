@@ -143,19 +143,6 @@ public class LoginController extends AbstractController{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //boolean passwordCorrecta = BCrypt.checkpw(textFieldPassword.getText(), usuario.getPassword());
-        /** Json
-        UsuarioEntityJson usuario = usuarioServiceJson.buscarUsuarioPorCriterio(textFieldUsuario.getText(), UsuarioEntityJson::getUsuario);
-        if (usuario == null) {
-            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorUsuarioNoEncontrado"));
-            return;
-        }
-        boolean passwordCorrecta = BCrypt.checkpw(textFieldPassword.getText(), usuario.getPassword());
-        if (!passwordCorrecta) {
-            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorContraseniaIncorrecta"));
-            return;
-        }
-        */
     }
 
     /**
@@ -175,7 +162,7 @@ public class LoginController extends AbstractController{
     @FXML
     protected void openListarUsuariosClick() {
         String tituloPantalla = ConfigManager.ConfigProperties.getProperty("usuarioTitle");
-        mostrarPantalla(openRegistrarButton, "usuarios.fxml", tituloPantalla);
+        mostrarPantalla(openListarUsuariosButton, "usuarios.fxml", tituloPantalla);
     }
 
     /**

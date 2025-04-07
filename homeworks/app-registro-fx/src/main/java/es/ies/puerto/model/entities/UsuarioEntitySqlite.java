@@ -13,6 +13,7 @@ public class UsuarioEntitySqlite {
     private String name;
     private String email;
     private String password;
+    private int idNivel;
 
     /**
      * Constructor por defecto
@@ -32,11 +33,12 @@ public class UsuarioEntitySqlite {
      * @param nombre del usuario
      * @param password del usuario
      */
-    public UsuarioEntitySqlite(String usuario, String email, String nombre, String password) {
+    public UsuarioEntitySqlite(String usuario, String email, String nombre, String password, int idNivel) {
         this.user = usuario;
         this.email = email;
         this.name = nombre;
         this.password = password;
+        this.idNivel = idNivel;
     }
 
     /**
@@ -47,12 +49,13 @@ public class UsuarioEntitySqlite {
      * @param nombre del usuario
      * @param password del usuario
      */
-    public UsuarioEntitySqlite(int id, String usuario, String email, String nombre, String password) {
+    public UsuarioEntitySqlite(int id, String usuario, String email, String nombre, String password, int idNivel) {
         this.id = id;
         this.user = usuario;
         this.email = email;
         this.name = nombre;
         this.password = password;
+        this.idNivel = idNivel;
     }
     
     /**
@@ -98,9 +101,18 @@ public class UsuarioEntitySqlite {
         this.email = email;
     }
 
+    public int getIdNivel() {
+        return idNivel;
+    }
+
+    public void setIdNivel(int idNivel) {
+        this.idNivel = idNivel;
+    }  
+
     @Override
     public String toString() {
-        return "UsuarioEntitySqlite [id=" + id + ", user=" + user + ", name=" + name + ", email=" + email + ", password=" + password + "]";
+        return "UsuarioEntitySqlite [id=" + id + ", user=" + user + ", name=" + name + ", email=" + email
+                + ", password=" + password + ", idNivel=" + idNivel + "]";
     }
 
     @Override
@@ -117,5 +129,5 @@ public class UsuarioEntitySqlite {
     @Override
     public int hashCode() {
         return Objects.hash(user, email);
-    }    
+    }  
 }

@@ -1,5 +1,7 @@
 package es.ies.puerto.model.services;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -84,7 +86,8 @@ public class UsuarioServiceSqlite extends Conexion{
                 String emailStr = resultado.getString("email");
                 String nombreStr = resultado.getString("name");
                 String contraseniaStr = resultado.getString("password");
-                UsuarioEntitySqlite usuarioEntityModel = new UsuarioEntitySqlite(usuarioId, usuarioStr, emailStr, nombreStr, contraseniaStr);
+                int ideNivel = resultado.getInt("id_nivel");
+                UsuarioEntitySqlite usuarioEntityModel = new UsuarioEntitySqlite(usuarioId, usuarioStr, emailStr, nombreStr, contraseniaStr, ideNivel);
                 usuarios.add(usuarioEntityModel);
             }
         } catch (Exception e) {
@@ -100,12 +103,31 @@ public class UsuarioServiceSqlite extends Conexion{
      * @throws SQLException error controlado
      */
     public boolean insertarUsuario(UsuarioEntitySqlite usuario) throws SQLException {
-        String sql = "INSERT INTO usuarios (user, email, name, password) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (user, email, name, password, id_nivel) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
             sentencia.setString(1, usuario.getUser());
             sentencia.setString(2, usuario.getEmail());
             sentencia.setString(3, usuario.getName());
             sentencia.setString(4, usuario.getPassword());
+            sentencia.setInt(5, usuario.getIdNivel());
+            sentencia.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrar();
+        }
+        return false;
+    }
+
+    public boolean actualizarUsuario(UsuarioEntitySqlite usuario) throws SQLException {
+        String sql = "UPDATE usuarios SET user = ?, email = ?, name = ?, password = ? WHERE id = ?";
+        try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
+            sentencia.setString(1, usuario.getUser());
+            sentencia.setString(2, usuario.getEmail());
+            sentencia.setString(3, usuario.getName());
+            sentencia.setString(4, usuario.getPassword());
+            sentencia.setInt(5, usuario.getId());
             sentencia.executeUpdate();
             return true;
         } catch (SQLException e) {

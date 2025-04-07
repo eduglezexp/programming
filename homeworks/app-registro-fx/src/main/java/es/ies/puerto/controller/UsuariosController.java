@@ -1,7 +1,6 @@
 package es.ies.puerto.controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import es.ies.puerto.config.ConfigManager;
@@ -119,6 +118,21 @@ public class UsuariosController extends AbstractController{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Maneja el evento de clic al pulsar un usario de la lista
+     * Redirige a la pantalla de perfil
+     */
+    @FXML
+    protected void onMouseClicked() {
+        UsuarioEntitySqlite usuarioSeleccionado = listViewUsuarios.getSelectionModel().getSelectedItem();
+        if (usuarioSeleccionado == null) {
+            textMensaje.setText(ConfigManager.ConfigProperties.getProperty("errorSelecioneUsuario"));
+            return;
+        }
+        String tituloPantalla = ConfigManager.ConfigProperties.getProperty("profileTitle");
+        mostrarPantalla(listViewUsuarios, "profile.fxml", tituloPantalla, usuarioSeleccionado);
     }
 
     /**
