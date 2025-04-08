@@ -95,57 +95,52 @@ public class JuegoController extends AbstractController{
 
     private void dibujarAhorcado() {
         GraphicsContext graphicsContext = ahorcadoCanvas.getGraphicsContext2D();
-        // Limpiar el canvas
         graphicsContext.clearRect(0, 0, ahorcadoCanvas.getWidth(), ahorcadoCanvas.getHeight());
         
-        // Calcular el centro del canvas
         double centerX = ahorcadoCanvas.getWidth() / 2.0;
         double centerY = ahorcadoCanvas.getHeight() / 2.0;
         
-        // Factor de escalado para agrandar el dibujo
         double scale = 1.2;
         
-        // Calcular errores acumulados (suponiendo 9 errores máximos)
         int errores = 9 - intentosRestantes;
         
-        // Dibuja la base (siempre se muestra)
-        // La base se extiende de izquierda a derecha alrededor del centro
+        // base
         graphicsContext.strokeLine(centerX - 45 * scale, centerY + 80 * scale, centerX + 45 * scale, centerY + 80 * scale);
     
         if (errores >= 1) {
-            // Poste vertical: parte inferior en la base, parte superior elevada
+            // Poste vertical
             graphicsContext.strokeLine(centerX - 10 * scale, centerY + 80 * scale, centerX - 10 * scale, centerY - 40 * scale);
         }
         if (errores >= 2) {
-            // Poste horizontal: desde el poste vertical hasta la derecha
+            // Poste horizontal
             graphicsContext.strokeLine(centerX - 10 * scale, centerY - 40 * scale, centerX + 40 * scale, centerY - 40 * scale);
         }
         if (errores >= 3) {
-            // Cuerda: línea vertical corta debajo del poste horizontal
+            // Cuerda
             graphicsContext.strokeLine(centerX + 40 * scale, centerY - 40 * scale, centerX + 40 * scale, centerY - 20 * scale);
         }
         if (errores >= 4) {
-            // Cabeza: un óvalo (círculo) que se dibuja a partir de la cuerda
+            // Cabeza
             graphicsContext.strokeOval(centerX + 30 * scale, centerY - 20 * scale, 20 * scale, 20 * scale);
         }
         if (errores >= 5) {
-            // Cuerpo: línea vertical a partir del centro de la cabeza hacia abajo
+            // Cuerpo
             graphicsContext.strokeLine(centerX + 40 * scale, centerY, centerX + 40 * scale, centerY + 30 * scale);
         }
         if (errores >= 6) {
-            // Brazo izquierdo: desde la parte superior del cuerpo hacia la izquierda
+            // Brazo izquierdo
             graphicsContext.strokeLine(centerX + 40 * scale, centerY + 10 * scale, centerX + 25 * scale, centerY + 20 * scale);
         }
         if (errores >= 7) {
-            // Brazo derecho: desde la parte superior del cuerpo hacia la derecha
+            // Brazo derecho
             graphicsContext.strokeLine(centerX + 40 * scale, centerY + 10 * scale, centerX + 55 * scale, centerY + 20 * scale);
         }
         if (errores >= 8) {
-            // Pierna izquierda: desde la parte inferior del cuerpo hacia la izquierda
+            // Pierna izquierda
             graphicsContext.strokeLine(centerX + 40 * scale, centerY + 30 * scale, centerX + 25 * scale, centerY + 40 * scale);
         }
         if (errores >= 9) {
-            // Pierna derecha: desde la parte inferior del cuerpo hacia la derecha
+            // Pierna derecha
             graphicsContext.strokeLine(centerX + 40 * scale, centerY + 30 * scale, centerX + 55 * scale, centerY + 40 * scale);
         }
     }    
@@ -188,7 +183,7 @@ public class JuegoController extends AbstractController{
         for (char letra : estadoPalabra) {
             stringbuilder.append(letra).append(' ');
         }
-        return stringbuilder.toString().trim(); // Elimina el último espacio extra
+        return stringbuilder.toString().trim(); 
     }
     
 
@@ -202,7 +197,6 @@ public class JuegoController extends AbstractController{
         String letraIngresada = textFieldLetra.getText().toLowerCase();
         textFieldLetra.clear();
 
-        // Validaciones: si no se ha iniciado juego, o la letra es vacía...
         if (palabraSecreta == null || palabraSecreta.isEmpty()) {
             textMensaje.setText("No hay juego iniciado");
             return;
@@ -212,7 +206,6 @@ public class JuegoController extends AbstractController{
             return;
         }
 
-        // Si el usuario intenta adivinar la palabra completa:
         if (letraIngresada.equals(palabraSecreta)) {
             for (int i = 0; i < palabraSecreta.length(); i++) {
                 estadoPalabra[i] = palabraSecreta.charAt(i);
@@ -225,7 +218,6 @@ public class JuegoController extends AbstractController{
 
         char letra = letraIngresada.charAt(0);
 
-        // Comprobar si la letra ya ha sido introducida (acertada previamente)
         for (char c : estadoPalabra) {
             if (c == letra) {
                 textMensaje.setText("Ya has introducido esa letra");
@@ -233,25 +225,22 @@ public class JuegoController extends AbstractController{
             }
         }
 
-        // Comprobamos si la letra está en la palabra
         boolean acierto = false;
+
         for (int i = 0; i < palabraSecreta.length(); i++) {
             if (palabraSecreta.charAt(i) == letra) {
                 estadoPalabra[i] = letra;
                 acierto = true;
             }
         }
-
         if (!acierto) {
             intentosRestantes--;
             textIntentos.setText("Intentos: " + intentosRestantes);
-            dibujarAhorcado(); // Actualizar dibujo
+            dibujarAhorcado(); 
         }
 
-        // Actualizar palabra en pantalla
         textPalabra.setText(formatearEstadoPalabra());
 
-        // Comprobar si se ha adivinado completamente
         if (String.valueOf(estadoPalabra).equals(palabraSecreta)) {
             textMensaje.setText("¡Has ganado!");
             textMensaje.setStyle("-fx-fill: green;");
