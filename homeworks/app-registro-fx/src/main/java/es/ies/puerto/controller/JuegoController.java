@@ -2,6 +2,7 @@ package es.ies.puerto.controller;
 
 import java.sql.SQLException;
 import java.util.List;
+
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.NivelEntitySqlite;
@@ -60,12 +61,13 @@ public class JuegoController extends AbstractController{
 
     private String usernameSinPrefijo;
     private int nivelUsuario;
+    private int puntosUsuario;
+    private String emailUsuario;
     private String palabraSecreta;   
     private char[] estadoPalabra;    
     private int intentosRestantes; 
     private StringBuilder letrasUtilizadas;
     private int victorias = 0;
-    private int puntosTotales = 0;
     private final int umbralVictorias = 3;
 
     @FXML
@@ -76,8 +78,12 @@ public class JuegoController extends AbstractController{
     public void cargarDatosUsuario(UsuarioEntitySqlite usuario) {
         if (usuario != null) {
             nivelUsuario = usuario.getIdNivel();
+            puntosUsuario = usuario.getPuntos();
+            emailUsuario = usuario.getEmail();
             usernameSinPrefijo = usuario.getUser();
             textUsuarioMostrar.setText("Usuario: " + usuario.getUser());
+            textPuntos.setText("Puntos: " + usuario.getPuntos());
+            textVictorias.setText("Victorias: " +usuario.getVictorias());
             try {
                 List<NivelEntitySqlite> nivel = getNivelServiceSqlite().obtenerNivelPorUsuario(usuario.getIdNivel());
                 textNivel.setText("Nivel: " + nivel.get(0).getNivel());
@@ -264,13 +270,18 @@ public class JuegoController extends AbstractController{
     private void procesarVictoria() {
         victorias++;
         int puntosGanados = 10;  
-        puntosTotales += puntosGanados;
+        puntosUsuario+= puntosGanados;
         textMensaje.setText("¡Has ganado! +" + puntosGanados + " puntos");
         textMensaje.setStyle("-fx-fill: green;");
-        textPuntos.setText("Puntos: " + puntosTotales);
+        textPuntos.setText("Puntos: " + puntosUsuario);
         textVictorias.setText("Victorias: " + victorias);
         if (victorias % umbralVictorias == 0) {
             subirNivel();
+        }
+        try {
+            getUsuarioServiceSqlite().actualizarPuntosVictorias(String.valueOf(puntosUsuario), String.valueOf(victorias), emailUsuario);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -283,6 +294,7 @@ public class JuegoController extends AbstractController{
             try {
                 List<NivelEntitySqlite> nivel = getNivelServiceSqlite().obtenerNivelPorUsuario(nivelUsuario);
                 textNivel.setText("Nivel: " + nivel.get(0).getNivel());
+                getUsuarioServiceSqlite().actualizarNivel(nivel.get(0).getNivel(), emailUsuario);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

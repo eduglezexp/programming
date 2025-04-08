@@ -84,8 +84,11 @@ public class UsuarioServiceSqlite extends Conexion{
                 String emailStr = resultado.getString("email");
                 String nombreStr = resultado.getString("name");
                 String contraseniaStr = resultado.getString("password");
+                int puntosStr = resultado.getInt("puntos");
+                int victoriasStr = resultado.getInt("victorias");
                 int idNivel = resultado.getInt("id_nivel");
-                UsuarioEntitySqlite usuarioEntityModel = new UsuarioEntitySqlite(usuarioId, usuarioStr, emailStr, nombreStr, contraseniaStr, idNivel);
+                UsuarioEntitySqlite usuarioEntityModel = new UsuarioEntitySqlite(usuarioId, usuarioStr, 
+                emailStr, nombreStr, contraseniaStr, puntosStr, victoriasStr, idNivel);
                 usuarios.add(usuarioEntityModel);
             }
         } catch (Exception e) {
@@ -126,6 +129,37 @@ public class UsuarioServiceSqlite extends Conexion{
             sentencia.setString(3, usuario.getName());
             sentencia.setString(4, usuario.getPassword());
             sentencia.setInt(5, usuario.getId());
+            sentencia.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrar();
+        }
+        return false;
+    }
+
+    public boolean actualizarPuntosVictorias(String puntos, String victorias, String email) throws SQLException {
+        String sql = "UPDATE usuarios SET puntos = ?, victorias = ? WHERE email = ?";
+        try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
+            sentencia.setString(1, puntos);
+            sentencia.setString(2, victorias);
+            sentencia.setString(3, email);
+            sentencia.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrar();
+        }
+        return false;
+    }
+
+    public boolean actualizarNivel(String nivel, String email) throws SQLException {
+        String sql = "UPDATE usuarios SET id_nivel = ? WHERE email = ?";
+        try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
+            sentencia.setString(1, nivel);
+            sentencia.setString(2, email);
             sentencia.executeUpdate();
             return true;
         } catch (SQLException e) {

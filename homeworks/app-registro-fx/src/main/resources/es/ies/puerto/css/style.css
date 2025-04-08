@@ -64,7 +64,7 @@ ComboBox {
     -fx-text-alignment: center;
 }
 
-#puntosButton {
+#tiendaButton {
     -fx-pref-width: 80px;
     -fx-pref-height: 25px; 
 }

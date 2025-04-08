@@ -3,8 +3,6 @@ package es.ies.puerto.controller;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
 
-import org.mindrot.jbcrypt.BCrypt;
-
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
 import es.ies.puerto.model.entities.UsuarioEntitySqlite;
@@ -130,8 +128,7 @@ public class RegistroController extends AbstractController{
                         textFieldUsuario.getText(),
                         textFieldEmail.getText(),
                         textFieldNombre.getText(),
-                        textFieldPassword.getText(),
-                        1
+                        textFieldPassword.getText()
                     );
                     boolean insertado = getUsuarioServiceSqlite().insertarUsuario(nuevoUsuario);
                     if (!insertado) {

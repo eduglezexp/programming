@@ -13,6 +13,8 @@ public class UsuarioEntitySqlite {
     private String name;
     private String email;
     private String password;
+    private int puntos;
+    private int victorias;
     private int idNivel;
 
     /**
@@ -33,11 +35,21 @@ public class UsuarioEntitySqlite {
      * @param nombre del usuario
      * @param password del usuario
      */
-    public UsuarioEntitySqlite(String usuario, String email, String nombre, String password, int idNivel) {
+    public UsuarioEntitySqlite(String user, String name, String email, String password) {
+        this.user = user;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public UsuarioEntitySqlite(String usuario, String email, String nombre, String password, int puntos,
+        int victorias, int idNivel) {
         this.user = usuario;
         this.email = email;
         this.name = nombre;
         this.password = password;
+        this.puntos = puntos;
+        this.victorias = victorias;
         this.idNivel = idNivel;
     }
 
@@ -48,13 +60,19 @@ public class UsuarioEntitySqlite {
      * @param email del usuario
      * @param nombre del usuario
      * @param password del usuario
+     * @param puntos del usuario
+     * @param victorias del usuario
+     * @param idNivel del usuario
      */
-    public UsuarioEntitySqlite(int id, String usuario, String email, String nombre, String password, int idNivel) {
+    public UsuarioEntitySqlite(int id, String user, String name, String email, String password, int puntos,
+        int victorias, int idNivel) {
         this.id = id;
-        this.user = usuario;
+        this.user = user;
+        this.name = name;
         this.email = email;
-        this.name = nombre;
         this.password = password;
+        this.puntos = puntos;
+        this.victorias = victorias;
         this.idNivel = idNivel;
     }
     
@@ -101,6 +119,22 @@ public class UsuarioEntitySqlite {
         this.email = email;
     }
 
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+    public int getVictorias() {
+        return victorias;
+    }
+
+    public void setVictorias(int victorias) {
+        this.victorias = victorias;
+    }
+
     public int getIdNivel() {
         return idNivel;
     }
@@ -112,7 +146,8 @@ public class UsuarioEntitySqlite {
     @Override
     public String toString() {
         return "UsuarioEntitySqlite [id=" + id + ", user=" + user + ", name=" + name + ", email=" + email
-                + ", password=" + password + ", idNivel=" + idNivel + "]";
+                + ", password=" + password + ", puntos=" + puntos + ", victorias=" + victorias + ", idNivel=" + idNivel
+                + "]";
     }
 
     @Override
