@@ -10,6 +10,28 @@ import es.ies.puerto.model.abstractas.Conexion;
 import es.ies.puerto.model.entities.PalabraEntitySqlite;
 
 public class PalabraServiceSqlite extends Conexion{
+
+    /**
+     * Constructor por defecto
+     */
+    public PalabraServiceSqlite() {
+
+    }
+
+    /**
+     * Contructor con la ruta del archivo de la bbdd
+     * @param unaRutaArchivoBD path de la bbdd
+     * @throws SQLException error controlado
+     */
+    public PalabraServiceSqlite(String unaRutaArchivoBD) throws SQLException {
+        super(unaRutaArchivoBD);
+    }
+
+    public List<PalabraEntitySqlite> obtenerPalabraAleatoriaPorNivel(int nivel) throws SQLException {
+        String sql = "SELECT * FROM palabras WHERE id_nivel = ? ORDER BY RANDOM() LIMIT 1";
+        return obtenerPalabra(sql, Integer.toString(nivel));
+    }
+
     private List<PalabraEntitySqlite> obtenerPalabra(String sql, String... parametros) throws SQLException{
         List<PalabraEntitySqlite> palabras = new ArrayList<PalabraEntitySqlite>();
         try {

@@ -3,6 +3,7 @@ package es.ies.puerto.model.entities;
 import java.util.Objects;
 
 public class PalabraEntitySqlite {
+    
     private int id;
     private String palabra;
     private int idNivel;

@@ -5,6 +5,8 @@ import java.lang.reflect.Method;
 import es.ies.puerto.PrincipalApplication;
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.model.entities.UsuarioEntitySqlite;
+import es.ies.puerto.model.services.NivelServiceSqlite;
+import es.ies.puerto.model.services.PalabraServiceSqlite;
 import es.ies.puerto.model.services.UsuarioServiceSqlite;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +28,8 @@ public abstract class AbstractController {
 
     static final String PATH_DB = "src/main/resources/usuarios.db";
     private UsuarioServiceSqlite usuarioServiceSqlite;
+    private PalabraServiceSqlite palabraServiceSqlite;
+    private NivelServiceSqlite nivelServiceSqlite;
     
     /**
      * Constructor por defecto
@@ -33,6 +37,8 @@ public abstract class AbstractController {
     public AbstractController() {
         try {
             usuarioServiceSqlite = new UsuarioServiceSqlite(PATH_DB);
+            palabraServiceSqlite = new PalabraServiceSqlite(PATH_DB);
+            nivelServiceSqlite = new NivelServiceSqlite(PATH_DB);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,6 +49,14 @@ public abstract class AbstractController {
      */
     public UsuarioServiceSqlite getUsuarioServiceSqlite() {
         return usuarioServiceSqlite;
+    }
+
+    public PalabraServiceSqlite getPalabraServiceSqlite() {
+        return palabraServiceSqlite;
+    }
+
+    public NivelServiceSqlite getNivelServiceSqlite() {
+        return nivelServiceSqlite;
     }
 
     @FXML

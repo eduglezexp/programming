@@ -54,26 +54,33 @@
             <Insets />
          </VBox.margin>
       </Canvas>
-      <Text fx:id="textIntentos" strokeType="OUTSIDE" strokeWidth="0.0" text="Intentos: " wrappingWidth="300.0">
+      <Text fx:id="textIntentos" strokeType="OUTSIDE" strokeWidth="0.0" text="Intentos: " wrappingWidth="305.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Text fx:id="textPalabra" strokeType="OUTSIDE" strokeWidth="0.0" text="Palabra: " wrappingWidth="300.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-         <VBox.margin>
-            <Insets top="-5.0" />
-         </VBox.margin>
-      </Text>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="305.0" spacing="10">
+         <children>
+            <Text text="Palabra:" wrappingWidth="74.431640625">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="textPalabra" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="220.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
       <Text fx:id="textMensaje" strokeType="OUTSIDE" strokeWidth="0.0">
          <VBox.margin>
             <Insets top="-10.0" />
          </VBox.margin>
          <font>
             <Font size="16.0" />
-         </font></Text>
+         </font>
+      </Text>
       <TextField fx:id="textFieldLetra" alignment="CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="57.0" promptText="Introduce una Letra">
          <font>
             <Font size="15.0" />
@@ -83,7 +90,8 @@
       <Button fx:id="reiniciarButton" mnemonicParsing="false" onAction="#onReiniciarClick" text="Reiniciar">
          <VBox.margin>
             <Insets />
-         </VBox.margin></Button>
+         </VBox.margin>
+      </Button>
       <Button fx:id="buttonVolverAtras" mnemonicParsing="false" onAction="#onVolverAtrasClick" text="Volver Atrás" />
    </children>
 </VBox>
