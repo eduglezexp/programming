@@ -9,6 +9,11 @@ import java.util.List;
 import es.ies.puerto.model.abstractas.Conexion;
 import es.ies.puerto.model.entities.PalabraEntitySqlite;
 
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
 public class PalabraServiceSqlite extends Conexion{
 
     /**
@@ -27,11 +32,19 @@ public class PalabraServiceSqlite extends Conexion{
         super(unaRutaArchivoBD);
     }
 
+    /**
+     * Metodo para obtener palabra aleatoria por el nivel del usuario
+     * @throws SQLException error controlado
+     */
     public List<PalabraEntitySqlite> obtenerPalabraAleatoriaPorNivel(int nivel) throws SQLException {
         String sql = "SELECT * FROM palabras WHERE id_nivel = ? ORDER BY RANDOM() LIMIT 1";
         return obtenerPalabra(sql, Integer.toString(nivel));
     }
 
+    /**
+     * Metodo para obtener palabra aleatoria 
+     * @throws SQLException error controlado
+     */
     private List<PalabraEntitySqlite> obtenerPalabra(String sql, String... parametros) throws SQLException{
         List<PalabraEntitySqlite> palabras = new ArrayList<PalabraEntitySqlite>();
         try {

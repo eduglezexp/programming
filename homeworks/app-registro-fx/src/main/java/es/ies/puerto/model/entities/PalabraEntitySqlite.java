@@ -2,25 +2,46 @@ package es.ies.puerto.model.entities;
 
 import java.util.Objects;
 
+/**
+ * @author eduglezexp
+ * @version 1.1.0
+ */
+
 public class PalabraEntitySqlite {
     
     private int id;
     private String palabra;
     private int idNivel;
     
+    /**
+     * Constructor por defecto
+     */
     public PalabraEntitySqlite() {
     }
 
+    /**
+     * Constructor con las propiedad identificativa id
+     * @param id de la palabra
+     */
     public PalabraEntitySqlite(int id) {
         this.id = id;
     }
 
+    /**
+     * Constructor con todas las propiedades
+     * @param id de la palabra
+     * @param palabra de la palabra
+     * @param idNivel de la palabra
+     */
     public PalabraEntitySqlite(int id, String palabra, int idNivel) {
         this.id = id;
         this.palabra = palabra;
         this.idNivel = idNivel;
     }
 
+    /**
+     * Getters and Setters
+     */
     public int getId() {
         return id;
     }
@@ -65,5 +86,4 @@ public class PalabraEntitySqlite {
     public int hashCode() {
         return Objects.hash(id);
     }
-    
 }

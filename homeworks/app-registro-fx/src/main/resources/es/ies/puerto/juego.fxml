@@ -35,7 +35,12 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Text fx:id="textVictorias" strokeType="OUTSIDE" strokeWidth="0.0" text="Victorias:" wrappingWidth="210.0">
+                  <Text fx:id="textVictorias" layoutX="10.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Victorias:" wrappingWidth="210.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="textDerrotas" strokeType="OUTSIDE" strokeWidth="0.0" text="Derrotas:" wrappingWidth="210.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -77,12 +82,12 @@
       </Text>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="324.0" spacing="10" translateY="-110.0">
          <children>
-            <Text text="Palabra:" translateX="6.0" wrappingWidth="87.15893602371216">
+            <Text fx:id="textPalabra" text="Palabra:" translateX="6.0" wrappingWidth="87.15893602371216">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text fx:id="textPalabra" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="220.0">
+            <Text fx:id="textPalabraMostrar" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="220.0" >
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

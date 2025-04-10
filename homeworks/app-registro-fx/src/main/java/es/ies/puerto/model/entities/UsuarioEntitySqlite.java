@@ -6,6 +6,7 @@ import java.util.Objects;
  * @author eduglezexp
  * @version 1.1.0
  */
+
 public class UsuarioEntitySqlite {
 
     private int id;  
@@ -15,6 +16,7 @@ public class UsuarioEntitySqlite {
     private String password;
     private int puntos;
     private int victorias;
+    private int derrotas;
     private int idNivel;
 
     /**
@@ -23,9 +25,28 @@ public class UsuarioEntitySqlite {
     public UsuarioEntitySqlite() {
     }
 
+    /**
+     * Constructor con las propiedades identificativas
+     * @param user del usuario
+     * @param email del usuario
+     */
     public UsuarioEntitySqlite(String user, String email) {
         this.user = user;
         this.email = email;
+    }
+
+    /**
+     * Constructor con algunas propiedades
+     * @param usuario nick del usuario
+     * @param email del usuario
+     * @param nombre del usuario
+     * @param password del usuario
+     */
+    public UsuarioEntitySqlite(String user, String email, String name, String password) {
+        this.user = user;
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     /**
@@ -34,22 +55,20 @@ public class UsuarioEntitySqlite {
      * @param email del usuario
      * @param nombre del usuario
      * @param password del usuario
+     * @param puntos del usuario
+     * @param victorias del usuario
+     * @param derrotas del usuario
+     * @param idNivel del usuario
      */
-    public UsuarioEntitySqlite(String user, String name, String email, String password) {
-        this.user = user;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-
     public UsuarioEntitySqlite(String usuario, String email, String nombre, String password, int puntos,
-        int victorias, int idNivel) {
+        int victorias, int derrotas, int idNivel) {
         this.user = usuario;
         this.email = email;
         this.name = nombre;
         this.password = password;
         this.puntos = puntos;
         this.victorias = victorias;
+        this.derrotas = derrotas;
         this.idNivel = idNivel;
     }
 
@@ -62,17 +81,19 @@ public class UsuarioEntitySqlite {
      * @param password del usuario
      * @param puntos del usuario
      * @param victorias del usuario
+     * @param derrotas del usuario
      * @param idNivel del usuario
      */
-    public UsuarioEntitySqlite(int id, String user, String name, String email, String password, int puntos,
-        int victorias, int idNivel) {
+    public UsuarioEntitySqlite(int id, String user, String email, String name, String password, int puntos,
+        int victorias, int derrotas, int idNivel) {
         this.id = id;
         this.user = user;
-        this.name = name;
         this.email = email;
+        this.name = name;
         this.password = password;
         this.puntos = puntos;
         this.victorias = victorias;
+        this.derrotas = derrotas;
         this.idNivel = idNivel;
     }
     
@@ -135,6 +156,14 @@ public class UsuarioEntitySqlite {
         this.victorias = victorias;
     }
 
+    public int getDerrotas() {
+        return derrotas;
+    }
+
+    public void setDerrotas(int derrotas) {
+        this.derrotas = derrotas;
+    }  
+
     public int getIdNivel() {
         return idNivel;
     }
@@ -146,8 +175,8 @@ public class UsuarioEntitySqlite {
     @Override
     public String toString() {
         return "UsuarioEntitySqlite [id=" + id + ", user=" + user + ", name=" + name + ", email=" + email
-                + ", password=" + password + ", puntos=" + puntos + ", victorias=" + victorias + ", idNivel=" + idNivel
-                + "]";
+                + ", password=" + password + ", puntos=" + puntos + ", victorias=" + victorias + ", derrotas="
+                + derrotas + ", idNivel=" + idNivel + "]";
     }
 
     @Override
@@ -164,5 +193,5 @@ public class UsuarioEntitySqlite {
     @Override
     public int hashCode() {
         return Objects.hash(user, email);
-    }  
+    }
 }

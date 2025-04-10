@@ -9,21 +9,42 @@ import java.util.List;
 import es.ies.puerto.model.abstractas.Conexion;
 import es.ies.puerto.model.entities.NivelEntitySqlite;
 
+/**
+ * @author eduglezexp
+ * @version 1.0.0
+ */
+
 public class NivelServiceSqlite extends Conexion{
 
+    /**
+     * Constructor por defecto
+     */
     public NivelServiceSqlite() {
 
     }
 
+    /**
+     * Contructor con la ruta del archivo de la bbdd
+     * @param unaRutaArchivoBD path de la bbdd
+     * @throws SQLException error controlado
+     */
     public NivelServiceSqlite(String unaRutaArchivoBD) throws SQLException {
         super(unaRutaArchivoBD);
     }
-
+    
+    /**
+     * Metodo para obtener el nivel del usuario
+     * @throws SQLException error controlado
+     */
     public List<NivelEntitySqlite> obtenerNivelPorUsuario(int nivel) throws SQLException {
         String sql = "SELECT * FROM niveles WHERE id = ?";
         return obtenerNivel(sql, Integer.toString(nivel));
     }
 
+    /**
+     * Metodo para obtener el nivel 
+     * @throws SQLException error controlado
+     */
     private List<NivelEntitySqlite> obtenerNivel(String sql, String... parametros) throws SQLException{
         List<NivelEntitySqlite> niveles = new ArrayList<NivelEntitySqlite>();
         try {

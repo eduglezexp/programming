@@ -86,9 +86,10 @@ public class UsuarioServiceSqlite extends Conexion{
                 String contraseniaStr = resultado.getString("password");
                 int puntosStr = resultado.getInt("puntos");
                 int victoriasStr = resultado.getInt("victorias");
+                int derrotasStr = resultado.getInt("derrotas");
                 int idNivel = resultado.getInt("id_nivel");
                 UsuarioEntitySqlite usuarioEntityModel = new UsuarioEntitySqlite(usuarioId, usuarioStr, 
-                emailStr, nombreStr, contraseniaStr, puntosStr, victoriasStr, idNivel);
+                emailStr, nombreStr, contraseniaStr, puntosStr, victoriasStr, derrotasStr, idNivel);
                 usuarios.add(usuarioEntityModel);
             }
         } catch (Exception e) {
@@ -121,6 +122,10 @@ public class UsuarioServiceSqlite extends Conexion{
         return false;
     }
 
+    /**
+     * Metodo para actualizar un usuario
+     * @throws SQLException error controlado
+     */
     public boolean actualizarUsuario(UsuarioEntitySqlite usuario) throws SQLException {
         String sql = "UPDATE usuarios SET user = ?, email = ?, name = ?, password = ? WHERE id = ?";
         try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
@@ -139,11 +144,35 @@ public class UsuarioServiceSqlite extends Conexion{
         return false;
     }
 
-    public boolean actualizarPuntosVictorias(String puntos, String victorias, String email) throws SQLException {
+    /**
+     * Metodo para actualizar los puntos y victorias de un usuario
+     * @throws SQLException error controlado
+     */
+    public boolean actualizarPuntosVictorias(int puntos, int victorias, String email) throws SQLException {
         String sql = "UPDATE usuarios SET puntos = ?, victorias = ? WHERE email = ?";
         try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
-            sentencia.setString(1, puntos);
-            sentencia.setString(2, victorias);
+            sentencia.setInt(1, puntos);
+            sentencia.setInt(2, victorias);
+            sentencia.setString(3, email);
+            sentencia.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cerrar();
+        }
+        return false;
+    }
+    
+    /**
+     * Metodo para actualizar los puntos y derrotas de un usuario
+     * @throws SQLException error controlado
+     */
+    public boolean actualizarPuntosDerrotas(int puntos, int derrotas, String email) throws SQLException {
+        String sql = "UPDATE usuarios SET puntos = ?, derrotas = ? WHERE email = ?";
+        try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
+            sentencia.setInt(1, puntos);
+            sentencia.setInt(2, derrotas);
             sentencia.setString(3, email);
             sentencia.executeUpdate();
             return true;
@@ -155,10 +184,14 @@ public class UsuarioServiceSqlite extends Conexion{
         return false;
     }
 
-    public boolean actualizarNivel(String nivel, String email) throws SQLException {
+    /**
+     * Metodo para actualizar el nivel de un usuario
+     * @throws SQLException error controlado
+     */
+    public boolean actualizarNivel(int nivel, String email) throws SQLException {
         String sql = "UPDATE usuarios SET id_nivel = ? WHERE email = ?";
         try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
-            sentencia.setString(1, nivel);
+            sentencia.setInt(1, nivel);
             sentencia.setString(2, email);
             sentencia.executeUpdate();
             return true;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import es.ies.puerto.config.ConfigManager;
 import es.ies.puerto.controller.abstractas.AbstractController;
+import es.ies.puerto.model.entities.NivelEntitySqlite;
 import es.ies.puerto.model.entities.UsuarioEntitySqlite;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -56,7 +57,12 @@ public class ProfileController extends AbstractController {
             textFieldUsuario.setText(usuario.getUser());
             textFieldNombre.setText(usuario.getName());
             textFieldEmail.setText(usuario.getEmail());
-            textFieldNivel.setText(String.valueOf(usuario.getIdNivel()));
+            try {
+                List<NivelEntitySqlite> nivel = getNivelServiceSqlite().obtenerNivelPorUsuario(usuario.getIdNivel());
+                textFieldNivel.setText(nivel.get(0).getNivel());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -81,7 +87,7 @@ public class ProfileController extends AbstractController {
             if (!usuarios.isEmpty()) {
                 UsuarioEntitySqlite usuario = usuarios.get(0);
                 String tituloPantalla = ConfigManager.ConfigProperties.getProperty("juegoTitle");
-                mostrarPantalla(buttonVolverAtras, "juego.fxml", tituloPantalla, usuario);
+                mostrarPantalla(openJugarButton, "juego.fxml", tituloPantalla, usuario);
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -10,6 +10,7 @@ CREATE TABLE usuarios (
     password TEXT NOT NULL,
     puntos INTEGER DEFAULT 0,
     victorias INTEGER DEFAULT 0,
+    derrotas INTEGER DEFAULT 0,
     id_nivel INTEGER NOT NULL,  
     FOREIGN KEY (id_nivel) REFERENCES niveles(id)  
 );

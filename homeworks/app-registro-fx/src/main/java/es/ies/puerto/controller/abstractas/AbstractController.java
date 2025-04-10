@@ -114,7 +114,28 @@ public abstract class AbstractController {
     private Text textListaUsuario;
 
     @FXML
+    private Text textPalabra;
+
+    @FXML
+    private TextField textFieldLetra;
+
+    @FXML
     private Button buscarUsuariosButton;
+
+    @FXML
+    private Button openEditarButton;
+
+    @FXML
+    private Button openJugarButton;
+    
+    @FXML
+    private Button tiendaButton;
+
+    @FXML
+    private Button insertarButton;
+
+    @FXML
+    private Button reiniciarButton;
 
     /**
      * Método para cambiar el idioma
@@ -195,6 +216,34 @@ public abstract class AbstractController {
 
         if (buscarUsuariosButton != null) {
             buscarUsuariosButton.setText(ConfigManager.ConfigProperties.getProperty("buscarUsuariosButton"));
+        }
+
+        if (openJugarButton != null) {
+            openJugarButton.setText(ConfigManager.ConfigProperties.getProperty("openJugarButton"));
+        }
+
+        if (openEditarButton != null) {
+            openEditarButton.setText(ConfigManager.ConfigProperties.getProperty("openEditarButton"));
+        }
+
+        if (tiendaButton != null) {
+            tiendaButton.setText(ConfigManager.ConfigProperties.getProperty("tiendaButton"));
+        }
+
+        if (textPalabra != null) {
+            textPalabra.setText(ConfigManager.ConfigProperties.getProperty("textPalabra"));
+        }
+
+        if (insertarButton != null) {
+            insertarButton.setText(ConfigManager.ConfigProperties.getProperty("insertarButton"));
+        }
+        
+        if (reiniciarButton != null) {
+            reiniciarButton.setText(ConfigManager.ConfigProperties.getProperty("reiniciarButton"));
+        }
+
+        if (textFieldLetra != null) {
+            textFieldLetra.setPromptText(ConfigManager.ConfigProperties.getProperty("textFieldLetra"));
         }
     }
 
