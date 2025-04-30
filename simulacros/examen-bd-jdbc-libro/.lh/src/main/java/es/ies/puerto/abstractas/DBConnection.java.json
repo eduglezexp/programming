@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/main/java/es/ies/puerto/abstractas/DBConnection.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745909963805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745909963805,
+            "name": "Commit-0",
+            "content": "package es.ies.puerto.abstractas;\n\nimport java.sql.Connection;\nimport java.sql.DriverManager;\nimport java.sql.SQLException;\nimport java.text.SimpleDateFormat;\n\npublic abstract class DBConnection {\n    private static final String URL = \"jdbc:sqlite:src/main/resources/biblioteca.db\";\n\n    private SimpleDateFormat sdf = new SimpleDateFormat(\"yyyy-MM-dd\");\n\n    public SimpleDateFormat getSdf() {\n        return sdf;\n    }\n\n    public Connection getConnection() throws SQLException {\n        Connection conn = DriverManager.getConnection(URL);\n        conn.setAutoCommit(true);\n        return conn;\n    }\n\n    public boolean cerrarConnection(Connection conn) {\n        if (conn != null) {\n            try {\n                conn.close();\n                return true;\n            } catch (SQLException e) {\n                e.printStackTrace();\n                return false;\n            } \n        } \n        return false;\n    }\n}"
+        }
+    ]
+}

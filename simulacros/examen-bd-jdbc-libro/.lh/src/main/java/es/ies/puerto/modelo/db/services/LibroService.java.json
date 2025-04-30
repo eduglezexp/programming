@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/main/java/es/ies/puerto/modelo/db/services/LibroService.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1745910656330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745910725484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,86 @@\n package es.ies.puerto.modelo.db.services;\n \n-public class LibroService {\n+import es.ies.puerto.abstractas.DBConnection;\n+import es.ies.puerto.modelo.db.entidades.Libro;\n \n+import java.sql.*;\n+import java.util.ArrayList;\n+import java.util.List;\n+\n+public class LibroService extends DBConnection {\n+\n+    public boolean crearLibro(Libro libro) {\n+        String sql = \"INSERT INTO libros (id_libro, titulo, autor_dni, fecha_publicacion, genero) VALUES (?, ?, ?, ?, ?)\";\n+        try (Connection conn = getConnection();\n+             PreparedStatement pstmt = conn.prepareStatement(sql)) {\n+            pstmt.setString(1, libro.getIdLibro());\n+            pstmt.setString(2, libro.getTitulo());\n+            pstmt.setString(3, libro.getAutorDni());\n+            pstmt.setString(4, libro.getFechaPublicacion() != null ? getSdf().format(libro.getFechaPublicacion()) : null);\n+            pstmt.setString(5, libro.getGenero());\n+            return pstmt.executeUpdate() > 0;\n+        } catch (Exception e) {\n+            e.printStackTrace();\n+            return false;\n+        }\n+    }\n+\n+    public List<Libro> obtenerTodosLibros() {\n+        List<Libro> libros = new ArrayList<>();\n+        String sql = \"SELECT * FROM libros\";\n+        try (Connection conn = getConnection();\n+             Statement stmt = conn.createStatement();\n+             ResultSet rs = stmt.executeQuery(sql)) {\n+            while (rs.next()) {\n+                libros.add(new Libro(rs));\n+            }\n+        } catch (SQLException e) {\n+            e.printStackTrace();\n+        }\n+        return libros;\n+    }\n+\n+    public Libro obtenerLibroPorId(String idLibro) {\n+        String sql = \"SELECT * FROM libros WHERE id_libro = ?\";\n+        try (Connection conn = getConnection();\n+             PreparedStatement pstmt = conn.prepareStatement(sql)) {\n+            pstmt.setString(1, idLibro);\n+            try (ResultSet rs = pstmt.executeQuery()) {\n+                if (rs.next()) {\n+                    return new Libro(rs);\n+                }\n+            }\n+        } catch (SQLException e) {\n+            e.printStackTrace();\n+        }\n+        return null;\n+    }\n+\n+    public boolean actualizarLibro(Libro libro) {\n+        String sql = \"UPDATE libros SET titulo = ?, autor_dni = ?, fecha_publicacion = ?, genero = ? WHERE id_libro = ?\";\n+        try (Connection conn = getConnection();\n+             PreparedStatement pstmt = conn.prepareStatement(sql)) {\n+            pstmt.setString(1, libro.getTitulo());\n+            pstmt.setString(2, libro.getAutorDni());\n+            pstmt.setString(3, libro.getFechaPublicacion() != null ? getSdf().format(libro.getFechaPublicacion()) : null);\n+            pstmt.setString(4, libro.getGenero());\n+            pstmt.setString(5, libro.getIdLibro());\n+            return pstmt.executeUpdate() > 0;\n+        } catch (SQLException e) {\n+            e.printStackTrace();\n+            return false;\n+        }\n+    }\n+\n+    public boolean eliminarLibro(String idLibro) {\n+        String sql = \"DELETE FROM libros WHERE id_libro = ?\";\n+        try (Connection conn = getConnection();\n+             PreparedStatement pstmt = conn.prepareStatement(sql)) {\n+            pstmt.setString(1, idLibro);\n+            return pstmt.executeUpdate() > 0;\n+        } catch (SQLException e) {\n+            e.printStackTrace();\n+            return false;\n+        }\n+    }\n }\n"
+                },
+                {
+                    "date": 1745914595035,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,14 @@\n \n import es.ies.puerto.abstractas.DBConnection;\n import es.ies.puerto.modelo.db.entidades.Libro;\n \n-import java.sql.*;\n+import java.sql.Connection;\n+import java.sql.PreparedStatement;\n+import java.sql.ResultSet;\n+import java.sql.Statement;\n import java.util.ArrayList;\n+import java.util.Date;\n import java.util.List;\n \n public class LibroService extends DBConnection {\n \n"
+                },
+                {
+                    "date": 1745914619490,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n \n import java.sql.Connection;\n import java.sql.PreparedStatement;\n import java.sql.ResultSet;\n+import java.sql.SQLException;\n import java.sql.Statement;\n import java.util.ArrayList;\n import java.util.Date;\n import java.util.List;\n"
+                },
+                {
+                    "date": 1745914625188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,8 @@\n import java.sql.ResultSet;\n import java.sql.SQLException;\n import java.sql.Statement;\n import java.util.ArrayList;\n-import java.util.Date;\n import java.util.List;\n \n public class LibroService extends DBConnection {\n \n"
+                }
+            ],
+            "date": 1745910656330,
+            "name": "Commit-0",
+            "content": "package es.ies.puerto.modelo.db.services;\n\npublic class LibroService {\n\n}\n"
+        }
+    ]
+}

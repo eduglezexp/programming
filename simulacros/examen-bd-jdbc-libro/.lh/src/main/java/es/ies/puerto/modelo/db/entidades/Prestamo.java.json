@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/main/java/es/ies/puerto/modelo/db/entidades/Prestamo.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1745913282839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745913291506,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n package es.ies.puerto.modelo.db.entidades;\n \n-import es.ies.puerto.abstractas.AbstractEntity;\n \n+\n import java.sql.ResultSet;\n import java.text.ParseException;\n import java.util.Date;\n \n"
+                },
+                {
+                    "date": 1745913297094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,10 @@\n import java.sql.ResultSet;\n import java.text.ParseException;\n import java.util.Date;\n \n+import es.ies.puerto.modelo.db.entidades.comun.AbstractEntity;\n+\n public class Prestamo extends AbstractEntity {\n     private String idPrestamo;\n     private String libroId;\n     private String usuarioId;\n"
+                }
+            ],
+            "date": 1745913282839,
+            "name": "Commit-0",
+            "content": "package es.ies.puerto.modelo.db.entidades;\n\nimport es.ies.puerto.abstractas.AbstractEntity;\n\nimport java.sql.ResultSet;\nimport java.text.ParseException;\nimport java.util.Date;\n\npublic class Prestamo extends AbstractEntity {\n    private String idPrestamo;\n    private String libroId;\n    private String usuarioId;\n    private Date fechaPrestamo;\n    private Date fechaDevolucion;\n\n    public Prestamo() {\n    }\n\n    public Prestamo(String idPrestamo, String libroId, String usuarioId, Date fechaPrestamo, Date fechaDevolucion) {\n        this.idPrestamo = idPrestamo;\n        this.libroId = libroId;\n        this.usuarioId = usuarioId;\n        this.fechaPrestamo = fechaPrestamo;\n        this.fechaDevolucion = fechaDevolucion;\n    }\n\n    public Prestamo(ResultSet rs) {\n        try {\n            this.idPrestamo = rs.getString(\"id_prestamo\");\n            this.libroId = rs.getString(\"libro_id\");\n            this.usuarioId = rs.getString(\"usuario_id\");\n\n            try {\n                String fechaPrestamoStr = rs.getString(\"fecha_prestamo\");\n                this.fechaPrestamo = fechaPrestamoStr != null && !fechaPrestamoStr.isEmpty()\n                        ? SDF_DATE.parse(fechaPrestamoStr) : null;\n            } catch (ParseException e) {\n                throw new java.sql.SQLException(\"Error parsing fecha_prestamo\", e);\n            }\n\n            try {\n                String fechaDevolucionStr = rs.getString(\"fecha_devolucion\");\n                this.fechaDevolucion = fechaDevolucionStr != null && !fechaDevolucionStr.isEmpty()\n                        ? SDF_DATE.parse(fechaDevolucionStr) : null;\n            } catch (ParseException e) {\n                throw new java.sql.SQLException(\"Error parsing fecha_devolucion\", e);\n            }\n\n        } catch (Exception e) {\n            e.printStackTrace();\n        }\n    }\n\n    public String getIdPrestamo() {\n        return idPrestamo;\n    }\n\n    public void setIdPrestamo(String idPrestamo) {\n        this.idPrestamo = idPrestamo;\n    }\n\n    public String getLibroId() {\n        return libroId;\n    }\n\n    public void setLibroId(String libroId) {\n        this.libroId = libroId;\n    }\n\n    public String getUsuarioId() {\n        return usuarioId;\n    }\n\n    public void setUsuarioId(String usuarioId) {\n        this.usuarioId = usuarioId;\n    }\n\n    public Date getFechaPrestamo() {\n        return fechaPrestamo;\n    }\n\n    public void setFechaPrestamo(Date fechaPrestamo) {\n        this.fechaPrestamo = fechaPrestamo;\n    }\n\n    public Date getFechaDevolucion() {\n        return fechaDevolucion;\n    }\n\n    public void setFechaDevolucion(Date fechaDevolucion) {\n        this.fechaDevolucion = fechaDevolucion;\n    }\n}\n"
+        }
+    ]
+}

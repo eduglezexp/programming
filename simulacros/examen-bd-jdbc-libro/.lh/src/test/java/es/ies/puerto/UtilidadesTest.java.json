@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/test/java/es/ies/puerto/UtilidadesTest.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1745909732643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745911066918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n package es.ies.puerto;\n \n+\n import java.io.File;\n import java.io.IOException;\n import java.nio.file.Files;\n import java.nio.file.StandardCopyOption;\n@@ -8,9 +9,11 @@\n import java.text.ParseException;\n import java.text.SimpleDateFormat;\n import java.util.Date;\n \n+import org.junit.jupiter.api.AfterEach;\n \n+\n public abstract class UtilidadesTest {\n     public static final SimpleDateFormat SDF = new SimpleDateFormat(\"yyyy-MM-dd\");\n     public static final String TEST_DB = \"jdbc:sqlite:test.db\";\n \n@@ -21,6 +24,42 @@\n             return null;\n         }\n     }\n \n+    @AfterEach\n+    public void tearDown() throws SQLException {\n+       \n+        File originalDB = new File(\"src/main/resources/biblioteca.db\");\n+        File backupDB = new File(\"src/main/backup/biblioteca.db\");  \n+        \n+        System.out.println(\"Path original: \" + originalDB.getAbsolutePath());\n+        System.out.println(\"Path backup: \" + backupDB.getAbsolutePath());\n+        System.out.println(\"Backup existe? \" + backupDB.exists());\n     \n+\n+        if (!backupDB.exists()) {\n+            throw new SQLException(\"El archivo de backup no existe en: \" + backupDB.getAbsolutePath());\n+        }\n+    \n+\n+        if (originalDB.exists()) {\n+            boolean deleted = originalDB.delete();\n+            if (!deleted) {\n+                throw new SQLException(\"No se pudo eliminar la base de datos original\");\n+            }\n+        }\n+    \n+        try {\n+            Files.copy(\n+                backupDB.toPath(),\n+                originalDB.toPath(),\n+                StandardCopyOption.REPLACE_EXISTING\n+            );\n+            System.out.println(\"Base de datos restaurada exitosamente\");\n+        } catch (IOException e) {\n+            throw new SQLException(\"Error copiando el backup\", e);\n+        }\n+    }\n+\n+\n+    \n }\n"
+                }
+            ],
+            "date": 1745909732643,
+            "name": "Commit-0",
+            "content": "package es.ies.puerto;\n\nimport java.io.File;\nimport java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.StandardCopyOption;\nimport java.sql.SQLException;\nimport java.text.ParseException;\nimport java.text.SimpleDateFormat;\nimport java.util.Date;\n\n\npublic abstract class UtilidadesTest {\n    public static final SimpleDateFormat SDF = new SimpleDateFormat(\"yyyy-MM-dd\");\n    public static final String TEST_DB = \"jdbc:sqlite:test.db\";\n\n    public Date getFecha(String fecha) {\n        try {\n            return SDF.parse(fecha);\n        } catch (ParseException e) {\n            return null;\n        }\n    }\n\n    \n}\n"
+        }
+    ]
+}

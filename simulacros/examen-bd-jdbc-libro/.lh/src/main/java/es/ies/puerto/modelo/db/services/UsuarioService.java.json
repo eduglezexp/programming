@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/main/java/es/ies/puerto/modelo/db/services/UsuarioService.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1745912812855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745912821613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,8 @@\n import es.ies.puerto.abstractas.DBConnection;\n import es.ies.puerto.modelo.db.entidades.Usuario;\n \n import java.sql.*;\n-import java.text.SimpleDateFormat;\n import java.util.ArrayList;\n import java.util.List;\n \n public class UsuarioService extends DBConnection {\n@@ -106,5 +105,5 @@\n             cerrarConnection(conn);\n         }\n     }\n \n-    \n+}\n"
+                },
+                {
+                    "date": 1745914604713,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,14 @@\n \n import es.ies.puerto.abstractas.DBConnection;\n import es.ies.puerto.modelo.db.entidades.Usuario;\n \n-import java.sql.*;\n+import java.sql.Connection;\n+import java.sql.PreparedStatement;\n+import java.sql.ResultSet;\n+import java.sql.Statement;\n import java.util.ArrayList;\n+import java.util.Date;\n import java.util.List;\n \n public class UsuarioService extends DBConnection {\n \n"
+                },
+                {
+                    "date": 1745914652997,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,8 @@\n import java.sql.PreparedStatement;\n import java.sql.ResultSet;\n import java.sql.Statement;\n import java.util.ArrayList;\n-import java.util.Date;\n import java.util.List;\n \n public class UsuarioService extends DBConnection {\n \n"
+                }
+            ],
+            "date": 1745912812855,
+            "name": "Commit-0",
+            "content": "package es.ies.puerto.modelo.db.services;\n\nimport es.ies.puerto.abstractas.DBConnection;\nimport es.ies.puerto.modelo.db.entidades.Usuario;\n\nimport java.sql.*;\nimport java.text.SimpleDateFormat;\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class UsuarioService extends DBConnection {\n\n    public boolean crearUsuario(Usuario usuario) {\n        String sql = \"INSERT INTO usuarios (id_usuario, nombre, email, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?)\";\n        Connection conn = null;\n        try {\n            conn = getConnection();\n            PreparedStatement pstmt = conn.prepareStatement(sql);\n            pstmt.setString(1, usuario.getIdUsuario());\n            pstmt.setString(2, usuario.getNombre());\n            pstmt.setString(3, usuario.getEmail());\n            pstmt.setString(4, usuario.getTelefono());\n            pstmt.setString(5, usuario.getFechaRegistro() != null ? getSdf().format(usuario.getFechaRegistro()) : null);\n            return pstmt.executeUpdate() > 0;\n        } catch (Exception e) {\n            e.printStackTrace();\n            return false;\n        } finally {\n            cerrarConnection(conn);\n        }\n    }\n\n    public List<Usuario> obtenerTodosUsuarios() {\n        List<Usuario> usuarios = new ArrayList<>();\n        String sql = \"SELECT * FROM usuarios\";\n        Connection conn = null;\n        try {\n            conn = getConnection();\n            Statement stmt = conn.createStatement();\n            ResultSet rs = stmt.executeQuery(sql);\n\n            while (rs.next()) {\n                usuarios.add(new Usuario(rs));\n            }\n        } catch (Exception e) {\n            e.printStackTrace();\n        } finally {\n            cerrarConnection(conn);\n        }\n        return usuarios;\n    }\n\n    public Usuario obtenerUsuarioPorId(String idUsuario) {\n        String sql = \"SELECT * FROM usuarios WHERE id_usuario = ?\";\n        Usuario usuario = null;\n        Connection conn = null;\n        try {\n            conn = getConnection();\n            PreparedStatement pstmt = conn.prepareStatement(sql);\n            pstmt.setString(1, idUsuario);\n\n            ResultSet rs = pstmt.executeQuery();\n            if (rs.next()) {\n                usuario = new Usuario(rs);\n            }\n        } catch (Exception e) {\n            e.printStackTrace();\n        } finally {\n            cerrarConnection(conn);\n        }\n        return usuario;\n    }\n\n    public boolean actualizarUsuario(Usuario usuario) {\n        String sql = \"UPDATE usuarios SET nombre = ?, email = ?, telefono = ?, fecha_registro = ? WHERE id_usuario = ?\";\n        Connection conn = null;\n        try {\n            conn = getConnection();\n            PreparedStatement pstmt = conn.prepareStatement(sql);\n            pstmt.setString(1, usuario.getNombre());\n            pstmt.setString(2, usuario.getEmail());\n            pstmt.setString(3, usuario.getTelefono());\n            pstmt.setString(4, usuario.getFechaRegistro() != null ? getSdf().format(usuario.getFechaRegistro()) : null);\n            pstmt.setString(5, usuario.getIdUsuario());\n            return pstmt.executeUpdate() > 0;\n        } catch (Exception e) {\n            e.printStackTrace();\n            return false;\n        } finally {\n            cerrarConnection(conn);\n        }\n    }\n\n    public boolean eliminarUsuario(String idUsuario) {\n        String sql = \"DELETE FROM usuarios WHERE id_usuario = ?\";\n        Connection conn = null;\n        try {\n            conn = getConnection();\n            PreparedStatement pstmt = conn.prepareStatement(sql);\n            pstmt.setString(1, idUsuario);\n            return pstmt.executeUpdate() > 0;\n        } catch (Exception e) {\n            e.printStackTrace();\n            return false;\n        } finally {\n            cerrarConnection(conn);\n        }\n    }\n\n    \n"
+        }
+    ]
+}

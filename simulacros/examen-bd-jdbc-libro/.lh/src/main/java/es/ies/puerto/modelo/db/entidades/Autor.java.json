@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/main/java/es/ies/puerto/modelo/db/entidades/Autor.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1745910193793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745910199596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n     // Método para convertir desde ResultSet\n     public Autor(java.sql.ResultSet rs) throws java.sql.SQLException {\n    \n-        autor.setDni(rs.getString(\"dni\"));\n+        this.setDni(rs.getString(\"dni\"));\n         autor.setNombre(rs.getString(\"nombre\"));\n         autor.setNacionalidad(rs.getString(\"nacionalidad\"));\n         \n         try {\n"
+                },
+                {
+                    "date": 1745910208411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     // Método para convertir desde ResultSet\n     public Autor(java.sql.ResultSet rs) throws java.sql.SQLException {\n    \n         this.setDni(rs.getString(\"dni\"));\n-        autor.setNombre(rs.getString(\"nombre\"));\n+        this.setNombre(rs.getString(\"nombre\"));\n         autor.setNacionalidad(rs.getString(\"nacionalidad\"));\n         \n         try {\n             String fechaStr = rs.getString(\"fecha_nacimiento\");\n"
+                },
+                {
+                    "date": 1745911594711,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,18 +22,17 @@\n         this.fechaNacimiento = fechaNacimiento;\n     }\n  \n \n-    // Método para convertir desde ResultSet\n     public Autor(java.sql.ResultSet rs) throws java.sql.SQLException {\n    \n         this.setDni(rs.getString(\"dni\"));\n         this.setNombre(rs.getString(\"nombre\"));\n-        autor.setNacionalidad(rs.getString(\"nacionalidad\"));\n+        this.setNacionalidad(rs.getString(\"nacionalidad\"));\n         \n         try {\n             String fechaStr = rs.getString(\"fecha_nacimiento\");\n-            autor.setFechaNacimiento(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n+            this.setFechaNacimiento(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n         } catch (ParseException e) {\n             throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n         }\n         \n"
+                },
+                {
+                    "date": 1745911603027,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n         }\n         \n     }\n \n-    // Getters y Setters\n+\n     public String getDni() { return dni; }\n     public void setDni(String dni) { this.dni = dni; }\n \n     public String getNombre() { return nombre; }\n@@ -50,9 +50,9 @@\n \n     public Date getFechaNacimiento() { return fechaNacimiento; }\n     public void setFechaNacimiento(Date fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }\n     \n-    // Para inserción/actualización\n+\n     public String getFechaNacimientoDB() {\n         return fechaNacimiento != null ? SDF_DATE.format(fechaNacimiento) : null;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1745912392559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,8 +51,5 @@\n     public Date getFechaNacimiento() { return fechaNacimiento; }\n     public void setFechaNacimiento(Date fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }\n     \n \n-    public String getFechaNacimientoDB() {\n-        return fechaNacimiento != null ? SDF_DATE.format(fechaNacimiento) : null;\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1745912681274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,8 @@\n     private String nombre;\n     private String nacionalidad;\n     private Date fechaNacimiento;\n     \n-    private static final SimpleDateFormat SDF_DATE = new SimpleDateFormat(\"yyyy-MM-dd\");\n \n     public Autor() {}\n \n     public Autor(String dni, String nombre, String nacionalidad, Date fechaNacimiento) {\n"
+                },
+                {
+                    "date": 1745912697570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,15 @@\n package es.ies.puerto.modelo.db.entidades;\n \n \n import java.util.Date;\n+\n+import es.ies.puerto.modelo.db.entidades.comun.AbstractEntity;\n+\n import java.text.ParseException;\n import java.text.SimpleDateFormat;\n \n-public class Autor {\n+public class Autor extends AbstractEntity{\n     private String dni;\n     private String nombre;\n     private String nacionalidad;\n     private Date fechaNacimiento;\n"
+                }
+            ],
+            "date": 1745910193793,
+            "name": "Commit-0",
+            "content": "package es.ies.puerto.modelo.db.entidades;\n\n\nimport java.util.Date;\nimport java.text.ParseException;\nimport java.text.SimpleDateFormat;\n\npublic class Autor {\n    private String dni;\n    private String nombre;\n    private String nacionalidad;\n    private Date fechaNacimiento;\n    \n    private static final SimpleDateFormat SDF_DATE = new SimpleDateFormat(\"yyyy-MM-dd\");\n\n    public Autor() {}\n\n    public Autor(String dni, String nombre, String nacionalidad, Date fechaNacimiento) {\n        this.dni = dni;\n        this.nombre = nombre;\n        this.nacionalidad = nacionalidad;\n        this.fechaNacimiento = fechaNacimiento;\n    }\n \n\n    // Método para convertir desde ResultSet\n    public Autor(java.sql.ResultSet rs) throws java.sql.SQLException {\n   \n        autor.setDni(rs.getString(\"dni\"));\n        autor.setNombre(rs.getString(\"nombre\"));\n        autor.setNacionalidad(rs.getString(\"nacionalidad\"));\n        \n        try {\n            String fechaStr = rs.getString(\"fecha_nacimiento\");\n            autor.setFechaNacimiento(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n        } catch (ParseException e) {\n            throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n        }\n        \n    }\n\n    // Getters y Setters\n    public String getDni() { return dni; }\n    public void setDni(String dni) { this.dni = dni; }\n\n    public String getNombre() { return nombre; }\n    public void setNombre(String nombre) { this.nombre = nombre; }\n\n    public String getNacionalidad() { return nacionalidad; }\n    public void setNacionalidad(String nacionalidad) { this.nacionalidad = nacionalidad; }\n\n    public Date getFechaNacimiento() { return fechaNacimiento; }\n    public void setFechaNacimiento(Date fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }\n    \n    // Para inserción/actualización\n    public String getFechaNacimientoDB() {\n        return fechaNacimiento != null ? SDF_DATE.format(fechaNacimiento) : null;\n    }\n}"
+        }
+    ]
+}

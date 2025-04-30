@@ -1,0 +1,126 @@
+{
+    "sourceFile": "src/main/java/es/ies/puerto/modelo/db/entidades/Libro.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 27,
+            "patches": [
+                {
+                    "date": 1745910777116,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745910784042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         this.fechaPublicacion = fechaPublicacion;\n         this.genero = genero;\n     }\n \n-    public Libro(String idLibro, String titulo, String autorDni, Date fechaPublicacion, String genero) {\n+    public Libro(ResultSet rs) {\n         this.idLibro = idLibro;\n         this.titulo = titulo;\n         this.autorDni = autorDni;\n         this.fechaPublicacion = fechaPublicacion;\n"
+                },
+                {
+                    "date": 1745910792689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n     }\n \n     public static Libro fromResultSet(ResultSet rs) throws SQLException {\n         return new Libro(\n-            rs.getString(\"id_libro\"),\n+           ,\n             rs.getString(\"titulo\"),\n             rs.getString(\"autor_dni\"),\n             rs.getDate(\"fecha_publicacion\"),\n             rs.getString(\"genero\")\n"
+                },
+                {
+                    "date": 1745910806914,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,14 @@\n         this.genero = genero;\n     }\n \n     public Libro(ResultSet rs) {\n-        this.idLibro = idLibro;\n+        try {\n+            \n+        } catch (Exception e) {\n+            // TODO: handle exception\n+        }\n+        this.idLibro =  rs.getString(\"id_libro\");\n         this.titulo = titulo;\n         this.autorDni = autorDni;\n         this.fechaPublicacion = fechaPublicacion;\n         this.genero = genero;\n"
+                },
+                {
+                    "date": 1745910812758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n \n     public static Libro fromResultSet(ResultSet rs) throws SQLException {\n         return new Libro(\n            ,\n-            rs.getString(\"titulo\"),\n+\n             rs.getString(\"autor_dni\"),\n             rs.getDate(\"fecha_publicacion\"),\n             rs.getString(\"genero\")\n         );\n"
+                },
+                {
+                    "date": 1745910832509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n            ,\n \n             rs.getString(\"autor_dni\"),\n             rs.getDate(\"fecha_publicacion\"),\n-            rs.getString(\"genero\")\n+            \n         );\n     }\n \n     // Getters y Setters\n"
+                },
+                {
+                    "date": 1745910841441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,17 +30,17 @@\n         this.idLibro =  rs.getString(\"id_libro\");\n         this.titulo = titulo;\n         this.autorDni = autorDni;\n         this.fechaPublicacion = fechaPublicacion;\n-        this.genero = genero;\n+        this.genero = rs.getString(\"genero\");\n     }\n \n     public static Libro fromResultSet(ResultSet rs) throws SQLException {\n         return new Libro(\n            ,\n \n             rs.getString(\"autor_dni\"),\n-            rs.getDate(\"fecha_publicacion\"),\n+            ,\n             \n         );\n     }\n \n"
+                },
+                {
+                    "date": 1745910847835,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,18 +29,18 @@\n         }\n         this.idLibro =  rs.getString(\"id_libro\");\n         this.titulo = titulo;\n         this.autorDni = autorDni;\n-        this.fechaPublicacion = fechaPublicacion;\n+        this.fechaPublicacion = rs.getDate(\"fecha_publicacion\");\n         this.genero = rs.getString(\"genero\");\n     }\n \n     public static Libro fromResultSet(ResultSet rs) throws SQLException {\n         return new Libro(\n            ,\n \n-            rs.getString(\"autor_dni\"),\n             ,\n+            ,\n             \n         );\n     }\n \n"
+                },
+                {
+                    "date": 1745910856152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,10 +27,10 @@\n         } catch (Exception e) {\n             // TODO: handle exception\n         }\n         this.idLibro =  rs.getString(\"id_libro\");\n-        this.titulo = titulo;\n-        this.autorDni = autorDni;\n+        this.titulo =  rs.getString(\"id_libro\");\n+        this.autorDni = rs.getString(\"autor_dni\");\n         this.fechaPublicacion = rs.getDate(\"fecha_publicacion\");\n         this.genero = rs.getString(\"genero\");\n     }\n \n"
+                },
+                {
+                    "date": 1745910864753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,23 +27,15 @@\n         } catch (Exception e) {\n             // TODO: handle exception\n         }\n         this.idLibro =  rs.getString(\"id_libro\");\n-        this.titulo =  rs.getString(\"id_libro\");\n+        this.titulo =  rs.getString(\"titulo\");\n         this.autorDni = rs.getString(\"autor_dni\");\n         this.fechaPublicacion = rs.getDate(\"fecha_publicacion\");\n         this.genero = rs.getString(\"genero\");\n     }\n \n-    public static Libro fromResultSet(ResultSet rs) throws SQLException {\n-        return new Libro(\n-           ,\n \n-            ,\n-            ,\n-            \n-        );\n-    }\n \n     // Getters y Setters\n     public String getIdLibro() { return idLibro; }\n     public void setIdLibro(String idLibro) { this.idLibro = idLibro; }\n"
+                },
+                {
+                    "date": 1745910869834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,17 +22,17 @@\n     }\n \n     public Libro(ResultSet rs) {\n         try {\n-            \n+            this.idLibro =  rs.getString(\"id_libro\");\n+            this.titulo =  rs.getString(\"titulo\");\n+            this.autorDni = rs.getString(\"autor_dni\");\n+            this.fechaPublicacion = rs.getDate(\"fecha_publicacion\");\n+            this.genero = rs.getString(\"genero\");\n         } catch (Exception e) {\n             // TODO: handle exception\n         }\n-        this.idLibro =  rs.getString(\"id_libro\");\n-        this.titulo =  rs.getString(\"titulo\");\n-        this.autorDni = rs.getString(\"autor_dni\");\n-        this.fechaPublicacion = rs.getDate(\"fecha_publicacion\");\n-        this.genero = rs.getString(\"genero\");\n+\n     }\n \n \n \n"
+                },
+                {
+                    "date": 1745910876808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n             this.autorDni = rs.getString(\"autor_dni\");\n             this.fechaPublicacion = rs.getDate(\"fecha_publicacion\");\n             this.genero = rs.getString(\"genero\");\n         } catch (Exception e) {\n-            // TODO: handle exception\n+            e.\n         }\n \n     }\n \n"
+                },
+                {
+                    "date": 1745911614789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n package es.ies.puerto.modelo.db.entidades;\n \n import java.sql.ResultSet;\n import java.sql.SQLException;\n+import java.text.ParseException;\n import java.util.Date;\n \n public class Libro {\n     private String idLibro;\n@@ -25,12 +26,18 @@\n         try {\n             this.idLibro =  rs.getString(\"id_libro\");\n             this.titulo =  rs.getString(\"titulo\");\n             this.autorDni = rs.getString(\"autor_dni\");\n+             try {\n+            String fechaStr = rs.getString(\"fecha_nacimiento\");\n+            this.setFechaNacimiento(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n+        } catch (ParseException e) {\n+            throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n+        }\n             this.fechaPublicacion = rs.getDate(\"fecha_publicacion\");\n             this.genero = rs.getString(\"genero\");\n         } catch (Exception e) {\n-            e.\n+            e.printStackTrace();\n         }\n \n     }\n \n"
+                },
+                {
+                    "date": 1745911625669,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n package es.ies.puerto.modelo.db.entidades;\n \n import java.sql.ResultSet;\n import java.sql.SQLException;\n-import java.text.ParseException;\n import java.util.Date;\n \n public class Libro {\n     private String idLibro;\n@@ -26,14 +25,8 @@\n         try {\n             this.idLibro =  rs.getString(\"id_libro\");\n             this.titulo =  rs.getString(\"titulo\");\n             this.autorDni = rs.getString(\"autor_dni\");\n-             try {\n-            String fechaStr = rs.getString(\"fecha_nacimiento\");\n-            this.setFechaNacimiento(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n-        } catch (ParseException e) {\n-            throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n-        }\n             this.fechaPublicacion = rs.getDate(\"fecha_publicacion\");\n             this.genero = rs.getString(\"genero\");\n         } catch (Exception e) {\n             e.printStackTrace();\n"
+                },
+                {
+                    "date": 1745911630831,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n package es.ies.puerto.modelo.db.entidades;\n \n import java.sql.ResultSet;\n import java.sql.SQLException;\n+import java.text.ParseException;\n import java.util.Date;\n \n public class Libro {\n     private String idLibro;\n@@ -25,8 +26,14 @@\n         try {\n             this.idLibro =  rs.getString(\"id_libro\");\n             this.titulo =  rs.getString(\"titulo\");\n             this.autorDni = rs.getString(\"autor_dni\");\n+             try {\n+            String fechaStr = rs.getString(\"fecha_nacimiento\");\n+            this.setFechaNacimiento(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n+        } catch (ParseException e) {\n+            throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n+        }\n             this.fechaPublicacion = rs.getDate(\"fecha_publicacion\");\n             this.genero = rs.getString(\"genero\");\n         } catch (Exception e) {\n             e.printStackTrace();\n"
+                },
+                {
+                    "date": 1745911685564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n             this.idLibro =  rs.getString(\"id_libro\");\n             this.titulo =  rs.getString(\"titulo\");\n             this.autorDni = rs.getString(\"autor_dni\");\n              try {\n-            String fechaStr = rs.getString(\"fecha_nacimiento\");\n+            String fechaStr = rs.getString(\"fecha_publicacion\");\n             this.setFechaNacimiento(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n         } catch (ParseException e) {\n             throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n         }\n"
+                },
+                {
+                    "date": 1745911698402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n             this.titulo =  rs.getString(\"titulo\");\n             this.autorDni = rs.getString(\"autor_dni\");\n              try {\n             String fechaStr = rs.getString(\"fecha_publicacion\");\n-            this.setFechaNacimiento(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n+            this.fechaPublicacion(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n         } catch (ParseException e) {\n             throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n         }\n             this.fechaPublicacion = rs.getDate(\"fecha_publicacion\");\n"
+                },
+                {
+                    "date": 1745911709352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,8 @@\n             this.fechaPublicacion(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n         } catch (ParseException e) {\n             throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n         }\n-            this.fechaPublicacion = rs.getDate(\"fecha_publicacion\");\n             this.genero = rs.getString(\"genero\");\n         } catch (Exception e) {\n             e.printStackTrace();\n         }\n"
+                },
+                {
+                    "date": 1745911723022,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,10 @@\n     private String autorDni;\n     private Date fechaPublicacion;\n     private String genero;\n \n-    public Libro() {}\n+    public Libro() {\n+    }\n \n     public Libro(String idLibro, String titulo, String autorDni, Date fechaPublicacion, String genero) {\n         this.idLibro = idLibro;\n         this.titulo = titulo;\n@@ -23,42 +24,65 @@\n     }\n \n     public Libro(ResultSet rs) {\n         try {\n-            this.idLibro =  rs.getString(\"id_libro\");\n-            this.titulo =  rs.getString(\"titulo\");\n+            this.idLibro = rs.getString(\"id_libro\");\n+            this.titulo = rs.getString(\"titulo\");\n             this.autorDni = rs.getString(\"autor_dni\");\n-             try {\n-            String fechaStr = rs.getString(\"fecha_publicacion\");\n-            this.fechaPublicacion(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n-        } catch (ParseException e) {\n-            throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n-        }\n+            try {\n+                String fechaStr = rs.getString(\"fecha_publicacion\");\n+                this.fechaPublicacion(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n+            } catch (ParseException e) {\n+                throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n+            }\n             this.genero = rs.getString(\"genero\");\n         } catch (Exception e) {\n             e.printStackTrace();\n         }\n \n     }\n \n+    // Getters y Setters\n+    public String getIdLibro() {\n+        return idLibro;\n+    }\n \n+    public void setIdLibro(String idLibro) {\n+        this.idLibro = idLibro;\n+    }\n \n-    // Getters y Setters\n-    public String getIdLibro() { return idLibro; }\n-    public void setIdLibro(String idLibro) { this.idLibro = idLibro; }\n-    \n-    public String getTitulo() { return titulo; }\n-    public void setTitulo(String titulo) { this.titulo = titulo; }\n-    \n-    public String getAutorDni() { return autorDni; }\n-    public void setAutorDni(String autorDni) { this.autorDni = autorDni; }\n-    \n-    public Date getFechaPublicacion() { return fechaPublicacion; }\n-    public void setFechaPublicacion(Date fechaPublicacion) { this.fechaPublicacion = fechaPublicacion; }\n-    \n-    public String getGenero() { return genero; }\n-    public void setGenero(String genero) { this.genero = genero; }\n+    public String getTitulo() {\n+        return titulo;\n+    }\n \n+    public void setTitulo(String titulo) {\n+        this.titulo = titulo;\n+    }\n+\n+    public String getAutorDni() {\n+        return autorDni;\n+    }\n+\n+    public void setAutorDni(String autorDni) {\n+        this.autorDni = autorDni;\n+    }\n+\n+    public Date getFechaPublicacion() {\n+        return fechaPublicacion;\n+    }\n+\n+    public void setFechaPublicacion(Date fechaPublicacion) {\n+        this.fechaPublicacion = fechaPublicacion;\n+    }\n+\n+    public String getGenero() {\n+        return genero;\n+    }\n+\n+    public void setGenero(String genero) {\n+        this.genero = genero;\n+    }\n+\n     @Override\n     public String toString() {\n         return String.format(\"%s (%s) - %s\", titulo, genero, fechaPublicacion);\n     }\n"
+                },
+                {
+                    "date": 1745911877728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import java.sql.SQLException;\n import java.text.ParseException;\n import java.util.Date;\n \n-public class Libro {\n+public class Libro extends {\n     private String idLibro;\n     private String titulo;\n     private String autorDni;\n     private Date fechaPublicacion;\n"
+                },
+                {
+                    "date": 1745911884017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import java.sql.SQLException;\n import java.text.ParseException;\n import java.util.Date;\n \n-public class Libro extends {\n+public class Libro extends AbstractEn{\n     private String idLibro;\n     private String titulo;\n     private String autorDni;\n     private Date fechaPublicacion;\n"
+                },
+                {
+                    "date": 1745911911559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,11 @@\n import java.sql.SQLException;\n import java.text.ParseException;\n import java.util.Date;\n \n-public class Libro extends AbstractEn{\n+import es.ies.puerto.modelo.db.entidades.comun.AbstractEntity;\n+\n+public class Libro extends AbstractEntity {\n     private String idLibro;\n     private String titulo;\n     private String autorDni;\n     private Date fechaPublicacion;\n"
+                },
+                {
+                    "date": 1745912184689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n             this.titulo = rs.getString(\"titulo\");\n             this.autorDni = rs.getString(\"autor_dni\");\n             try {\n                 String fechaStr = rs.getString(\"fecha_publicacion\");\n-                this.fechaPublicacion(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n+                this.setFechaPublicacion(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n             } catch (ParseException e) {\n                 throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n             }\n             this.genero = rs.getString(\"genero\");\n"
+                },
+                {
+                    "date": 1745912190815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n             this.titulo = rs.getString(\"titulo\");\n             this.autorDni = rs.getString(\"autor_dni\");\n             try {\n                 String fechaStr = rs.getString(\"fecha_publicacion\");\n-                this.setFechaPublicacion(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n+                this.fechaPublicacion(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n             } catch (ParseException e) {\n                 throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n             }\n             this.genero = rs.getString(\"genero\");\n"
+                },
+                {
+                    "date": 1745912206669,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n             this.titulo = rs.getString(\"titulo\");\n             this.autorDni = rs.getString(\"autor_dni\");\n             try {\n                 String fechaStr = rs.getString(\"fecha_publicacion\");\n-                this.fechaPublicacion(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n+                this.setFechaPublicacion(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n             } catch (ParseException e) {\n                 throw new java.sql.SQLException(\"Error parsing fecha_nacimiento\", e);\n             }\n             this.genero = rs.getString(\"genero\");\n"
+                },
+                {
+                    "date": 1745912213002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,8 @@\n         }\n \n     }\n \n-    // Getters y Setters\n     public String getIdLibro() {\n         return idLibro;\n     }\n \n"
+                },
+                {
+                    "date": 1745912219672,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n package es.ies.puerto.modelo.db.entidades;\n \n import java.sql.ResultSet;\n-import java.sql.SQLException;\n import java.text.ParseException;\n import java.util.Date;\n \n import es.ies.puerto.modelo.db.entidades.comun.AbstractEntity;\n"
+                },
+                {
+                    "date": 1745912485435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,5 @@\n     public void setGenero(String genero) {\n         this.genero = genero;\n     }\n \n-    @Override\n-    public String toString() {\n-        return String.format(\"%s (%s) - %s\", titulo, genero, fechaPublicacion);\n-    }\n }\n"
+                }
+            ],
+            "date": 1745910777116,
+            "name": "Commit-0",
+            "content": "package es.ies.puerto.modelo.db.entidades;\n\nimport java.sql.ResultSet;\nimport java.sql.SQLException;\nimport java.util.Date;\n\npublic class Libro {\n    private String idLibro;\n    private String titulo;\n    private String autorDni;\n    private Date fechaPublicacion;\n    private String genero;\n\n    public Libro() {}\n\n    public Libro(String idLibro, String titulo, String autorDni, Date fechaPublicacion, String genero) {\n        this.idLibro = idLibro;\n        this.titulo = titulo;\n        this.autorDni = autorDni;\n        this.fechaPublicacion = fechaPublicacion;\n        this.genero = genero;\n    }\n\n    public Libro(String idLibro, String titulo, String autorDni, Date fechaPublicacion, String genero) {\n        this.idLibro = idLibro;\n        this.titulo = titulo;\n        this.autorDni = autorDni;\n        this.fechaPublicacion = fechaPublicacion;\n        this.genero = genero;\n    }\n\n    public static Libro fromResultSet(ResultSet rs) throws SQLException {\n        return new Libro(\n            rs.getString(\"id_libro\"),\n            rs.getString(\"titulo\"),\n            rs.getString(\"autor_dni\"),\n            rs.getDate(\"fecha_publicacion\"),\n            rs.getString(\"genero\")\n        );\n    }\n\n    // Getters y Setters\n    public String getIdLibro() { return idLibro; }\n    public void setIdLibro(String idLibro) { this.idLibro = idLibro; }\n    \n    public String getTitulo() { return titulo; }\n    public void setTitulo(String titulo) { this.titulo = titulo; }\n    \n    public String getAutorDni() { return autorDni; }\n    public void setAutorDni(String autorDni) { this.autorDni = autorDni; }\n    \n    public Date getFechaPublicacion() { return fechaPublicacion; }\n    public void setFechaPublicacion(Date fechaPublicacion) { this.fechaPublicacion = fechaPublicacion; }\n    \n    public String getGenero() { return genero; }\n    public void setGenero(String genero) { this.genero = genero; }\n\n    @Override\n    public String toString() {\n        return String.format(\"%s (%s) - %s\", titulo, genero, fechaPublicacion);\n    }\n}\n"
+        }
+    ]
+}

@@ -1,0 +1,114 @@
+{
+    "sourceFile": "src/main/java/es/ies/puerto/modelo/db/services/PrestamoService.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 24,
+            "patches": [
+                {
+                    "date": 1745913311941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745913343477,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,128 @@\n package es.ies.puerto.modelo.db.services;\n \n-public class PrestamoService {\n+package es.ies.puerto.modelo.db.services;\n \n+import es.ies.puerto.abstractas.DBConnection;\n+import es.ies.puerto.modelo.db.entidades.Prestamo;\n+\n+import java.sql.*;\n+import java.text.SimpleDateFormat;\n+import java.util.ArrayList;\n+import java.util.List;\n+\n+public class PrestamoService extends DBConnection {\n+\n+    public boolean crearPrestamo(Prestamo prestamo) {\n+        if (prestamo.getFechaPrestamo() == null || prestamo.getFechaDevolucion() == null) return false;\n+\n+        String sql = \"INSERT INTO prestamos (id_prestamo, libro_id, usuario_id, fecha_prestamo, fecha_devolucion) VALUES (?, ?, ?, ?, ?)\";\n+        Connection conn = null;\n+\n+        try {\n+            conn = getConnection();\n+            PreparedStatement pstmt = conn.prepareStatement(sql);\n+\n+            pstmt.setString(1, prestamo.getIdPrestamo());\n+            pstmt.setString(2, prestamo.getLibroId());\n+            pstmt.setString(3, prestamo.getUsuarioId());\n+            pstmt.setString(4, getSdf().format(prestamo.getFechaPrestamo()));\n+            pstmt.setString(5, getSdf().format(prestamo.getFechaDevolucion()));\n+\n+            return pstmt.executeUpdate() > 0;\n+        } catch (Exception e) {\n+            e.printStackTrace();\n+            return false;\n+        } finally {\n+            cerrarConnection(conn);\n+        }\n+    }\n+\n+    public List<Prestamo> obtenerTodosPrestamos() {\n+        List<Prestamo> prestamos = new ArrayList<>();\n+        String sql = \"SELECT * FROM prestamos\";\n+        Connection conn = null;\n+\n+        try {\n+            conn = getConnection();\n+            Statement stmt = conn.createStatement();\n+            ResultSet rs = stmt.executeQuery(sql);\n+\n+            while (rs.next()) {\n+                prestamos.add(new Prestamo(rs));\n+            }\n+        } catch (Exception e) {\n+            e.printStackTrace();\n+        } finally {\n+            cerrarConnection(conn);\n+        }\n+        return prestamos;\n+    }\n+\n+    public Prestamo obtenerPrestamoPorId(String id) {\n+        String sql = \"SELECT * FROM prestamos WHERE id_prestamo = ?\";\n+        Connection conn = null;\n+        Prestamo prestamo = null;\n+\n+        try {\n+            conn = getConnection();\n+            PreparedStatement pstmt = conn.prepareStatement(sql);\n+            pstmt.setString(1, id);\n+\n+            ResultSet rs = pstmt.executeQuery();\n+            if (rs.next()) {\n+                prestamo = new Prestamo(rs);\n+            }\n+        } catch (Exception e) {\n+            e.printStackTrace();\n+        } finally {\n+            cerrarConnection(conn);\n+        }\n+        return prestamo;\n+    }\n+\n+    public boolean actualizarPrestamo(Prestamo prestamo) {\n+        if (prestamo.getFechaPrestamo() == null || prestamo.getFechaDevolucion() == null) return false;\n+\n+        String sql = \"UPDATE prestamos SET libro_id = ?, usuario_id = ?, fecha_prestamo = ?, fecha_devolucion = ? WHERE id_prestamo = ?\";\n+        Connection conn = null;\n+\n+        try {\n+            conn = getConnection();\n+            PreparedStatement pstmt = conn.prepareStatement(sql);\n+            pstmt.setString(1, prestamo.getLibroId());\n+            pstmt.setString(2, prestamo.getUsuarioId());\n+            pstmt.setString(3, getSdf().format(prestamo.getFechaPrestamo()));\n+            pstmt.setString(4, getSdf().format(prestamo.getFechaDevolucion()));\n+            pstmt.setString(5, prestamo.getIdPrestamo());\n+\n+            return pstmt.executeUpdate() > 0;\n+        } catch (Exception e) {\n+            e.printStackTrace();\n+            return false;\n+        } finally {\n+            cerrarConnection(conn);\n+        }\n+    }\n+\n+    public boolean eliminarPrestamo(String id) {\n+        String sql = \"DELETE FROM prestamos WHERE id_prestamo = ?\";\n+        Connection conn = null;\n+\n+        try {\n+            conn = getConnection();\n+            PreparedStatement pstmt = conn.prepareStatement(sql);\n+            pstmt.setString(1, id);\n+            return pstmt.executeUpdate() > 0;\n+        } catch (Exception e) {\n+            e.printStackTrace();\n+            return false;\n+        } finally {\n+            cerrarConnection(conn);\n+        }\n+    }\n+\n+    private SimpleDateFormat getSdf() {\n+        return new SimpleDateFormat(\"yyyy-MM-dd\");\n+    }\n }\n+\n"
+                },
+                {
+                    "date": 1745913353981,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n package es.ies.puerto.modelo.db.services;\n \n-package es.ies.puerto.modelo.db.services;\n \n+\n import es.ies.puerto.abstractas.DBConnection;\n import es.ies.puerto.modelo.db.entidades.Prestamo;\n \n import java.sql.*;\n@@ -120,9 +120,7 @@\n             cerrarConnection(conn);\n         }\n     }\n \n-    private SimpleDateFormat getSdf() {\n-        return new SimpleDateFormat(\"yyyy-MM-dd\");\n-    }\n+\n }\n \n"
+                },
+                {
+                    "date": 1745913359345,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,11 @@\n package es.ies.puerto.modelo.db.services;\n \n \n-\n import es.ies.puerto.abstractas.DBConnection;\n import es.ies.puerto.modelo.db.entidades.Prestamo;\n \n import java.sql.*;\n-import java.text.SimpleDateFormat;\n import java.util.ArrayList;\n import java.util.List;\n \n public class PrestamoService extends DBConnection {\n"
+                },
+                {
+                    "date": 1745913948675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -118,7 +118,57 @@\n             cerrarConnection(conn);\n         }\n     }\n \n+    /**\n+ * Obtiene todos los préstamos vencidos antes de una fecha dada.\n+ */\n+public List<Prestamo> obtenerPrestamosVencidos(Date fechaLimite) {\n+    List<Prestamo> resultado = new ArrayList<>();\n+    List<Prestamo> prestamos = obtenerTodos();\n \n+    for (Prestamo prestamo : prestamos) {\n+        if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().before(fechaLimite)) {\n+            resultado.add(prestamo);\n+        }\n+    }\n+\n+    return resultado;\n }\n \n+/**\n+ * Obtiene todos los préstamos realizados por un usuario específico.\n+ */\n+public List<Prestamo> obtenerPrestamosPorUsuario(String idUsuario) {\n+    List<Prestamo> resultado = new ArrayList<>();\n+    List<Prestamo> prestamos = obtenerTodos();\n+\n+    for (Prestamo prestamo : prestamos) {\n+        if (prestamo.getUsuarioId().equalsIgnoreCase(idUsuario)) {\n+            resultado.add(prestamo);\n+        }\n+    }\n+\n+    return resultado;\n+}\n+\n+/**\n+ * Obtiene todos los préstamos activos: cuya fecha de devolución es posterior a hoy.\n+ */\n+public List<Prestamo> obtenerPrestamosActivos() {\n+    List<Prestamo> resultado = new ArrayList<>();\n+    List<Prestamo> prestamos = obtenerTodos();\n+    Date hoy = new Date();\n+\n+    for (Prestamo prestamo : prestamos) {\n+        if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().after(hoy)) {\n+            resultado.add(prestamo);\n+        }\n+    }\n+\n+    return resultado;\n+}\n+\n+\n+\n+}\n+\n"
+                },
+                {
+                    "date": 1745913961823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -150,11 +150,10 @@\n \n     return resultado;\n }\n \n-/**\n- * Obtiene todos los préstamos activos: cuya fecha de devolución es posterior a hoy.\n- */\n+\n+\n public List<Prestamo> obtenerPrestamosActivos() {\n     List<Prestamo> resultado = new ArrayList<>();\n     List<Prestamo> prestamos = obtenerTodos();\n     Date hoy = new Date();\n"
+                },
+                {
+                    "date": 1745913984316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -123,9 +123,9 @@\n  * Obtiene todos los préstamos vencidos antes de una fecha dada.\n  */\n public List<Prestamo> obtenerPrestamosVencidos(Date fechaLimite) {\n     List<Prestamo> resultado = new ArrayList<>();\n-    List<Prestamo> prestamos = obtenerTodos();\n+    List<Prestamo> prestamos = obtenerTodosPrestamos();\n \n     for (Prestamo prestamo : prestamos) {\n         if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().before(fechaLimite)) {\n             resultado.add(prestamo);\n"
+                },
+                {
+                    "date": 1745913989877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -134,14 +134,12 @@\n \n     return resultado;\n }\n \n-/**\n- * Obtiene todos los préstamos realizados por un usuario específico.\n- */\n+\n public List<Prestamo> obtenerPrestamosPorUsuario(String idUsuario) {\n     List<Prestamo> resultado = new ArrayList<>();\n-    List<Prestamo> prestamos = obtenerTodos();\n+    List<Prestamo> prestamos = obtenerTodosPrestamos();\n \n     for (Prestamo prestamo : prestamos) {\n         if (prestamo.getUsuarioId().equalsIgnoreCase(idUsuario)) {\n             resultado.add(prestamo);\n"
+                },
+                {
+                    "date": 1745913997020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -118,11 +118,9 @@\n             cerrarConnection(conn);\n         }\n     }\n \n-    /**\n- * Obtiene todos los préstamos vencidos antes de una fecha dada.\n- */\n+\n public List<Prestamo> obtenerPrestamosVencidos(Date fechaLimite) {\n     List<Prestamo> resultado = new ArrayList<>();\n     List<Prestamo> prestamos = obtenerTodosPrestamos();\n \n@@ -152,9 +150,9 @@\n \n \n public List<Prestamo> obtenerPrestamosActivos() {\n     List<Prestamo> resultado = new ArrayList<>();\n-    List<Prestamo> prestamos = obtenerTodos();\n+    List<Prestamo> prestamos = obtenerTodosPrestamos();\n     Date hoy = new Date();\n \n     for (Prestamo prestamo : prestamos) {\n         if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().after(hoy)) {\n"
+                },
+                {
+                    "date": 1745914031013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,9 +151,9 @@\n \n public List<Prestamo> obtenerPrestamosActivos() {\n     List<Prestamo> resultado = new ArrayList<>();\n     List<Prestamo> prestamos = obtenerTodosPrestamos();\n-    Date hoy = new Date();\n+    Date hoy = new  Date();\n \n     for (Prestamo prestamo : prestamos) {\n         if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().after(hoy)) {\n             resultado.add(prestamo);\n"
+                },
+                {
+                    "date": 1745914045715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,9 +151,9 @@\n \n public List<Prestamo> obtenerPrestamosActivos() {\n     List<Prestamo> resultado = new ArrayList<>();\n     List<Prestamo> prestamos = obtenerTodosPrestamos();\n-    Date hoy = new  Date();\n+    javaDate hoy = new Date();\n \n     for (Prestamo prestamo : prestamos) {\n         if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().after(hoy)) {\n             resultado.add(prestamo);\n"
+                },
+                {
+                    "date": 1745914054918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,9 +151,9 @@\n \n public List<Prestamo> obtenerPrestamosActivos() {\n     List<Prestamo> resultado = new ArrayList<>();\n     List<Prestamo> prestamos = obtenerTodosPrestamos();\n-    javaDate hoy = new Date();\n+    java.util.Date hoy = new java.util.Date();\n \n     for (Prestamo prestamo : prestamos) {\n         if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().after(hoy)) {\n             resultado.add(prestamo);\n"
+                },
+                {
+                    "date": 1745914189992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n import es.ies.puerto.abstractas.DBConnection;\n import es.ies.puerto.modelo.db.entidades.Prestamo;\n \n-import java.sql.*;\n+\n import java.util.ArrayList;\n import java.util.List;\n \n public class PrestamoService extends DBConnection {\n"
+                },
+                {
+                    "date": 1745914211348,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n import es.ies.puerto.abstractas.DBConnection;\n import es.ies.puerto.modelo.db.entidades.Prestamo;\n \n-\n+import java.sql.*;\n import java.util.ArrayList;\n import java.util.List;\n \n public class PrestamoService extends DBConnection {\n@@ -151,9 +151,9 @@\n \n public List<Prestamo> obtenerPrestamosActivos() {\n     List<Prestamo> resultado = new ArrayList<>();\n     List<Prestamo> prestamos = obtenerTodosPrestamos();\n-    java.util.Date hoy = new java.util.Date();\n+    java.util.Date hoy = new Date();\n \n     for (Prestamo prestamo : prestamos) {\n         if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().after(hoy)) {\n             resultado.add(prestamo);\n"
+                },
+                {
+                    "date": 1745914221440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,9 +151,9 @@\n \n public List<Prestamo> obtenerPrestamosActivos() {\n     List<Prestamo> resultado = new ArrayList<>();\n     List<Prestamo> prestamos = obtenerTodosPrestamos();\n-    java.util.Date hoy = new Date();\n+    java.util.Date hoy = new java.util.Date();\n \n     for (Prestamo prestamo : prestamos) {\n         if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().after(hoy)) {\n             resultado.add(prestamo);\n"
+                },
+                {
+                    "date": 1745914238446,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -151,9 +151,9 @@\n \n public List<Prestamo> obtenerPrestamosActivos() {\n     List<Prestamo> resultado = new ArrayList<>();\n     List<Prestamo> prestamos = obtenerTodosPrestamos();\n-    java.util.Date hoy = new java.util.Date();\n+    Date hoy = new  Date();\n \n     for (Prestamo prestamo : prestamos) {\n         if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().after(hoy)) {\n             resultado.add(prestamo);\n"
+                },
+                {
+                    "date": 1745914277381,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,17 @@\n package es.ies.puerto.modelo.db.services;\n \n \n+import java.sql.Connection;\n+import java.sql.Date;\n+import java.sql.ResultSet;\n+import java.sql.Statement;\n+import java.util.ArrayList;\n+import java.util.List;\n+\n import es.ies.puerto.abstractas.DBConnection;\n import es.ies.puerto.modelo.db.entidades.Prestamo;\n \n-import java.sql.*;\n-import java.util.ArrayList;\n-import java.util.List;\n-\n public class PrestamoService extends DBConnection {\n \n     public boolean crearPrestamo(Prestamo prestamo) {\n         if (prestamo.getFechaPrestamo() == null || prestamo.getFechaDevolucion() == null) return false;\n@@ -151,9 +154,9 @@\n \n public List<Prestamo> obtenerPrestamosActivos() {\n     List<Prestamo> resultado = new ArrayList<>();\n     List<Prestamo> prestamos = obtenerTodosPrestamos();\n-    Date hoy = new  Date();\n+    java.util.Date hoy = new Date();\n \n     for (Prestamo prestamo : prestamos) {\n         if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().after(hoy)) {\n             resultado.add(prestamo);\n"
+                },
+                {
+                    "date": 1745914297814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n package es.ies.puerto.modelo.db.services;\n \n \n-import java.sql.Connection;\n+import java.sql.*;\n import java.sql.Date;\n import java.sql.ResultSet;\n import java.sql.Statement;\n import java.util.ArrayList;\n@@ -154,9 +154,9 @@\n \n public List<Prestamo> obtenerPrestamosActivos() {\n     List<Prestamo> resultado = new ArrayList<>();\n     List<Prestamo> prestamos = obtenerTodosPrestamos();\n-    java.util.Date hoy = new Date();\n+    java.util.Date hoy = new java.util.Date();\n \n     for (Prestamo prestamo : prestamos) {\n         if (prestamo.getFechaDevolucion() != null && prestamo.getFechaDevolucion().after(hoy)) {\n             resultado.add(prestamo);\n"
+                },
+                {
+                    "date": 1745914401428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,8 @@\n package es.ies.puerto.modelo.db.services;\n \n \n import java.sql.*;\n-import java.sql.Date;\n-import java.sql.ResultSet;\n-import java.sql.Statement;\n-import java.util.ArrayList;\n import java.util.List;\n \n import es.ies.puerto.abstractas.DBConnection;\n import es.ies.puerto.modelo.db.entidades.Prestamo;\n"
+                },
+                {
+                    "date": 1745914420319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n package es.ies.puerto.modelo.db.services;\n \n \n-import java.sql.*;\n+\n+import java.util.ArrayList;\n import java.util.List;\n \n import es.ies.puerto.abstractas.DBConnection;\n import es.ies.puerto.modelo.db.entidades.Prestamo;\n"
+                },
+                {
+                    "date": 1745914426829,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n package es.ies.puerto.modelo.db.services;\n \n \n \n+import java.sql.Connection;\n import java.util.ArrayList;\n import java.util.List;\n \n import es.ies.puerto.abstractas.DBConnection;\n"
+                },
+                {
+                    "date": 1745914538816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n \n \n import java.sql.Connection;\n+import java.sql.PreparedStatement;\n import java.util.ArrayList;\n import java.util.List;\n \n import es.ies.puerto.abstractas.DBConnection;\n"
+                },
+                {
+                    "date": 1745914544900,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n \n \n import java.sql.Connection;\n import java.sql.PreparedStatement;\n+import java.sql.Statement;\n import java.util.ArrayList;\n import java.util.List;\n \n import es.ies.puerto.abstractas.DBConnection;\n"
+                },
+                {
+                    "date": 1745914553105,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n \n \n import java.sql.Connection;\n import java.sql.PreparedStatement;\n+import java.sql.ResultSet;\n import java.sql.Statement;\n import java.util.ArrayList;\n import java.util.List;\n \n"
+                },
+                {
+                    "date": 1745914560265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n import java.sql.PreparedStatement;\n import java.sql.ResultSet;\n import java.sql.Statement;\n import java.util.ArrayList;\n+import java.util.Date;\n import java.util.List;\n \n import es.ies.puerto.abstractas.DBConnection;\n import es.ies.puerto.modelo.db.entidades.Prestamo;\n"
+                }
+            ],
+            "date": 1745913311941,
+            "name": "Commit-0",
+            "content": "package es.ies.puerto.modelo.db.services;\n\npublic class PrestamoService {\n\n}\n"
+        }
+    ]
+}

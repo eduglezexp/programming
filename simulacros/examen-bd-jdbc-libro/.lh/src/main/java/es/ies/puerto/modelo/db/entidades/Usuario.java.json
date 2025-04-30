@@ -1,0 +1,46 @@
+{
+    "sourceFile": "src/main/java/es/ies/puerto/modelo/db/entidades/Usuario.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1745912653332,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745912661180,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n             this.fechaRegistro = new SimpleDateFormat(\"yyyy-MM-dd\").parse(fechaStr);\n         }\n     }\n \n-    // Getters y Setters\n+\n     public String getIdUsuario() { return idUsuario; }\n     public void setIdUsuario(String idUsuario) { this.idUsuario = idUsuario; }\n     \n     public String getNombre() { return nombre; }\n"
+                },
+                {
+                    "date": 1745912667464,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,5 @@\n     \n     public Date getFechaRegistro() { return fechaRegistro; }\n     public void setFechaRegistro(Date fechaRegistro) { this.fechaRegistro = fechaRegistro; }\n \n-    @Override\n-    public String toString() {\n-        return String.format(\"%s (%s)\", nombre, email);\n-    }\n }\n"
+                },
+                {
+                    "date": 1745912710771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,11 @@\n import java.text.ParseException;\n import java.text.SimpleDateFormat;\n import java.util.Date;\n \n-public class Usuario {\n+import es.ies.puerto.modelo.db.entidades.comun.AbstractEntity;\n+\n+public class Usuario extends AbstractEntity{\n     private String idUsuario;\n     private String nombre;\n     private String email;\n     private String telefono;\n"
+                },
+                {
+                    "date": 1745912730853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,9 @@\n         this.email = rs.getString(\"email\");\n         this.telefono = rs.getString(\"telefono\");\n \n         String fechaStr = rs.getString(\"fecha_registro\");\n+        his.setFechaNacimiento(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n         if (fechaStr != null) {\n             this.fechaRegistro = new SimpleDateFormat(\"yyyy-MM-dd\").parse(fechaStr);\n         }\n     }\n"
+                },
+                {
+                    "date": 1745912737489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n         this.email = rs.getString(\"email\");\n         this.telefono = rs.getString(\"telefono\");\n \n         String fechaStr = rs.getString(\"fecha_registro\");\n-        his.setFechaNacimiento(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n+        this.fechaRegistro(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n         if (fechaStr != null) {\n             this.fechaRegistro = new SimpleDateFormat(\"yyyy-MM-dd\").parse(fechaStr);\n         }\n     }\n"
+                },
+                {
+                    "date": 1745912747911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n         this.email = rs.getString(\"email\");\n         this.telefono = rs.getString(\"telefono\");\n \n         String fechaStr = rs.getString(\"fecha_registro\");\n-        this.fechaRegistro(fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n+        this.fechaRegistro = (fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n         if (fechaStr != null) {\n             this.fechaRegistro = new SimpleDateFormat(\"yyyy-MM-dd\").parse(fechaStr);\n         }\n     }\n"
+                },
+                {
+                    "date": 1745912755361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,11 +32,9 @@\n         this.telefono = rs.getString(\"telefono\");\n \n         String fechaStr = rs.getString(\"fecha_registro\");\n         this.fechaRegistro = (fechaStr != null && !fechaStr.isEmpty() ? SDF_DATE.parse(fechaStr) : null);\n-        if (fechaStr != null) {\n-            this.fechaRegistro = new SimpleDateFormat(\"yyyy-MM-dd\").parse(fechaStr);\n-        }\n+\n     }\n \n \n     public String getIdUsuario() { return idUsuario; }\n"
+                }
+            ],
+            "date": 1745912653332,
+            "name": "Commit-0",
+            "content": "package es.ies.puerto.modelo.db.entidades;\n\nimport java.sql.ResultSet;\nimport java.sql.SQLException;\nimport java.text.ParseException;\nimport java.text.SimpleDateFormat;\nimport java.util.Date;\n\npublic class Usuario {\n    private String idUsuario;\n    private String nombre;\n    private String email;\n    private String telefono;\n    private Date fechaRegistro;\n\n    public Usuario() {}\n\n    public Usuario(String idUsuario, String nombre, String email, String telefono, Date fechaRegistro) {\n        this.idUsuario = idUsuario;\n        this.nombre = nombre;\n        this.email = email;\n        this.telefono = telefono;\n        this.fechaRegistro = fechaRegistro;\n    }\n\n    public Usuario(ResultSet rs) throws SQLException, ParseException {\n        this.idUsuario = rs.getString(\"id_usuario\");\n        this.nombre = rs.getString(\"nombre\");\n        this.email = rs.getString(\"email\");\n        this.telefono = rs.getString(\"telefono\");\n\n        String fechaStr = rs.getString(\"fecha_registro\");\n        if (fechaStr != null) {\n            this.fechaRegistro = new SimpleDateFormat(\"yyyy-MM-dd\").parse(fechaStr);\n        }\n    }\n\n    // Getters y Setters\n    public String getIdUsuario() { return idUsuario; }\n    public void setIdUsuario(String idUsuario) { this.idUsuario = idUsuario; }\n    \n    public String getNombre() { return nombre; }\n    public void setNombre(String nombre) { this.nombre = nombre; }\n    \n    public String getEmail() { return email; }\n    public void setEmail(String email) { this.email = email; }\n    \n    public String getTelefono() { return telefono; }\n    public void setTelefono(String telefono) { this.telefono = telefono; }\n    \n    public Date getFechaRegistro() { return fechaRegistro; }\n    public void setFechaRegistro(Date fechaRegistro) { this.fechaRegistro = fechaRegistro; }\n\n    @Override\n    public String toString() {\n        return String.format(\"%s (%s)\", nombre, email);\n    }\n}\n"
+        }
+    ]
+}

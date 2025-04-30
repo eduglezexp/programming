@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/test/java/es/ies/puerto/modelo/db/services/UsuarioServiceTest.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1745912843364,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745912881071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,75 @@\n package es.ies.puerto.modelo.db.services;\n \n-public class UsuarioServiceTest {\n+import es.ies.puerto.modelo.db.entidades.Usuario;\n+import org.junit.jupiter.api.*;\n \n-}\n+import java.text.SimpleDateFormat;\n+import java.util.Date;\n+import java.util.List;\n+\n+import static org.junit.jupiter.api.Assertions.*;\n+\n+class UsuarioServiceTest {\n+\n+    UsuarioService usuarioService = new UsuarioService();\n+\n+    Date getFecha(String fechaStr) {\n+        try {\n+            return new SimpleDateFormat(\"yyyy-MM-dd\").parse(fechaStr);\n+        } catch (Exception e) {\n+            return null;\n+        }\n+    }\n+\n+    @Test\n+    void crearUsuarioTest() {\n+        Usuario usuario = new Usuario(\"USR001\", \"Prueba\", \"correo@prueba.com\", \"123456789\", getFecha(\"2024-01-01\"));\n+        assertTrue(usuarioService.crearUsuario(usuario));\n+        assertFalse(usuarioService.crearUsuario(usuario)); // duplicado\n+    }\n+\n+    @Test\n+    void obtenerTodosUsuariosTest() {\n+        int inicial = usuarioService.obtenerTodosUsuarios().size();\n+\n+        usuarioService.crearUsuario(new Usuario(\"USR002\", \"Juan\", \"juan@correo.com\", \"111\", new Date()));\n+        usuarioService.crearUsuario(new Usuario(\"USR003\", \"Ana\", \"ana@correo.com\", \"222\", new Date()));\n+\n+        List<Usuario> usuarios = usuarioService.obtenerTodosUsuarios();\n+        assertEquals(inicial + 2, usuarios.size());\n+    }\n+\n+    @Test\n+    void testObtenerUsuarioPorId() {\n+        Usuario esperado = new Usuario(\"USR004\", \"Buscado\", \"buscado@correo.com\", \"333\", getFecha(\"2023-01-01\"));\n+        usuarioService.crearUsuario(esperado);\n+\n+        Usuario actual = usuarioService.obtenerUsuarioPorId(\"USR004\");\n+        assertNotNull(actual);\n+        assertEquals(\"USR004\", actual.getIdUsuario());\n+\n+        assertNull(usuarioService.obtenerUsuarioPorId(\"NOEXISTE\"));\n+    }\n+\n+    @Test\n+    void testActualizarUsuario() {\n+        Usuario usuario = new Usuario(\"USR005\", \"Nombre\", \"old@correo.com\", \"444\", null);\n+        usuarioService.crearUsuario(usuario);\n+\n+        usuario.setNombre(\"NuevoNombre\");\n+        usuario.setEmail(\"nuevo@correo.com\");\n+        assertTrue(usuarioService.actualizarUsuario(usuario));\n+\n+        Usuario actualizado = usuarioService.obtenerUsuarioPorId(\"USR005\");\n+        assertEquals(\"NuevoNombre\", actualizado.getNombre());\n+        assertEquals(\"nuevo@correo.com\", actualizado.getEmail());\n+    }\n+\n+    @Test\n+    void testEliminarUsuario() {\n+        usuarioService.crearUsuario(new Usuario(\"USR006\", \"Eliminar\", \"delete@correo.com\", \"555\", null));\n+        assertTrue(usuarioService.eliminarUsuario(\"USR006\"));\n+        assertNull(usuarioService.obtenerUsuarioPorId(\"USR006\"));\n+\n+        assertFalse(usuarioService.eliminarUsuario(\"NOEXISTE\"));\n+    }\n"
+                },
+                {
+                    "date": 1745912893503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,4 +72,5 @@\n         assertNull(usuarioService.obtenerUsuarioPorId(\"USR006\"));\n \n         assertFalse(usuarioService.eliminarUsuario(\"NOEXISTE\"));\n     }\n+    \n"
+                },
+                {
+                    "date": 1745912901819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n package es.ies.puerto.modelo.db.services;\n \n+import es.ies.puerto.UtilidadesTest;\n import es.ies.puerto.modelo.db.entidades.Usuario;\n import org.junit.jupiter.api.*;\n \n import java.text.SimpleDateFormat;\n@@ -8,9 +9,9 @@\n import java.util.List;\n \n import static org.junit.jupiter.api.Assertions.*;\n \n-class UsuarioServiceTest {\n+class UsuarioServiceTest extends UtilidadesTest{\n \n     UsuarioService usuarioService = new UsuarioService();\n \n     Date getFecha(String fechaStr) {\n@@ -72,5 +73,5 @@\n         assertNull(usuarioService.obtenerUsuarioPorId(\"USR006\"));\n \n         assertFalse(usuarioService.eliminarUsuario(\"NOEXISTE\"));\n     }\n-    \n+}\n"
+                },
+                {
+                    "date": 1745912907635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,15 +13,8 @@\n class UsuarioServiceTest extends UtilidadesTest{\n \n     UsuarioService usuarioService = new UsuarioService();\n \n-    Date getFecha(String fechaStr) {\n-        try {\n-            return new SimpleDateFormat(\"yyyy-MM-dd\").parse(fechaStr);\n-        } catch (Exception e) {\n-            return null;\n-        }\n-    }\n \n     @Test\n     void crearUsuarioTest() {\n         Usuario usuario = new Usuario(\"USR001\", \"Prueba\", \"correo@prueba.com\", \"123456789\", getFecha(\"2024-01-01\"));\n"
+                },
+                {
+                    "date": 1745912916520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,8 @@\n import es.ies.puerto.UtilidadesTest;\n import es.ies.puerto.modelo.db.entidades.Usuario;\n import org.junit.jupiter.api.*;\n \n-import java.text.SimpleDateFormat;\n import java.util.Date;\n import java.util.List;\n \n import static org.junit.jupiter.api.Assertions.*;\n@@ -18,9 +17,9 @@\n     @Test\n     void crearUsuarioTest() {\n         Usuario usuario = new Usuario(\"USR001\", \"Prueba\", \"correo@prueba.com\", \"123456789\", getFecha(\"2024-01-01\"));\n         assertTrue(usuarioService.crearUsuario(usuario));\n-        assertFalse(usuarioService.crearUsuario(usuario)); // duplicado\n+        assertFalse(usuarioService.crearUsuario(usuario));\n     }\n \n     @Test\n     void obtenerTodosUsuariosTest() {\n"
+                }
+            ],
+            "date": 1745912843364,
+            "name": "Commit-0",
+            "content": "package es.ies.puerto.modelo.db.services;\n\npublic class UsuarioServiceTest {\n\n}\n"
+        }
+    ]
+}

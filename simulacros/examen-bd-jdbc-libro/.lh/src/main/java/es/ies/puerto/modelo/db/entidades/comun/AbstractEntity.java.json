@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/main/java/es/ies/puerto/modelo/db/entidades/comun/AbstractEntity.java",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1745911838213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745911856572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n package es.ies.puerto.modelo.db.entidades.comun;\n \n public abstract class AbstractEntity {\n+    src/main/java/es/ies/puerto/modelo/db/entidades/Autor.java\n \n }\n"
+                },
+                {
+                    "date": 1745911866656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n package es.ies.puerto.modelo.db.entidades.comun;\n \n+import java.text.SimpleDateFormat;\n+\n public abstract class AbstractEntity {\n-    src/main/java/es/ies/puerto/modelo/db/entidades/Autor.java\n+    private static final SimpleDateFormat SDF_DATE = new SimpleDateFormat(\"yyyy-MM-dd\");\n \n }\n"
+                }
+            ],
+            "date": 1745911838213,
+            "name": "Commit-0",
+            "content": "package es.ies.puerto.modelo.db.entidades.comun;\n\npublic abstract class AbstractEntity {\n\n}\n"
+        }
+    ]
+}
