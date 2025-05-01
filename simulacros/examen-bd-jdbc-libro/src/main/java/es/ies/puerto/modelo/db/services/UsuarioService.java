@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.ies.puerto.modelo.abstractas.Conexion;
 import es.ies.puerto.modelo.db.entidades.Usuario;
+import es.ies.puerto.modelo.db.services.abstractas.Conexion;
 
 /**
  * @author eduglezexp

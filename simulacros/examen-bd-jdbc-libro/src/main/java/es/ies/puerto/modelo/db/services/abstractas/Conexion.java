@@ -1,8 +1,10 @@
-package es.ies.puerto.modelo.abstractas;
+package es.ies.puerto.modelo.db.services.abstractas;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import org.sqlite.SQLiteConfig;
 
 import es.ies.puerto.config.ConfigManager;
 
@@ -14,27 +16,32 @@ import es.ies.puerto.config.ConfigManager;
 public abstract class Conexion {
     private String rutaArchivoBD;
     private Connection connection;
+    private final SQLiteConfig config;
 
     /**
-     * Constructor por defecto
+     * Constructor por defecto que devuelve una nueva conexión usando 
+     * la configuración (incluye formato de fecha)
      */
     public Conexion() {
         this.rutaArchivoBD = ConfigManager.ConfigProperties.getUrlBd();
+        this.config = new SQLiteConfig();
+        this.config.setDateStringFormat("yyyy-MM-dd");
     }
 
     /**
      * Getters and Setters
      */
     public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:sqlite:" + rutaArchivoBD);
+        String url = "jdbc:sqlite:" + rutaArchivoBD;
+        return config.createConnection(url);
     }
 
     /**
      * Funcion que conecta a la bbdd
      */
     protected Connection conectar() throws SQLException{
-        if (connection == null) {
-            connection = DriverManager.getConnection("jdbc:sqlite:" + rutaArchivoBD);
+        if (connection == null || connection.isClosed()) {
+            connection = getConnection();
         }
         return connection;
     }

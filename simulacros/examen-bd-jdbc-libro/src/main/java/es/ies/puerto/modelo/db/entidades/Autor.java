@@ -65,8 +65,7 @@ public class Autor {
             return null;
         }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String fechaConFormato = simpleDateFormat.format(fechaNacimiento); 
-        return fechaConFormato; 
+        return simpleDateFormat.format(fechaNacimiento);
     }
 
     public void setFechaNacimiento(Date fechaNacimiento) { 
@@ -76,7 +75,7 @@ public class Autor {
     @Override
     public String toString() {
         return "Autor [dni=" + dni + ", nombre=" + nombre + ", nacionalidad=" + nacionalidad + ", fechaNacimiento="
-                + fechaNacimiento + "]";
+        + fechaNacimiento + "]";
     }
     
     @Override

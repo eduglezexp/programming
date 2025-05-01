@@ -59,7 +59,4 @@ public abstract class UtilidadesTest {
             throw new SQLException("Error copiando el backup", e);
         }
     }
-
-
-    
 }

@@ -8,14 +8,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.ies.puerto.modelo.abstractas.Conexion;
 import es.ies.puerto.modelo.db.entidades.Autor;
+import es.ies.puerto.modelo.db.services.abstractas.AbstractService;
 
 /**
- * Servicio para operaciones CRUD de Autor
- * Corrige uso de conexión y mapeo de fechas para que los datos de prueba se carguen correctamente.
+ * @author eduglezexp
+ * @version 1.0.0
  */
-public class AutorService extends Conexion {
+
+public class AutorService extends AbstractService<Autor> {
 
     /**
      * Metodo para ejecutar una query de autor
@@ -76,7 +77,7 @@ public class AutorService extends Conexion {
      * @return lista de autores
      */
     public List<Autor> obtenerTodosAutores() {
-        String sql = "SELECT dni, nombre, nacionalidad, fecha_nacimiento FROM autores";
+        String sql = "SELECT * FROM autores";
         return executeQuery(sql);
     }
 
