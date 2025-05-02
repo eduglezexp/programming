@@ -5,12 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+import es.ies.puerto.modelo.db.entidades.abstractas.AbstractEntity;
+
 /**
  * @author eduglezexp
  * @version 1.0.0
  */
 
-public class Autor {
+public class Autor extends AbstractEntity{
     private String dni;
     private String nombre;
     private String nacionalidad;
@@ -56,16 +58,8 @@ public class Autor {
     public String getNacionalidad() { return nacionalidad; }
     public void setNacionalidad(String nacionalidad) { this.nacionalidad = nacionalidad; }
 
-    public Date getFechaNacimientoDate() {
-        return fechaNacimiento;
-    }
-
     public String getFechaNacimiento() { 
-        if (fechaNacimiento == null) {
-            return null;
-        }
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return simpleDateFormat.format(fechaNacimiento);
+        return getFecha(fechaNacimiento);
     }
 
     public void setFechaNacimiento(Date fechaNacimiento) { 

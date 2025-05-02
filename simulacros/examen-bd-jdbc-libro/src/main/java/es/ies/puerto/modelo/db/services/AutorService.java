@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import es.ies.puerto.modelo.db.entidades.Autor;
@@ -19,35 +18,17 @@ import es.ies.puerto.modelo.db.services.abstractas.AbstractService;
 public class AutorService extends AbstractService<Autor> {
 
     /**
-     * Metodo para ejecutar una query de autor
-     * @param sql a ejectar
-     * @param params a añadir
-     * @return lista de autores
-     * @throws SQLException error controlado
+     * Metodo para mapear las filas del autor
+     * @param resultado que contiene el executeQuery()
+     * @return un autor con sus propiedades
      */
-    public List<Autor> executeQuery(String sql, String... params) {
-        List<Autor> autores = new ArrayList<>();
-        try (Connection connection = getConnection();
-             PreparedStatement sentencia = connection.prepareStatement(sql)) {
-            for (int i = 0; i < params.length; i++) {
-                sentencia.setString(i + 1, params[i]);
-            }
-            try (ResultSet resultado = sentencia.executeQuery()) {
-                while (resultado.next()) {
-                    String dni = resultado.getString("dni");
-                    String nombre = resultado.getString("nombre");
-                    String nacionalidad = resultado.getString("nacionalidad");
-                    Date fechaNacimiento = resultado.getDate("fecha_nacimiento");
-                    Autor autor = new Autor(dni, nombre, nacionalidad, fechaNacimiento);
-                    autores.add(autor);
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("SQL State: " + e.getSQLState());
-            System.err.println("Error Code: " + e.getErrorCode());
-            e.printStackTrace();
-        }
-        return autores;
+    @Override
+    protected Autor mapRow(ResultSet resultado) throws SQLException {
+        String dni = resultado.getString("dni");
+        String nombre = resultado.getString("nombre");
+        String nacionalidad = resultado.getString("nacionalidad");
+        Date fechaNacimiento = resultado.getDate("fecha_nacimiento");
+        return new Autor(dni, nombre, nacionalidad, fechaNacimiento);
     }
 
     /**
