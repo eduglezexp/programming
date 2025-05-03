@@ -93,7 +93,7 @@ public class PrestamoService extends AbstractService<Prestamo> {
         "WHERE id_prestamo = ?";
         try (Connection connection = getConnection();
              PreparedStatement sentencia = connection.prepareStatement(sql)) {
-            sentencia.setString(1, prestamo);
+            //sentencia.setString(1, prestamo);
             sentencia.executeUpdate();
             return true;
         } catch (SQLException e) {

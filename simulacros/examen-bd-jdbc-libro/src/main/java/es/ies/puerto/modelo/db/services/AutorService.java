@@ -95,7 +95,8 @@ public class AutorService extends AbstractService<Autor> {
             sentencia.setString(4, autor.getFechaNacimiento());
             sentencia.setString(4, autor.getDni());
             sentencia.executeUpdate();
-            return true;
+            int filas = sentencia.executeUpdate();
+            return filas == 1;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

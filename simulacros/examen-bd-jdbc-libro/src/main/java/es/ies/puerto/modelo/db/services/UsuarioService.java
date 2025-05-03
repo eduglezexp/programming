@@ -9,48 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.ies.puerto.modelo.db.entidades.Usuario;
-import es.ies.puerto.modelo.db.services.abstractas.Conexion;
+import es.ies.puerto.modelo.db.services.abstractas.AbstractService;
 
 /**
  * @author eduglezexp
  * @version 1.0.0
  */
 
-public class UsuarioService extends Conexion{
+public class UsuarioService extends AbstractService<Usuario> {
 
     /**
-     * Metodo para ejecutar la querry
-     * @param sql  ejecutar
-     * @param parametros del usuario
-     * @return lista de usuarios
+     * Metodo para mapear las filas del usuario
+     * @param resultado que contiene el executeQuery()
+     * @return un usuario con sus propiedades
      */
-    private List<Usuario> executeQuerry(String sql, String... parametros){
-        List<Usuario> usuarios = new ArrayList<>();
-        try (Connection connection = getConnection()) {
-            PreparedStatement sentencia = connection.prepareStatement(sql);
-            for (int i = 0; i < parametros.length; i++) {
-                sentencia.setString(i + 1, parametros[i]);
-            }
-            ResultSet resultado = sentencia.executeQuery();
-            while(resultado.next()){
-                    String dni = resultado.getString("id_usuario");
-                    String nombreStr = resultado.getString("nombre");
-                    String emailStr = resultado.getString("email");
-                    String telefonoStr = resultado.getString("telefono");
-                    Date fechaRegistro = resultado.getDate("fecha_registro");
-                    Usuario usuario = new Usuario(dni, nombreStr, emailStr, telefonoStr, fechaRegistro);
-                    usuarios.add(usuario);
-                }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                cerrar();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return usuarios;
+    @Override
+    protected Usuario mapRow(ResultSet resultado) throws SQLException {
+        String dni = resultado.getString("id_usuario");
+        String nombreStr = resultado.getString("nombre");
+        String emailStr = resultado.getString("email");
+        String telefonoStr = resultado.getString("telefono");
+        Date fechaRegistro = resultado.getDate("fecha_registro");
+        return new Usuario(dni, nombreStr, emailStr, telefonoStr, fechaRegistro);
     }
 
     /**
@@ -59,14 +39,15 @@ public class UsuarioService extends Conexion{
      */
     public boolean crearUsuario(Usuario usuario) {
         String sql = "INSERT INTO usuarios (id_usuario, nombre, email, telefono, fecha_registro) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
+        try (Connection connection = getConnection();
+            PreparedStatement sentencia = connection.prepareStatement(sql)) {
             sentencia.setString(1, usuario.getIdUsuario());
             sentencia.setString(2, usuario.getNombre());
             sentencia.setString(3, usuario.getEmail());
             sentencia.setString(4, usuario.getTelefono());
-            sentencia.setDate(5, null);
-            boolean resultado = sentencia.executeUpdate() > 0;
-            return resultado;
+            sentencia.setString(5, usuario.getFechaRegistro());
+            sentencia.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -85,7 +66,7 @@ public class UsuarioService extends Conexion{
      */
     public List<Usuario> obtenerTodosUsuarios() {
         String sql = "SELECT * FROM usuarios";
-        return executeQuerry(sql);
+        return executeQuery(sql);
     }
     
     /**
@@ -93,8 +74,8 @@ public class UsuarioService extends Conexion{
      * @return lista de usuarios
      */
     public Usuario obtenerUsuarioPorId(String idUsuario) {
-        String sql = "SELECT * FROM usuarios WHERE id_usuario = ? ";
-        List<Usuario> usuarios = executeQuerry(sql);
+        String sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+        List<Usuario> usuarios = executeQuery(sql, idUsuario);
         if (usuarios.isEmpty()) {
             return null;
         }
@@ -103,18 +84,23 @@ public class UsuarioService extends Conexion{
 
     /**
      * Metodo para actualizar el usuario
+     * @param usuario a actualizar
      * @return true/false
      */
     public boolean actualizarUsuario(Usuario usuario) {
-        String sql = "UPDATE usuarios SET nombre = ?, email = ? WHERE id_usuario = ?";
-        try (Connection connection = getConnection()) {
-            PreparedStatement sentencia = connection.prepareStatement(sql);
+        String sql = "UPDATE usuarios SET nombre = ?, email = ?, telefono = ?, fecha_registro = ? WHERE id_usuario = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement sentencia = connection.prepareStatement(sql)) {
             sentencia.setString(1, usuario.getNombre());
             sentencia.setString(2, usuario.getEmail());
-            sentencia.executeUpdate();
-            return true;
+            sentencia.setString(3, usuario.getTelefono());
+            sentencia.setString(4, usuario.getFechaRegistro());
+            sentencia.setString(5, usuario.getIdUsuario());
+            int filas = sentencia.executeUpdate();
+            return filas == 1;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         } finally {
             try {
                 cerrar();
@@ -122,7 +108,6 @@ public class UsuarioService extends Conexion{
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
     /**
@@ -131,11 +116,12 @@ public class UsuarioService extends Conexion{
      * @return true/false
      */
     public boolean eliminarUsuario(String idUsuario) {
-        String sql = "DELETE FROM usuarios WHERE dni = ?";
-        try (PreparedStatement sentencia = getConnection().prepareStatement(sql)) {
+        String sql = "DELETE FROM usuarios WHERE id_usuario = ?";
+        try (Connection connection = getConnection();
+            PreparedStatement sentencia = connection.prepareStatement(sql)) {
             sentencia.setString(1, idUsuario);
-            sentencia.executeUpdate();
-            return true;
+            int filas = sentencia.executeUpdate();
+            return filas == 1;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

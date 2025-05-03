@@ -76,39 +76,36 @@ class PrestamoServiceTest {
     }
 
     @Test
-void obtenerPrestamosVencidosTest() {
-    prestamoService.crearPrestamo(new Prestamo("PRE007", "LIB-007", "USR007", getFecha("2023-01-01"), getFecha("2023-02-01")));
-    prestamoService.crearPrestamo(new Prestamo("PRE008", "LIB-008", "USR007", getFecha("2024-01-01"), getFecha("2025-01-01")));
+    void obtenerPrestamosVencidosTest() {
+        prestamoService.crearPrestamo(new Prestamo("PRE007", "LIB-007", "USR007", getFecha("2023-01-01"), getFecha("2023-02-01")));
+        prestamoService.crearPrestamo(new Prestamo("PRE008", "LIB-008", "USR007", getFecha("2024-01-01"), getFecha("2025-01-01")));
 
-    List<Prestamo> vencidos = prestamoService.obtenerPrestamosVencidos(getFecha("2024-01-01"));
-    assertTrue(vencidos.stream().anyMatch(p -> p.getIdPrestamo().equals("PRE007")));
-    assertTrue(vencidos.stream().noneMatch(p -> p.getIdPrestamo().equals("PRE008")));
-}
+        List<Prestamo> vencidos = prestamoService.obtenerPrestamosVencidos(getFecha("2024-01-01"));
+        assertTrue(vencidos.stream().anyMatch(p -> p.getIdPrestamo().equals("PRE007")));
+        assertTrue(vencidos.stream().noneMatch(p -> p.getIdPrestamo().equals("PRE008")));
+    }
 
-@Test
-void obtenerPrestamosPorUsuarioTest() {
-    prestamoService.crearPrestamo(new Prestamo("PRE009", "LIB-009", "USR008", getFecha("2024-04-01"), getFecha("2024-04-20")));
-    prestamoService.crearPrestamo(new Prestamo("PRE010", "LIB-010", "USR008", getFecha("2024-04-02"), getFecha("2024-04-25")));
+    @Test
+    void obtenerPrestamosPorUsuarioTest() {
+        prestamoService.crearPrestamo(new Prestamo("PRE009", "LIB-009", "USR008", getFecha("2024-04-01"), getFecha("2024-04-20")));
+        prestamoService.crearPrestamo(new Prestamo("PRE010", "LIB-010", "USR008", getFecha("2024-04-02"), getFecha("2024-04-25")));
 
-    List<Prestamo> prestamos = prestamoService.obtenerPrestamosPorUsuario("USR008");
-    assertEquals(2, prestamos.size());
-    assertTrue(prestamos.stream().allMatch(p -> p.getUsuarioId().equals("USR008")));
-}
+        List<Prestamo> prestamos = prestamoService.obtenerPrestamosPorUsuario("USR008");
+        assertEquals(2, prestamos.size());
+        assertTrue(prestamos.stream().allMatch(p -> p.getUsuarioId().equals("USR008")));
+    }
 
-@Test
-void obtenerPrestamosActivosTest() {
-    Date hoy = new Date();
-    Calendar futuro = Calendar.getInstance();
-    futuro.add(Calendar.DAY_OF_MONTH, 10);
+    @Test
+    void obtenerPrestamosActivosTest() {
+        Date hoy = new Date();
+        Calendar futuro = Calendar.getInstance();
+        futuro.add(Calendar.DAY_OF_MONTH, 10);
 
-    prestamoService.crearPrestamo(new Prestamo("PRE011", "LIB-011", "USR009", getFecha("2024-04-10"), getFecha("2024-04-15")));
-    prestamoService.crearPrestamo(new Prestamo("PRE012", "LIB-012", "USR009", getFecha("2024-04-20"), futuro.getTime()));
+        prestamoService.crearPrestamo(new Prestamo("PRE011", "LIB-011", "USR009", getFecha("2024-04-10"), getFecha("2024-04-15")));
+        prestamoService.crearPrestamo(new Prestamo("PRE012", "LIB-012", "USR009", getFecha("2024-04-20"), futuro.getTime()));
 
-    List<Prestamo> activos = prestamoService.obtenerPrestamosActivos();
-    assertTrue(activos.stream().anyMatch(p -> p.getIdPrestamo().equals("PRE012")));
-    assertTrue(activos.stream().noneMatch(p -> p.getIdPrestamo().equals("PRE011")));
-}
-
-
-    
+        List<Prestamo> activos = prestamoService.obtenerPrestamosActivos();
+        assertTrue(activos.stream().anyMatch(p -> p.getIdPrestamo().equals("PRE012")));
+        assertTrue(activos.stream().noneMatch(p -> p.getIdPrestamo().equals("PRE011")));
+    }
 }
