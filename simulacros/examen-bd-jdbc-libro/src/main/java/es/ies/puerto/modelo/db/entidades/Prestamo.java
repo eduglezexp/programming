@@ -5,12 +5,14 @@ package es.ies.puerto.modelo.db.entidades;
 import java.util.Date;
 import java.util.Objects;
 
+import es.ies.puerto.modelo.db.entidades.abstractas.AbstractEntity;
+
 /**
  * @author eduglezexp
  * @version 1.0.0
  */
 
-public class Prestamo {
+public class Prestamo extends AbstractEntity{
     private String idPrestamo;
     private String libroId;
     private String usuarioId;
@@ -70,16 +72,16 @@ public class Prestamo {
         this.usuarioId = usuarioId;
     }
 
-    public Date getFechaPrestamo() {
-        return fechaPrestamo;
+    public String getFechaPrestamo() {
+        return getFecha(fechaPrestamo);
     }
 
     public void setFechaPrestamo(Date fechaPrestamo) {
         this.fechaPrestamo = fechaPrestamo;
     }
 
-    public Date getFechaDevolucion() {
-        return fechaDevolucion;
+    public String getFechaDevolucion() {
+        return getFecha(fechaDevolucion);
     }
 
     public void setFechaDevolucion(Date fechaDevolucion) {

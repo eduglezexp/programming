@@ -1,7 +1,6 @@
 package es.ies.puerto.modelo.db.services.abstractas;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.sqlite.SQLiteConfig;

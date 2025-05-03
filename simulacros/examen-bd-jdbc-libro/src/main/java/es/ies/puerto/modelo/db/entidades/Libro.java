@@ -3,12 +3,14 @@ package es.ies.puerto.modelo.db.entidades;
 import java.util.Date;
 import java.util.Objects;
 
+import es.ies.puerto.modelo.db.entidades.abstractas.AbstractEntity;
+
 /**
  * @author eduglezexp
  * @version 1.0.0
  */
 
-public class Libro {
+public class Libro extends AbstractEntity{
     private String idLibro;
     private String titulo;
     private String autorDni;
@@ -66,8 +68,8 @@ public class Libro {
         this.autorDni = autorDni;
     }
 
-    public Date getFechaPublicacion() {
-        return fechaPublicacion;
+    public String getFechaPublicacion() {
+        return getFecha(fechaPublicacion);
     }
 
     public void setFechaPublicacion(Date fechaPublicacion) {

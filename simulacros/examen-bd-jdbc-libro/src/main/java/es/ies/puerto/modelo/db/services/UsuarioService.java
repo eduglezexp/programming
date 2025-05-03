@@ -138,6 +138,7 @@ public class UsuarioService extends Conexion{
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         } finally {
             try {
                 cerrar();
@@ -145,6 +146,5 @@ public class UsuarioService extends Conexion{
                 e.printStackTrace();
             }
         }
-        return false;
     }
 }

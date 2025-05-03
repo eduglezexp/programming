@@ -1,7 +1,5 @@
 package es.ies.puerto.modelo.db.entidades;
 
-
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 

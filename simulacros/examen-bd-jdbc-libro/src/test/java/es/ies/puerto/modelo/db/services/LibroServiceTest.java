@@ -78,5 +78,4 @@ class LibroServiceTest extends UtilidadesTest{
             Assertions.fail("No se ha obtenido el resultado esperado");
         }
     }
-
 }

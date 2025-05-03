@@ -39,8 +39,7 @@ public class AutorService extends AbstractService<Autor> {
     public boolean crearAutor(Autor autor) {
         String sql = "INSERT INTO autores (dni, nombre, nacionalidad, fecha_nacimiento) VALUES (?, ?, ?, ?)";
         try (Connection connection = getConnection();
-             PreparedStatement sentencia = connection.prepareStatement(sql)) {
-            
+             PreparedStatement sentencia = connection.prepareStatement(sql)) {        
             sentencia.setString(1, autor.getDni());
             sentencia.setString(2, autor.getNombre());
             sentencia.setString(3, autor.getNacionalidad());
@@ -50,6 +49,12 @@ public class AutorService extends AbstractService<Autor> {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            try {
+                cerrar();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -113,10 +118,8 @@ public class AutorService extends AbstractService<Autor> {
         try (Connection connection = getConnection();
              PreparedStatement sentencia = connection.prepareStatement(sql)) {
             sentencia.setString(1, dni);
-            if (sentencia.executeUpdate() == 1) {
-                return true;
-            }
-            return false;
+            int filas = sentencia.executeUpdate();
+            return filas == 1;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
