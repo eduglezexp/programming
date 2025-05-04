@@ -19,7 +19,7 @@ class AutorServiceTest extends UtilidadesTest{
     private AutorService autorService;
 
     @BeforeEach
-    void setUp()  {
+    void setUp() {
         autorService = new AutorService();
     }
 
@@ -78,6 +78,20 @@ class AutorServiceTest extends UtilidadesTest{
         } catch (Exception e) {
             Assertions.fail("No se ha obtenido el resultado esperado");
         }
-
     } 
+
+    @Test
+    void testObtenerNacionalidadAutor() {
+        autorService.crearAutor(new Autor("NAT001", "Autor Español", "España", getFecha("1970-01-01")));
+        autorService.crearAutor(new Autor("NAT002", "Autor Francés", "Francia", getFecha("1980-02-02")));
+        autorService.crearAutor(new Autor("NAT003", "Otro Español", "España", getFecha("1990-03-03")));
+        List<Autor> autoresEspanioles = autorService.obtenerNacionalidadAutor("España");
+        assertNotNull(autoresEspanioles);
+        assertFalse(autoresEspanioles.isEmpty(), "La lista de autores no debería estar vacía");
+        assertTrue(autoresEspanioles.stream().allMatch(a -> "España".equals(a.getNacionalidad())),
+                "Todos los autores deberían ser de nacionalidad 'España'");
+        assertTrue(autoresEspanioles.stream().anyMatch(a -> "NAT001".equals(a.getDni())));
+        assertTrue(autoresEspanioles.stream().anyMatch(a -> "NAT003".equals(a.getDni())));
+        assertFalse(autoresEspanioles.stream().anyMatch(a -> "NAT002".equals(a.getDni())));
+    }
 }

@@ -132,4 +132,62 @@ public class AutorService extends AbstractService<Autor> {
             }
         }
     }
+
+    /**
+     * Metodo para obtener la nacionalidad de un autor 
+     * @param nacionalidad de los autores a buscar
+     * @return lista de autores que tengan la nacionalidad dada
+     */
+    public List<Autor> obtenerNacionalidadAutor(String nacionalidad) {
+        String sql = "SELECT * FROM autores WHERE nacionalidad = ?";
+        return executeQuery(sql, nacionalidad);
+    }
+
+    /**
+     * Metodo para obtener los autores que tengan mas de un libro
+     * @return lista de autores con mas de un libro
+     */
+    public List<Autor> obtenerAutoresConMasDeUnLibro() {
+        String sql = "SELECT a.dni, a.nombre, COUNT(l.id_libro) AS num_libros " +
+                     "FROM autores a " +
+                     "JOIN libros l " + 
+                     "ON a.dni = l.autor_dni " +
+                     "GROUP BY a.dni, a.nombre " + 
+                     "HAVING COUNT(*) > 1";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo que obtiene los autores con su libro mas reciente
+     * @return una lista de autores con su libro mas reciente
+     */
+    public List<Autor> obtenerAutoresConLibroMasRecientes() {
+        String sql = "SELECT a.dni, a.nombre, COUNT(l.id_libro) AS num_libros " +
+                     "FROM autores a " +
+                     "JOIN libros l " + 
+                     "ON a.dni = l.autor_dni " +
+                     "GROUP BY a.dni, a.nombre " + 
+                     "HAVING COUNT(*) > 1";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo para obtener los autores ordenados por su edad
+     * @return lista de autores ordenados por edad
+     */
+    public List<Autor> obtenerAutoresOrdenadosPorEdad() {
+        String sql = "SELECT * FROM autores ORDER BY fecha_nacimiento ASC";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo para obtener los autores que tengan mas de un libro de un genero
+     * @return lista de autores
+     */
+    public List<Autor> obtenerAutoresConMasDeUnLibroEnGenero() {
+        String sql = "SELECT a.nombre, COUNT(DISTINCT l.genero) AS num_generos " +
+                     "FROM autores a JOIN libros l ON a.dni = l.autor_dni " +
+                     "GROUP BY a.dni, a.nombre HAVING COUNT(DISTINCT l.genero) > 1";
+        return executeQuery(sql);
+    }
 }

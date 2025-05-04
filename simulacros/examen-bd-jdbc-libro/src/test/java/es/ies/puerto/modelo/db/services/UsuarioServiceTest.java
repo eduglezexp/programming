@@ -66,4 +66,20 @@ class UsuarioServiceTest extends UtilidadesTest{
 
         assertFalse(usuarioService.eliminarUsuario("NOEXISTE"));
     }
+
+    @Test
+    void testObtenerUsuariosRegistradosEn() {
+        usuarioService.crearUsuario(new Usuario("USR007", "Usuario 2023", "u2023@correo.com", "111", getFecha("2023-05-10")));
+        usuarioService.crearUsuario(new Usuario("USR008", "Usuario 2024", "u2024@correo.com", "222", getFecha("2024-03-15")));
+        usuarioService.crearUsuario(new Usuario("USR009", "Usuario 2024 bis", "u2024b@correo.com", "333", getFecha("2024-07-01")));
+        List<Usuario> usuarios2024 = usuarioService.obtenerUsuariosRegistradosEn(2024);
+        assertNotNull(usuarios2024);
+        assertTrue(usuarios2024.stream().anyMatch(u -> "USR008".equals(u.getIdUsuario())));
+        assertTrue(usuarios2024.stream().anyMatch(u -> "USR009".equals(u.getIdUsuario())));
+        assertTrue(usuarios2024.stream().noneMatch(u -> "USR007".equals(u.getIdUsuario())));
+        List<Usuario> usuarios2023 = usuarioService.obtenerUsuariosRegistradosEn(2023);
+        assertNotNull(usuarios2023);
+        assertTrue(usuarios2023.stream().anyMatch(u -> "USR007".equals(u.getIdUsuario())));
+        assertTrue(usuarios2023.stream().noneMatch(u -> "USR008".equals(u.getIdUsuario())));
+    }
 }

@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import es.ies.puerto.modelo.db.entidades.Usuario;
@@ -132,5 +131,87 @@ public class UsuarioService extends AbstractService<Usuario> {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Metodo para obtener los usuarios registrados entre un anio dado
+     * @param anio anio a partir del cual se buscan usuarios registrados 
+     * en ese anio
+     * @return lista de usuarios registrados en ese anio
+     */
+    public List<Usuario> obtenerUsuariosRegistradosEn(int anio) {
+        String sql = "SELECT * FROM usuarios WHERE fecha_registro " +
+        "BETWEEN '" + anio + "-01-01' AND '" + anio + "-12-31'";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo para obtener los usuarios con prestamos activos
+     * @return lista con los usuarios con prestamos activos
+     */
+    public List<Usuario> obtenerUsuariosConPrestamosActivos() {
+        String sql = "SELECT DISTINCT u.* " + 
+                     "FROM usuarios u " + 
+                     "JOIN prestamos p " + 
+                     "ON u.id_usuario = p.usuario_id " +
+                     "WHERE fecha_devolucion IS NULL OR fecha_devolucion > CURRENT_DATE";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo para obtener el conteo de los prestamos por usuario
+     * @return lista con el conteo de los prestamos por usuario
+     */
+    public List<Usuario> obtenerConteoPrestamosPorUsuario() {
+        String sql = "SELECT u.id_usuario, " + 
+                     "u.nombre, " + 
+                     "COUNT(p.id_prestamo) AS total_prestamos " + 
+                     "FROM usuarios u " + 
+                     "LEFT JOIN prestamos p " + 
+                     "ON u.id_usuario = p.usuario_id " + 
+                     "GROUP BY u.id_usuario, u.nombre";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo para obtener los ultimos prestamos de cada usuario
+     * @return una lista con los ultimos prestamos de cada usuario
+     */
+    public List<Usuario> obtenerUsuariosUltimosPrestamos() {
+        String sql = "SELECT u.nombre, " + 
+                     "p.id_prestamo, " + 
+                     "p.fecha_prestamo " + 
+                     "FROM usuarios u " + 
+                     "JOIN prestamos p " + 
+                     "ON u.id_usuario = p.usuario_i " + 
+                     "WHERE p.fecha_prestamo = ( " + 
+                     "SELECT MAX(fecha_prestamo) " + 
+                     "FROM prestamos " +
+                     "WHERE usuario_id = u.id_usuario)";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo que obtiene los usuarios con el dominio GMAIL
+     * @return lista de usuarios
+     */
+    public List<Usuario> obtenerUsuariosConGmail() {
+        String sql = "SELECT * FROM usuarios WHERE email REGEXP '^[^@]+@gmail\\.com$'";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo que obtiene los prestamos que tiene cada usuario en un mes y anio dado 
+     * @param mes del prestamo
+     * @param anio del prestamo
+     * @return lista de usuarios
+     */
+    public List<Usuario> obtenerPrestamoMesAnio(String mes, String anio) {
+        String sql = "SELECT DISTINCT u.* FROM usuarios u " +
+                     "JOIN prestamos p " + 
+                     "ON u.id_usuario = p.usuario_id " +
+                     "WHERE p.fecha_prestamo " + 
+                     "BETWEEN '" + anio + "-" + mes + "-01' AND '" + anio + "-" + mes + "-31'";
+        return executeQuery(sql);
     }
 }

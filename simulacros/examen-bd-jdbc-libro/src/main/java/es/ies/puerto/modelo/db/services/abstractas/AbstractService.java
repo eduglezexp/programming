@@ -25,15 +25,15 @@ import java.util.List;
     /**
      * Ejecuta una consulta SQL y mapea cada fila a T usando mapRow
      * @param sql a ejecutar
-     * @param params parámetros opcionales para el PreparedStatement
+     * @param parametros parámetros opcionales para el PreparedStatement
      * @return lista de objetos T
      */
-    public List<T> executeQuery(String sql, String... params) {
+    public List<T> executeQuery(String sql, Object... parametros) {
         List<T> lista = new ArrayList<>();
         try (Connection connection = getConnection();
             PreparedStatement sentencia = connection.prepareStatement(sql)) {
-            for (int i = 0; i < params.length; i++) {
-                sentencia.setString(i + 1, params[i]);
+            for (int i = 0; i < parametros.length; i++) {
+                sentencia.setObject(i + 1, parametros[i]);
             }
             try (ResultSet resultado = sentencia.executeQuery()) {
                 while (resultado.next()) {

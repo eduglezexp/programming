@@ -135,4 +135,100 @@ public class LibroService extends AbstractService<Libro> {
             }
         }
     }
+
+    /**
+     * Metodo para obtener los libros publicados despues de un anio dado
+     * @param anio anio a partir del cual se buscan libros
+     * @return lista de libros publicados despues de ese anio
+     */
+    public List<Libro> obtenerLibrosPublicadosDespuesDe(int anio) {
+        String sql = "SELECT * FROM libros WHERE fecha_publicacion > '" + anio + "-12-31'";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo para obtener los autores de los libros
+     * @return lista de los autores y sus propiedades
+     */
+    public List<Libro> obtenerLibrosAutores() {
+        String sql = "SELECT l.*, a.nombre AS autor, a.nacionalidad, a.fecha_nacimiento " + 
+                     "FROM libros l JOIN autores a ON l.autor_dni = a.dni";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo para obtener la cantidad de libros por genero
+     * @return lista con la cantidad de libros por genero
+     */
+    public List<Libro> obtenerLibrosPorGeneros() {
+        String sql = "SELECT genero, COUNT(*) AS total_libros FROM libros GROUP BY genero";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo para obtener los libros nunca prestados
+     * @return libros nunca prestados
+     */
+    public List<Libro> obtenerLibrosNuncaPrestados() {
+        String sql = "SELECT l.* " + 
+                     "FROM libros l " + 
+                     "LEFT JOIN prestamos p " + 
+                     "ON l.id_libro = p.libro_id " + 
+                     "WHERE p.libro_id IS NULL";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo para obtener los libros publicados antes de un anio y genero dado
+     * @param genero del libro
+     * @param anio anio a partir del cual se buscan libros
+     * @return lista de libros publicados despues de ese anio
+     */
+    public List<Libro> obtenerLibrosPublicadosAntesDe(String genero, String anio) {
+        String sql = "SELECT * FROM libros WHERE genero = '" + genero + "' " +
+                     "AND fecha_publicacion > '" + anio + "-01-01'";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo para obtener libros con su autor y nacionalidad
+     * @return lista de libros 
+     */
+    public List<Libro> obtenerLibrosConAutorYNacionalidad() {
+        String sql = "SELECT l.titulo, a.nombre AS autor, a.nacionalidad " +
+                     "FROM libros l  JOIN autores a ON l.autor_dni = a.dni";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo que obtiene la cantidad de prestamos por libro
+     * @return lista de libros
+     */
+    public List<Libro> obtenerLibrosCantidadPrestamos() {
+        String sql = "SELECT l.id_libro, l.titulo, COUNT(p.id_prestamo) AS total_prestamos " +
+                     "FROM libros l LEFT JOIN prestamos p ON l.id_libro = p.libro_id " +
+                     "GROUP BY l.id_libro, l.titulo";
+        return executeQuery(sql);
+    }
+
+    /**
+     * Metodo para obtener los autores y libros ordenados por publicacion 
+     * @return lista de libros
+     */
+    public List<Libro> obtenerActoresYLibrosOrdenadosPorPublicacion() {
+        String sql = "SELECT a.nombre AS autor, l.titulo, l.fecha_publicacion " +
+                     "FROM autores a JOIN libros l ON a.dni = l.autor_dni " +
+                     "ORDER BY l.fecha_publicacion DESC";
+        return executeQuery(sql);
+    }
+
+    public List<Libro> obtenerLibrosMasPrestados() {
+        String sql = "SELECT l.id_libro, l.titulo, " + 
+                     "COUNT(p.id_prestamo) AS total_prestamos " + 
+                     "FROM libros l LEFT JOIN prestamos p " + 
+                     "ON l.id_libro = p.libro_id " + 
+                     "GROUP BY l.id_libro, l.titulo " + 
+                     "ORDER BY total_prestamos DESC LIMIT 1";
+        return executeQuery(sql);
+    }
 }

@@ -1,25 +1,32 @@
 package es.ies.puerto.modelo.db.services;
 
+import es.ies.puerto.UtilidadesTest;
+import es.ies.puerto.modelo.db.entidades.Autor;
+import es.ies.puerto.modelo.db.entidades.Libro;
 import es.ies.puerto.modelo.db.entidades.Prestamo;
+import es.ies.puerto.modelo.db.entidades.Usuario;
+
 import org.junit.jupiter.api.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PrestamoServiceTest {
+class PrestamoServiceTest extends UtilidadesTest{
 
-    PrestamoService prestamoService = new PrestamoService();
+    PrestamoService prestamoService;
+    private AutorService autorService;
+    private UsuarioService usuarioService;
+    private LibroService libroService;
 
-    Date getFecha(String fecha) {
-        try {
-            return new SimpleDateFormat("yyyy-MM-dd").parse(fecha);
-        } catch (Exception e) {
-            return null;
-        }
+    @BeforeEach
+    void setUp() {
+        prestamoService = new PrestamoService();
+        autorService = new AutorService();
+        usuarioService = new UsuarioService();
+        libroService = new LibroService();
     }
 
     @Test
@@ -107,5 +114,17 @@ class PrestamoServiceTest {
         List<Prestamo> activos = prestamoService.obtenerPrestamosActivos();
         assertTrue(activos.stream().anyMatch(p -> p.getIdPrestamo().equals("PRE012")));
         assertTrue(activos.stream().noneMatch(p -> p.getIdPrestamo().equals("PRE011")));
+    }
+
+    @Test
+    void obtenerPrestamosNoDevueltosTest() {
+        Prestamo prestamoDevuelto = new Prestamo("PRE013", "LIB-013", "USR010", getFecha("2024-03-01"), getFecha("2024-03-15"));
+        prestamoService.crearPrestamo(prestamoDevuelto);
+        Prestamo prestamoNoDevuelto = new Prestamo("PRE014", "LIB-014", "USR011", getFecha("2024-04-01"), null);
+        prestamoService.crearPrestamo(prestamoNoDevuelto);
+        List<Prestamo> noDevueltos = prestamoService.obtenerPrestamosNoDevueltos();
+        assertNotNull(noDevueltos);
+        assertTrue(noDevueltos.stream().anyMatch(p -> "PRE014".equals(p.getIdPrestamo())));
+        assertFalse(noDevueltos.stream().anyMatch(p -> "PRE013".equals(p.getIdPrestamo())));
     }
 }

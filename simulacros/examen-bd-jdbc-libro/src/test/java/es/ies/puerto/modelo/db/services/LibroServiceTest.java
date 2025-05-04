@@ -3,6 +3,7 @@ package es.ies.puerto.modelo.db.services;
 import org.junit.jupiter.api.*;
 
 import es.ies.puerto.UtilidadesTest;
+import es.ies.puerto.modelo.db.entidades.Autor;
 import es.ies.puerto.modelo.db.entidades.Libro;
 
 import java.util.List;
@@ -10,10 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LibroServiceTest extends UtilidadesTest{
     private LibroService libroService;
+    private AutorService autorService;
 
     @BeforeEach
     void setUp()  {
         libroService = new LibroService();
+        autorService = new AutorService();
     }
 
     @Test
@@ -77,5 +80,35 @@ class LibroServiceTest extends UtilidadesTest{
         } catch (Exception e) {
             Assertions.fail("No se ha obtenido el resultado esperado");
         }
+    }
+
+    @Test
+    void testObtenerLibrosPublicadosDespuesDe() {
+        libroService.crearLibro(new Libro("TEST-007", "Libro Antiguo", "11111111A", getFecha("1975-01-01"), "Historia"));
+        libroService.crearLibro(new Libro("TEST-008", "Libro Reciente", "22222222B", getFecha("1990-05-05"), "Ciencia ficción"));
+        libroService.crearLibro(new Libro("TEST-009", "Libro Muy Reciente", "33333333C", getFecha("2021-08-08"), "Tecnología"));
+        List<Libro> libros = libroService.obtenerLibrosPublicadosDespuesDe(1980);
+        assertNotNull(libros);
+        for (Libro libro : libros) {
+            String fecha = libro.getFechaPublicacion(); 
+            assertTrue(fecha.compareTo("1980-12-31") > 0, "Libro con fecha invalida: " + fecha);
+        }
+        assertFalse(libros.stream().anyMatch(libro -> "TEST-007".equals(libro.getIdLibro())));
+    }
+
+    @Test
+    void obtenerLibrosAutoresTest() {
+        Autor autor = new Autor("444", "Autor Conocido", "Chile", getFecha("1980-04-04"));
+        autorService.crearAutor(autor);
+        Libro libro = new Libro("TEST-010", "Libro Autor Conocido", "444", getFecha("2020-10-10"), "Biografía");
+        assertTrue(libroService.crearLibro(libro));
+        List<Libro> librosConAutores = libroService.obtenerLibrosAutores();
+        assertNotNull(librosConAutores);
+        assertFalse(librosConAutores.isEmpty());
+        Libro resultado = librosConAutores.stream()
+        .filter(l -> "TEST-010".equals(l.getIdLibro())).findFirst().orElse(null);
+        assertNotNull(resultado, "El libro con autor no fue encontrado.");
+        assertEquals("Libro Autor Conocido", resultado.getTitulo());
+        assertEquals("444", resultado.getAutorDni());
     }
 }

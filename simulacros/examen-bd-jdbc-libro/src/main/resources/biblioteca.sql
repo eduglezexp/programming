@@ -38,7 +38,6 @@ CREATE TABLE prestamos (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario)
 );
 
-
 INSERT INTO autores (dni, nombre, nacionalidad, fecha_nacimiento) VALUES
 ('12345678A', 'Gabriel García Márquez', 'Colombia', '1927-03-06'),
 ('98765432B', 'J.K. Rowling', 'Reino Unido', '1965-07-31'),

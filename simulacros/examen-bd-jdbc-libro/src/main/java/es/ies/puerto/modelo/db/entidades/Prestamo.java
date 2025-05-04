@@ -1,7 +1,5 @@
 package es.ies.puerto.modelo.db.entidades;
 
-
-
 import java.util.Date;
 import java.util.Objects;
 
@@ -94,7 +92,6 @@ public class Prestamo extends AbstractEntity{
                 + ", fechaPrestamo=" + fechaPrestamo + ", fechaDevolucion=" + fechaDevolucion + "]";
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -110,5 +107,4 @@ public class Prestamo extends AbstractEntity{
     public int hashCode() {
         return Objects.hash(idPrestamo, libroId, usuarioId);
     }
-    
 }
