@@ -1,6 +1,9 @@
 package es.ies.puerto.modelo.db.services;
 
 import es.ies.puerto.UtilidadesTest;
+import es.ies.puerto.modelo.db.entidades.Autor;
+import es.ies.puerto.modelo.db.entidades.Libro;
+import es.ies.puerto.modelo.db.entidades.Prestamo;
 import es.ies.puerto.modelo.db.entidades.Usuario;
 import org.junit.jupiter.api.*;
 
@@ -8,10 +11,22 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.never;
 
 class UsuarioServiceTest extends UtilidadesTest{
 
-    UsuarioService usuarioService = new UsuarioService();
+    UsuarioService usuarioService;
+    PrestamoService prestamoService;
+    AutorService autorService;
+    LibroService libroService;
+
+    @BeforeEach
+    void setUp() throws Exception {
+        usuarioService = new UsuarioService();
+        prestamoService = new PrestamoService();
+        autorService = new AutorService();
+        libroService = new LibroService();
+    }
 
 
     @Test

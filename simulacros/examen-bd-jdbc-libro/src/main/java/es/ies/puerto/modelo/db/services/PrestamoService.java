@@ -264,6 +264,4 @@ public class PrestamoService extends AbstractService<Prestamo> {
                      "AND DATEDIFF(fecha_devolucion, fecha_prestamo) < 10";
         return executeQuery(sql);
     }
-
-    
 }

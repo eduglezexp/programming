@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class PrestamoServiceTest extends UtilidadesTest{
 
     PrestamoService prestamoService;
-    private AutorService autorService;
-    private UsuarioService usuarioService;
-    private LibroService libroService;
+    AutorService autorService;
+    UsuarioService usuarioService;
+    LibroService libroService;
 
     @BeforeEach
     void setUp() {
